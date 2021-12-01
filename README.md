@@ -1,1 +1,1 @@
-# frenly
+# vibesbot
