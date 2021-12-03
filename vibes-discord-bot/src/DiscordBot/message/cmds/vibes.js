@@ -1,5 +1,6 @@
 import getTargetMember from "../getTargetMember";
 import DiscordGuild from "../../models/DiscordGuild";
+import messageVibeFeedChannel from "../messageVibeFeedChannel";
 
 export default async function vibes({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -34,7 +35,7 @@ export default async function vibes({ client, message, cmd_args }) {
     user_id: member.user.id,
     reason,
   });
-  await DiscordGuild.messageVibeFeedChannel(guild, 
+  await messageVibeFeedChannel(guild, 
     `${vibedust_emoji} from ${message_member} to ${member}`
   );
 }

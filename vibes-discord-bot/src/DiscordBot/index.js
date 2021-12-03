@@ -5,6 +5,7 @@ import { TOKEN, GLOBAL_CMDS, REQUIRED_INTENTS } from "./constants";
 import handleCmd from "./message/handleCmd";
 import handleMention from "./message/handleMention";
 import DiscordGuild from "./models/DiscordGuild";
+import messageVibeFeedChannel from "./message/messageVibeFeedChannel";
 import Cron from "croner";
 
 let bot_guilds = [];
@@ -125,7 +126,7 @@ DiscordBot.start = async function () {
         user_id: message_member.user.id,
         reason,
       });
-      await DiscordGuild.messageVibeFeedChannel(guild, 
+      await messageVibeFeedChannel(guild, 
         `${vibedust_emoji} from ${lastReactionUser} to ${message_member}`
       );
     } else if (reaction.emoji.name == "badvibes") {
@@ -149,7 +150,7 @@ DiscordBot.start = async function () {
         reason,
       });
 
-      await DiscordGuild.messageVibeFeedChannel(guild, 
+      await messageVibeFeedChannel(guild, 
         `${badvibes_emoji} from ${lastReactionUser} to ${message_member}`
       );
     } else {

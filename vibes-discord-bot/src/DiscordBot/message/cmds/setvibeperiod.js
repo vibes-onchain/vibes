@@ -1,4 +1,5 @@
 import DiscordGuild from "../../models/DiscordGuild";
+import messageVibeFeedChannel from "../messageVibeFeedChannel";
 
 export default async function setvibeperiod({ client, message, cmd_args }) {
   const member = message.member;
@@ -35,7 +36,7 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
         icon_url: "https://i.imgur.com/1c0avUE.png",
       },
     };
-    await DiscordGuild.messageVibeFeedChannel(guild, { embeds: [vibecheckEmbed] });
+    await messageVibeFeedChannel(guild, { embeds: [vibecheckEmbed] });
     vibecheckEmbed = {
       color: 0x00eeee,
       title: `${vibedust_emoji}${vibedust_emoji}  Vibe Period Changed  ${vibedust_emoji}${vibedust_emoji}`,

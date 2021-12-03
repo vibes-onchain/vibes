@@ -4,6 +4,17 @@ import moment from "moment";
 import updateGuildMember from "../message/updateGuildMember";
 import Space from "spotspace/lib/Space";
 
+function calculateUserVibeRate(vibe_rate_str, { user_id, user_vibes }) {
+  const vibe_rates = DiscordGuild.parseVibeRate(vibe_rate_str);
+  const vibedust = user_vibes[user_id];
+  for (const tier of vibe_rates) {
+    const passed = ssEval(tier[0], { vibedust });
+    if (passed) {
+      return tier[1];
+    }
+  }
+  return 0;
+}
 export default class DiscordGuild {
   static ALLOWED_VIBE_PERIODS = ["minute", "hour", "day", "week", "month"];
 
@@ -249,18 +260,6 @@ export default class DiscordGuild {
     await entry.save();
   }
 
-  static calculateUserVibeRate(vibe_rate_str, { user_id, user_vibes }) {
-    const vibe_rates = DiscordGuild.parseVibeRate(vibe_rate_str);
-    const vibedust = user_vibes[user_id];
-    for (const tier of vibe_rates) {
-      const passed = ssEval(tier[0], { vibedust });
-      if (passed) {
-        return tier[1];
-      }
-    }
-    return 0;
-  }
-
   static distributeVibeDust({
     current_rate,
     current_period,
@@ -273,10 +272,10 @@ export default class DiscordGuild {
     }
     // console.log('DISTRIBUTING', current_time, pending_vibes)
     for (const from_user_id of Object.keys(pending_vibes)) {
-      const from_user_vibe_rate = DiscordGuild.calculateUserVibeRate(
-        current_rate,
-        { user_vibes, user_id: from_user_id }
-      );
+      const from_user_vibe_rate = calculateUserVibeRate(current_rate, {
+        user_vibes,
+        user_id: from_user_id,
+      });
       const pending_vibes_sent = pending_vibes[from_user_id];
       let total_pending_vibes = 0;
       for (const vibes of Object.values(pending_vibes_sent)) {

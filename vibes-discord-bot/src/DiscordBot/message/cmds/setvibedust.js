@@ -1,6 +1,7 @@
 import getTargetMember from "../getTargetMember";
 import updateGuildMember from "../updateGuildMember";
 import DiscordGuild from "../../models/DiscordGuild";
+import messageVibeFeedChannel from "../messageVibeFeedChannel";
 import Random from ":/lib/Random";
 
 export default async function setvibedust({ client, message, cmd_args }) {
@@ -60,7 +61,7 @@ export default async function setvibedust({ client, message, cmd_args }) {
     },
   };
   const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
-  await DiscordGuild.messageVibeFeedChannel(guild, { embeds: [setvibedustEmbed] });
+  await messageVibeFeedChannel(guild, { embeds: [setvibedustEmbed] });
   setvibedustEmbed = {
     color: 0x00eeee,
     title: `${vibedust_emoji}${vibedust_emoji}  Vibe Dust Set  ${vibedust_emoji}${vibedust_emoji}`,

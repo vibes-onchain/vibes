@@ -1,5 +1,6 @@
 import DiscordGuild from "../../models/DiscordGuild";
 import updateGuildMember from "../updateGuildMember";
+import messageVibeFeedChannel from "../messageVibeFeedChannel";
 
 export default async function vibedistro({ client, message, cmd_args }) {
   const member = message.member;
@@ -49,7 +50,7 @@ export default async function vibedistro({ client, message, cmd_args }) {
     },
   };
 
-  await DiscordGuild.messageVibeFeedChannel(guild, {
+  await messageVibeFeedChannel(guild, {
     embeds: [vibecheckEmbed],
   });
 }
