@@ -85,7 +85,6 @@ DiscordBot.start = async function () {
       message.content.match(prefixUserMention) ||
       message.content.match(prefixAtMention)
     ) {
-      console.log("handling mentioned message");
       await handleMention({ message });
     }
     const prefixCmdMention = /^\!([a-zA-Z0-9_]*)\s*(.*)/;
@@ -93,7 +92,6 @@ DiscordBot.start = async function () {
     if (cmdM && GLOBAL_CMDS.indexOf(cmdM[1]) !== -1) {
       const cmd = cmdM[1];
       const cmd_args = cmdM[2].split(/[ ]+/);
-      console.log("handling cmd message");
       await handleCmd({ client, message, cmd, cmd_args });
     }
   });

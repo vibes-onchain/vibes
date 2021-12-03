@@ -11,19 +11,16 @@ import setfrenlyparen from "./cmds/setfrenlyparen";
 import setfrenlylabel from "./cmds/setfrenlylabel";
 
 export default async function handleCmd({ client, message, cmd, cmd_args }) {
-  const member = message.member;
-  const guild = member.guild;
-  const guild_members = guild.members;
-  // console.log({ guild, guild_members });
-  // console.log({ message, member, cmd, cmd_args });
+  const guild_id = message?.guild_id;
+
   if (!cmd && !cmd_args) {
     cmd_args = message.content.split(" ");
     cmd_args.shift();
     cmd = cmd_args.shift();
   }
   console.log(
-    `[${cmd}] FROM: discord:${guild.id}:${
-      member.user.id
+    `[${cmd}] FROM: discord:${guild_id || 'dm'}:${
+      message.author.id
     } :: ARGS: (${cmd_args.join(", ")})`
   );
   if (cmd === "about" || cmd === "help") {

@@ -2,31 +2,29 @@ import DiscordGuild from "../../models/DiscordGuild";
 import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
 
 export default async function help({ message, cmd_args }) {
-  const member = message.member;
-  const guild = member.guild;
+  const guild = message?.member?.guild;
 
   const vibedust_emoji =
-    guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
+    guild?.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
 
-  const vibesEmoji = message.guild.emojis.cache.find(
+  const vibesEmoji = guild?.emojis.cache.find(
     (emoji) => emoji.name === "vibes"
   );
-  const badvibes_emoji = message.guild.emojis.cache.find(
+  const badvibes_emoji = guild?.emojis.cache.find(
     (emoji) => emoji.name === "badvibes"
   );
-  const rareVibeEmoji = message.guild.emojis.cache.find(
+  const rareVibeEmoji = guild?.emojis.cache.find(
     (emoji) => emoji.name === "rarevibe"
   );
-  const epicVibeEmoji = message.guild.emojis.cache.find(
+  const epicVibeEmoji = guild?.emojis.cache.find(
     (emoji) => emoji.name === "epicvibe"
   );
-  const legendaryVibeEmoji = message.guild.emojis.cache.find(
+  const legendaryVibeEmoji = guild?.emojis.cache.find(
     (emoji) => emoji.name === "legendaryvibe"
   );
-  const ogVibeEmoji = message.guild.emojis.cache.find(
+  const ogVibeEmoji = guild?.emojis.cache.find(
     (emoji) => emoji.name === "ogvibe"
   );
-  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
   let helpMessage = [
     "i live at `fren.ly`",
     `and i work in discord \n my ${vibedust_emoji} and ${badvibes_emoji} do stuffz \n\n`,
@@ -90,10 +88,16 @@ export default async function help({ message, cmd_args }) {
     "` = OG Vibe \t\t 97.72% - 99.99% rank`\n\n",
   ].join("");
 
+  let space_id;
+  if (guild) {
+    const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
+    space_id = space.id;
+  }
+
   const helpEmbed = {
     color: 0x00eeee,
     title: `${vibedust_emoji}${vibedust_emoji}  How Frenly Bot Works  ${vibedust_emoji}${vibedust_emoji}`,
-    url: `https://www.spot.space/${space.id}`,
+    url: `https://www.spot.space/${space_id}`,
     description: `${helpMessage}\n\n Get lots more vibe analytics on ***spot.space***, click the vibedust to view more!`,
     thumbnail: {
       url: "https://media0.giphy.com/media/1fnwSUTsHRyGXEYMos/giphy.gif?cid=ecf05e47b7vkmx00wquadbiunwj71or7xxm1b44iti4zdaxo&rid=giphy.gif&ct=g",
