@@ -6,6 +6,7 @@ import handleCmd from "./message/handleCmd";
 import handleMention from "./message/handleMention";
 import DiscordGuild from "./models/DiscordGuild";
 import messageVibeFeedChannel from "./message/messageVibeFeedChannel";
+import updateSpaceGuildUsers from "./updateSpaceGuildUsers";
 import Cron from "croner";
 
 let bot_guilds = [];
@@ -179,7 +180,7 @@ DiscordBot.start = async function () {
     const space_ids = await DiscordGuild.getSpaceIdsToUpdateEachPeriod(period);
     for (const space_id of space_ids) {
       console.log(`UPDATING space_id: ${space_id}`);
-      await DiscordGuild.updateSpaceGuildUsers(client, space_id);
+      await updateSpaceGuildUsers(client, space_id);
     }
   }
 

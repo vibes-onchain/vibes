@@ -1,4 +1,5 @@
 import DiscordGuild from "../../models/DiscordGuild";
+import updateSpaceGuildUsers from "../../updateSpaceGuildUsers";
 
 export default async function setparen({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -20,5 +21,5 @@ export default async function setparen({ client, message, cmd_args }) {
   space.changed("meta", true);
   await space.save();
 
-  await DiscordGuild.updateSpaceGuildUsers(client, space.id); 
+  await updateSpaceGuildUsers(client, space.id); 
 }
