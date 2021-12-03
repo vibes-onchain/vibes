@@ -2,6 +2,7 @@ import _ from "lodash";
 import { parse as ssParse, evaluate as ssEval } from "subscript";
 import moment from "moment";
 import updateGuildMember from "../message/updateGuildMember";
+import Space from "spotspace/lib/Space";
 
 export default class DiscordGuild {
   static ALLOWED_VIBE_PERIODS = ["minute", "hour", "day", "week", "month"];
@@ -198,7 +199,6 @@ export default class DiscordGuild {
       space.name = guild_name;
     }
     space.meta = { ...space.meta, discord_guild_id: guild_id };
-    space.changed("meta", true);
     await space.save();
     return space;
   }
@@ -381,6 +381,7 @@ export default class DiscordGuild {
   }
 
   static async getSpaceIdsToUpdateEachPeriod(period) {
+    return []; // TODO
     const q = `select distinct on(space_id) space_id, value
     from spotspace.space_ledger_entries
     where type = 'Set Vibe Period' and value->>'vibe_period' = '${period}'

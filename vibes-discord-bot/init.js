@@ -14,3 +14,7 @@ if (fs.existsSync(`${__dirname}/config/.env`)) {
     process.env[k] = envConfig[k];
   }
 }
+
+globalThis.SPOTSPACE_CONNECTION = {
+  prefixUrl: 'http://spot-dev.space:2000'
+}
