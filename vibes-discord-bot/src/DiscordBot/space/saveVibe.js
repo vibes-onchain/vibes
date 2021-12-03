@@ -1,5 +1,7 @@
+import findOrCreateSpaceForGuild from "./findOrCreateSpaceForGuild";
+
 export default async function saveVibe({ from_user_id, user_id, reason }) {
-  const space = await DiscordGuild.findOrCreateSpace(this.id);
+  const space = await findOrCreateSpaceForGuild(this.id);
   const entry = SpaceLedgerEntry.build({
     space_id: space.id,
     type: "Vibe",

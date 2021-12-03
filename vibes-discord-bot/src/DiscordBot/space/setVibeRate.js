@@ -1,5 +1,6 @@
 import { parse as ssParse, evaluate as ssEval } from "subscript";
 import parseVibeRate from "./parseVibeRate";
+import findOrCreateSpaceForGuild from "./findOrCreateSpaceForGuild";
 
 export default async function saveVibeRate(str, user_id) {
   const vibe_rate = parseVibeRate(str);
@@ -7,7 +8,7 @@ export default async function saveVibeRate(str, user_id) {
     ...this.values,
     vibe_rate,
   };
-  const space = await DiscordGuild.findOrCreateSpace(this.id);
+  const space = await findOrCreateSpaceForGuild(this.id);
   const entry = SpaceLedgerEntry.build({
     space_id: space.id,
     type: "Set Vibe Rate",

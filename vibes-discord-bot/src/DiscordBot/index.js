@@ -5,8 +5,11 @@ import { TOKEN, GLOBAL_CMDS, REQUIRED_INTENTS } from "./constants";
 import handleCmd from "./message/handleCmd";
 import handleMention from "./message/handleMention";
 import DiscordGuild from "./models/DiscordGuild";
-import messageVibeFeedChannel from "./message/messageVibeFeedChannel";
-import updateSpaceGuildUsers from "./updateSpaceGuildUsers";
+import messageVibeFeedChannel from "./discord/messageVibeFeedChannel";
+import updateSpaceGuildUsers from "./discord/updateSpaceGuildUsers";
+import getSpaceIdsToUpdateEachPeriod from './space/getSpaceIdsToUpdateEachPeriod';
+import findOrCreateSpaceForGuild from "./space/findOrCreateSpaceForGuild";
+
 import Cron from "croner";
 
 let bot_guilds = [];
@@ -26,7 +29,7 @@ DiscordBot.start = async function () {
       return acc;
     }, {});
     for (const [guild_id, guild_name] of Object.entries(bot_guilds)) {
-      await DiscordGuild.findOrCreateSpace(guild_id, guild_name);
+      await findOrCreateSpaceForGuild(guild_id, guild_name);
     }
     console.log(`in guilds`, bot_guilds);
   });
@@ -177,7 +180,7 @@ DiscordBot.start = async function () {
   client.login(TOKEN);
 
   async function updateSpacesForPeriod(period) {
-    const space_ids = await DiscordGuild.getSpaceIdsToUpdateEachPeriod(period);
+    const space_ids = await getSpaceIdsToUpdateEachPeriod(period);
     for (const space_id of space_ids) {
       console.log(`UPDATING space_id: ${space_id}`);
       await updateSpaceGuildUsers(client, space_id);

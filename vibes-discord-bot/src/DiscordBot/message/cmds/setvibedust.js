@@ -1,7 +1,8 @@
 import getTargetMember from "../getTargetMember";
-import updateGuildMember from "../updateGuildMember";
+import updateGuildMember from "../../discord/updateGuildMember";
 import DiscordGuild from "../../models/DiscordGuild";
-import messageVibeFeedChannel from "../messageVibeFeedChannel";
+import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
+import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
 import Random from ":/lib/Random";
 
 export default async function setvibedust({ client, message, cmd_args }) {
@@ -31,7 +32,7 @@ export default async function setvibedust({ client, message, cmd_args }) {
   const vibes = parseFloat(cmd_args[1]);
   console.log({ vibes });
 
-  const space = await DiscordGuild.findOrCreateSpace(guild.id, guild.name);
+  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
   const entry = SpaceLedgerEntry.build({
     space_id: space.id,
     type: "Set Vibe Dust",

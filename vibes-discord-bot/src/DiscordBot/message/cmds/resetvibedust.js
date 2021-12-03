@@ -1,8 +1,9 @@
 import DiscordGuild from "../../models/DiscordGuild";
-import updateSpaceGuildUsers from "../../updateSpaceGuildUsers";
+import updateSpaceGuildUsers from "../../discord/updateSpaceGuildUsers";
+import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
 
 export default async function resetvibes({ client, message }) {
-  const space = await DiscordGuild.findOrCreateSpace(
+  const space = await findOrCreateSpaceForGuild(
     message.guild.id,
     message.guild.name
   );

@@ -1,5 +1,5 @@
 import DiscordGuild from "../../models/DiscordGuild";
-import messageVibeFeedChannel from "../messageVibeFeedChannel";
+import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 
 export default async function setviberate({ client, message, cmd_args }) {
   const member = message.member;

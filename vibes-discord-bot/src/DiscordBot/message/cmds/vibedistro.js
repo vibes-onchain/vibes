@@ -1,7 +1,8 @@
 import DiscordGuild from "../../models/DiscordGuild";
-import updateGuildMember from "../updateGuildMember";
-import messageVibeFeedChannel from "../messageVibeFeedChannel";
+import updateGuildMember from "../../discord/updateGuildMember";
+import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import recountSpaceVibes from "../../space/recountSpaceVibes";
+import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
 
 export default async function vibedistro({ client, message, cmd_args }) {
   const member = message.member;
@@ -16,7 +17,7 @@ export default async function vibedistro({ client, message, cmd_args }) {
     return;
   }
   const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
-  const space = await DiscordGuild.findOrCreateSpace(guild.id, guild.name);
+  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
   const users_vibes = await recountSpaceVibes(space.id);
   for (const [user_id, vibes] of Object.entries(users_vibes)) {
     await updateGuildMember({

@@ -1,3 +1,5 @@
+import findOrCreateSpaceForGuild from "./findOrCreateSpaceForGuild";
+
 export const ALLOWED_VIBE_PERIODS = ["minute", "hour", "day", "week", "month"];
 
 export default async function saveVibePeriod(period, user_id) {
@@ -9,7 +11,7 @@ export default async function saveVibePeriod(period, user_id) {
   } else {
     throw new Error(`vibe period ${period} not allowed`);
   }
-  const space = await DiscordGuild.findOrCreateSpace(this.id);
+  const space = await findOrCreateSpaceForGuild(this.id);
   const entry = SpaceLedgerEntry.build({
     space_id: space.id,
     type: "Set Vibe Period",

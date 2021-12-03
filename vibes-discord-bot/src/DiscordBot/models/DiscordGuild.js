@@ -1,6 +1,4 @@
 import _ from "lodash";
-import moment from "moment";
-import updateGuildMember from "../message/updateGuildMember";
 import Space from "spotspace/lib/Space";
 export default class DiscordGuild {
   static getKey({ guild_id }) {

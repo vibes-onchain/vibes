@@ -1,4 +1,5 @@
 import DiscordGuild from "../../models/DiscordGuild";
+import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
 
 export default async function help({ message, cmd_args }) {
   const member = message.member;
@@ -25,7 +26,7 @@ export default async function help({ message, cmd_args }) {
   const ogVibeEmoji = message.guild.emojis.cache.find(
     (emoji) => emoji.name === "ogvibe"
   );
-  const space = await DiscordGuild.findOrCreateSpace(guild.id, guild.name);
+  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
   let helpMessage = [
     "i live at `fren.ly`",
     `and i work in discord \n my ${vibedust_emoji} and ${badvibes_emoji} do stuffz \n\n`,

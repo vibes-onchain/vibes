@@ -1,5 +1,6 @@
 import DiscordGuild from "../../models/DiscordGuild";
-import messageVibeFeedChannel from "../messageVibeFeedChannel";
+import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
+import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
 
 export default async function setvibeperiod({ client, message, cmd_args }) {
   const member = message.member;
@@ -21,7 +22,7 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
       guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
     const vibes_emoji =
       guild.emojis.cache.find((emoji) => emoji.name === "vibes") || "✨";
-    const space = await DiscordGuild.findOrCreateSpace(guild.id, guild.name);
+    const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
 
     let vibecheckEmbed = {
       color: 0x00eeee,
