@@ -1,7 +1,0 @@
-#!/bin/bash
-. `dirname $0`/vars
-set -x
-
-echo $SQL_DB_URL
-
-docker run --net=$APP_DOCKER_NET -it $CONTAINER_NAME bash
