@@ -54,7 +54,7 @@ export default async function updateGuildMember({
 
   const context = {};
   context["vibedust"] = formatNumber(vibes, "decimal2f");
-  for (const [label, users_labels] of Object.entries(frenly_labels)) {
+  for (const [label, users_labels] of Object.entries(frenly_labels || {})) {
     context[label] = users_labels[member.user.id] || '';
   }
 
