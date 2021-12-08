@@ -16,8 +16,10 @@ export default async function vibedistro({ client, message, cmd_args }) {
     );
     return;
   }
-  const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
-  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
+  const space = await findOrCreateLedgerForGuild(
+    guild.id,
+    guild.name
+  );
   const users_vibes = await recountLedgerVibes(space.id);
   for (const [user_id, vibes] of Object.entries(users_vibes)) {
     await updateGuildMember({
