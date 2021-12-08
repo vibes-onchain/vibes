@@ -1,6 +1,6 @@
 import DiscordGuild from "../../models/DiscordGuild";
 import updateGuildMember from "../../discord/updateGuildMember";
-import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
+import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 
 export default async function vibecheck({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -18,7 +18,7 @@ export default async function vibecheck({ client, message, cmd_args }) {
   //   // );
   //   return;
   // }
-  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
+  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
 
   const vibedust_emoji =
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";

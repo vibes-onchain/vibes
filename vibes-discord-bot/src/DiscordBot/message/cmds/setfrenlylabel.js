@@ -1,7 +1,7 @@
 import DiscordGuild from "../../models/DiscordGuild";
 import getTargetMember from "../getTargetMember";
 import updateSpaceGuildUsers from "../../discord/updateSpaceGuildUsers";
-import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
+import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 
 export default async function setparen({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -24,7 +24,7 @@ export default async function setparen({ client, message, cmd_args }) {
     return;
   }
 
-  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
+  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
   const label = cmd_args[1];
   const value = cmd_args.length > 2 ? cmd_args[2] : null;
   space.meta = {

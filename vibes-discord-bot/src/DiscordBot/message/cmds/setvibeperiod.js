@@ -1,6 +1,6 @@
 // import DiscordGuild from "../../models/DiscordGuild";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
+import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 import saveVibePeriod, {
   ALLOWED_VIBE_PERIODS,
 } from "../../space/saveVibePeriod";
@@ -26,7 +26,7 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
   console.log({ cmd_args });
   const vibeperiod = cmd_args[0];
 
-  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
+  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
   if (!space) {
     return;
   }

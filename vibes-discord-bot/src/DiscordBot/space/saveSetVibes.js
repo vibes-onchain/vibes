@@ -1,4 +1,4 @@
-import findOrCreateSpaceForGuild from "./findOrCreateSpaceForGuild";
+import findOrCreateLedgerForGuild from "./findOrCreateLedgerForGuild";
 
 export default async function saveSetVibes({
   by_user_id,
@@ -6,7 +6,7 @@ export default async function saveSetVibes({
   vibes = 1,
   reason,
 }) {
-  const space = await findOrCreateSpaceForGuild(this.id);
+  const space = await findOrCreateLedgerForGuild(this.id);
   const entry = LedgerEntry.build({
     ledger_id: space.id,
     type: "Set Vibe Dust",

@@ -8,7 +8,7 @@ import DiscordGuild from "./models/DiscordGuild";
 import messageVibeFeedChannel from "./discord/messageVibeFeedChannel";
 import updateSpaceGuildUsers from "./discord/updateSpaceGuildUsers";
 import getSpaceIdsToUpdateEachPeriod from './space/getSpaceIdsToUpdateEachPeriod';
-import findOrCreateSpaceForGuild from "./space/findOrCreateSpaceForGuild";
+import findOrCreateLedgerForGuild from "./space/findOrCreateLedgerForGuild";
 
 import Cron from "croner";
 
@@ -29,7 +29,7 @@ DiscordBot.start = async function () {
       return acc;
     }, {});
     for (const [guild_id, guild_name] of Object.entries(bot_guilds)) {
-      await findOrCreateSpaceForGuild(guild_id, guild_name);
+      await findOrCreateLedgerForGuild(guild_id, guild_name);
     }
     console.log(`in guilds`, bot_guilds);
   });

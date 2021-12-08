@@ -1,5 +1,5 @@
 import DiscordGuild from "../../models/DiscordGuild";
-import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
+import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 
 export default async function help({ message, cmd_args }) {
   const guild = message?.member?.guild;
@@ -90,7 +90,7 @@ export default async function help({ message, cmd_args }) {
 
   let space_id;
   if (guild) {
-    const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
+    const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
     space_id = space.id;
   }
 
