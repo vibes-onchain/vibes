@@ -18,8 +18,10 @@ export default async function vibecheck({ client, message, cmd_args }) {
   //   // );
   //   return;
   // }
-  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
-
+  const space = await findOrCreateLedgerForGuild(
+    guild.id,
+    guild.name
+  );
   const vibedust_emoji =
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
 

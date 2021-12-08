@@ -4,8 +4,8 @@ import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 export default async function help({ message, cmd_args }) {
   const guild = message?.member?.guild;
   const space = await findOrCreateLedgerForGuild(
-    message.guild.id,
-    message.guild.name
+    guild.id,
+    guild.name
   );
   const vibedust_emoji =
     guild?.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
