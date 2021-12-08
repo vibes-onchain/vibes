@@ -1,6 +1,5 @@
 import getTargetMember from "../getTargetMember";
 import updateGuildMember from "../../discord/updateGuildMember";
-import DiscordGuild from "../../models/DiscordGuild";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 import Random from ":/lib/Random";
@@ -61,7 +60,6 @@ export default async function setvibedust({ client, message, cmd_args }) {
       icon_url: "https://i.imgur.com/1c0avUE.png",
     },
   };
-  const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
   await messageVibeFeedChannel(guild, { embeds: [setvibedustEmbed] });
   setvibedustEmbed = {
     color: 0x00eeee,

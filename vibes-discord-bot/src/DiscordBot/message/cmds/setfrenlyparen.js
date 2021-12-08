@@ -1,4 +1,3 @@
-import DiscordGuild from "../../models/DiscordGuild";
 import updateLedgerGuildMembers from "../../discord/updateLedgerGuildMembers";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 
@@ -22,5 +21,5 @@ export default async function setparen({ client, message, cmd_args }) {
   space.changed("meta", true);
   await space.save();
 
-  await updateLedgerGuildMembers(client, space.id); 
+  await updateLedgerGuildMembers(client, space.id);
 }

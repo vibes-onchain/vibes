@@ -1,4 +1,3 @@
-// import DiscordGuild from "../../models/DiscordGuild";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 import saveVibePeriod, {

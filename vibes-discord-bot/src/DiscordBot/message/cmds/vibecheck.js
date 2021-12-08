@@ -1,4 +1,3 @@
-import DiscordGuild from "../../models/DiscordGuild";
 import updateGuildMember from "../../discord/updateGuildMember";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 

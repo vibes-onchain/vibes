@@ -1,4 +1,3 @@
-import DiscordGuild from "../../models/DiscordGuild";
 import getTargetMember from "../getTargetMember";
 import updateLedgerGuildMembers from "../../discord/updateLedgerGuildMembers";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";

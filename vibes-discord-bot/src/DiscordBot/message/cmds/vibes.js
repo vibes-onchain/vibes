@@ -1,7 +1,6 @@
 import getTargetMember from "../getTargetMember";
-import DiscordGuild from "../../models/DiscordGuild";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-
+import saveVibe from "../../space/saveVibe";
 export default async function vibes({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
@@ -29,13 +28,12 @@ export default async function vibes({ client, message, cmd_args }) {
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
 
   const reason = cmd_args.slice(1).join(" ");
-  const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
-  await dg.saveVibe({
+  await saveVibe({
     from_user_id: message_member.user.id,
     user_id: member.user.id,
     reason,
   });
-  await messageVibeFeedChannel(guild, 
+  await messageVibeFeedChannel(guild,
     `${vibedust_emoji} from ${message_member} to ${member}`
   );
 }

@@ -1,6 +1,5 @@
-import DiscordGuild from "../../models/DiscordGuild";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-
+import setVibeRate from "../../space/setVibeRate";
 export default async function setviberate({ client, message, cmd_args }) {
   const member = message.member;
   const guild = member.guild;
@@ -13,9 +12,9 @@ export default async function setviberate({ client, message, cmd_args }) {
     );
     return;
   }
-  const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
   const viberate_str = cmd_args.join(" ");
-  await dg.saveVibeRate(viberate_str, member.user_id);
+  await setVibeRate(viberate_str, member.user_id);
+
   const vibedust_emoji =
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
   const vibes_emoji =
