@@ -1,4 +1,3 @@
-import DiscordGuild from "../../models/DiscordGuild";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 
 export default async function help({ message, cmd_args }) {

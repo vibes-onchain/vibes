@@ -1,4 +1,4 @@
-export default async function recountSpaceVibes(space_id) {
+export default async function recountLedgerVibes(space_id) {
   const entries = await LedgerEntry.findAll({
     where: { ledger_id: space_id },
     order: [["global_seq_number", "ASC"]],

@@ -6,7 +6,7 @@ import handleCmd from "./message/handleCmd";
 import handleMention from "./message/handleMention";
 import DiscordGuild from "./models/DiscordGuild";
 import messageVibeFeedChannel from "./discord/messageVibeFeedChannel";
-import updateSpaceGuildUsers from "./discord/updateSpaceGuildUsers";
+import updateLedgerGuildMembers from "./discord/updateLedgerGuildMembers";
 import getSpaceIdsToUpdateEachPeriod from './space/getSpaceIdsToUpdateEachPeriod';
 import findOrCreateLedgerForGuild from "./space/findOrCreateLedgerForGuild";
 
@@ -181,7 +181,7 @@ DiscordBot.start = async function () {
     const space_ids = await getSpaceIdsToUpdateEachPeriod(period);
     for (const space_id of space_ids) {
       console.log(`UPDATING ledger_id: ${space_id}`);
-      await updateSpaceGuildUsers(client, space_id);
+      await updateLedgerGuildMembers(client, space_id);
     }
   }
 
