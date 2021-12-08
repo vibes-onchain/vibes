@@ -1,7 +1,6 @@
 import getTargetMember from "../getTargetMember";
-import DiscordGuild from "../../models/DiscordGuild";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-
+import saveBadVibe from "../../space/saveBadVibe";
 export default async function badvibes({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
@@ -29,15 +28,15 @@ export default async function badvibes({ client, message, cmd_args }) {
     guild.emojis.cache.find((emoji) => emoji.name === "badvibes") || "✨";
   const reason = cmd_args.slice(1).join(" ");
 
-  const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
-  await dg.saveBadVibe({
+  await saveBadVibe({
     from_user_id: message_member.user.id,
     user_id: member.user.id,
     reason,
   });
 
 
-  await messageVibeFeedChannel(guild, 
+
+  await messageVibeFeedChannel(guild,
     `${badvibes_emoji} from ${message_member} to ${member}`
   );
 }
