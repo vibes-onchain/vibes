@@ -1,14 +1,14 @@
-import DiscordGuild from "../../models/DiscordGuild";
-import updateSpaceGuildUsers from "../../discord/updateSpaceGuildUsers";
+import updateLedgerGuildMembers from "../../discord/updateLedgerGuildMembers";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import LedgerEntry from 'spotspace/lib/LedgerEntry';
 
 export default async function resetvibes({ client, message }) {
-  const space = await findOrCreateLedgerForGuild(
+  const ledger = await findOrCreateLedgerForGuild(
     message.guild.id,
     message.guild.name
   );
   const entry = LedgerEntry.build({
-    ledger_id: space.id,
+    ledger_id: ledger.id,
     type: "Reset Vibe Dust",
     value: {
       by_user_id: message.member.user.id,
@@ -17,5 +17,5 @@ export default async function resetvibes({ client, message }) {
   });
   await entry.save();
 
-  await updateSpaceGuildUsers(client, space.id)
+  await updateLedgerGuildMembers(client, ledger.id)
 }
