@@ -1,3 +1,5 @@
+import { parse as ssParse, evaluate as ssEval } from "subscript";
+
 export default async function parseVibeRate(str) {
   const numberMatcher = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
 

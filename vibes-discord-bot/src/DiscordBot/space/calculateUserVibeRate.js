@@ -1,4 +1,5 @@
 import parseVibeRate from "./parseVibeRate";
+import { evaluate as ssEval } from "subscript";
 
 export default function calculateUserVibeRate(
   vibe_rate_str,

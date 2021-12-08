@@ -1,4 +1,3 @@
-import updateGuildMember from "../../discord/updateGuildMember";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 
 export default async function vibecheck({ client, message, cmd_args }) {
