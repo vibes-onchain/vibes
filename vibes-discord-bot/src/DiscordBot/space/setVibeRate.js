@@ -1,4 +1,3 @@
-import { parse as ssParse, evaluate as ssEval } from "subscript";
 import parseVibeRate from "./parseVibeRate";
 import findOrCreateLedgerForGuild from "./findOrCreateLedgerForGuild";
 
