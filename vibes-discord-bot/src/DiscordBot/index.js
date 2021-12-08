@@ -4,7 +4,8 @@ import { TOKEN, GLOBAL_CMDS, REQUIRED_INTENTS } from "./constants";
 
 import handleCmd from "./message/handleCmd";
 import handleMention from "./message/handleMention";
-import DiscordGuild from "./models/DiscordGuild";
+import saveBadVibe from "./space/saveBadVibe";
+import saveVibe from "./space/saveVibe";
 import messageVibeFeedChannel from "./discord/messageVibeFeedChannel";
 import updateLedgerGuildMembers from "./discord/updateLedgerGuildMembers";
 import getSpaceIdsToUpdateEachPeriod from './space/getSpaceIdsToUpdateEachPeriod';
@@ -14,7 +15,7 @@ import Cron from "croner";
 
 let bot_guilds = [];
 
-class DiscordBot {}
+class DiscordBot { }
 
 DiscordBot.start = async function () {
   const client = new Client({
@@ -122,13 +123,12 @@ DiscordBot.start = async function () {
       const vibedust_emoji =
         guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
       const reason = message.content;
-      const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
-      await dg.saveVibe({
+      await saveVibe({
         from_user_id: lastReactionUser.id,
         user_id: message_member.user.id,
         reason,
       });
-      await messageVibeFeedChannel(guild, 
+      await messageVibeFeedChannel(guild,
         `${vibedust_emoji} from ${lastReactionUser} to ${message_member}`
       );
     } else if (reaction.emoji.name == "badvibes") {
@@ -145,14 +145,13 @@ DiscordBot.start = async function () {
       const badvibes_emoji =
         guild.emojis.cache.find((emoji) => emoji.name === "badvibes") || "✨";
       const reason = message.content;
-      const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
-      await dg.saveBadVibe({
+      await saveBadVibe({
         from_user_id: lastReactionUser.id,
         user_id: message_member.user.id,
         reason,
       });
 
-      await messageVibeFeedChannel(guild, 
+      await messageVibeFeedChannel(guild,
         `${badvibes_emoji} from ${lastReactionUser} to ${message_member}`
       );
     } else {
@@ -210,7 +209,7 @@ DiscordBot.start = async function () {
     await updateSpacesForPeriod("month");
   });
 
-  await new Promise((resolve, reject) => {});
+  await new Promise((resolve, reject) => { });
 };
 
 export default DiscordBot;
