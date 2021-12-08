@@ -1,3 +1,6 @@
+import LedgerEntry from 'spotspace/lib/LedgerEntry';
+import distributeVibeDust from './distributeVibeDust';
+
 export default async function recountLedgerVibes(space_id) {
   const entries = await LedgerEntry.findAll({
     where: { ledger_id: space_id },
@@ -24,7 +27,7 @@ export default async function recountLedgerVibes(space_id) {
         .endOf(current_period)
         .isSameOrBefore(moment(entry.authored_on))
     ) {
-      user_vibes = DiscordGuild.distributeVibeDust({
+      user_vibes = distributeVibeDust({
         current_rate,
         current_period,
         current_time,
@@ -68,7 +71,7 @@ export default async function recountLedgerVibes(space_id) {
     //   pending_vibes,
     // });
   }
-  user_vibes = DiscordGuild.distributeVibeDust({
+  user_vibes = distributeVibeDust({
     current_rate,
     current_period,
     current_time,
