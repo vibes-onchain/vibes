@@ -33,8 +33,8 @@ export default async function setvibedust({ client, message, cmd_args }) {
   console.log({ vibes });
 
   const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
-  const entry = SpaceLedgerEntry.build({
-    space_id: space.id,
+  const entry = LedgerEntry.build({
+    ledger_id: space.id,
     type: "Set Vibe Dust",
     value: {
       by_user_id: message.member.user.id,

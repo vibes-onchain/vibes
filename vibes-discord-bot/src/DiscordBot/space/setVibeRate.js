@@ -9,8 +9,8 @@ export default async function saveVibeRate(str, user_id) {
     vibe_rate,
   };
   const space = await findOrCreateSpaceForGuild(this.id);
-  const entry = SpaceLedgerEntry.build({
-    space_id: space.id,
+  const entry = LedgerEntry.build({
+    ledger_id: space.id,
     type: "Set Vibe Rate",
     value: {
       by_user_id: user_id,

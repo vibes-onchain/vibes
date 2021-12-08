@@ -180,7 +180,7 @@ DiscordBot.start = async function () {
   async function updateSpacesForPeriod(period) {
     const space_ids = await getSpaceIdsToUpdateEachPeriod(period);
     for (const space_id of space_ids) {
-      console.log(`UPDATING space_id: ${space_id}`);
+      console.log(`UPDATING ledger_id: ${space_id}`);
       await updateSpaceGuildUsers(client, space_id);
     }
   }

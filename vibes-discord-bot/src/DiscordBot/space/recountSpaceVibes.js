@@ -1,6 +1,6 @@
 export default async function recountSpaceVibes(space_id) {
-  const entries = await SpaceLedgerEntry.findAll({
-    where: { space_id: space_id },
+  const entries = await LedgerEntry.findAll({
+    where: { ledger_id: space_id },
     order: [["global_seq_number", "ASC"]],
   });
   let current_rate = null;

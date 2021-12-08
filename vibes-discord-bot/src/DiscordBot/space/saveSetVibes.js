@@ -7,8 +7,8 @@ export default async function saveSetVibes({
   reason,
 }) {
   const space = await findOrCreateSpaceForGuild(this.id);
-  const entry = SpaceLedgerEntry.build({
-    space_id: space.id,
+  const entry = LedgerEntry.build({
+    ledger_id: space.id,
     type: "Set Vibe Dust",
     value: {
       by_user_id: by_user_id,

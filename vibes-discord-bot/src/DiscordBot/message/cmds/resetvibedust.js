@@ -7,8 +7,8 @@ export default async function resetvibes({ client, message }) {
     message.guild.id,
     message.guild.name
   );
-  const entry = SpaceLedgerEntry.build({
-    space_id: space.id,
+  const entry = LedgerEntry.build({
+    ledger_id: space.id,
     type: "Reset Vibe Dust",
     value: {
       by_user_id: message.member.user.id,

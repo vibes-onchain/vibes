@@ -1,7 +1,7 @@
-import Space from "spotspace/lib/Space";
+import Ledger from "spotspace/lib/Ledger";
 
 export default async function findOrCreateSpaceForGuild(guild_id, guild_name) {
-  const [space, _was_created] = await Space.findOrCreate({
+  const [space, _was_created] = await Ledger.findOrCreate({
     where: { meta: { discord_guild_id: guild_id } },
     defaults: {
       // name: guild_name,

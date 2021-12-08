@@ -1,10 +1,18 @@
-import DiscordGuild from "../../models/DiscordGuild";
+// import DiscordGuild from "../../models/DiscordGuild";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import findOrCreateSpaceForGuild from "../../space/findOrCreateSpaceForGuild";
+import saveVibePeriod, {
+  ALLOWED_VIBE_PERIODS,
+} from "../../space/saveVibePeriod";
 
 export default async function setvibeperiod({ client, message, cmd_args }) {
   const member = message.member;
-  const guild = member.guild;
+  const guild = message.member?.guild;
+
+  if (!guild) {
+    await message.channel.send("only able to set vibe period for a guild");
+    return;
+  }
 
   if (
     !member.roles.cache.some((role) => role.name === "__CanControlFrenlyBot__")
@@ -14,15 +22,21 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
     );
     return;
   }
-  const dg = await DiscordGuild.findOrCreate({ guild_id: guild.id });
+
+  console.log({ cmd_args });
   const vibeperiod = cmd_args[0];
+
+  const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
+  if (!space) {
+    return;
+  }
+
   try {
-    await dg.saveVibePeriod(vibeperiod, member.user.id);
+    await saveVibePeriod(space.id, vibeperiod, member.user.id);
     const vibedust_emoji =
       guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
     const vibes_emoji =
       guild.emojis.cache.find((emoji) => emoji.name === "vibes") || "✨";
-    const space = await findOrCreateSpaceForGuild(guild.id, guild.name);
 
     let vibecheckEmbed = {
       color: 0x00eeee,
@@ -53,12 +67,11 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
     };
     await message.channel.send({ embeds: [vibecheckEmbed] });
   } catch (e) {
+    console.log(e);
     await message.channel.send(
-      `Unable to set vibe period to ${vibeperiod}. Please select from: ${DiscordGuild.ALLOWED_VIBE_PERIODS.join(
+      `Unable to set vibe period to ${vibeperiod}. Please select from: ${ALLOWED_VIBE_PERIODS.join(
         ", "
       )}`
     );
   }
-
-  console.log(dg.values);
 }
