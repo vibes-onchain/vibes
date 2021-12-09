@@ -11,6 +11,12 @@ import jquery from "jquery";
 // }
 global.$ = global.jQuery = jquery;
 
+window.SPOTSPACE_CONNECTION = {
+  prefixUrl: process.env.REACT_APP_SPOTSPACE_CONNECTION_prefixUrl
+}
+
+console.log(window.SPOTSPACE_CONNECTION);
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
