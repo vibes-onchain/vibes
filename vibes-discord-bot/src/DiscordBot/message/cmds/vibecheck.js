@@ -1,4 +1,5 @@
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import getTargetMember from '../getTargetMember';
 
 export default async function vibecheck({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -21,7 +22,7 @@ export default async function vibecheck({ client, message, cmd_args }) {
   const vibecheckEmbed = {
     color: 0x00eeee,
     title: `${vibedust_emoji}${vibedust_emoji}  Vibe Check  ${vibedust_emoji}${vibedust_emoji}`,
-    url: `https://www.spot.space/${space.id}`,
+    url: `https://www.vibes.live/ledger/${space.id}`,
     description:
       "Get lots more vibe analytics on ***spot.space***, click the vibedust to view more!",
     thumbnail: {
