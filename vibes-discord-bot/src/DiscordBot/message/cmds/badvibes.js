@@ -1,6 +1,7 @@
 import getTargetMember from "../getTargetMember";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import saveBadVibe from "../../space/saveBadVibe";
+import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 
 
 export default async function badvibes({ client, message, cmd_args }) {

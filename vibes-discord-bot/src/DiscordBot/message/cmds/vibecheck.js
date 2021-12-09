@@ -4,22 +4,17 @@ export default async function vibecheck({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
 
-  // const member = await getTargetMember({ message, cmd_args });
-  // if (!member) {
-  //   console.log("receiver not found");
-  //   return;
-  // }
+  const member = await getTargetMember({ message, cmd_args });
+  if (!member) {
+    console.log("receiver not found");
+    return;
+  }
 
-  // if (member.user.id === message_member.user.id) {
-  //   // await message.channel.send(
-  //   //   `@${target_user.username} you can only vibe others`
-  //   // );
-  //   return;
-  // }
   const space = await findOrCreateLedgerForGuild(
     guild.id,
     guild.name
   );
+
   const vibedust_emoji =
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
 

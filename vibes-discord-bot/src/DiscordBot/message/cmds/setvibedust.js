@@ -3,6 +3,7 @@ import updateGuildMember from "../../discord/updateGuildMember";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
 import Random from ":/lib/Random";
+import LedgerEntry from 'spotspace/lib/LedgerEntry';
 
 export default async function setvibedust({ client, message, cmd_args }) {
   const message_member = message.member;
