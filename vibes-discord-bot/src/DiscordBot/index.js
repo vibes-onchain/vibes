@@ -8,7 +8,7 @@ import saveBadVibe from "./space/saveBadVibe";
 import saveVibe from "./space/saveVibe";
 import messageVibeFeedChannel from "./discord/messageVibeFeedChannel";
 import updateLedgerGuildMembers from "./discord/updateLedgerGuildMembers";
-import getSpaceIdsToUpdateEachPeriod from './space/getSpaceIdsToUpdateEachPeriod';
+import getLedgerIdsToUpdateEachPeriod from './space/getLedgerIdsToUpdateEachPeriod';
 import findOrCreateLedgerForGuild from "./space/findOrCreateLedgerForGuild";
 
 import Cron from "croner";
@@ -177,7 +177,7 @@ DiscordBot.start = async function () {
   client.login(TOKEN);
 
   async function updateSpacesForPeriod(period) {
-    const space_ids = await getSpaceIdsToUpdateEachPeriod(period);
+    const space_ids = await getLedgerIdsToUpdateEachPeriod(period);
     for (const space_id of space_ids) {
       console.log(`UPDATING ledger_id: ${space_id}`);
       await updateLedgerGuildMembers(client, space_id);
