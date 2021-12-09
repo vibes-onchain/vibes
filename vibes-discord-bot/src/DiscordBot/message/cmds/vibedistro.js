@@ -2,6 +2,7 @@ import updateGuildMember from "../../discord/updateGuildMember";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import recountLedgerVibes from "../../space/recountLedgerVibes";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
 
 export default async function vibedistro({ client, message, cmd_args }) {
   const member = message.member;
@@ -30,20 +31,17 @@ export default async function vibedistro({ client, message, cmd_args }) {
       frenly_paren: space.meta?.frenly_paren,
     });
   }
-  const vibedust_emoji =
-    guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
-  const vibes_emoji =
-    guild.emojis.cache.find((emoji) => emoji.name === "vibes") || "✨";
-  await message.channel.send(
-    `Vibes have been refreshed ${vibedust_emoji} ${vibes_emoji}`
-  );
 
-  const vibecheckEmbed = {
+
+  const vibeDistroEmbedFeed = {
     color: 0x00eeee,
-    title: `${vibedust_emoji}${vibedust_emoji} Vibes Distributed ${vibedust_emoji}${vibedust_emoji}`,
-    url: `https://www.spot.space/${space.id}`,
-    description:
-      "Get lots more vibe analytics on ***spot.space***, click the vibedust to view more!",
+    title: await parseEmojisForMessage(message, `:arrow_right: vibedustEmoji New Vibe Distro! vibedustEmoji  vibedustEmoji`),
+    url: `https://vibes.live/[VibesLiveCommunityID]`,
+    description: await parseEmojisForMessage(message, `@everyone
+
+    :hourglass: vibedust vibedustEmoji  has been distro'd for the \`VIBEPERIOD\` that ran from [tx.starttime] to [tx.endtime]
+    :vibedust: check DM for your vibestack
+    :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`),
     image: {
       url: "https://media.giphy.com/media/dWCaFhKKq3K8TryllR/giphy.gif",
     },
@@ -53,7 +51,14 @@ export default async function vibedistro({ client, message, cmd_args }) {
     },
   };
 
-  await messageVibeFeedChannel(guild, {
-    embeds: [vibecheckEmbed],
+  await message.author.send(await parseEmojisForMessage(message, `:arrow_right: vibedustEmoji  \`VIBEDISTRO\` – u got [interactingUser.lastDistro.vibedustRecieved] vibedust vibedustEmoji  for the \`VIBEPERIOD\` that ran from [tx.starttime] to [tx.endtime]
+
+  :eyes: peep your updated vibes at vibes.live/[interactingUser.VibesLiveID]
+  
+  :clipboard: Full Tx log – **vibescan.io/[interactingUser.vibescanID]**"""`));
+  const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
+
+  await vibeFeedChannel.send({ embeds: [vibeDistroEmbedFeed] }).catch(e => {
+    console.log(e);
   });
 }
