@@ -39,7 +39,7 @@ export default async function setparen({ client, message, cmd_args }) {
     type: "Set Ledger Metadata",
     value: {
       key: "vibes:labels",
-      value: vibes_labels,
+      value: JSON.stringify(vibes_labels),
     },
   });
   await le.save();

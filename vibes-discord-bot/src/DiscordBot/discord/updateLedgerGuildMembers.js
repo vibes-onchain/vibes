@@ -17,7 +17,7 @@ export default async function updateLedgerGuildMembers(client, ledger_id) {
           guild,
           user_id: member.user?.id,
           vibes: 0,
-          frenly_labels: ledger.meta?.['vibes:labels'],
+          frenly_labels: JSON.parse(ledger.meta?.['vibes:labels'] || "{}"),
           frenly_paren: ledger.meta?.['vibes:paren'],
         });
       }
@@ -28,7 +28,7 @@ export default async function updateLedgerGuildMembers(client, ledger_id) {
         guild,
         user_id,
         vibes,
-        frenly_labels: ledger.meta?.['vibes:labels'],
+        frenly_labels: JSON.parse(ledger.meta?.['vibes:labels'] || "{}"),
         frenly_paren: ledger.meta?.['vibes:paren'],
       });
     }
