@@ -19,11 +19,10 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     cmd = cmd_args.shift();
   }
   console.log(
-    `[${cmd}] FROM: discord:${guild_id || 'dm'}:${
-      message.author.id
+    `[${cmd}] FROM: discord:${guild_id || 'dm'}:${message.author.id
     } :: ARGS: (${cmd_args.join(", ")})`
   );
-  if (cmd === "about" || cmd === "help") {
+  if (cmd === "about" || cmd === "help" || cmd === "vibesbot") {
     return help({ message, cmd_args });
   } else if (cmd === "vibe" || cmd === "vibes") {
     return vibes({ client, message, cmd_args });
@@ -42,7 +41,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
   } else if (cmd === "setfrenlyparen") {
     return setfrenlyparen({ client, message, cmd_args });
   } else if (cmd === "setfrenlylabel") {
-    return setfrenlylabel({ client, message, cmd_args }); 
+    return setfrenlylabel({ client, message, cmd_args });
   } else if (cmd === "vibechk" || cmd === "vibecheck" || cmd === "vc") {
     return vibecheck({ client, message, cmd_args });
   }

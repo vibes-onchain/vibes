@@ -10,6 +10,7 @@ export const GLOBAL_CMDS = [
   "vibecheck",
   "vibechk",
   "help",
+  "vibesbot",
   "about",
   "setvibeperiod",
   "setvibeprd",
