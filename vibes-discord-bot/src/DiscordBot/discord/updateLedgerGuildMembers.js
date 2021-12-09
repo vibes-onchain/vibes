@@ -5,6 +5,7 @@ import updateGuildMember from './updateGuildMember';
 export default async function updateLedgerGuildMembers(client, ledger_id) {
   const ledger = await Ledger.findOne({ where: { id: ledger_id } });
   const guild_id = ledger.meta?.['vibes:discord_guild_id'];
+  console.log({ledger, guild_id});
   if (guild_id) {
     const guild = await client.guilds.cache.find((g) => g.id === guild_id);
     console.log({ ledger, guild });
@@ -16,8 +17,8 @@ export default async function updateLedgerGuildMembers(client, ledger_id) {
           guild,
           user_id: member.user?.id,
           vibes: 0,
-          frenly_labels: ledger.meta?.frenly_labels,
-          frenly_paren: ledger.meta?.frenly_paren,
+          frenly_labels: ledger.meta?.['vibes:labels'],
+          frenly_paren: ledger.meta?.['vibes:paren'],
         });
       }
     }
@@ -27,8 +28,8 @@ export default async function updateLedgerGuildMembers(client, ledger_id) {
         guild,
         user_id,
         vibes,
-        frenly_labels: ledger.meta?.frenly_labels,
-        frenly_paren: ledger.meta?.frenly_paren,
+        frenly_labels: ledger.meta?.['vibes:labels'],
+        frenly_paren: ledger.meta?.['vibes:paren'],
       });
     }
   }

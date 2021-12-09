@@ -38,9 +38,9 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return vibedistro({ client, message, cmd_args });
   } else if (cmd === "setvibedust" || cmd === "genvibedust") {
     return setvibedust({ client, message, cmd_args });
-  } else if (cmd === "setfrenlyparen") {
+  } else if (cmd === "setvibesparen") {
     return setfrenlyparen({ client, message, cmd_args });
-  } else if (cmd === "setfrenlylabel") {
+  } else if (cmd === "setvibeslabel") {
     return setfrenlylabel({ client, message, cmd_args });
   } else if (cmd === "vibechk" || cmd === "vibecheck" || cmd === "vc") {
     return vibecheck({ client, message, cmd_args });

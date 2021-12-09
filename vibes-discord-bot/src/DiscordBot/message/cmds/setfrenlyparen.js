@@ -1,5 +1,6 @@
 import updateLedgerGuildMembers from "../../discord/updateLedgerGuildMembers";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import LedgerEntry from 'spotspace/lib/LedgerEntry';
 
 export default async function setparen({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -17,9 +18,11 @@ export default async function setparen({ client, message, cmd_args }) {
   }
 
   const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
-  space.meta = { ...space.meta, frenly_paren: cmd_args.join(' ') };
-  space.changed("meta", true);
-  await space.save();
+  const le = LedgerEntry.build({ledger_id: space.id, type: "Set Ledger Metadata", value: {
+    key: "vibes:paren",
+    value: cmd_args.join(' ')
+  }});
+  await le.save();
 
   await updateLedgerGuildMembers(client, space.id);
 }
