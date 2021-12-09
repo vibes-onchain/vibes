@@ -12,6 +12,7 @@ import getLedgerIdsToUpdateEachPeriod from './space/getLedgerIdsToUpdateEachPeri
 import findOrCreateLedgerForGuild from "./space/findOrCreateLedgerForGuild";
 
 import Cron from "croner";
+import { space } from "subscript/parse";
 
 let bot_guilds = [];
 
@@ -109,11 +110,15 @@ DiscordBot.start = async function () {
         return;
       }
     }
+    const message = reaction.message;
+    const message_member = message.member;
+    const guild = message_member.guild;
+    const space = await findOrCreateLedgerForGuild(
+      guild.id,
+      guild.name
+    );
 
     if (reaction.emoji.name == "vibedust") {
-      const message = reaction.message;
-      const message_member = message.member;
-      const guild = message_member.guild;
       const reactionUsers = Array.from(await reaction.users.fetch());
       const lastReactionUser = reactionUsers.at(-1)[1];
 
@@ -124,6 +129,7 @@ DiscordBot.start = async function () {
         guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
       const reason = message.content;
       await saveVibe({
+        ledger_id: space.id,
         from_user_id: lastReactionUser.id,
         user_id: message_member.user.id,
         reason,
@@ -132,10 +138,6 @@ DiscordBot.start = async function () {
         `${vibedust_emoji} from ${lastReactionUser} to ${message_member}`
       );
     } else if (reaction.emoji.name == "badvibes") {
-      const message = reaction.message;
-      const message_member = message.member;
-      const guild = message_member.guild;
-
       const reactionUsers = Array.from(await reaction.users.fetch());
       const lastReactionUser = reactionUsers.at(-1)[1];
 
@@ -146,6 +148,7 @@ DiscordBot.start = async function () {
         guild.emojis.cache.find((emoji) => emoji.name === "badvibes") || "✨";
       const reason = message.content;
       await saveBadVibe({
+        ledger_id: space.id,
         from_user_id: lastReactionUser.id,
         user_id: message_member.user.id,
         reason,

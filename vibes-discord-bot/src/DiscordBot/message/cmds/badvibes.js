@@ -1,10 +1,15 @@
 import getTargetMember from "../getTargetMember";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
 import saveBadVibe from "../../space/saveBadVibe";
+
+
 export default async function badvibes({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
-
+  const space = await findOrCreateLedgerForGuild(
+    guild.id,
+    guild.name
+  );
   const member = await getTargetMember({ message, cmd_args });
   if (!member) {
     console.log("receiver not found");
@@ -29,6 +34,7 @@ export default async function badvibes({ client, message, cmd_args }) {
   const reason = cmd_args.slice(1).join(" ");
 
   await saveBadVibe({
+    ledger_id: space.id,
     from_user_id: message_member.user.id,
     user_id: member.user.id,
     reason,
