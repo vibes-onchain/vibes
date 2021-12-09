@@ -5,7 +5,6 @@ export default async function getLedgerIdsToUpdateEachPeriod(period) {
   const ledgers = await Ledger.findAll({ where: {} });
   const r = [];
   for (const ledger of ledgers) {
-    console.log({ledger});
     const le = await LedgerEntry.findOne({
       where: {
         type: "Set Vibe Period",
