@@ -1,7 +1,7 @@
 import formatNumber from ":/lib/formatNumber";
 
 const removeAllRoles = (member, guild) => {
-  ["Rare Vibe", "Epic Vibe", "Legendary Vibe", "OG Vibe"].map((roleName) => {
+  ["Sus Vibe", "Rare Vibe", "Epic Vibe", "Legendary Vibe", "OG Vibe"].map((roleName) => {
     const role = guild.roles.cache.find((role) => role.name === roleName);
     if (role) {
       member.roles.remove(role);
@@ -10,7 +10,7 @@ const removeAllRoles = (member, guild) => {
 };
 
 const removeAllRolesAndAddRoleName = async (member, guild, role_name) => {
-  ["Rare Vibe", "Epic Vibe", "Legendary Vibe", "OG Vibe"]
+  ["Sus Vibe", "Rare Vibe", "Epic Vibe", "Legendary Vibe", "OG Vibe"]
     .filter((i) => i !== role_name)
     .map((roleName) => {
       const role = guild.roles.cache.find((role) => role.name === roleName);
@@ -76,17 +76,8 @@ export default async function updateGuildMember({
         .catch((e) => {
           console.log(e);
         });
-      removeAllRoles(member, guild);
+      await removeAllRolesAndAddRoleName(member, guild, "Sus Vibe");
     } else if (vibes < 100) {
-      await member
-        .setNickname(
-          `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
-        )
-        .catch((e) => {
-          console.log(e);
-        });
-      removeAllRoles(member, guild);
-    } else if (vibes < 200) {
       await member
         .setNickname(
           `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
