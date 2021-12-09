@@ -13,6 +13,7 @@ import findOrCreateLedgerForGuild from "./space/findOrCreateLedgerForGuild";
 
 import Cron from "croner";
 import { space } from "subscript/parse";
+import parseEmojisForMessage from "./discord/parseEmojisForMessage";
 
 let bot_guilds = [];
 
@@ -125,8 +126,7 @@ DiscordBot.start = async function () {
       if (lastReactionUser.id === message_member.user.id) {
         return;
       }
-      const vibedust_emoji =
-        guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
+
       const reason = message.content;
       await saveVibe({
         ledger_id: space.id,
@@ -134,18 +134,38 @@ DiscordBot.start = async function () {
         user_id: message_member.user.id,
         reason,
       });
-      await messageVibeFeedChannel(guild,
-        `${vibedust_emoji} from ${lastReactionUser} to ${message_member}`
-      );
-    } else if (reaction.emoji.name == "badvibes") {
+
+      const vibesEmbedFeed = {
+        color: 0x00eeee,
+        title: await parseEmojisForMessage(message, `vibesEmoji  **!vibes**  vibesEmoji`),
+        url: `https://vibes.live/[VibesLiveCommunityID]`,
+        description: await parseEmojisForMessage(message, ` :right_arrow: vibedustEmoji  [targetedUser.@username] – u got vibes vibesEmoji  from [commandingUser.username]
+          for [tx.discordPostLink]
+          :pancakes: [commandingUser] has a **\`VIBESTACK\`** of [commandingUser.vibestack] this **\`VIBEPERIOD\`** (vibes.live/[commandingUser.VibesLiveId])
+          :timer: **\`VIBEPERIOD\`** ends in [vibeperiodRemaining?]
+          
+          :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`),
+        footer: {
+          text: `Powered by Spot`,
+          icon_url: "https://i.imgur.com/1c0avUE.png",
+        },
+      };
+
+      const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
+      // await message.channel.send(await parseEmojisForMessage(message, `:clipboard: susvibesEmoji  **vibescan.io/[tx.vibescanTX]**`)).catch(e => {
+      //   console.log(e);
+      // });
+      await vibeFeedChannel.send({ embeds: [vibesEmbedFeed] }).catch(e => {
+        console.log(e);
+      });
+    } else if (reaction.emoji.name == "susvibes") {
       const reactionUsers = Array.from(await reaction.users.fetch());
       const lastReactionUser = reactionUsers.at(-1)[1];
 
       if (lastReactionUser.id === message_member.user.id) {
         return;
       }
-      const badvibes_emoji =
-        guild.emojis.cache.find((emoji) => emoji.name === "badvibes") || "✨";
+
       const reason = message.content;
       await saveBadVibe({
         ledger_id: space.id,
@@ -154,9 +174,31 @@ DiscordBot.start = async function () {
         reason,
       });
 
-      await messageVibeFeedChannel(guild,
-        `${badvibes_emoji} from ${lastReactionUser} to ${message_member}`
-      );
+
+      const badVibesEmbedFeed = {
+        color: 0x00eeee,
+        title: await parseEmojisForMessage(message, `:arrow_right: vibedustEmoji New Vibe Distro! vibedustEmoji  vibedustEmoji`),
+        url: `https://vibes.live/[VibesLiveCommunityID]`,
+        description: await parseEmojisForMessage(message, `:right_arrow: susvibesEmoji   [targetedUser.@username] – u got susvibes susvibesEmoji   from [commandingUser.username]
+        for [tx.discordPostLink]
+        :pancakes: [commandingUser] has a **\`VIBESTACK\`** of [commandingUser.vibestack] this **\`VIBEPERIOD\`** (vibes.live/[commandingUser.VibesLiveId])
+        :timer: **\`VIBEPERIOD\`** ends in [vibeperiodRemaining?]
+        
+        :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`),
+        footer: {
+          text: `Powered by Spot`,
+          icon_url: "https://i.imgur.com/1c0avUE.png",
+        },
+      };
+
+      const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
+      await message.channel.send(await parseEmojisForMessage(message, `:clipboard: susvibesEmoji  **vibescan.io/[tx.vibescanTX]**`)).catch(e => {
+        console.log(e);
+      });
+      await vibeFeedChannel.send({ embeds: [badVibesEmbedFeed] }).catch(e => {
+        console.log(e);
+      });
+
     } else {
       return;
     }
