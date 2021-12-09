@@ -8,31 +8,33 @@ import BackendContext from ":/contexts/BackendContext";
 import { Popup, Button } from "semantic-ui-react";
 import Footer from ":/components/Footer";
 import Header from ":/components/Header";
-import useSession from ":/lib/useSession";
 import useRouter from ":/lib/useRouter";
 import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
+import Ledger from 'spotspace/lib/Ledger';
+import LedgerEntry from 'spotspace/lib/LedgerEntry';
 
 export default function () {
-  const session = useSession();
   const router = useRouter();
-  const space_id = router.match.params.space_id;
-  const [space, setSpace] = React.useState(null);
-  const [spaceLedgerEntries, setSpaceLedgerEntries] = React.useState(null);
+  const ledger_id = router.match.params.ledger_id;
+  const [ledger, setLedger] = React.useState(null);
+  const [ledgerEntries, setLedgerEntries] = React.useState(null);
 
   React.useEffect(() => {
-    Backend.get(`/spaces/${space_id}`).then((r) => {
-      setSpace(r.data);
-    });
-  }, space_id);
+    if (ledger_id) {
+      Ledger.findOne({where: {id: ledger_id}}).then(r => {
+        setLedger(r);
+      })
+    }
+  }, ledger_id);
 
   React.useEffect(() => {
-    Backend.get(`/spaces/${space_id}/ledger_entries`).then((r) => {
-      setSpaceLedgerEntries(r.data);
+    LedgerEntry.findAll({where: {ledger_id}}).then(r => {
+      setLedgerEntries(r);
     });
-  }, space_id);
+  }, ledger_id);
 
-  if (!space || !spaceLedgerEntries) {
+  if (!ledger || !ledgerEntries) {
     return <Loading />;
   }
 
@@ -41,7 +43,7 @@ export default function () {
       <Header />
       <div className="page-container">
         <div css={CSS}>
-          <h1>{space.name}</h1>
+          <h1>{ledger.name}</h1>
           <table>
             <thead>
               <tr>
@@ -54,7 +56,7 @@ export default function () {
               </tr>
             </thead>
             <tbody>
-              {spaceLedgerEntries.map((entry) => (
+              {ledgerEntries.map((entry) => (
                 <tr>
                   <td>{EntryId.abbreviate(entry.id)}</td>
                   <td>{entry.authored_on}</td>
