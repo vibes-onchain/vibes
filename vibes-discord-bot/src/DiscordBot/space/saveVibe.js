@@ -1,4 +1,6 @@
 import findOrCreateLedgerForGuild from "./findOrCreateLedgerForGuild";
+import LedgerEntry from 'spotspace/lib/LedgerEntry';
+
 
 export default async function saveVibe({ ledger_id, from_user_id, user_id, reason }) {
   const space = await findOrCreateLedgerForGuild(ledger_id);
