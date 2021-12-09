@@ -15,6 +15,6 @@ if (fs.existsSync(`${__dirname}/config/.env`)) {
   }
 }
 
-globalThis.SPOTSPACE_CONNECTION = {
-  prefixUrl: process.env.APP_SPOTSPACE_CONNECTION_prefixUrl
+globalThis.SPOTHUB_CONNECTION = {
+  prefixUrl: process.env.APP_SPOTHUB_CONNECTION_prefixUrl
 }
