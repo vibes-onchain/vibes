@@ -9,7 +9,7 @@ export default async function parseEmojisForMessage(guild_message, text) {
         (emoji) => emoji.name === "vibes"
     );
     const badvibes_emoji = guild?.emojis.cache.find(
-        (emoji) => emoji.name === "badvibes"
+        (emoji) => emoji.name === "susvibes"
     );
     const rareVibeEmoji = guild?.emojis.cache.find(
         (emoji) => emoji.name === "rarevibe"
@@ -31,12 +31,12 @@ export default async function parseEmojisForMessage(guild_message, text) {
         rareEmoji: rareVibeEmoji,
         legendaryEmoji: legendaryVibeEmoji,
         epicEmoji: epicVibeEmoji,
-        badvibesEmoji: badvibes_emoji,
+        susvibesEmoji: badvibes_emoji,
         vibeSender: member,
         vibeFeed: `<#${vibeFeedChannel.id}>`
     };
     return text.replace(
-        /\b(?:vibedustEmoji|vibesEmoji|ogEmoji|rareEmoji|legendaryEmoji|epicEmoji|badvibesEmoji|vibeSender|vibeFeed)\b/gi,
+        /\b(?:vibedustEmoji|vibesEmoji|ogEmoji|rareEmoji|legendaryEmoji|epicEmoji|susvibesEmoji|vibeSender|vibeFeed)\b/gi,
         (matched) => nameToEmoji[matched]
     );
 }

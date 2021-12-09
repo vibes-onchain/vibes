@@ -5,6 +5,8 @@ export const GLOBAL_CMDS = [
   "badvibe",
   "vibes",
   "badvibes",
+  "susvibes",
+  "susvibe",
   "setviberate",
   'setvibestack',
   "vibecheck",

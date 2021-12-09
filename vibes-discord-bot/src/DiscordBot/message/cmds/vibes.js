@@ -39,7 +39,47 @@ export default async function vibes({ client, message, cmd_args }) {
     user_id: member.user.id,
     reason,
   });
-  await messageVibeFeedChannel(guild,
-    `${vibedust_emoji} from ${message_member} to ${member}`
-  );
+
+
+  const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
+
+  const vibesChannelEmbed = {
+    color: 0x00eeee,
+    // url: parseEmojisForMessage(message, `https://www.vibesbot.gg`),
+    description: await parseEmojisForMessage(message, `:clipboard: vibedustEmoji **vibescan.io/[tx.vibescanTX]**`),
+    // thumbnail: {
+    //   url: "https://media2.giphy.com/media/BzM7MRs96dYpLSeUTy/giphy.gif?cid=ecf05e47yk8rvloiy4yh52cdlyzqoil3ksr606xmluc3p6ox&rid=giphy.gif&ct=ts",
+    // },
+    // footer: {
+    //   text: `Powered by Spot`,
+    //   icon_url: "https://i.imgur.com/1c0avUE.png",
+    // },
+  };
+
+  const vibesFeedEmbed = {
+    color: 0x00eeee,
+    url: `https://www.vibesbot.gg`,
+    title: await parseEmojisForMessage(message, `vibesEmoji  **!vibes**  vibesEmoji`),
+    description: await parseEmojisForMessage(message, `:right_arrow: vibedustEmoji  [targetedUser.@username] – u got vibes vibesEmoji  from [commandingUser.username]
+      for "[tx.vibesReason]"
+      :pancakes: [commandingUser] has a **\`VIBESTACK\`** of [commandingUser.vibestack] this **\`VIBEPERIOD\`** (vibes.live/[commandingUser.VibesLiveId])
+      :timer: **\`VIBEPERIOD\`** ends in [vibeperiodRemaining?]
+      :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`
+    ),
+    // thumbnail: {
+    //   url: "https://media2.giphy.com/media/BzM7MRs96dYpLSeUTy/giphy.gif?cid=ecf05e47yk8rvloiy4yh52cdlyzqoil3ksr606xmluc3p6ox&rid=giphy.gif&ct=ts",
+    // },
+    // footer: {
+    //   text: `Powered by Spot`,
+    //   icon_url: "https://i.imgur.com/1c0avUE.png",
+    // },
+  };
+
+  await message.channel.send({ embeds: [vibesChannelEmbed] }).catch(e => {
+    console.log(e);
+  });
+
+  await vibeFeedChannel.send({ embeds: [vibesFeedEmbed] }).catch(e => {
+    console.log(e);
+  });
 }

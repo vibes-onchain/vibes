@@ -9,7 +9,7 @@ export default async function updateLedgerGuildMembers(client, ledger_id) {
     const guild = await client.guilds.cache.find((g) => g.id === guild_id);
     console.log({ ledger, guild });
     const users_vibes = await recountLedgerVibes(ledger_id);
-    for (const [member_id, member] of guild.members.cache) {
+    for (const [member_id, member] of guild?.members.cache) {
       if (Object.keys(users_vibes).indexOf(member.user.id) === -1) {
         await updateGuildMember({
           client,

@@ -26,7 +26,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return help({ message, cmd_args });
   } else if (cmd === "vibe" || cmd === "vibes") {
     return vibes({ client, message, cmd_args });
-  } else if (cmd === "badvibe" || cmd === "badvibes") {
+  } else if (cmd === "badvibe" || cmd === "badvibes" || cmd === "susvibes" || cmd === "susvibe") {
     return badvibes({ client, message, cmd_args });
   } else if (cmd === "resetvibedust") {
     return resetvibedust({ client, message, cmd_args });
