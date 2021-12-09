@@ -67,53 +67,60 @@ export default async function updateGuildMember({
     return;
   }
 
-  if (vibes < 0) {
-    await member
-      .setNickname(
-        `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
-      )
-      .catch((e) => {
-        console.log(e);
-      });
-    removeAllRoles(member, guild);
-  } else if (vibes < 100) {
-    await member
-      .setNickname(
-        `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
-      )
-      .catch((e) => {
-        console.log(e);
-      });
-    removeAllRoles(member, guild);
-  } else if (vibes < 200) {
-    await member
-      .setNickname(
-        `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
-      )
-      .catch((e) => {
-        console.log(e);
-      });
-    await removeAllRolesAndAddRoleName(member, guild, "Rare Vibe");
-  } else if (vibes >= 200 && vibes < 300) {
-    await member
-      .setNickname(
-        `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
-      )
-      .catch((e) => {});
-    await removeAllRolesAndAddRoleName(member, guild, "Epic Vibe");
-  } else if (vibes >= 300 && vibes < 400) {
-    await member
-      .setNickname(
-        `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
-      )
-      .catch((e) => {});
-    removeAllRolesAndAddRoleName(member, guild, "Legendary Vibe");
-  } else if (vibes >= 400) {
-    await member
-      .setNickname(
-        `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
-      )
-      .catch((e) => {});
-    await removeAllRolesAndAddRoleName(member, guild, "OG Vibe");
+  try {
+    if (vibes < 0) {
+      await member
+        .setNickname(
+          `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
+        )
+        .catch((e) => {
+          console.log(e);
+        });
+      removeAllRoles(member, guild);
+    } else if (vibes < 100) {
+      await member
+        .setNickname(
+          `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
+        )
+        .catch((e) => {
+          console.log(e);
+        });
+      removeAllRoles(member, guild);
+    } else if (vibes < 200) {
+      await member
+        .setNickname(
+          `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
+        )
+        .catch((e) => {
+          console.log(e);
+        });
+      await removeAllRolesAndAddRoleName(member, guild, "Rare Vibe");
+    } else if (vibes >= 200 && vibes < 300) {
+      await member
+        .setNickname(
+          `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
+        )
+        .catch((e) => { });
+      await removeAllRolesAndAddRoleName(member, guild, "Epic Vibe");
+    } else if (vibes >= 300 && vibes < 400) {
+      await member
+        .setNickname(
+          `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
+        )
+        .catch((e) => { });
+      removeAllRolesAndAddRoleName(member, guild, "Legendary Vibe");
+    } else if (vibes >= 400) {
+      await member
+        .setNickname(
+          `${member.user.username} (${evalFrenlyParen(frenly_paren, context)})`
+        )
+        .catch((e) => { });
+      await removeAllRolesAndAddRoleName(member, guild, "OG Vibe");
+    }
+  } catch (error) {
+    console.log("Couldnt update that users guild id");
+    throw new Error("Not able to update nickname");
   }
+
+
 }
