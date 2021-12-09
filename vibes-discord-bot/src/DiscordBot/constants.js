@@ -19,6 +19,8 @@ export const GLOBAL_CMDS = [
   "setvibedust",
   "genvibedust",
   "vibedistro",
+  "vibedistribution",
+  "refreshvibes",
   "vd",
   "vc",
   "resetvibedust",
