@@ -1,7 +1,7 @@
-import spotspace from 'spotspace';
+import spothub from 'spothub';
 
-test("spotspace", async () => {
-  const ss = spotspace({prefixUrl: 'http://spot-dev.space:2000'});
+test("spothub", async () => {
+  const ss = spothub({prefixUrl: 'http://spot-dev.space:2000'});
   const { Space, LedgerEntry } = ss.models;
   const space0 = new Space({name: 'hello'});
   await space0.save();

@@ -11,8 +11,8 @@ import Header from ":/components/Header";
 import useRouter from ":/lib/useRouter";
 import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
-import Ledger from 'spotspace/lib/Ledger';
-import LedgerEntry from 'spotspace/lib/LedgerEntry';
+import Ledger from 'spothub/lib/Ledger';
+import LedgerEntry from 'spothub/lib/LedgerEntry';
 
 export default function () {
   const router = useRouter();

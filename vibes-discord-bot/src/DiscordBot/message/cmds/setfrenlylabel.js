@@ -1,7 +1,7 @@
 import getTargetMember from "../getTargetMember";
 import updateLedgerGuildMembers from "../../discord/updateLedgerGuildMembers";
 import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
-import LedgerEntry from "spotspace/lib/LedgerEntry";
+import LedgerEntry from "spothub/lib/LedgerEntry";
 
 export default async function setparen({ client, message, cmd_args }) {
   const message_member = message.member;

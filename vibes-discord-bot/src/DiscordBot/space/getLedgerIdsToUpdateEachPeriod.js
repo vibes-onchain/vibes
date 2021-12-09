@@ -1,5 +1,5 @@
-import Ledger from "spotspace/lib/Ledger";
-import LedgerEntry from "spotspace/lib/LedgerEntry";
+import Ledger from "spothub/lib/Ledger";
+import LedgerEntry from "spothub/lib/LedgerEntry";
 
 export default async function getLedgerIdsToUpdateEachPeriod(period) {
   const ledgers = await Ledger.findAll({ where: {} });

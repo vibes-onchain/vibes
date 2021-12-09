@@ -1,4 +1,4 @@
-import LedgerEntry from 'spotspace/lib/LedgerEntry';
+import LedgerEntry from 'spothub/lib/LedgerEntry';
 
 export const ALLOWED_VIBE_PERIODS = ["minute", "hour", "day", "week", "month"];
 

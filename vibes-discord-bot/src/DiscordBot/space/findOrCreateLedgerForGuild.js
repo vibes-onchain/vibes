@@ -1,5 +1,5 @@
-import Ledger from "spotspace/lib/Ledger";
-import LedgerEntry from "spotspace/lib/LedgerEntry";
+import Ledger from "spothub/lib/Ledger";
+import LedgerEntry from "spothub/lib/LedgerEntry";
 
 export default async function findOrCreateLedgerForGuild(guild_id, guild_name) {
   const existingLedger = await Ledger.findOne({

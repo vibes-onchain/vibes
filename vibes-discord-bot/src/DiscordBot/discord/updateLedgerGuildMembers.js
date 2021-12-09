@@ -1,4 +1,4 @@
-import Ledger from 'spotspace/lib/Ledger';
+import Ledger from 'spothub/lib/Ledger';
 import recountLedgerVibes from '../space/recountLedgerVibes';
 import updateGuildMember from './updateGuildMember';
 

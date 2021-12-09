@@ -45,7 +45,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.3",
     "source-map-explorer": "^2.5.2",
-    "spotspace": "github:spot-foundation/spotspace-js",
+    "spothub": "github:spot-foundation/spothub-js",
     "uuid-validate": "0.0.3",
     "validator": "^13.6.0",
     "yup": "^0.29.3"

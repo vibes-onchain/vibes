@@ -1,4 +1,4 @@
-import LedgerEntry from 'spotspace/lib/LedgerEntry';
+import LedgerEntry from 'spothub/lib/LedgerEntry';
 import distributeVibeDust from './distributeVibeDust';
 
 export default async function recountLedgerVibes(space_id) {
