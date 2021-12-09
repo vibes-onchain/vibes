@@ -3,7 +3,10 @@ import setVibeRate from "../../space/setVibeRate";
 export default async function setviberate({ client, message, cmd_args }) {
   const member = message.member;
   const guild = member.guild;
-
+  const space = await findOrCreateLedgerForGuild(
+    guild.id,
+    guild.name
+  );
   if (
     !member.roles.cache.some((role) => role.name === "__CanControlFrenlyBot__")
   ) {
@@ -13,7 +16,7 @@ export default async function setviberate({ client, message, cmd_args }) {
     return;
   }
   const viberate_str = cmd_args.join(" ");
-  await setVibeRate(viberate_str, member.user_id);
+  await setVibeRate(space.id, viberate_str, member.user_id);
 
   const vibedust_emoji =
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
