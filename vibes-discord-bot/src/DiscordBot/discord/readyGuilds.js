@@ -1,4 +1,5 @@
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+import setupVibeRoles from "./setupVibeRoles";
 
 export default async function (client, ready_guild_ids = []) {
   const bot_guilds = client.guilds.cache.reduce((acc, guild) => {
@@ -7,6 +8,7 @@ export default async function (client, ready_guild_ids = []) {
   }, {});
   for (const [guild_id, guild_name] of Object.entries(bot_guilds)) {
     await findOrCreateLedgerForGuild(guild_id, guild_name);
+    await setupVibeRoles({client, guild_id});
   }
   return bot_guilds;
 }
