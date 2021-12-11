@@ -56,6 +56,24 @@ async function setupCronJobs(client) {
   });
 }
 
+DiscordBot.setupClient = async function () {
+  const client = new Client({
+    intents: REQUIRED_INTENTS,
+    partials: ["CHANNEL"],
+  });
+  const connect = new Promise((resolve) => {
+    client.once("ready", async () => {
+      // console.log(`connected as @${process.env.APP_DISCORD_BOT_USERNAME}`);
+      ready_guilds = await readyGuilds(client, ready_guilds);
+      console.log("[CLIENT]", `Guilds: `, ready_guilds);
+      resolve(client);
+    });
+  });
+  client.login(TOKEN);
+  await connect;
+  return client;
+};
+
 DiscordBot.start = async function () {
   const client = new Client({
     intents: REQUIRED_INTENTS,
