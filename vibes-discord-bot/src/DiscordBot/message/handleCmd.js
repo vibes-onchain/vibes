@@ -1,14 +1,14 @@
-import help from "./cmds/help";
-import vibes from "./cmds/vibes";
-import badvibes from "./cmds/badvibes";
-import setviberate from "./cmds/setviberate";
-import setvibedust from "./cmds/setvibedust";
-import setvibeperiod from "./cmds/setvibeperiod";
-import vibedistro from "./cmds/vibedistro";
-import vibecheck from "./cmds/vibecheck";
-import resetvibedust from "./cmds/resetvibedust";
-import setfrenlyparen from "./cmds/setfrenlyparen";
-import setfrenlylabel from "./cmds/setfrenlylabel";
+import help from "../cmds/help";
+import vibes from "../cmds/vibes";
+import badvibes from "../cmds/badvibes";
+import setviberate from "../cmds/setviberate";
+import setvibedust from "../cmds/setvibedust";
+import setvibeperiod from "../cmds/setvibeperiod";
+import vibedistro from "../cmds/vibedistro";
+import vibecheck from "../cmds/vibecheck";
+import resetvibedust from "../cmds/resetvibedust";
+import setfrenlyparen from "../cmds/setfrenlyparen";
+import setfrenlylabel from "../cmds/setfrenlylabel";
 
 export default async function handleCmd({ client, message, cmd, cmd_args }) {
   const guild_id = message?.guild_id;

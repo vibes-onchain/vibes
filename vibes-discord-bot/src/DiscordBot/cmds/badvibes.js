@@ -1,9 +1,11 @@
-import getTargetMember from "../getTargetMember";
-import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import saveVibe from "../../spothub/saveVibe";
-import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
-import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
-export default async function vibes({ client, message, cmd_args }) {
+import getTargetMember from "../message/getTargetMember";
+import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
+import saveBadVibe from "../spothub/saveBadVibe";
+import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+import parseEmojisForMessage from "../discord/parseEmojisForMessage";
+
+
+export default async function badvibes({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
   const space = await findOrCreateLedgerForGuild(
@@ -25,25 +27,24 @@ export default async function vibes({ client, message, cmd_args }) {
 
   if (cmd_args.length < 2) {
     await message.channel.send(
-      "fren. i am not allowed to !vibe someone without reasons! enter some reasons after the @user in your command. or you can use vibe dust emoji to react to a post. \n\n!vibe <@member> <reason for vibin>"
+      "fren. i am not allowed to !badvibe someone without reasons! enter some reasons after the @user in your command. or you can use badvibes emoji to react to a post. \n\n!badvibe <@member> <reason for vibe>"
     );
     return;
   }
-  const vibedust_emoji =
-    guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
-
+  const badvibes_emoji =
+    guild.emojis.cache.find((emoji) => emoji.name === "susvibes") || "✨";
   const reason = cmd_args.slice(1).join(" ");
-  await saveVibe({
+
+  await saveBadVibe({
     ledger_id: space.id,
     from_user_id: message_member.user.id,
     user_id: member.user.id,
     reason,
   });
 
-
   const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
 
-  const vibesChannelEmbed = {
+  const badVibesChannelEmbed = {
     color: 0x00eeee,
     // url: parseEmojisForMessage(message, `https://www.vibesbot.gg`),
     description: await parseEmojisForMessage(message, `:clipboard: vibedustEmoji **vibescan.io/[tx.vibescanTX]**`),
@@ -56,12 +57,12 @@ export default async function vibes({ client, message, cmd_args }) {
     // },
   };
 
-  const vibesFeedEmbed = {
+  const badVibesFeedEmbed = {
     color: 0x00eeee,
     url: `https://www.vibesbot.gg`,
-    title: await parseEmojisForMessage(message, `vibesEmoji  **!vibes**  vibesEmoji`),
-    description: await parseEmojisForMessage(message, `:right_arrow: vibedustEmoji  [targetedUser.@username] – u got vibes vibesEmoji  from [commandingUser.username]
-      for "[tx.vibesReason]"
+    title: await parseEmojisForMessage(message, `susvibesEmoji   **!susvibes**  susvibesEmoji`),
+    description: await parseEmojisForMessage(message, `:right_arrow: susvibesEmoji   [targetedUser.@username] – u got susvibes susvibesEmoji   from [commandingUser.username]
+      for [tx.discordPostLink]
       :pancakes: [commandingUser] has a **\`VIBESTACK\`** of [commandingUser.vibestack] this **\`VIBEPERIOD\`** (vibes.live/[commandingUser.VibesLiveId])
       :timer: **\`VIBEPERIOD\`** ends in [vibeperiodRemaining?]
       :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`
@@ -75,11 +76,12 @@ export default async function vibes({ client, message, cmd_args }) {
     // },
   };
 
-  await message.channel.send({ embeds: [vibesChannelEmbed] }).catch(e => {
+  await message.channel.send({ embeds: [badVibesChannelEmbed] }).catch(e => {
     console.log(e);
   });
 
-  await vibeFeedChannel.send({ embeds: [vibesFeedEmbed] }).catch(e => {
+  await vibeFeedChannel.send({ embeds: [badVibesFeedEmbed] }).catch(e => {
     console.log(e);
   });
+
 }

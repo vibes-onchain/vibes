@@ -1,10 +1,10 @@
-import getTargetMember from "../getTargetMember";
-import updateGuildMember from "../../discord/updateGuildMember";
-import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
+import getTargetMember from "../message/getTargetMember";
+import updateGuildMember from "../discord/updateGuildMember";
+import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
+import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import Random from ":/lib/Random";
 import LedgerEntry from 'spothub/lib/LedgerEntry';
-import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
+import parseEmojisForMessage from "../discord/parseEmojisForMessage";
 
 export default async function setvibedust({ client, message, cmd_args }) {
   const message_member = message.member;

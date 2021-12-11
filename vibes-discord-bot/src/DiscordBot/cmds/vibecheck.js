@@ -1,6 +1,6 @@
-import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
-import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
-import getTargetMember from '../getTargetMember';
+import parseEmojisForMessage from "../discord/parseEmojisForMessage";
+import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+import getTargetMember from '../message/getTargetMember';
 
 export default async function vibecheck({ client, message, cmd_args }) {
   const message_member = message.member;

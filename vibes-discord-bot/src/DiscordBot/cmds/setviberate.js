@@ -1,5 +1,5 @@
-import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import setVibeRate from "../../spothub/setVibeRate";
+import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
+import setVibeRate from "../spothub/setVibeRate";
 export default async function setviberate({ client, message, cmd_args }) {
   const member = message.member;
   const guild = member.guild;

@@ -1,5 +1,5 @@
-import updateLedgerGuildMembers from "../../discord/updateLedgerGuildMembers";
-import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
+import updateLedgerGuildMembers from "../discord/updateLedgerGuildMembers";
+import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import LedgerEntry from 'spothub/lib/LedgerEntry';
 
 export default async function resetvibes({ client, message }) {

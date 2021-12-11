@@ -1,8 +1,8 @@
-import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
+import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
+import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import saveVibePeriod, {
   ALLOWED_VIBE_PERIODS,
-} from "../../spothub/saveVibePeriod";
+} from "../spothub/saveVibePeriod";
 
 export default async function setvibeperiod({ client, message, cmd_args }) {
   const member = message.member;

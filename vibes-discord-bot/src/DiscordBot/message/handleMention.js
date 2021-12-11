@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 
-import help from './cmds/help';
+import help from '../cmds/help';
 
 export default async function handleMention({ message, cmd, cmd_args }) {
   const member = message.member;
