@@ -4,12 +4,12 @@ import { TOKEN, GLOBAL_CMDS, REQUIRED_INTENTS } from "./constants";
 
 import handleCmd from "./message/handleCmd";
 import handleMention from "./message/handleMention";
-import saveBadVibe from "./space/saveBadVibe";
-import saveVibe from "./space/saveVibe";
+import saveBadVibe from "./spothub/saveBadVibe";
+import saveVibe from "./spothub/saveVibe";
 import messageVibeFeedChannel from "./discord/messageVibeFeedChannel";
 import updateLedgerGuildMembers from "./discord/updateLedgerGuildMembers";
-import getLedgerIdsToUpdateEachPeriod from './space/getLedgerIdsToUpdateEachPeriod';
-import findOrCreateLedgerForGuild from "./space/findOrCreateLedgerForGuild";
+import getLedgerIdsToUpdateEachPeriod from './spothub/getLedgerIdsToUpdateEachPeriod';
+import findOrCreateLedgerForGuild from "./spothub/findOrCreateLedgerForGuild";
 
 import Cron from "croner";
 import { space } from "subscript/parse";

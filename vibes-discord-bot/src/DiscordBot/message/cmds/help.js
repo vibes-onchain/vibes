@@ -1,5 +1,5 @@
 import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
-import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
 
 export default async function help({ message, cmd_args }) {
   const guild = message?.member?.guild;

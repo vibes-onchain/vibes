@@ -1,7 +1,7 @@
 import getTargetMember from "../getTargetMember";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import saveBadVibe from "../../space/saveBadVibe";
-import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import saveBadVibe from "../../spothub/saveBadVibe";
+import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
 import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
 
 

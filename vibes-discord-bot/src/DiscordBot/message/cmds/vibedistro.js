@@ -1,7 +1,7 @@
 import updateGuildMember from "../../discord/updateGuildMember";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import recountLedgerVibes from "../../space/recountLedgerVibes";
-import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import recountLedgerVibes from "../../spothub/recountLedgerVibes";
+import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
 import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
 
 export default async function vibedistro({ client, message, cmd_args }) {

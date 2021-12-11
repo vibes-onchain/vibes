@@ -1,7 +1,7 @@
 import getTargetMember from "../getTargetMember";
 import messageVibeFeedChannel from "../../discord/messageVibeFeedChannel";
-import saveVibe from "../../space/saveVibe";
-import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import saveVibe from "../../spothub/saveVibe";
+import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
 import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
 export default async function vibes({ client, message, cmd_args }) {
   const message_member = message.member;

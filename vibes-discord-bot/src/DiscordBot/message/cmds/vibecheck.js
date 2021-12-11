@@ -1,5 +1,5 @@
 import parseEmojisForMessage from "../../discord/parseEmojisForMessage";
-import findOrCreateLedgerForGuild from "../../space/findOrCreateLedgerForGuild";
+import findOrCreateLedgerForGuild from "../../spothub/findOrCreateLedgerForGuild";
 import getTargetMember from '../getTargetMember';
 
 export default async function vibecheck({ client, message, cmd_args }) {

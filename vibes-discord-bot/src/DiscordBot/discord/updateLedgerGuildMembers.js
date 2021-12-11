@@ -1,5 +1,5 @@
 import Ledger from 'spothub/lib/Ledger';
-import recountLedgerVibes from '../space/recountLedgerVibes';
+import recountLedgerVibes from '../spothub/recountLedgerVibes';
 import updateGuildMember from './updateGuildMember';
 
 export default async function updateLedgerGuildMembers(client, ledger_id) {
