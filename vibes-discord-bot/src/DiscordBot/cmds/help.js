@@ -58,10 +58,10 @@ export default async function help({ message, cmd_args }) {
       },
     ],
 
-    footer: {
-      text: `Powered by Spot`,
-      icon_url: "https://i.imgur.com/1c0avUE.png",
-    },
+    // footer: {
+    //   text: `Powered by Spot`,
+    //   icon_url: "https://i.imgur.com/1c0avUE.png",
+    // },
   };
   const helpMessageChannel = await parseEmojisForMessage(message, cmd_args, `see vibeFeed for vibedustEmoji Wat VibesBot? vibedustEmoji`);
   const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
