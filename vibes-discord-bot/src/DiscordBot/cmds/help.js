@@ -10,7 +10,7 @@ export default async function help({ message, cmd_args }) {
   );
 
 
-  const helpMessage = await parseEmojisForMessage(message, `**I AM VIBES BOT vibesEmoji :robot:**
+  const helpMessage = await parseEmojisForMessage(message, cmd_args, `**I AM VIBES BOT vibesEmoji :robot:**
     :eyes: i help you show people's vibes  vibesEmoji \n
     **DURING A NEW VIBE PERIOD**
     :timer: u get a new **\`VIBESTACK\`** at bgn of each **\`VIBEPERIOD\`** 
@@ -63,7 +63,7 @@ export default async function help({ message, cmd_args }) {
       icon_url: "https://i.imgur.com/1c0avUE.png",
     },
   };
-  const helpMessageChannel = await parseEmojisForMessage(message, `see vibeFeed for vibedustEmoji Wat VibesBot? vibedustEmoji`);
+  const helpMessageChannel = await parseEmojisForMessage(message, cmd_args, `see vibeFeed for vibedustEmoji Wat VibesBot? vibedustEmoji`);
   const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
 
   const helpEmbedChannel = {

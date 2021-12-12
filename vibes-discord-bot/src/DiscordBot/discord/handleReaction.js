@@ -56,7 +56,7 @@ export default async function handleReaction() {
     const vibeFeedChannel = message.guild.channels.cache.find(
       (channel) => channel.name === "vibe-feed"
     );
-    // await message.channel.send(await parseEmojisForMessage(message, `:clipboard: susvibesEmoji  **vibescan.io/[tx.vibescanTX]**`)).catch(e => {
+    // await message.channel.send(await parseEmojisForMessage(message, cmd_args, `:clipboard: susvibesEmoji  **vibescan.io/[tx.vibescanTX]**`)).catch(e => {
     //   console.log(e);
     // });
     await vibeFeedChannel.send({ embeds: [vibesEmbedFeed] }).catch((e) => {

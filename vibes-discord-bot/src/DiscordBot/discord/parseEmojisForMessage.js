@@ -1,6 +1,8 @@
-export default async function parseEmojisForMessage(guild_message, text) {
-    const member = guild_message?.member;
-    const guild = guild_message?.member?.guild;
+import getTargetMember from "../message/getTargetMember";
+
+export default async function parseEmojisForMessage(message, cmd_args, text) {
+    const member = message?.member;
+    const guild = message?.member?.guild;
 
     const vibedust_emoji =
         guild?.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
@@ -23,7 +25,9 @@ export default async function parseEmojisForMessage(guild_message, text) {
     const ogVibeEmoji = guild?.emojis.cache.find(
         (emoji) => emoji.name === "ogvibe"
     );
-    const vibeFeedChannel = guild_message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
+    const targetMember = await getTargetMember({ message, cmd_args });
+
+    const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
     const nameToEmoji = {
         vibedustEmoji: vibedust_emoji,
         vibesEmoji: vibesEmoji,
@@ -33,10 +37,12 @@ export default async function parseEmojisForMessage(guild_message, text) {
         epicEmoji: epicVibeEmoji,
         susvibesEmoji: badvibes_emoji,
         vibeSender: member,
+        commandingUser: member,
+        targetedUser: targetMember,
         vibeFeed: `<#${vibeFeedChannel.id}>`
     };
     return text.replace(
-        /\b(?:vibedustEmoji|vibesEmoji|ogEmoji|rareEmoji|legendaryEmoji|epicEmoji|susvibesEmoji|vibeSender|vibeFeed)\b/gi,
+        /\b(?:vibedustEmoji|vibesEmoji|ogEmoji|rareEmoji|legendaryEmoji|epicEmoji|susvibesEmoji|vibeSender|vibeFeed|targetedUser|commandingUser)\b/gi,
         (matched) => nameToEmoji[matched]
     );
 }

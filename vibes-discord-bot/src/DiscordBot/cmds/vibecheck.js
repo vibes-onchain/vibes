@@ -22,10 +22,10 @@ export default async function vibecheck({ client, message, cmd_args }) {
 
   const vibecheckEmbed = {
     color: 0x00eeee,
-    title: await parseEmojisForMessage(message, `vibesEmoji **vibes of [targetedUser.username]** vibesEmoji `),
+    title: await parseEmojisForMessage(message, cmd_args, `vibesEmoji **vibes of [targetedUser.username]** vibesEmoji `),
     url: `https://www.vibes.live/ledger/${space.id}`,
     description:
-      await parseEmojisForMessage(message, `:eyes: _see full profile at Vibes – **vibes.live/[targetedUser.VibesLiveID]**_
+      await parseEmojisForMessage(message, cmd_args, `:eyes: _see full profile at Vibes – **vibes.live/[targetedUser.VibesLiveID]**_
 
       [targetedUser.vibeLevelEmoji]\`VIBELEVEL\` – [targetedUser.vibeLevelEmoji] [targetedUser.vibeLevel] – [targetedUser.vibedust] ([targetedUser.vibeDustPercentile]%)
       :mechanical_arm:\`BOOSTS\` – [=[targetedUser.vibeLevelBoost]*[targetedUser.stakeMoBoost]] [targetedUser.vibeLevelBoost]x for [targetedUser.vibeLevel] Vibe Level and [targetedUser.stakeMoBoost]x for [targetedUser.stakeMo] Months Staked [targetedUser.stakeMoBoost] 
@@ -45,6 +45,6 @@ export default async function vibecheck({ client, message, cmd_args }) {
   };
   const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
 
-  await message.channel.send(await parseEmojisForMessage(message, `see vibeFeed for vibedustEmoji Vibe Check vibedustEmoji`));
+  await message.channel.send(await parseEmojisForMessage(message, cmd_args, `see vibeFeed for vibedustEmoji Vibe Check vibedustEmoji`));
   await vibeFeedChannel.send({ embeds: [vibecheckEmbed] });
 }

@@ -45,8 +45,8 @@ export default async function vibes({ client, message, cmd_args }) {
 
   const vibesChannelEmbed = {
     color: 0x00eeee,
-    // url: parseEmojisForMessage(message, `https://www.vibesbot.gg`),
-    description: await parseEmojisForMessage(message, `:clipboard: vibedustEmoji **vibescan.io/[tx.vibescanTX]**`),
+    // url: parseEmojisForMessage(message, cmd_args, `https://www.vibesbot.gg`),
+    description: await parseEmojisForMessage(message, cmd_args, `:clipboard: vibedustEmoji **vibescan.io/[tx.vibescanTX]**`),
     // thumbnail: {
     //   url: "https://media2.giphy.com/media/BzM7MRs96dYpLSeUTy/giphy.gif?cid=ecf05e47yk8rvloiy4yh52cdlyzqoil3ksr606xmluc3p6ox&rid=giphy.gif&ct=ts",
     // },
@@ -59,8 +59,8 @@ export default async function vibes({ client, message, cmd_args }) {
   const vibesFeedEmbed = {
     color: 0x00eeee,
     url: `https://www.vibesbot.gg`,
-    title: await parseEmojisForMessage(message, `vibesEmoji  **!vibes**  vibesEmoji`),
-    description: await parseEmojisForMessage(message, `:right_arrow: vibedustEmoji  [targetedUser.@username] – u got vibes vibesEmoji  from [commandingUser.username]
+    title: await parseEmojisForMessage(message, cmd_args, `vibesEmoji  **!vibes**  vibesEmoji`),
+    description: await parseEmojisForMessage(message, cmd_args, `:right_arrow: vibedustEmoji  [targetedUser.@username] – u got vibes vibesEmoji  from [commandingUser.username]
       for "[tx.vibesReason]"
       :pancakes: [commandingUser] has a **\`VIBESTACK\`** of [commandingUser.vibestack] this **\`VIBEPERIOD\`** (vibes.live/[commandingUser.VibesLiveId])
       :timer: **\`VIBEPERIOD\`** ends in [vibeperiodRemaining?]

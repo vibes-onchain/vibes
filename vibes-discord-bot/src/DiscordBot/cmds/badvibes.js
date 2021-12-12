@@ -46,8 +46,8 @@ export default async function badvibes({ client, message, cmd_args }) {
 
   const badVibesChannelEmbed = {
     color: 0x00eeee,
-    // url: parseEmojisForMessage(message, `https://www.vibesbot.gg`),
-    description: await parseEmojisForMessage(message, `:clipboard: vibedustEmoji **vibescan.io/[tx.vibescanTX]**`),
+    // url: parseEmojisForMessage(message, cmd_args, `https://www.vibesbot.gg`),
+    description: await parseEmojisForMessage(message, cmd_args, `:clipboard: vibedustEmoji **vibescan.io/[tx.vibescanTX]**`),
     // thumbnail: {
     //   url: "https://media2.giphy.com/media/BzM7MRs96dYpLSeUTy/giphy.gif?cid=ecf05e47yk8rvloiy4yh52cdlyzqoil3ksr606xmluc3p6ox&rid=giphy.gif&ct=ts",
     // },
@@ -60,8 +60,8 @@ export default async function badvibes({ client, message, cmd_args }) {
   const badVibesFeedEmbed = {
     color: 0x00eeee,
     url: `https://www.vibesbot.gg`,
-    title: await parseEmojisForMessage(message, `susvibesEmoji   **!susvibes**  susvibesEmoji`),
-    description: await parseEmojisForMessage(message, `:right_arrow: susvibesEmoji   [targetedUser.@username] – u got susvibes susvibesEmoji   from [commandingUser.username]
+    title: await parseEmojisForMessage(message, cmd_args, `susvibesEmoji   **!susvibes**  susvibesEmoji`),
+    description: await parseEmojisForMessage(message, cmd_args, `:arrow_right: susvibesEmoji targetedUser – u got susvibes susvibesEmoji  from commandingUser
       for [tx.discordPostLink]
       :pancakes: [commandingUser] has a **\`VIBESTACK\`** of [commandingUser.vibestack] this **\`VIBEPERIOD\`** (vibes.live/[commandingUser.VibesLiveId])
       :timer: **\`VIBEPERIOD\`** ends in [vibeperiodRemaining?]

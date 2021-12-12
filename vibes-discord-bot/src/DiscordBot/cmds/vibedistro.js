@@ -35,9 +35,9 @@ export default async function vibedistro({ client, message, cmd_args }) {
 
   const vibeDistroEmbedFeed = {
     color: 0x00eeee,
-    title: await parseEmojisForMessage(message, `:arrow_right: vibedustEmoji New Vibe Distro! vibedustEmoji  vibedustEmoji`),
+    title: await parseEmojisForMessage(message, cmd_args, `:arrow_right: vibedustEmoji New Vibe Distro! vibedustEmoji  vibedustEmoji`),
     url: `https://vibes.live/[VibesLiveCommunityID]`,
-    description: await parseEmojisForMessage(message, `@everyone
+    description: await parseEmojisForMessage(message, cmd_args, `@everyone
 
     :hourglass: vibedust vibedustEmoji  has been distro'd for the \`VIBEPERIOD\` that ran from [tx.starttime] to [tx.endtime]
     :vibedust: check DM for your vibestack
@@ -53,9 +53,9 @@ export default async function vibedistro({ client, message, cmd_args }) {
 
   const vibeDistroEmbedChannel = {
     color: 0x00eeee,
-    title: await parseEmojisForMessage(message, `:arrow_right: vibedustEmoji New Vibe Distro! vibedustEmoji  vibedustEmoji `),
+    title: await parseEmojisForMessage(message, cmd_args, `:arrow_right: vibedustEmoji New Vibe Distro! vibedustEmoji  vibedustEmoji `),
     url: `https://vibes.live/[VibesLiveCommunityID]`,
-    description: await parseEmojisForMessage(message, `@everyone
+    description: await parseEmojisForMessage(message, cmd_args, `@everyone
 
     :hourglass: vibedust vibedustEmoji  has been distrod for the \`VIBEPERIOD\` that ran from [tx.starttime] to [tx.endtime]
     :vibedust: check DM for your vibestack
@@ -70,7 +70,7 @@ export default async function vibedistro({ client, message, cmd_args }) {
   };
 
 
-  await message.author.send(await parseEmojisForMessage(message, `:arrow_right: vibedustEmoji  \`VIBEDISTRO\` – u got [interactingUser.lastDistro.vibedustRecieved] vibedust vibedustEmoji  for the \`VIBEPERIOD\` that ran from [tx.starttime] to [tx.endtime]
+  await message.author.send(await parseEmojisForMessage(message, cmd_args, `:arrow_right: vibedustEmoji  \`VIBEDISTRO\` – u got [interactingUser.lastDistro.vibedustRecieved] vibedust vibedustEmoji  for the \`VIBEPERIOD\` that ran from [tx.starttime] to [tx.endtime]
 
   :eyes: peep your updated vibes at vibes.live/[interactingUser.VibesLiveID]
   

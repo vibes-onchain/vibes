@@ -48,9 +48,9 @@ export default async function setvibedust({ client, message, cmd_args }) {
 
   let setvibedustEmbed = {
     color: 0x00eeee,
-    title: await parseEmojisForMessage(message, `:sparkles: :rocket: vibedustEmoji Go Brrrr! vibesEmoji  vibesEmoji `),
+    title: await parseEmojisForMessage(message, cmd_args, `:sparkles: :rocket: vibedustEmoji Go Brrrr! vibesEmoji  vibesEmoji `),
     url: `https://vibes.live/[VibesLiveCommunityID]`,
-    description: await parseEmojisForMessage(message, `@everyone
+    description: await parseEmojisForMessage(message, cmd_args, `@everyone
 
     vibedustEmoji  new vibedust has been generated for some members
    :eyes: peep \`vibes.live\` to see what you received
@@ -66,9 +66,9 @@ export default async function setvibedust({ client, message, cmd_args }) {
   await messageVibeFeedChannel(guild, { embeds: [setvibedustEmbed] });
   setvibedustEmbed = {
     color: 0x00eeee,
-    title: await parseEmojisForMessage(message, `:sparkles: :rocket: vibedustEmoji Go Brrrr! vibesEmoji  vibesEmoji `),
+    title: await parseEmojisForMessage(message, cmd_args, `:sparkles: :rocket: vibedustEmoji Go Brrrr! vibesEmoji  vibesEmoji `),
     url: `https://vibes.live/[VibesLiveCommunityID]`,
-    description: await parseEmojisForMessage(message, ` vibedustEmoji new vibedust has been generated
+    description: await parseEmojisForMessage(message, cmd_args, ` vibedustEmoji new vibedust has been generated
 
     :eyes: peep \`vibes.live\` to see what you received
     
@@ -82,7 +82,7 @@ export default async function setvibedust({ client, message, cmd_args }) {
     },
   };
   await message.channel.send({ embeds: [setvibedustEmbed] });
-  await member.send(await parseEmojisForMessage(message, `:arrow_right: vibedustEmoji  \`GENVIBEDUST\` – u got [interactingUser.lastGebVibe.vibedustRecieved] vibedust vibedustEmoji  from this gen event 
+  await member.send(await parseEmojisForMessage(message, cmd_args, `:arrow_right: vibedustEmoji  \`GENVIBEDUST\` – u got [interactingUser.lastGebVibe.vibedustRecieved] vibedust vibedustEmoji  from this gen event 
   :eyes: peep ur updated vibes at vibes.live/[interactingUser.VibesLiveID]
   
   :clipboard: Full Tx log – **vibescan.io/[interactingUser.vibescanID]**"""`));
