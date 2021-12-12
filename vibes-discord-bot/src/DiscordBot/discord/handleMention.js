@@ -7,7 +7,7 @@ export default async function handleMention({ message, cmd, cmd_args }) {
   const guild = member.guild;
   const guild_members = guild.members;
   const canControlFrenlyBot = member.roles.cache.some(
-    (role) => role.name === "__CanControlFrenlyBot__"
+    (role) => role.name === "__CanControlVibesBot__"
   )
     ? true
     : false;

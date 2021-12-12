@@ -9,10 +9,10 @@ export default async function vibedistro({ client, message, cmd_args }) {
   const guild = member.guild;
 
   if (
-    !member.roles.cache.some((role) => role.name === "__CanControlFrenlyBot__")
+    !member.roles.cache.some((role) => role.name === "__CanControlVibesBot__")
   ) {
     await message.channel.send(
-      "You're not in the role __CanControlFrenlyBot__, so you can't run this command."
+      "You're not in the role __CanControlVibesBot__, so you can't run this command."
     );
     return;
   }

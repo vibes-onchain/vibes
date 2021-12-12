@@ -12,11 +12,11 @@ export default async function setvibedust({ client, message, cmd_args }) {
 
   if (
     !message_member.roles.cache.some(
-      (role) => role.name === "__CanControlFrenlyBot__"
+      (role) => role.name === "__CanControlVibesBot__"
     )
   ) {
     await message.channel.send(
-      "You're not in the role __CanControlFrenlyBot__, so you can't run this command."
+      "You're not in the role __CanControlVibesBot__, so you can't run this command."
     );
     return;
   }

@@ -5,6 +5,7 @@ const VIBE_ROLES = {
   "Rare Vibe": { color: 3447003, reason: "", name: "Rare Vibe" },
   "Frenly Vibe": { color: 0, reason: "", name: "Frenly Vibe" },
   "Sus Vibe": { color: 10038562, reason: "", name: "Sus Vibe" },
+  "__CanControlVibesBot__": {name: "__CanControlVibesBot__", hoist: false, mentionable: false}
 };
 
 export default async function ({ client, guild_id }) {

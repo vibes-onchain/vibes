@@ -14,10 +14,10 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
   }
 
   if (
-    !member.roles.cache.some((role) => role.name === "__CanControlFrenlyBot__")
+    !member.roles.cache.some((role) => role.name === "__CanControlVibesBot__")
   ) {
     await message.channel.send(
-      "You're not in the role __CanControlFrenlyBot__, so you can't run this command."
+      "You're not in the role __CanControlVibesBot__, so you can't run this command."
     );
     return;
   }

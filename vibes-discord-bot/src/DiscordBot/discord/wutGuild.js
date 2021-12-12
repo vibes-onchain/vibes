@@ -6,5 +6,4 @@ export default async function({client, guild_id}) {
   if (!guild) {
     throw new Error("guild not found");
   }
-  console.log(guild);
 }
