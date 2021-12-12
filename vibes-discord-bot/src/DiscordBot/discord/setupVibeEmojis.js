@@ -1,10 +1,16 @@
-const path = require('path');
-
-const dirPath = path.join(__dirname, '../img/');
+const iconsDir = `${__dirname}/../../../assets/icons`;
 
 const VIBE_EMOJIS = {
-  "susvibes": { location: `${dirPath}/susvibes.gif`, name: "susvibes" },
-};
+  "susvibe": { location: `${iconsDir}/sus-vibes.gif`, name: "susvibe" },
+  "ogvibe": { location: `${iconsDir}/og-vibes.png`, name: "ogvibe" },
+  "epicvibe": { location: `${iconsDir}/epic-vibes.png`, name: "epicvibe" },
+  "rarevibe": { location: `${iconsDir}/rare-vibes.png`, name: "rarevibe" },
+  "legendaryvibe": { location: `${iconsDir}/legendary-vibes.png`, name: "legendaryvibe" },
+  "frenlyvibe": { location: `${iconsDir}/frenly-vibes.png`, name: "frenlyvibe" },
+  "vibes": { location: `${iconsDir}/frenly-vibes.png`, name: "vibes" },
+  "vibe": { location: `${iconsDir}/frenly-vibes.png`, name: "vibe" },
+  "vibedust": { location: `${iconsDir}/vibedust.gif`, name: "vibedust" },
+}
 
 export default async function ({ client, guild_id }) {
   if (!guild_id) {

@@ -23,7 +23,7 @@ const NEG_VIBE_ROLES = [
     reason: "",
     name: "Sus Vibe",
     hoist: false,
-    icon: "sus-vibes.svg",
+    icon: "sus-vibes.gif",
   },
 ];
 
