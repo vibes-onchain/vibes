@@ -11,7 +11,7 @@ export default async function ({ client, guild_id }) {
   console.log(guild);
   console.log('roles',
     _.sortBy(
-      guild.roles.cache.map((i) => ({ name: i.name, position: i.position })),
+      guild.roles.cache.map((i) => ({ name: i.name, position: i.position, color: i.color })),
       "position"
     )
   );

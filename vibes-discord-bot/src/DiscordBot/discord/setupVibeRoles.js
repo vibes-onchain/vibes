@@ -13,7 +13,7 @@ const VIBE_ROLES = [
     name: "Legendary Vibe",
     icon: "legendary-vibes.png",
   },
-  { color: "", reason: "", name: "Epic Vibe", icon: "epic-vibes.png" },
+  { color: 10181046, reason: "", name: "Epic Vibe", icon: "epic-vibes.png" },
   { color: 3447003, reason: "", name: "Rare Vibe", icon: "rare-vibes.png" },
   { color: 0, reason: "", name: "Frenly Vibe", icon: "frenly-vibes.png" },
 ];
