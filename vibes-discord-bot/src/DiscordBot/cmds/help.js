@@ -79,10 +79,12 @@ export default async function help({ message, cmd_args }) {
     // },
   };
 
-  await vibeFeedChannel.send({ embeds: [helpEmbed] }).catch(e => {
-    console.log(e);
-  });
-
+  if (vibeFeedChannel) {
+    await vibeFeedChannel.send({ embeds: [helpEmbed] }).catch(e => {
+      console.log(e);
+    });
+  }
+  
   await message.channel.send({ embeds: [helpEmbedChannel] }).catch(e => {
     console.log(e);
   });
