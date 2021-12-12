@@ -39,7 +39,7 @@ export default async function parseEmojisForMessage(message, cmd_args, text) {
         vibeSender: member,
         commandingUser: member,
         targetedUser: targetMember,
-        vibeFeed: `<#${vibeFeedChannel.id}>`
+        vibeFeed: `<#${vibeFeedChannel?.id}>`
     };
     return text.replace(
         /\b(?:vibedustEmoji|vibesEmoji|ogEmoji|rareEmoji|legendaryEmoji|epicEmoji|susvibesEmoji|vibeSender|vibeFeed|targetedUser|commandingUser)\b/gi,
