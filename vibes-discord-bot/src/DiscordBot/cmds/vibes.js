@@ -60,9 +60,9 @@ export default async function vibes({ client, message, cmd_args }) {
     color: 0x00eeee,
     url: `https://www.vibesbot.gg`,
     title: await parseEmojisForMessage(message, cmd_args, `vibesEmoji  **!vibes**  vibesEmoji`),
-    description: await parseEmojisForMessage(message, cmd_args, `:right_arrow: vibedustEmoji  [targetedUser.@username] – u got vibes vibesEmoji  from [commandingUser.username]
+    description: await parseEmojisForMessage(message, cmd_args, `:arrow_right: vibedustEmoji  targetedUser – u got vibes vibesEmoji  from commandingUser
       for "[tx.vibesReason]"
-      :pancakes: [commandingUser] has a **\`VIBESTACK\`** of [commandingUser.vibestack] this **\`VIBEPERIOD\`** (vibes.live/[commandingUser.VibesLiveId])
+      :pancakes: commandingUser has a **\`VIBESTACK\`** of commandingUser {vibestack} this **\`VIBEPERIOD\`** {vibes.live/[commandingUser.VibesLiveId])}
       :timer: **\`VIBEPERIOD\`** ends in [vibeperiodRemaining?]
       :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`
     ),
