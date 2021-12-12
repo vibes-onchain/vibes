@@ -4,13 +4,12 @@ import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 export default async function help({ message, cmd_args }) {
   const guild = message?.member?.guild;
   const member = message?.member;
-  const space = await findOrCreateLedgerForGuild(
-    guild.id,
-    guild.name
-  );
+  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
 
-
-  const helpMessage = await parseEmojisForMessage(message, cmd_args, `**I AM VIBES BOT vibesEmoji :robot:**
+  const helpMessage = await parseEmojisForMessage(
+    message,
+    cmd_args,
+    `**I AM VIBES BOT vibesEmoji :robot:**
     :eyes: i help you show people's vibes  vibesEmoji \n
     **DURING A NEW VIBE PERIOD**
     :timer: u get a new **\`VIBESTACK\`** at bgn of each **\`VIBEPERIOD\`** 
@@ -30,9 +29,8 @@ export default async function help({ message, cmd_args }) {
     :rocket: ur **\`VIBELEVEL\`** will **\`!BOOST\`** ur **\`VIBESTACK\`** before each new **\`VIBEPERIOD\`**\n
     **DEEP VIBES**
     :clipboard: full tx logs on vibescan.io – **vibescan.io/[targetedUser.vibescanID]**
-    :eyes: full profiles on vibes.live – **vibes.live/[targetedUser.VibesLiveID]**`)
-    ;
-
+    :eyes: full profiles on vibes.live – **vibes.live/[targetedUser.VibesLiveID]**`
+  );
   const helpEmbed = {
     color: 0x00eeee,
     title: `**wat vibes bot?**`,
@@ -43,18 +41,19 @@ export default async function help({ message, cmd_args }) {
     },
     fields: [
       {
-        name: 'I AM VIBES BOT vibesEmoji',
-        value: '`Rare Vibe`\n2x\n69.15% - 84.15% ',
-        inline: true
+        name: "I AM VIBES BOT vibesEmoji",
+        value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
+        inline: true,
       },
       {
-        name: 'I AM VIBES BOT vibesEmoji',
-        value: '`Rare Vibe`\n2x\n69.15% - 84.15% ',
-        inline: true
-      }, {
-        name: 'I AM VIBES BOT vibesEmoji',
-        value: '`Rare Vibe`\n2x\n69.15% - 84.15% ',
-        inline: true
+        name: "I AM VIBES BOT vibesEmoji",
+        value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
+        inline: true,
+      },
+      {
+        name: "I AM VIBES BOT vibesEmoji",
+        value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
+        inline: true,
       },
     ],
 
@@ -63,8 +62,14 @@ export default async function help({ message, cmd_args }) {
     //   icon_url: "https://i.imgur.com/1c0avUE.png",
     // },
   };
-  const helpMessageChannel = await parseEmojisForMessage(message, cmd_args, `see vibeFeed for vibedustEmoji Wat VibesBot? vibedustEmoji`);
-  const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
+  const helpMessageChannel = await parseEmojisForMessage(
+    message,
+    cmd_args,
+    `see vibeFeed for vibedustEmoji Wat VibesBot? vibedustEmoji`
+  );
+  const vibeFeedChannel = message.guild.channels.cache.find(
+    (channel) => channel.name === "vibe-feed"
+  );
 
   const helpEmbedChannel = {
     color: 0x00eeee,
@@ -79,13 +84,13 @@ export default async function help({ message, cmd_args }) {
     // },
   };
 
-  if (vibeFeedChannel) {
-    await vibeFeedChannel?.send({ embeds: [helpEmbed] }).catch(e => {
-      console.log(e);
-    });
-  }
-  
-  await message.channel.send({ embeds: [helpEmbedChannel] }).catch(e => {
+  await vibeFeedChannel?.send({ embeds: [helpEmbed] }).catch((e) => {
+    console.log(e);
+  });
+
+  // TODO send an embed with current vibe ledger settings
+
+  await message.channel.send({ embeds: [helpEmbedChannel] }).catch((e) => {
     console.log(e);
   });
 
