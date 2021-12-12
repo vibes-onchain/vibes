@@ -46,5 +46,5 @@ export default async function vibecheck({ client, message, cmd_args }) {
   const vibeFeedChannel = message.guild.channels.cache.find(channel => channel.name === "vibe-feed");
 
   await message.channel.send(await parseEmojisForMessage(message, cmd_args, `see vibeFeed for vibedustEmoji Vibe Check vibedustEmoji`));
-  await vibeFeedChannel.send({ embeds: [vibecheckEmbed] });
+  await vibeFeedChannel?.send({ embeds: [vibecheckEmbed] });
 }

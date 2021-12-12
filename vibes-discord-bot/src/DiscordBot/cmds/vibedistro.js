@@ -79,7 +79,7 @@ export default async function vibedistro({ client, message, cmd_args }) {
   await message.channel.send({ embeds: [vibeDistroEmbedChannel] }).catch(e => {
     console.log(e);
   });
-  await vibeFeedChannel.send({ embeds: [vibeDistroEmbedFeed] }).catch(e => {
+  await vibeFeedChannel?.send({ embeds: [vibeDistroEmbedFeed] }).catch(e => {
     console.log(e);
   });
 }

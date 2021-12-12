@@ -59,7 +59,7 @@ export default async function handleReaction() {
     // await message.channel.send(await parseEmojisForMessage(message, cmd_args, `:clipboard: susvibesEmoji  **vibescan.io/[tx.vibescanTX]**`)).catch(e => {
     //   console.log(e);
     // });
-    await vibeFeedChannel.send({ embeds: [vibesEmbedFeed] }).catch((e) => {
+    await vibeFeedChannel?.send({ embeds: [vibesEmbedFeed] }).catch((e) => {
       console.log(e);
     });
   } else if (reaction.emoji.name == "susvibes") {
@@ -113,7 +113,7 @@ export default async function handleReaction() {
       .catch((e) => {
         console.log(e);
       });
-    await vibeFeedChannel.send({ embeds: [badVibesEmbedFeed] }).catch((e) => {
+    await vibeFeedChannel?.send({ embeds: [badVibesEmbedFeed] }).catch((e) => {
       console.log(e);
     });
   } else {

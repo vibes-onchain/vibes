@@ -79,7 +79,7 @@ export default async function vibes({ client, message, cmd_args }) {
     console.log(e);
   });
 
-  await vibeFeedChannel.send({ embeds: [vibesFeedEmbed] }).catch(e => {
+  await vibeFeedChannel?.send({ embeds: [vibesFeedEmbed] }).catch(e => {
     console.log(e);
   });
 }

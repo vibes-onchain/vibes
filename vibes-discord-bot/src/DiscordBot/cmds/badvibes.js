@@ -80,7 +80,7 @@ export default async function badvibes({ client, message, cmd_args }) {
     console.log(e);
   });
 
-  await vibeFeedChannel.send({ embeds: [badVibesFeedEmbed] }).catch(e => {
+  await vibeFeedChannel?.send({ embeds: [badVibesFeedEmbed] }).catch(e => {
     console.log(e);
   });
 
