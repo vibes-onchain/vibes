@@ -1,1 +1,1 @@
-bot: ./bin/run_action bot/run
+bot: ./bin/run_action start
