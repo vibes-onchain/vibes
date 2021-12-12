@@ -6,6 +6,8 @@ export default async function help({ message, cmd_args }) {
   const member = message?.member;
   const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
 
+  const ledger_id = space.id;
+
   const helpMessage = await parseEmojisForMessage(
     message,
     cmd_args,
@@ -28,8 +30,8 @@ export default async function help({ message, cmd_args }) {
     ogEmoji  \`OG Vibe\`   5x   97.72% - 99.99%
     :rocket: ur **\`VIBELEVEL\`** will **\`!BOOST\`** ur **\`VIBESTACK\`** before each new **\`VIBEPERIOD\`**\n
     **DEEP VIBES**
-    :clipboard: full tx logs on vibescan.io – **vibescan.io/[targetedUser.vibescanID]**
-    :eyes: full profiles on vibes.live – **vibes.live/[targetedUser.VibesLiveID]**`
+    :clipboard: full tx logs on **[vibescan.io](https://vibescan.io/ledger/${ledger_id}/entries)**
+    :eyes: full profiles on **[vibes.live](https://www.vibes.live/ledger/${ledger_id})**`
   );
   const helpEmbed = {
     color: 0x00eeee,
