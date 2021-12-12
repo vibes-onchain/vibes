@@ -1,8 +1,9 @@
+import _ from "lodash";
+
 const CONTROL_BOT_ROLE = {
   name: "__CanControlVibesBot__",
   hoist: false,
   mentionable: false,
-  position: 14,
 };
 const VIBE_ROLES = [
   { color: 15844367, reason: "", name: "OG Vibe", icon: "og-vibes.png" },
@@ -37,10 +38,9 @@ async function createOrUpdateRole(guild, attrs, position, rel_to_bot = false) {
   )?.position;
   const role_names = guild.roles.cache.map((i) => i.name);
   if (!role_names.includes(attrs.name)) {
-    await guild.roles.create({
-      ...attrs,
-      icon: undefined,
-    });
+    await guild.roles.create(
+      _.pick(attrs, ["name", "hoist", "mentionable", "color", "reason"])
+    );
   }
   const role = guild.roles.cache.find((i) => i.name === attrs.name);
   if (!role) {
