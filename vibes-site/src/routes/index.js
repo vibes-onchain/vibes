@@ -13,15 +13,21 @@ export default function () {
   return (
     <div css={CSS}>
       <Header />
-      <div
-      >
-        <div className="upper-band">
+      <div>
+        <div className="hero">
           <img className="cover-wave" src={wave_gradient} alt="cover"/> 
-          <div className="message header">
-            On-chain trust for massive, open, decentralized communities
-          </div>
-          <div className="message">
-            Bringing trust and reputation to web3 communities. Everyone has a vibe, what's yours?
+          <div className="hero">
+            <div className="hero-container">
+              <div className="hero h1">
+              On-chain trust for massive, open, decentralized communities
+              </div>
+              <div className="hero caption">
+              Bringing trust and reputation to web3 communities. Everyone has a vibe, what's yours?
+              </div>
+              <div className="hero button">
+              ✨ Add to Discord ✨
+              </div>
+              </div>
           </div>
         </div>
         <div>
@@ -74,35 +80,44 @@ const CSS = css`
   text-align: center;
   width: 100%;
   overflow: hidden;
-  .upper-band{
-    //display: flex; 
-    //flex-direction: column;
-    position: relative; 
-    text-align: center; 
+  font-family: Apercu;
 
-    .cover-wave{
-      max-width: 100%;
-      height: 70vh;
+  .hero {
+    padding-top: 5rem!important;
+    display: block;
+    box-sizing: border-box;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;   
+    text-align: center;
+    .hero-container {
+      position: relative;
+      z-index: 1;
+    } 
+    .cover-wave {
+      width: 100%;
+      height: 80vh;
     }
-
-    .message{
-    
+    &.h1 {
+      top: 45%;
+      font-size: 46px;
+      font-weight: bold;
+      width: 780px;
+      max-width: 90%;
+      line-height: 1.3em;
+    }
+    &.caption {
       position: absolute;
-      
       top: 60%;
       left: 50%;
-      transform: translate(-50%, -50%);
       font-weight: 500; 
       font-size: 18px;
-
-      &.header{
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 22px;
-        font-weight: bold; 
-      }
+    }
+    &.button {
+      margin-top: 20px;
     }
   }
-  
 `;
