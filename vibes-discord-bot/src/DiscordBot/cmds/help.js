@@ -1,38 +1,38 @@
-import parseEmojisForMessage from "../discord/parseEmojisForMessage";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+import getEmojis from "../discord/getEmojis";
 
-export default async function help({ message, cmd_args }) {
+export default async function help({ client, message, cmd_args }) {
   const guild = message?.member?.guild;
   const member = message?.member;
-  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
+  const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
 
-  const ledger_id = space.id;
+  const ledger_id = ledger.id;
 
-  const helpMessage = await parseEmojisForMessage(
-    message,
-    cmd_args,
-    `**I AM VIBES BOT vibesEmoji :robot:**
-    :eyes: i help you show people's vibes  vibesEmoji \n
+  const emojis = await getEmojis({ client, guild_id: guild.id });
+
+  const helpMessage = `**I AM VIBES BOT ${emojis.vibes} :robot:**
+    :eyes: i help you show people's vibes  ${emojis.vibes} \n
     **DURING A NEW VIBE PERIOD**
     :timer: u get a new **\`VIBESTACK\`** at bgn of each **\`VIBEPERIOD\`** 
-    vibedustEmoji  use this react wen fren has **\`!VIBES\`**
-    susvibesEmoji   use this react wen fren has **\`!susvibes\`** \n
+    ${emojis.vibedust}  use this react wen fren has **\`!VIBES\`**
+    ${emojis.susvibe}   use this react wen fren has **\`!susvibes\`** \n
     **AT THE END OF A VIBE PERIOD**
-    :arrow_right:  vibedustEmoji  ur whole **\`VIBESTACK\`**:pancakes: distros as **\`VIBEDUST\`** based on who you gave \`!VIBES\`
-    :arrow_left:  vibedustEmoji  u get **\`VIBEDUST\`** based on who gave you **\`!VIBES\`** vibesEmoji  you and their \`VIBESTACK\`:pancakes:
+    :arrow_right:  ${emojis.vibedust}  ur whole **\`VIBESTACK\`**:pancakes: distros as **\`VIBEDUST\`** based on who you gave \`!VIBES\`
+    :arrow_left:  ${emojis.vibedust}  u get **\`VIBEDUST\`** based on who gave you **\`!VIBES\`** ${emojis.vibes} and their \`VIBESTACK\`:pancakes:
     :mechanical_arm: ur **\`VIBELEVEL\`** is calculated by ranking your **\`VIBEDUST\`** in community\n
     **HOW VIBE LEVELS WORK**
-    **\`VIBELEVEL\`** **\`BOOST\`** **\`VIBEDUST % ILE\`**
-    vibesEmoji  \`Frenly Vibe\` <:Blank:850603065760284722> <:Blank:850603065760284722> <:Blank:850603065760284722> 1x  15.87% - 69.15% 
-    rareEmoji  \`Rare Vibe\`  2x   69.15% - 84.15% 
-    epicEmoji  \`Epic Vibe\`   3x   84.15% - 93.32% 
-    legendaryEmoji  \`Legend Vibe\`   4x   93.32% - 97.72% 
-    ogEmoji  \`OG Vibe\`   5x   97.72% - 99.99%
-    :rocket: ur **\`VIBELEVEL\`** will **\`!BOOST\`** ur **\`VIBESTACK\`** before each new **\`VIBEPERIOD\`**\n
+                      \`   VIBELEVEL              VIBEDUST %ILE  \`
+${emojis.vibes}          \`Frenly Vibe            15.87% - 69.15%\`
+${emojis.rarevibe}       \`Rare Vibe              69.15% - 84.15%\`
+${emojis.epicvibe}       \`Epic Vibe              84.15% - 93.32%\`
+${emojis.legendaryvibe}  \`Legendary Vibe         93.32% - 97.72%\`
+${emojis.ogvibe}         \`OG Vibe                97.72% - 99.99%\`
+
+    :rocket: ur **\`VIBELEVEL\`** will boost ur **\`VIBESTACK\`** before each new **\`VIBEPERIOD\`**
+
     **DEEP VIBES**
     :clipboard: full tx logs on **[vibescan.io](https://vibescan.io/ledger/${ledger_id}/entries)**
-    :eyes: full profiles on **[vibes.live](https://www.vibes.live/ledger/${ledger_id})**`
-  );
+    :eyes: full profiles on **[vibes.live](https://www.vibes.live/ledger/${ledger_id})**`;
   const helpEmbed = {
     color: 0x00eeee,
     title: `**wat vibes bot?**`,
@@ -42,21 +42,21 @@ export default async function help({ message, cmd_args }) {
       url: "https://media0.giphy.com/media/1fnwSUTsHRyGXEYMos/giphy.gif?cid=ecf05e47b7vkmx00wquadbiunwj71or7xxm1b44iti4zdaxo&rid=giphy.gif&ct=g",
     },
     fields: [
-      {
-        name: "I AM VIBES BOT vibesEmoji",
-        value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
-        inline: true,
-      },
-      {
-        name: "I AM VIBES BOT vibesEmoji",
-        value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
-        inline: true,
-      },
-      {
-        name: "I AM VIBES BOT vibesEmoji",
-        value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
-        inline: true,
-      },
+      // {
+      //   name: "I AM VIBES BOT ${emojis.vibes}",
+      //   value: "`${emojis.rarevibe} Rare Vibe`\n2x\n69.15% - 84.15% ",
+      //   inline: true,
+      // },
+      // {
+      //   name: "I AM VIBES BOT ${emojis.vibes}",
+      //   value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
+      //   inline: true,
+      // },
+      // {
+      //   name: "I AM VIBES BOT ${emojis.vibes}",
+      //   value: "`Rare Vibe`\n2x\n69.15% - 84.15% ",
+      //   inline: true,
+      // },
     ],
 
     // footer: {
@@ -64,14 +64,11 @@ export default async function help({ message, cmd_args }) {
     //   icon_url: "https://i.imgur.com/1c0avUE.png",
     // },
   };
-  const helpMessageChannel = await parseEmojisForMessage(
-    message,
-    cmd_args,
-    `see vibeFeed for vibedustEmoji Wat VibesBot? vibedustEmoji`
-  );
   const vibeFeedChannel = message.guild.channels.cache.find(
     (channel) => channel.name === "vibe-feed"
   );
+  const helpMessageChannel = 
+    `see <#${vibeFeedChannel?.id}> for ${emojis.vibedust} Wat VibesBot? ${emojis.vibedust}`;
 
   const helpEmbedChannel = {
     color: 0x00eeee,

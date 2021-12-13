@@ -2,22 +2,21 @@ import getTargetMember from "../message/getTargetMember";
 import updateGuildMember from "../discord/updateGuildMember";
 import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
-import Random from ":/lib/Random";
-import LedgerEntry from 'spothub/lib/LedgerEntry';
-import parseEmojisForMessage from "../discord/parseEmojisForMessage";
+import setVibeDust from "../spothub/setVibeDust";
+import canControlVibesBot from "../discord/canControlVibesBot";
+import getEmojis from "../discord/getEmojis";
 
 export default async function setvibedust({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
 
   if (
-    !message_member.roles.cache.some(
-      (role) => role.name === "__CanControlVibesBot__"
-    )
+    !canControlVibesBot({
+      client,
+      guild_id: guild.id,
+      member_id: message_member.id,
+    })
   ) {
-    await message.channel.send(
-      "You're not in the role __CanControlVibesBot__, so you can't run this command."
-    );
     return;
   }
 
@@ -34,58 +33,38 @@ export default async function setvibedust({ client, message, cmd_args }) {
   console.log({ vibes });
 
   const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
-  const entry = LedgerEntry.build({
+  await setVibeDust({
     ledger_id: space.id,
-    type: "Set Vibe Dust",
-    value: {
-      by_user_id: message.member.user.id,
-      user_id: member.user.id,
-      vibes: vibes,
-    },
-    authored_on: new Date(),
+    by_discord_member_id: message.member.id,
+    discord_member_id: member.id,
+    vibe_dust: vibes,
   });
-  await entry.save();
+
+  const emojis = getEmojis({ client, guild_id: guild.id });
 
   let setvibedustEmbed = {
     color: 0x00eeee,
-    title: await parseEmojisForMessage(message, cmd_args, `:sparkles: :rocket: vibedustEmoji Go Brrrr! vibesEmoji  vibesEmoji `),
-    url: `https://vibes.live/[VibesLiveCommunityID]`,
-    description: await parseEmojisForMessage(message, cmd_args, `@everyone
-
-    vibedustEmoji  new vibedust has been generated for some members
-   :eyes: peep \`vibes.live\` to see what you received
-   :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`),
+    title:
+      `:sparkles: :rocket: ${emojis.vibedust} Go Brrrr! ${emojis.vibes} ${emojis.vibes}`,
+    url: `https://www.vibes.live/ledger/${space.id}`,
+    description: 
+      `${emojis.vibedust} new vibedust has been generated for some members
+   :eyes: peep [\`vibes.live\`]() to see what you received
+   :clipboard:Full Tx log – **[vibescan.io](http://vibescan.io/ledger/${space.id}/entries)**`,
     image: {
       url: "https://media4.giphy.com/media/azGJUrx592uc0/giphy.gif?cid=ecf05e47lrktsdr15ncs416w0n3bil6h37wy9h3zq1br5p6y&rid=giphy.gif&ct=g",
     },
-    footer: {
-      text: `Powered by Spot`,
-      icon_url: "https://i.imgur.com/1c0avUE.png",
-    },
+    // footer: {
+    //   text: `Powered by Spot`,
+    //   icon_url: "https://i.imgur.com/1c0avUE.png",
+    // },
   };
   await messageVibeFeedChannel(guild, { embeds: [setvibedustEmbed] });
-  setvibedustEmbed = {
-    color: 0x00eeee,
-    title: await parseEmojisForMessage(message, cmd_args, `:sparkles: :rocket: vibedustEmoji Go Brrrr! vibesEmoji  vibesEmoji `),
-    url: `https://vibes.live/[VibesLiveCommunityID]`,
-    description: await parseEmojisForMessage(message, cmd_args, ` vibedustEmoji new vibedust has been generated
-
-    :eyes: peep \`vibes.live\` to see what you received
-    
-    :clipboard:Full Tx log – **vibescan.io/[tx.vibescanTX]**`),
-    thumbnail: {
-      url: "https://media4.giphy.com/media/azGJUrx592uc0/giphy.gif?cid=ecf05e47lrktsdr15ncs416w0n3bil6h37wy9h3zq1br5p6y&rid=giphy.gif&ct=g",
-    },
-    footer: {
-      text: `Powered by Spot`,
-      icon_url: "https://i.imgur.com/1c0avUE.png",
-    },
-  };
   await message.channel.send({ embeds: [setvibedustEmbed] });
-  await member.send(await parseEmojisForMessage(message, cmd_args, `:arrow_right: vibedustEmoji  \`GENVIBEDUST\` – u got [interactingUser.lastGebVibe.vibedustRecieved] vibedust vibedustEmoji  from this gen event 
+  await member.send(`:arrow_right: ${emojis.vibedust}  \`GENVIBEDUST\` – u got [interactingUser.lastGebVibe.vibedustRecieved] vibedust ${emojis.vibedust}  from this gen event 
   :eyes: peep ur updated vibes at vibes.live/[interactingUser.VibesLiveID]
   
-  :clipboard: Full Tx log – **vibescan.io/[interactingUser.vibescanID]**"""`));
+  :clipboard: Full Tx log – **vibescan.io/[interactingUser.vibescanID]**"""`);
   await updateGuildMember({
     client: client,
     guild: guild,

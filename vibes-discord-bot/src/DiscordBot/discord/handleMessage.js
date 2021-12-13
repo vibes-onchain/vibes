@@ -1,6 +1,7 @@
-import { GLOBAL_CMDS } from '../constants';
-import handleCmd from '../discord/handleCmd';
-import handleMention from '../discord/handleMention';
+import { GLOBAL_CMDS } from "../constants";
+import handleCmd from "../discord/handleCmd";
+import handleMention from "../discord/handleMention";
+
 export default async function handleMessage(client, message) {
   // console.log({
   //   message,
@@ -29,7 +30,7 @@ export default async function handleMessage(client, message) {
     message.content.match(prefixUserMention) ||
     message.content.match(prefixAtMention)
   ) {
-    await handleMention({ message });
+    await handleMention({ client, message });
   }
   const prefixCmdMention = /^\!([a-zA-Z0-9_]*)\s*(.*)/;
   const cmdM = message.content.match(prefixCmdMention);

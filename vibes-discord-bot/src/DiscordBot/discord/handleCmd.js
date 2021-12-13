@@ -23,7 +23,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     } :: ARGS: (${cmd_args.join(", ")})`
   );
   if (cmd === "about" || cmd === "help" || cmd === "vibesbot") {
-    return help({ message, cmd_args });
+    return help({ client, message, cmd_args });
   } else if (cmd === "vibe" || cmd === "vibes") {
     return vibes({ client, message, cmd_args });
   } else if (cmd === "badvibe" || cmd === "badvibes" || cmd === "susvibes" || cmd === "susvibe") {

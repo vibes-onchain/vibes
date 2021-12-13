@@ -9,11 +9,11 @@ export default async function setparen({ client, message, cmd_args }) {
 
   if (
     !message_member.roles.cache.some(
-      (role) => role.name === "__CanControlVibesBot__"
+      (role) => role.name === "[Can Control Vibes Bot]"
     )
   ) {
     await message.channel.send(
-      "You're not in the role __CanControlVibesBot__, so you can't run this command."
+      "You're not in the role [Can Control Vibes Bot], so you can't run this command."
     );
     return;
   }
