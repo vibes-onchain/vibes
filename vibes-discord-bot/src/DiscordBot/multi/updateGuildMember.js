@@ -1,6 +1,8 @@
 import updateGuildMemberVibeRole from "../discord/updateGuildMemberVibeRoles";
 import updateGuildMemberNicknameParen from "../discord/updateGuildMemberNicknameParen";
 import getVibesUserDetails from "../spothub/getVibesUserDetails";
+import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+import renderParen from "../spothub/renderVibesUserParen";
 
 export default async function updateGuildMember({
   client,
@@ -17,16 +19,17 @@ export default async function updateGuildMember({
   if (!guild) {
     throw new Error("guild not found");
   }
+  const ledger = await findOrCreateLedgerForGuild(guild_id);
+  const vibes_paren = ledger.meta?.['vibes:paren']
 
   const memberDetails = await getVibesUserDetails({ guild_id, member_id });
-  // console.log(member_id, {memberDetails});
-  // TODO figure out paren
-  // updateGuildMemberNicknameParen
+  // TODO include vibe traits
+  const paren = await renderParen({paren: vibes_paren, context: memberDetails});
   const updatedParen = await updateGuildMemberNicknameParen({
     client,
     guild_id,
     member_id,
-    paren: memberDetails.vibedust,
+    paren,
   });
 
   // TODO figure out vibe role

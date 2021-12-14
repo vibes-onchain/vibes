@@ -13,7 +13,7 @@ export default async function getLedgerIdsToUpdateEachPeriod(period) {
       order: "desc",
     });
     if (le.value?.vibe_period === period) {
-      r.push(ledger.id);
+      r.push({ id: ledger.id, guild_id: ledger.meta?.discord_guild_id });
     }
   }
   return r;

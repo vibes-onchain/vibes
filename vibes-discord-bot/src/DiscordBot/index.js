@@ -5,7 +5,7 @@ import { TOKEN, GLOBAL_CMDS, REQUIRED_INTENTS } from "./constants";
 import handleMessage from "./discord/handleMessage";
 import handleReaction from "./discord/handleReaction";
 import readyGuilds from "./discord/readyGuilds";
-import updateLedgerGuildMembers from "./discord/updateLedgerGuildMembers";
+import updateAllGuildMembers from "./multi/updateAllGuildMembers";
 import welcomeGuildMember from "./discord/welcomeGuildMember";
 import getLedgerIdsToUpdateEachPeriod from "./spothub/getLedgerIdsToUpdateEachPeriod";
 
@@ -16,10 +16,12 @@ let ready_guilds = [];
 class DiscordBot {}
 
 async function updateGuildsForPeriod(client, period) {
-  const space_ids = await getLedgerIdsToUpdateEachPeriod(period);
-  for (const space_id of space_ids) {
-    console.log(`UPDATING ledger_id: ${space_id}`);
-    await updateLedgerGuildMembers(client, space_id);
+  const ledgers = await getLedgerIdsToUpdateEachPeriod(period);
+  for (const ledger of ledgers) {
+    if (ledger.guild_id) {
+      console.log(`UPDATING ledger_id: ${ledger.id}`);
+      await updateAllGuildMembers({ client, guild_id: ledger.guild_id });
+    }
   }
 }
 

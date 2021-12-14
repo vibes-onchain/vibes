@@ -9,5 +9,5 @@ function evalParen(paren, context) {
 }
 
 export default async function renderParen({paren, context}) {
-  // TODO
+  return evalParen(paren, context);
 }

@@ -1,5 +1,5 @@
 import getTargetMember from "../message/getTargetMember";
-import updateLedgerGuildMembers from "../discord/updateLedgerGuildMembers";
+import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import LedgerEntry from "spothub/lib/LedgerEntry";
 
@@ -45,5 +45,5 @@ export default async function setparen({ client, message, cmd_args }) {
   });
   await le.save();
 
-  await updateLedgerGuildMembers(client, space.id);
+  await updateAllGuildMembers({client, guild_id: guild.id});
 }
