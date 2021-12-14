@@ -62,12 +62,13 @@ export default function Header(props) {
         <div className="page-width-container">
           <div className="left">
             <Link to={"/"}>
-              {/* <img className="smiley" src={smiley_png} /> */}
               <img className="text" src={vibeslogo} alt="vibes" />
             </Link>
           </div>
           <div className="right">
-            <Link className="item" to={'/setup/discord'}>Install</Link>
+            <Link className="item" to={'/'}>📖 Docs</Link>
+            <Link className="item" to={'https://discord.gg/Ccae6XpDBV'}>💬 Chat with us</Link>
+            <Link className="item" to={process.env.DISCORD_BOT_URL}>🤖 Build your bot ➝</Link>
           </div>
         </div>
       </div>
@@ -79,7 +80,6 @@ const headerCSS = css`
   margin: 0px auto;
   text-align: center;
   width: 100%;
-  border-bottom: 1px solid #2f2f2f;
   span.bold {
     font-weight: bold;
   }
@@ -101,7 +101,8 @@ const headerCSS = css`
       }
       .left {
         flex-basis: 300px;
-        flex-grow: 1;
+        flex-grow: 0;
+        flex-shrink: 1;
       }
       .left a {
         display: flex;
@@ -109,7 +110,7 @@ const headerCSS = css`
         padding: 15px 0;
         img {
           margin-right: 5px;
-          height: 30px;
+          height: 50px;
         }
         font-size: 28px;
         font-weight: 800;
@@ -125,9 +126,8 @@ const headerCSS = css`
         }
       }
       .right a {
-        border-left: 1px solid #2f2f2f;
-        font-size: 16px;
-        font-weight: normal;
+        font-size: 20px;
+        font-weight: 600;
         padding: 0 30px;
         color: #2f2f2f;
         display: flex;
