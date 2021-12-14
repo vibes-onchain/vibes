@@ -1,11 +1,8 @@
-import findOrCreateLedgerForGuild from "./findOrCreateLedgerForGuild";
 import LedgerEntry from 'spothub/lib/LedgerEntry';
 
-
 export default async function saveVibe({ ledger_id, from_member_id, member_id, reason }) {
-  const space = await findOrCreateLedgerForGuild(ledger_id);
   const entry = LedgerEntry.build({
-    ledger_id: space.id,
+    ledger_id,
     type: "Vibe",
     sender: {
       type: 'discord_guild_member',

@@ -1,5 +1,7 @@
 import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
 import setVibeRate from "../spothub/setVibeRate";
+import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+
 export default async function setviberate({ client, message, cmd_args }) {
   const member = message.member;
   const guild = member.guild;
@@ -54,6 +56,4 @@ export default async function setviberate({ client, message, cmd_args }) {
     },
   };
   await message.channel.send({ embeds: [viberateEmbed] });
-
-  console.log(dg.values);
 }

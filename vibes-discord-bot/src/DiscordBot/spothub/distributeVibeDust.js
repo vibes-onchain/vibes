@@ -1,3 +1,5 @@
+import calculateUserVibeRate from './calculateUserVibeRate';
+
 export default function distributeVibeDust({
   current_rate,
   current_period,

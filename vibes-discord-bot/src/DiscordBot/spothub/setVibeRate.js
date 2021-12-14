@@ -1,15 +1,10 @@
 import parseVibeRate from "./parseVibeRate";
-import findOrCreateLedgerForGuild from "./findOrCreateLedgerForGuild";
+import LedgerEntry from 'spothub/lib/LedgerEntry';
 
 export default async function saveVibeRate(ledger_id, str, user_id) {
   const vibe_rate = parseVibeRate(str);
-  this.values = {
-    ...this.values,
-    vibe_rate,
-  };
-  const space = await findOrCreateLedgerForGuild(ledger_id);
   const entry = LedgerEntry.build({
-    ledger_id: space.id,
+    ledger_id,
     type: "Set Vibe Rate",
     value: {
       by_user_id: user_id,
@@ -19,5 +14,4 @@ export default async function saveVibeRate(ledger_id, str, user_id) {
     authored_on: new Date(),
   });
   await entry.save();
-  await this.save();
 }

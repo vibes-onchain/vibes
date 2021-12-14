@@ -18,6 +18,7 @@ export default async function ({ guild_id }) {
   const setVibeRateLE = await LedgerEntry.findLast({
     where: { ledger_id, type: "Set Vibe Rate" },
   });
+  console.log(setVibeRateLE);
   if (setVibeRateLE && setVibeRateLE.id) {
     vibe_rate = setVibeRateLE.value.vibe_rate;
   } 

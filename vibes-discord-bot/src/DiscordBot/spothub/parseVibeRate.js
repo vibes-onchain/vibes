@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import { parse as ssParse, evaluate as ssEval } from "subscript";
 
-export default async function parseVibeRate(str) {
+export default function parseVibeRate(str) {
   const numberMatcher = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
 
   const m = str.match(/^case\s+(.*)\s+end$/i);
@@ -19,7 +20,7 @@ export default async function parseVibeRate(str) {
   }
   rule_strs.shift();
   for (const rule_str of rule_strs) {
-    const m = rule_str.match(/^(.*)\s+?(?:then)?\s+?(.*)$/);
+    const m = rule_str.match(/^(.*)\s+?(?:then)?\s+?(.*)$/i);
     if (m) {
       const guard = ssParse(m[1]);
       const tokens = _.flatten(guard).filter((i) => {
@@ -31,20 +32,27 @@ export default async function parseVibeRate(str) {
       });
       const unknownTokens = _.uniq(tokens).filter(
         (i) =>
-          ["vibedust_sd", "vibedust_percentile", "vibedust"].indexOf(i) === -1
+          [
+            "days_in_period",
+            "vibelevel",
+            "vibedust_zscore",
+            "vibedust_percentile",
+            "vibedust",
+          ].indexOf(i) === -1
       );
       if (unknownTokens.length > 0) {
         throw new Error("unknown variable used");
       }
       const n = m[2].match(numberMatcher);
-      if (!n) {
+      if (n === null || typeof n === undefined) {
         throw new Error("vibe rate not a number");
       }
       const value = parseFloat(n[0]);
       rules.push([guard, value]);
     } else {
+      console.log({rule_str})
       const n = rule_str.match(numberMatcher);
-      if (!n) {
+      if (n === null || typeof n === undefined) {
         throw new Error("vibe rate not a number");
       }
       const value = parseFloat(n[0]);
