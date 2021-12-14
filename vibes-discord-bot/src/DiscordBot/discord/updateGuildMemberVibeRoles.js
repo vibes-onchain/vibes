@@ -1,6 +1,11 @@
-import { VIBE_ROLE_NAMES } from '../constants';
+import { VIBE_ROLE_NAMES } from "../constants";
 
-export default async function updateGuildMemberVibeRole({client, guild_id, member_id, role_name}) {
+export default async function updateGuildMemberVibeRole({
+  client,
+  guild_id,
+  member_id,
+  role_name,
+}) {
   if (!guild_id) {
     throw new Error("needs guild_id");
   }
@@ -13,9 +18,12 @@ export default async function updateGuildMemberVibeRole({client, guild_id, membe
   }
   const member = guild.members.cache.find((i) => i.id === member_id);
 
-  for (const role of member.roles.cache.map(i => i)) {
+  let didUpdate = false;
+
+  for (const role of member.roles.cache.map((i) => i)) {
     if (VIBE_ROLE_NAMES.includes(role.name) && role_name !== role.name) {
       await member.roles.remove(role);
+      didUpdate = true;
     }
   }
   const in_role = member.roles.cache.find((role) => role.name === role_name);
@@ -23,7 +31,8 @@ export default async function updateGuildMemberVibeRole({client, guild_id, membe
     const role = guild.roles.cache.find((role) => role.name === role_name);
     if (role) {
       await member.roles.add(role);
-    } 
+      didUpdate = true;
+    }
   }
-  return true;
+  return didUpdate;
 }

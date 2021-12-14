@@ -17,12 +17,11 @@ export default async function updateGuildMember({
   if (!guild) {
     throw new Error("guild not found");
   }
-  const member = guild.members.cache.find((i) => i.id === member_id);
 
   const memberDetails = await getVibesUserDetails({ guild_id, member_id });
   // TODO figure out paren
   // updateGuildMemberNicknameParen
-  await updateGuildMemberNicknameParen({
+  const updatedParen = await updateGuildMemberNicknameParen({
     client,
     guild_id,
     member_id,
@@ -31,10 +30,12 @@ export default async function updateGuildMember({
 
   // TODO figure out vibe role
   // updateGuildMemberVibeRoles
-  await updateGuildMemberVibeRole({
+  const updatedVibesRole = await updateGuildMemberVibeRole({
     client,
     guild_id,
     member_id,
     role_name: memberDetails.vibeLevel,
   });
+
+  return updatedParen || updatedVibesRole;
 }

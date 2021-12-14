@@ -24,10 +24,8 @@ export const GLOBAL_CMDS = [
   "vd",
   "vc",
   "resetvibedust",
-  "setfrenlyparen",
   "setvibesparen",
-  "setfrenlylabel",
-  "setvibeslabel",
+  "setvibestrait",
 ];
 
 export const REQUIRED_INTENTS = [
