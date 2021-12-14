@@ -44,7 +44,7 @@ ${emojis.ogvibe}         \`OG Vibe                97.72% - 99.99%\`
     :eyes: full profiles on **[vibes.live](https://www.vibes.live/ledger/${ledger_id})**
     
     **CURRENT SETTINGS**
-    :timer: \`!setvibeperiod\` to ${vibe_period_text} ${vibe_period ? `ends ${vibe_period_remaining}` : ''}
+    :timer: \`!setvibeperiod\` to \`${vibe_period_text}\` ${vibe_period ? `ends ${vibe_period_remaining}` : ''}
     :pancakes: \`!setvibestacks\` to \`${vibe_stacks}\`
     `;
   const helpEmbed = {

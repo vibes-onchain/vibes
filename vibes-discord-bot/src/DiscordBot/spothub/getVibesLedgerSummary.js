@@ -12,7 +12,7 @@ export default async function ({ guild_id }) {
   let vibe_period_remaining;
   if (setVibePeriodLE || setVibePeriodLE.id) {
     vibe_period = setVibePeriodLE.value.vibe_period;
-    vibe_period_remaining = moment().endOf(vibe_period).from(moment()); 
+    vibe_period_remaining = moment.utc().endOf(vibe_period).from(moment.utc()); 
   }
   let vibe_rate;
   const setVibeRateLE = await LedgerEntry.findLast({
