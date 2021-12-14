@@ -19,13 +19,14 @@ export default async function updateGuildMember({
   }
 
   const memberDetails = await getVibesUserDetails({ guild_id, member_id });
+  // console.log(member_id, {memberDetails});
   // TODO figure out paren
   // updateGuildMemberNicknameParen
   const updatedParen = await updateGuildMemberNicknameParen({
     client,
     guild_id,
     member_id,
-    paren: memberDetails.nicknameParen,
+    paren: memberDetails.vibedust,
   });
 
   // TODO figure out vibe role

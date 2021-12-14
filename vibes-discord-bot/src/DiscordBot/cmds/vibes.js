@@ -1,5 +1,4 @@
 import getTargetMember from "../message/getTargetMember";
-import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
 import saveVibe from "../spothub/saveVibe";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import parseEmojisForMessage from "../discord/parseEmojisForMessage";
@@ -35,8 +34,8 @@ export default async function vibes({ client, message, cmd_args }) {
   const reason = cmd_args.slice(1).join(" ");
   await saveVibe({
     ledger_id: space.id,
-    from_user_id: message_member.user.id,
-    user_id: member.user.id,
+    from_member_id: message_member.id,
+    member_id: member.id,
     reason,
   });
 

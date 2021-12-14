@@ -59,6 +59,7 @@
     "pino-http": "^5.7.0",
     "pino-pretty": "^7.0.1",
     "save": "^2.4.0",
+    "simple-statistics": "^7.7.0",
     "spothub": "github:spot-foundation/spothub-js",
     "subscript": "^3.0.3",
     "uuid": "^3.4.0",

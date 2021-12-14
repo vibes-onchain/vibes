@@ -40,8 +40,8 @@ export default async function setvibedust({ client, message, cmd_args }) {
   const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
   await setVibeDust({
     ledger_id: space.id,
-    by_discord_member_id: message.member.id,
-    discord_member_id: member.id,
+    by_member_id: message.member.id,
+    member_id: member.id,
     vibe_dust: vibe_dust,
   });
 

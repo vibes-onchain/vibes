@@ -23,11 +23,13 @@ export default async function handleReaction() {
       return;
     }
 
+    const lastReactionMember = guild.members.cache.find(i => i.user.id === lastReactionUser.id);
+
     const reason = message.content;
     await saveVibe({
       ledger_id: space.id,
-      from_user_id: lastReactionUser.id,
-      user_id: message_member.user.id,
+      from_member_id: lastReactionMember.id,
+      member_id: message_member.id,
       reason,
     });
 
@@ -70,11 +72,13 @@ export default async function handleReaction() {
       return;
     }
 
+    const lastReactionMember = guild.members.cache.find(i => i.user.id === lastReactionUser.id);
+
     const reason = message.content;
     await saveBadVibe({
       ledger_id: space.id,
-      from_user_id: lastReactionUser.id,
-      user_id: message_member.user.id,
+      from_member_id: lastReactionMember.id,
+      member_id: message_member.id,
       reason,
     });
 
