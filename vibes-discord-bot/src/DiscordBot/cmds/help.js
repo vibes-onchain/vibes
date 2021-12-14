@@ -1,5 +1,6 @@
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getEmojis from "../discord/getEmojis";
+import getVibeFeed from "../discord/getVibeFeed";
 
 export default async function help({ client, message, cmd_args }) {
   const guild = message?.member?.guild;
@@ -64,11 +65,8 @@ ${emojis.ogvibe}         \`OG Vibe                97.72% - 99.99%\`
     //   icon_url: "https://i.imgur.com/1c0avUE.png",
     // },
   };
-  const vibeFeedChannel = message.guild.channels.cache.find(
-    (channel) => channel.name === "vibe-feed"
-  );
-  const helpMessageChannel = 
-    `see <#${vibeFeedChannel?.id}> for ${emojis.vibedust} Wat VibesBot? ${emojis.vibedust}`;
+  const vibeFeedChannel = await getVibeFeed({ client, guild_id: guild.id });
+  const helpMessageChannel = `see <#${vibeFeedChannel?.id}> for ${emojis.vibedust} Wat VibesBot? ${emojis.vibedust}`;
 
   const helpEmbedChannel = {
     color: 0x00eeee,

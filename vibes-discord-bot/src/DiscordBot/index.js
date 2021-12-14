@@ -86,6 +86,10 @@ DiscordBot.start = async function () {
   // TODO guildCreate, handle addition to guild
   // TODO guildDelete, handle removal from guild
 
+  // client.on("apiRequest", (msg) => {
+  //   console.log("[DISCORD]", msg?.method, msg?.path, msg?.route);
+  // });
+
   client.on("debug", (msg) => {
     console.log("[DISCORD]", msg);
   });

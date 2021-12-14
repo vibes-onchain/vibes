@@ -8,7 +8,7 @@ export const GLOBAL_CMDS = [
   "susvibes",
   "susvibe",
   "setviberate",
-  'setvibestack',
+  "setvibestack",
   "vibecheck",
   "vibechk",
   "help",
@@ -27,7 +27,7 @@ export const GLOBAL_CMDS = [
   "setfrenlyparen",
   "setvibesparen",
   "setfrenlylabel",
-  "setvibeslabel"
+  "setvibeslabel",
 ];
 
 export const REQUIRED_INTENTS = [
@@ -49,3 +49,94 @@ export const REQUIRED_INTENTS = [
 ];
 
 export const TOKEN = process.env.APP_DISCORD_BOT_TOKEN;
+
+export const CAN_CONTROL_VIBES_BOT_ROLE = {
+  name: "[Can Control Vibes Bot]",
+  hoist: false,
+  mentionable: false,
+};
+
+export const GOOD_VIBES_START_HERE_ROLE = {
+  host: false,
+  mentionable: false,
+  name: "[Good Vibes Start Here]",
+};
+export const GOOD_VIBE_ROLES = [
+  {
+    color: 15844367,
+    reason: "",
+    name: "OG Vibe",
+    icon: "og-vibes.png",
+    hoist: true,
+  },
+  {
+    color: 15105570,
+    reason: "",
+    name: "Legendary Vibe",
+    hoist: true,
+    icon: "legendary-vibes.png",
+  },
+  {
+    color: 10181046,
+    reason: "",
+    name: "Epic Vibe",
+    icon: "epic-vibes.png",
+    hoist: true,
+  },
+  {
+    color: 3447003,
+    reason: "",
+    name: "Rare Vibe",
+    icon: "rare-vibes.png",
+    hoist: true,
+  },
+  {
+    color: 0,
+    reason: "",
+    name: "Frenly Vibe",
+    icon: "frenly-vibes.png",
+    hoist: true,
+  },
+];
+export const BAD_VIBES_START_HERE_ROLE = {
+  host: false,
+  mentionable: false,
+  name: "[Bad Vibes Start Here]",
+};
+export const BAD_VIBE_ROLES = [
+  {
+    color: 10038562,
+    reason: "",
+    name: "Sus Vibe",
+    hoist: false,
+    icon: "sus-vibes.gif",
+    hoist: true,
+  },
+];
+
+export const VIBE_ROLE_NAMES = [
+  ...BAD_VIBE_ROLES.map((i) => i.name),
+  ...GOOD_VIBE_ROLES.map((i) => i.name),
+];
+
+export const VIBES_BOT_ROLE_NAME =
+  process.env.APP_ENV === "development" ? "vibesbot-dev" : "vibesbot";
+
+export const VIBE_FEED_CHANNEL = { name: "vibe-feed", type: "GUILD_TEXT" };
+
+const iconsDir = `${__dirname}/../../assets/icons`;
+
+export const VIBE_EMOJIS = {
+  susvibe: { location: `${iconsDir}/sus-vibes.gif`, name: "susvibe" },
+  ogvibe: { location: `${iconsDir}/og-vibes.png`, name: "ogvibe" },
+  epicvibe: { location: `${iconsDir}/epic-vibes.png`, name: "epicvibe" },
+  rarevibe: { location: `${iconsDir}/rare-vibes.png`, name: "rarevibe" },
+  legendaryvibe: {
+    location: `${iconsDir}/legendary-vibes.png`,
+    name: "legendaryvibe",
+  },
+  frenlyvibe: { location: `${iconsDir}/frenly-vibes.png`, name: "frenlyvibe" },
+  vibes: { location: `${iconsDir}/frenly-vibes.png`, name: "vibes" },
+  vibe: { location: `${iconsDir}/frenly-vibes.png`, name: "vibe" },
+  vibedust: { location: `${iconsDir}/vibedust.gif`, name: "vibedust" },
+};

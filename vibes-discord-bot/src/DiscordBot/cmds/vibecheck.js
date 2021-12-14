@@ -2,7 +2,7 @@ import parseEmojisForMessage from "../discord/parseEmojisForMessage";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getTargetMember from "../message/getTargetMember";
 import getEmojis from "../discord/getEmojis";
-import getMemberDetails from "../helpers/getMemberDetails";
+import getMemberDetails from "../multi/getMemberDetails";
 import getVibesLedgerSummary from '../spothub/getVibesLedgerSummary';
 
 export default async function vibecheck({ client, message, cmd_args }) {

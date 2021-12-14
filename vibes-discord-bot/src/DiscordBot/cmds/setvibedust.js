@@ -1,77 +1,91 @@
+import getMemberDetails from "../multi/getMemberDetails";
 import getTargetMember from "../message/getTargetMember";
-import updateGuildMember from "../discord/updateGuildMember";
-import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import setVibeDust from "../spothub/setVibeDust";
 import canControlVibesBot from "../discord/canControlVibesBot";
 import getEmojis from "../discord/getEmojis";
+import getVibeFeed from "../discord/getVibeFeed";
+import updateGuildMember from "../multi/updateGuildMember";
 
 export default async function setvibedust({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
 
   if (
-    !canControlVibesBot({
+    !(await canControlVibesBot({
       client,
       guild_id: guild.id,
-      member_id: message_member.id,
-    })
+      member_id: message.member?.id,
+    }))
   ) {
     return;
   }
 
   const member = await getTargetMember({ message, cmd_args });
   if (!member) {
-    console.log("receiver not found");
+    await message_member.send(
+      "ERROR: !setvibedust must specify receiver and amount"
+    );
     return;
   }
   if (cmd_args.length <= 1) {
-    console.log("no vibes specified");
+    await message_member.send(
+      "ERROR: !setvibedust must specify receiver and amount"
+    );
     return;
   }
-  const vibes = parseFloat(cmd_args[1]);
-  console.log({ vibes });
+
+  const vibe_dust = parseFloat(cmd_args[1]);
 
   const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
   await setVibeDust({
     ledger_id: space.id,
     by_discord_member_id: message.member.id,
     discord_member_id: member.id,
-    vibe_dust: vibes,
+    vibe_dust: vibe_dust,
   });
 
-  const emojis = getEmojis({ client, guild_id: guild.id });
+  const emojis = await getEmojis({ client, guild_id: guild.id });
 
-  let setvibedustEmbed = {
+  const targetedUser = await getMemberDetails({
+    client,
+    guild_id: guild.id,
+    member_id: member.id,
+  });
+
+  const vibeFeedEmbed = {
     color: 0x00eeee,
-    title:
-      `:sparkles: :rocket: ${emojis.vibedust} Go Brrrr! ${emojis.vibes} ${emojis.vibes}`,
+    title: `:sparkles: :rocket: ${emojis.vibedust} Go Brrrr! ${emojis.vibes} ${emojis.vibes}`,
     url: `https://www.vibes.live/ledger/${space.id}`,
-    description: 
-      `${emojis.vibedust} new vibedust has been generated for some members
-   :eyes: peep [\`vibes.live\`]() to see what you received
-   :clipboard:Full Tx log – **[vibescan.io](http://vibescan.io/ledger/${space.id}/entries)**`,
-    image: {
+    description: `@${targetedUser.username} now has ${vibe_dust}${emojis.vibedust} vibedust
+   :eyes: peep **[vibes.live](http://www.vibes.live/ledger/${space.id}/discord_member-${targetedUser.member_id})** to see what @${targetedUser.username} received
+   :clipboard: Full Tx log – **[vibescan.io](http://vibescan.io/ledger/${space.id}/entries)**`,
+    thumbnail: {
       url: "https://media4.giphy.com/media/azGJUrx592uc0/giphy.gif?cid=ecf05e47lrktsdr15ncs416w0n3bil6h37wy9h3zq1br5p6y&rid=giphy.gif&ct=g",
     },
-    // footer: {
-    //   text: `Powered by Spot`,
-    //   icon_url: "https://i.imgur.com/1c0avUE.png",
-    // },
   };
-  await messageVibeFeedChannel(guild, { embeds: [setvibedustEmbed] });
-  await message.channel.send({ embeds: [setvibedustEmbed] });
-  await member.send(`:arrow_right: ${emojis.vibedust}  \`GENVIBEDUST\` – u got [interactingUser.lastGebVibe.vibedustRecieved] vibedust ${emojis.vibedust}  from this gen event 
-  :eyes: peep ur updated vibes at vibes.live/[interactingUser.VibesLiveID]
-  
-  :clipboard: Full Tx log – **vibescan.io/[interactingUser.vibescanID]**"""`);
+  const vibeFeed = await getVibeFeed({ client, guild_id: guild.id });
+  await vibeFeed?.send({ embeds: [vibeFeedEmbed] });
+
+  const channelEmbed = {
+    ...vibeFeedEmbed,
+  };
+  if (vibeFeed.id !== message.channel.id) {
+    await message.channel.send({ embeds: [channelEmbed] });
+  }
+
+  const dmEmbed = {
+    title: `:sparkles: :rocket: You now have ${vibe_dust} ${emojis.vibedust} vibedust in ${message.guild.name} ${emojis.vibes} ${emojis.vibes}`,
+    url: `https://www.vibes.live/ledger/${space.id}`,
+    description: `:eyes: peep **[vibes.live](http://www.vibes.live/ledger/${space.id}/profile/discord_member-${targetedUser.member_id})** to see your profile
+    :clipboard: Full Tx log – **[vibescan.io](http://vibescan.io/ledger/${space.id}/entries)**`,
+    thumbnail: vibeFeedEmbed.thumbnail,
+  };
+  await member.send({ embeds: [dmEmbed] });
+
   await updateGuildMember({
-    client: client,
-    guild: guild,
-    member: member,
-    vibes: vibes,
-    user_id: member.user.id,
-    frenly_labels: space.meta?.frenly_labels,
-    frenly_paren: space.meta?.frenly_paren,
+    client,
+    guild_id: guild.id,
+    member_id: member.id,
   });
 }
