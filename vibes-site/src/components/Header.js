@@ -67,8 +67,8 @@ export default function Header(props) {
           </div>
           <div className="right">
             <Link className="item" to={'/'}>📖 Docs</Link>
-            <Link className="item" to={'https://discord.gg/Ccae6XpDBV'}>💬 Chat with us</Link>
-            <Link className="item" to={process.env.DISCORD_BOT_URL}>🤖 Build your bot ➝</Link>
+            <a className="item" to={'https://discord.gg/Ccae6XpDBV'}>💬 Chat with us</a>
+            <a className="item" to={process.env.DISCORD_BOT_URL}>🤖 Build your bot ➝</a>
           </div>
         </div>
       </div>
