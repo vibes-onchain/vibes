@@ -43,7 +43,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return badvibes({ client, message, cmd_args });
   } else if (cmd === "resetvibedust") {
     return resetvibedust({ client, message, cmd_args });
-  } else if (cmd === "setviberate" || cmd === "setvibestack") {
+  } else if (cmd === "setviberate" || cmd === "setvibestack" || cmd === "setvibestacks") {
     return setviberate({ client, message, cmd_args });
   } else if (cmd === "setvibeperiod" || cmd === "setvibeprd") {
     return setvibeperiod({ client, message, cmd_args });

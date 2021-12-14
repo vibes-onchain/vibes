@@ -1,6 +1,7 @@
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getEmojis from "../discord/getEmojis";
 import getVibeFeed from "../discord/getVibeFeed";
+import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 
 export default async function help({ client, message, cmd_args }) {
   const guild = message?.member?.guild;
@@ -10,6 +11,13 @@ export default async function help({ client, message, cmd_args }) {
   const ledger_id = ledger.id;
 
   const emojis = await getEmojis({ client, guild_id: guild.id });
+
+
+  const vibesLedgerSummary = await getVibesLedgerSummary({guild_id: guild.id});
+  const vibe_period = vibesLedgerSummary.vibe_period;
+  const vibe_period_text = vibesLedgerSummary.vibe_period ?? "OFF";
+  const vibe_period_remaining = vibesLedgerSummary.vibe_period_remaining;
+  const vibe_stacks = vibesLedgerSummary.vibe_rate ?? "0";
 
   const helpMessage = `**I AM VIBES BOT ${emojis.vibes} :robot:**
     :eyes: i help you show people's vibes  ${emojis.vibes} \n
@@ -33,7 +41,12 @@ ${emojis.ogvibe}         \`OG Vibe                97.72% - 99.99%\`
 
     **DEEP VIBES**
     :clipboard: full tx logs on **[vibescan.io](https://vibescan.io/ledger/${ledger_id}/entries)**
-    :eyes: full profiles on **[vibes.live](https://www.vibes.live/ledger/${ledger_id})**`;
+    :eyes: full profiles on **[vibes.live](https://www.vibes.live/ledger/${ledger_id})**
+    
+    **CURRENT SETTINGS**
+    :timer: \`!setvibeperiod\` to ${vibe_period_text} ${vibe_period ? `ends ${vibe_period_remaining}` : ''}
+    :pancakes: \`!setvibestacks\` to \`${vibe_stacks}\`
+    `;
   const helpEmbed = {
     color: 0x00eeee,
     title: `**wat vibes bot?**`,
