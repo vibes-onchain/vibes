@@ -125,6 +125,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
         vibedust: vibe_dust,
         vibe_dust_zscore,
         vibe_dust_percentile,
+        vibedust_percentile: vibe_dust_percentile,
         vibeLevel
       };
       return acc;

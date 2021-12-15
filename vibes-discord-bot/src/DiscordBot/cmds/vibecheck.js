@@ -3,7 +3,8 @@ import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getTargetMember from "../message/getTargetMember";
 import getEmojis from "../discord/getEmojis";
 import getMemberDetails from "../multi/getMemberDetails";
-import getVibesLedgerSummary from '../spothub/getVibesLedgerSummary';
+import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
+import formatNumber from '../../lib/formatNumber';
 
 export default async function vibecheck({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -35,6 +36,10 @@ export default async function vibecheck({ client, message, cmd_args }) {
 
   const profilePath = `ledger/${space.id}/profile/discord_member-${targetedUser.member_id}`;
 
+  const vibeLevelEmoji = targetedUser.vibeLevel
+    ? emojis[targetedUser.vibeLevel.replace(/ /, "").toLowerCase()]
+    : ":seedling:";
+
   const vibecheckEmbed = {
     color: 0x00eeee,
     title: await parseEmojisForMessage(
@@ -48,10 +53,22 @@ export default async function vibecheck({ client, message, cmd_args }) {
       cmd_args,
       `:eyes: _see full profile at **[Vibes](https://www.vibes.live/${profilePath})**_
 
-      ${targetedUser.vibeLevelEmoji} \`VIBELEVEL\` – ${targetedUser.vibeLevelEmoji} ${targetedUser.vibeLevel} with ${targetedUser.vibedust}${emojis.vibedust} (${targetedUser.vibedustPercentile})
-      :pancakes: \`VIBESTACK\` – ${targetedUser.vibestack} good until \`VIBEPERIOD\` ends in ${vibesLedgerSummary.period_remaining}
+      ${vibeLevelEmoji} \`VIBELEVEL\` – ${vibeLevelEmoji} ${
+        targetedUser.vibeLevel || "Has no level"
+      } with ${targetedUser.vibedust}${emojis.vibedust} (${
+        formatNumber(targetedUser.vibedust_percentile, "percent2f")
+      })
+      :pancakes: \`VIBESTACK\` – ${
+        targetedUser.vibestack
+      } good until \`VIBEPERIOD\` ends ${vibesLedgerSummary.vibe_period_remaining}
 
-      :mechanical_arm: \`BOOSTS\` – [=${targetedUser.vibeLevelBoost}*${targetedUser.stakeMoBoost}] ${targetedUser.vibeLevelBoost}x for ${targetedUser.vibeLevel} Vibe Level and ${targetedUser.stakeMoBoost}x for ${targetedUser.stakeMo} Months Staked ${targetedUser.stakeMoBoost} 
+      :mechanical_arm: \`BOOSTS\` – [=${targetedUser.vibeLevelBoost}*${
+        targetedUser.stakeMoBoost
+      }] ${targetedUser.vibeLevelBoost}x for ${
+        targetedUser.vibeLevel
+      } Vibe Level and ${targetedUser.stakeMoBoost}x for ${
+        targetedUser.stakeMo
+      } Months Staked ${targetedUser.stakeMoBoost} 
       
       :clipboard: Full Tx log – **[vibescan.io](https://vibescane.io/${profilePath}/log)**
       

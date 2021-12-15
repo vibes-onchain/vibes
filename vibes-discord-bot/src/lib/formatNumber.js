@@ -10,6 +10,7 @@ export const isKnownFormat = function (as) {
   else if (as === 'percent0f') { return '.0~%'; }
   else if (as === 'percent1f') { return '.1~%'; }
   else if (as === 'percent2f') { return '.2~%'; }
+  else if (as === 'percent') { return '.0~%'; }
   else if (as === 'decimal')   { return '.2~f'; }
   else if (as === 'decimal0f') { return '.0~f'; }
   else if (as === 'decimal1f') { return '.1~f'; }
