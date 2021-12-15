@@ -27,6 +27,7 @@ export const GLOBAL_CMDS = [
   "resetvibedust",
   "setvibesparen",
   "setvibestrait",
+  "setupvibes"
 ];
 
 export const REQUIRED_INTENTS = [
