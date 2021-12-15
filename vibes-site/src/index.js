@@ -15,8 +15,6 @@ window.SPOTHUB_CONNECTION = {
   prefixUrl: process.env.REACT_APP_SPOTHUB_CONNECTION_prefixUrl
 }
 
-console.log(window.SPOTHUB_CONNECTION);
-
 ReactDOM.render(
   <React.StrictMode>
     <App />
