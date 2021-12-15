@@ -147,12 +147,15 @@ const CSS = css`
     text-align: center;
     background-image: url(${wave_gradient});
     background-position: center center;
-    background-size: contain;
-    background-repeat: repeat-x no-repeat;
+    background-size: cover;
+    @media (min-width: 500px) {
+      background-size: contain;
+      background-repeat: repeat-x no-repeat;
+    }
     .hero-container {
       width: 100%;
       height: 600px;
-      max-height: 80vw;
+      max-height: 80vh;
       position: relative;
       z-index: 1;
       display: flex;
@@ -162,8 +165,10 @@ const CSS = css`
       justify-content: center;
     }
     .h1 {
-      top: 45%;
-      font-size: 58px;
+      font-size: 40px;
+      @media (min-width: 500px) {
+        font-size: 58px;
+      }
       font-weight: 800;
       width: 1080px;
       max-width: 90%;
@@ -213,7 +218,9 @@ const CSS = css`
     .items {
       display: flex;
       flex-wrap: wrap;
-      margin: -50px;
+      @media (min-width: 600px) {
+        margin: -50px;
+      }
     }
     .item {
       flex-basis: 400px;
@@ -263,6 +270,10 @@ const CSS = css`
       flex-wrap: wrap;
     }
     .logo {
+      flex-grow: 1;
+      @media (min-width: 600px) {
+        flex-grow: 0;
+      }
       text-align: left;
       flex-basis: 50%;
       font-size: 18px;
@@ -280,7 +291,13 @@ const CSS = css`
     .link-lists {
       display: flex;
       align-items: end;
-      justify-content: flex-end;
+      flex-grow: 1;
+      justify-content: flex-start;
+      align-items: flex-start;
+      @media (min-width: 600px) {
+        flex-grow: 0;
+        justify-content: flex-end;
+      }
       flex-basis: 50%;
       .link-list {
         display: flex;
