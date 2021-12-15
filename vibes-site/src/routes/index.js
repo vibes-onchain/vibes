@@ -14,12 +14,13 @@ import vibenomics from ":/assets/img/vibenomics.png";
 import demod from ":/assets/img/demod.png";
 import integrations from ":/assets/img/integrations.png";
 import vibecheck from ":/assets/img/vibecheck.png";
-
 import vibesribbon from ":/assets/img/vibes-ribbon.png";
-
 import vibesicon from ":/assets/img/vibes-hand.png";
-
 import spotchain_logo from ":/assets/img/spotchain.png";
+import epic_sparkle from ":/assets/img/epic.png";
+import rare_sparkle from ":/assets/img/rare.png";
+import legendary_sparkle from ":/assets/img/legendary.png";
+import og_sparkle from ":/assets/img/og.png";
 
 export default function () {
   return (
@@ -28,6 +29,18 @@ export default function () {
       <div className="hero">
         {/* <img className="cover-wave" src={wave_gradient} alt="cover" /> */}
         <div className="hero-container">
+          <div class="snowflakes" aria-hidden="true">
+            <div class="snowflake"><img src={epic_sparkle} /></div>
+            <div class="snowflake"><img src={rare_sparkle} /></div>
+            <div class="snowflake"><img src={legendary_sparkle} /></div>
+            <div class="snowflake"><img src={og_sparkle} /></div>
+            <div class="snowflake"><img src={epic_sparkle} /></div>
+            <div class="snowflake"><img src={rare_sparkle} /></div>
+            <div class="snowflake"><img src={legendary_sparkle} /></div>
+            <div class="snowflake"><img src={og_sparkle} /></div>
+            <div class="snowflake"><img src={epic_sparkle} /></div>
+            <div class="snowflake"><img src={rare_sparkle} /></div>
+          </div>
           <div className="h1">
             On-chain trust for massive, open, decentralized communities
           </div>
@@ -136,7 +149,6 @@ const CSS = css`
   font-family: "Cabin", sans-serif;
 
   .hero {
-    padding-top: 5rem !important;
     display: block;
     box-sizing: border-box;
     top: 0px;
@@ -165,6 +177,7 @@ const CSS = css`
       justify-content: center;
     }
     .h1 {
+      z-index: 1;
       font-size: 40px;
       @media (min-width: 500px) {
         font-size: 58px;
@@ -177,25 +190,159 @@ const CSS = css`
         0px 0px 5px rgb(255 255 255 / 3%);
     }
     .caption {
+      z-index: 1;
       padding-top: 20px;
       font-weight: 300;
-      font-size: 24px;
-      line-height: 1.4em;
+      font-size: 21px;
+      line-height: 1.2em;
       padding-bottom: 20px;
     }
     .button {
-      margin-top: 20px;
-      background: #33363b;
+      z-index: 1;
+      margin-top: 28px;
+      background: #33363a;
       padding: 15px 20px;
       border-radius: 8px;
       font-size: 18px;
+      font-weight: 500;
       color: white;
+    }
+    /* customizable snowflake styling */
+    .snowflakes {
+      z-index: 0;
+    }
+    .snowflake {
+      color: #fff;
+      font-size: 40px;
+      font-family: Arial;
+      text-shadow: 0 0 1px #000;
+      img { width: 35px; }
+    }
+
+    @-webkit-keyframes snowflakes-fall {
+      0% {
+        top: -10%;
+      }
+      100% {
+        top: 100%;
+      }
+    }
+    @-webkit-keyframes snowflakes-shake {
+      0% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+      }
+      50% {
+        -webkit-transform: translateX(80px);
+        transform: translateX(80px);
+      }
+      100% {
+        -webkit-transform: translateX(0px);
+        transform: translateX(0px);
+      }
+    }
+    @keyframes snowflakes-fall {
+      0% {
+        top: -10%;
+      }
+      100% {
+        top: 100%;
+      }
+    }
+    @keyframes snowflakes-shake {
+      0% {
+        transform: translateX(0px);
+      }
+      50% {
+        transform: translateX(80px);
+      }
+      100% {
+        transform: translateX(0px);
+      }
+    }
+    position: relative;
+    .snowflakes {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+    .snowflake {
+      position: absolute;
+      top: -10%;
+      z-index: 9999;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      cursor: default;
+      -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+      -webkit-animation-duration: 10s, 3s;
+      -webkit-animation-timing-function: linear, ease-in-out;
+      -webkit-animation-iteration-count: infinite, infinite;
+      -webkit-animation-play-state: running, running;
+      animation-name: snowflakes-fall, snowflakes-shake;
+      animation-duration: 10s, 3s;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite, infinite;
+      animation-play-state: running, running;
+    }
+    .snowflake:nth-of-type(0) {
+      left: 1%;
+      -webkit-animation-delay: 0s, 0s;
+      animation-delay: 0s, 0s;
+    }
+    .snowflake:nth-of-type(1) {
+      left: 10%;
+      -webkit-animation-delay: 1s, 1s;
+      animation-delay: 1s, 1s;
+    }
+    .snowflake:nth-of-type(2) {
+      left: 20%;
+      -webkit-animation-delay: 6s, 0.5s;
+      animation-delay: 6s, 0.5s;
+    }
+    .snowflake:nth-of-type(3) {
+      left: 30%;
+      -webkit-animation-delay: 4s, 2s;
+      animation-delay: 4s, 2s;
+    }
+    .snowflake:nth-of-type(4) {
+      left: 40%;
+      -webkit-animation-delay: 2s, 2s;
+      animation-delay: 2s, 2s;
+    }
+    .snowflake:nth-of-type(5) {
+      left: 50%;
+      -webkit-animation-delay: 8s, 3s;
+      animation-delay: 8s, 3s;
+    }
+    .snowflake:nth-of-type(6) {
+      left: 60%;
+      -webkit-animation-delay: 6s, 2s;
+      animation-delay: 6s, 2s;
+    }
+    .snowflake:nth-of-type(7) {
+      left: 70%;
+      -webkit-animation-delay: 2.5s, 1s;
+      animation-delay: 2.5s, 1s;
+    }
+    .snowflake:nth-of-type(8) {
+      left: 80%;
+      -webkit-animation-delay: 1s, 0s;
+      animation-delay: 1s, 0s;
+    }
+    .snowflake:nth-of-type(9) {
+      left: 90%;
+      -webkit-animation-delay: 3s, 1.5s;
+      animation-delay: 3s, 1.5s;
     }
   }
   .features {
-    background: #33363b;
+    background: #33363a;
     .features-container {
-      width: calc(100% - 20px);
+      width: calc(100% - 50px);
       max-width: 1200px;
       margin: 0 auto;
       padding: 80px 0;
@@ -208,10 +355,10 @@ const CSS = css`
       padding-bottom: 20px;
     }
     .a-powerful {
-      font-size: 40px;
+      font-size: 45px;
       font-weight: 800;
       line-height: 1.1em;
-      width: 700px;
+      width: 760px;
       max-width: 100%;
       padding-bottom: 40px;
     }
@@ -227,21 +374,25 @@ const CSS = css`
       box-sizing: border-box;
       padding: 50px;
       .icon {
-        width: 150px;
+        width: 135px;
       }
       .title {
         padding-top: 20px;
-        font-weight: bold;
-        font-size: 18px;
+        line-height: 3em;
+        font-weight: 700;
+        font-size: 20px;
       }
       .text {
-        color: #afb2b6;
-        font-size: 16px;
+        color: white;
+        font-size: 17px;
+        opacity: 0.6;
+        letter-spacing: 0.02em;
+        line-height: 1.3em;
       }
     }
   }
   .communities {
-    background: #33363b;
+    background: #33363a;
     padding: 60px;
   }
   .give-vibes-a-try {
@@ -265,7 +416,6 @@ const CSS = css`
       display: flex;
       flex-direction: row;
       margin: 50px auto;
-      width: 850px;
       max-width: calc(100% - 20px);
       flex-wrap: wrap;
     }
@@ -273,6 +423,7 @@ const CSS = css`
       flex-grow: 1;
       @media (min-width: 600px) {
         flex-grow: 0;
+        justify-content: start;
       }
       text-align: left;
       flex-basis: 50%;
@@ -304,7 +455,7 @@ const CSS = css`
         flex-direction: column;
         text-align: left;
         padding: 20px;
-        font-size: 14px;
+        font-size: 16px;
         p {
           font-weight: 600;
           padding-bottom: 10px;

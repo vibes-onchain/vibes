@@ -114,7 +114,7 @@ const headerCSS = css`
         }
         font-size: 28px;
         font-weight: 800;
-        color: #2f2f2f;
+        color: #0f0f0f;
       }
       .right {
         display: none;
@@ -126,10 +126,10 @@ const headerCSS = css`
         }
       }
       .right a {
-        font-size: 20px;
+        font-size: 17px;
         font-weight: 600;
         padding: 0 30px;
-        color: #2f2f2f;
+        color: #0f0f0f;
         display: flex;
         align-items: center;
         border-radius: none;
