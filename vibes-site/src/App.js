@@ -48,6 +48,9 @@ function App() {
 const routes = [
   "/setup/discord",
   "/ledger/:ledger_id/admin",
+  "/ledger/:ledger_id/profile/:profile_id/entries",
+  "/ledger/:ledger_id/profile/:profile_id",
+  "/ledger/:ledger_id/entries",
   "/ledger/:ledger_id",
   "/",
 ];
