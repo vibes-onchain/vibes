@@ -67,7 +67,7 @@ export default async function vibecheck({ client, message, cmd_args }) {
         vibesLedgerSummary.vibe_period_remaining
       }
       
-      :clipboard: Full Tx log – **[vibescan.io](https://vibescane.io/${profilePath}/log)**
+      :clipboard: Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/${profilePath}/entries)**
       
       :pig_nose: _requested by @${commandingUser.username}_
       `

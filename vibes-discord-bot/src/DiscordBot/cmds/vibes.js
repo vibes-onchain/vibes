@@ -1,6 +1,7 @@
 import getTargetMember from "../message/getTargetMember";
 import saveVibe from "../spothub/saveVibe";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 import getEmojis from "../discord/getEmojis";
 import getVibeFeed from "../discord/getVibeFeed";
 import getMemberDetails from "../multi/getMemberDetails";
@@ -17,7 +18,7 @@ export default async function vibes({ client, message, cmd_args }) {
 
   if (member.user.id === message_member.user.id) {
     // await message.channel.send(
-      // `@${target_user.username} you can only vibe others`
+    // `@${target_user.username} you can only vibe others`
     // );
     return;
   }
@@ -46,6 +47,10 @@ export default async function vibes({ client, message, cmd_args }) {
     member_id: message_member.id,
   });
 
+  const vibesLedgerSummary = await getVibesLedgerSummary({
+    guild_id: guild.id,
+  });
+
   const vibesFeedEmbed = {
     color: 0x00eeee,
     url: `https://www.vibesbot.gg`,
@@ -55,15 +60,17 @@ export default async function vibes({ client, message, cmd_args }) {
     } – u got vibes ${emojis.vibes} from @${message_member.user.username} ${
       reason ? `\nfor "${reason}"` : ""
     }
-      :pancakes: @${
-        message_member.user.username
-      } has a **\`VIBESTACK\`** of ${senderDetails.vibestack} this **\`VIBEPERIOD\`** [vibe.live](${process.env.VIBES_LIVE_BASE_URL}/ledgers/${ledger.id}/profile/discord_member-${
-      message_member.id
-    })
-      :timer: **\`VIBEPERIOD\`** ends in ${"time"}
-      :clipboard:Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledgers/${
-        ledger.id
-      })**`,
+      :pancakes: @${message_member.user.username} has a **\`VIBESTACK\`** of ${
+      senderDetails.vibestack
+    } this **\`VIBEPERIOD\`** [vibe.live](${
+      process.env.VIBES_LIVE_BASE_URL
+    }/ledger/${ledger.id}/profile/discord_member-${message_member.id})
+      :timer: **\`VIBEPERIOD\`** ends ${
+        vibesLedgerSummary.vibe_period_remaining
+      }
+      :clipboard:Full Tx log – **[vibescan.io](${
+        process.env.VIBESCAN_BASE_URL
+      }/ledger/${ledger.id})**`,
     // thumbnail: {
     //   url: "https://media2.giphy.com/media/BzM7MRs96dYpLSeUTy/giphy.gif?cid=ecf05e47yk8rvloiy4yh52cdlyzqoil3ksr606xmluc3p6ox&rid=giphy.gif&ct=ts",
     // },
@@ -80,7 +87,7 @@ export default async function vibes({ client, message, cmd_args }) {
     const vibesChannelEmbed = {
       color: 0x00eeee,
       // url: parseEmojisForMessage(message, cmd_args, `https://www.vibesbot.gg`),
-      description: `:clipboard: ${emojis.vibedust} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledgers/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
+      description: `:clipboard: ${emojis.vibedust} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
     };
 
     await message.channel.send({ embeds: [vibesChannelEmbed] }).catch((e) => {

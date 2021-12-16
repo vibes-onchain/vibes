@@ -57,11 +57,11 @@ export default async function badVibes({ client, message, cmd_args }) {
     }
       :pancakes: @${
         message_member.user.username
-      } has a **\`VIBESTACK\`** of ${senderDetails.vibestack} this **\`VIBEPERIOD\`** [vibe.live](${process.env.VIBES_LIVE_BASE_URL}/ledgers/${ledger.id}/profile/discord_member-${
+      } has a **\`VIBESTACK\`** of ${senderDetails.vibestack} this **\`VIBEPERIOD\`** [vibe.live](${process.env.VIBES_LIVE_BASE_URL}/ledger/${ledger.id}/profile/discord_member-${
       message_member.id
     })
       :timer: **\`VIBEPERIOD\`** ends in ${"time"}
-      :clipboard:Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledgers/${
+      :clipboard:Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${
         ledger.id
       })**`,
     // thumbnail: {
@@ -80,7 +80,7 @@ export default async function badVibes({ client, message, cmd_args }) {
     const vibesChannelEmbed = {
       color: 0x00eeee,
       // url: parseEmojisForMessage(message, cmd_args, `https://www.vibesbot.gg`),
-      description: `:clipboard: ${emojis.susvibe} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledgers/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
+      description: `:clipboard: ${emojis.susvibe} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
     };
 
     await message.channel.send({ embeds: [vibesChannelEmbed] }).catch((e) => {

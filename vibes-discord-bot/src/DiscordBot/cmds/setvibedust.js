@@ -6,6 +6,7 @@ import canControlVibesBot from "../discord/canControlVibesBot";
 import getEmojis from "../discord/getEmojis";
 import getVibeFeed from "../discord/getVibeFeed";
 import updateGuildMember from "../multi/updateGuildMember";
+import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 
 export default async function setvibedust({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -88,4 +89,8 @@ export default async function setvibedust({ client, message, cmd_args }) {
     guild_id: guild.id,
     member_id: member.id,
   });
+  await updateAllGuildMembers({
+    client,
+    guild_id: guild.id,
+  })
 }
