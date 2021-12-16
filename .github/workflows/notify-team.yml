@@ -1,4 +1,5 @@
 name: Notify Team
+on: [push, pull_request]
 uses: appleboy/telegram-action@master
 with:
   to: ${{ secrets.TELEGRAM_TO }}
