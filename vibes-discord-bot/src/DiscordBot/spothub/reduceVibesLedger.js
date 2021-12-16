@@ -81,8 +81,8 @@ export default async function reduceVibesLedger({ ledger_id }) {
     user_vibes,
     pending_vibes,
   });
-  const vibe_dust_mean = ss.mean(Object.values(user_vibes));
-  const vibe_dust_sd = ss.standardDeviation(Object.values(user_vibes));
+  const vibe_dust_mean = Object.values(user_vibes).length ? ss.mean(Object.values(user_vibes)) : 0;
+  const vibe_dust_sd = Object.values(user_vibes).length ? ss.standardDeviation(Object.values(user_vibes)) : 0;
 
   const profiles = Object.entries(user_vibes).reduce(
     (acc, [user_id, vibe_dust]) => {
