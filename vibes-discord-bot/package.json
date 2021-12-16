@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec \"./bin/run_action\" bot/run",
+    "start": "nodemon --exec \"./bin/run_action\" start",
     "test:watch": "APP_ENV=test jest --watch",
     "test": "APP_ENV=test node --async-stack-traces --harmony -r esm-wallaby -r ./init.js --experimental-vm-modules node_modules/.bin/jest --forceExit",
     "test:inspect": "APP_ENV=test node --inspect-brk --expose-gc --async-stack-traces --harmony -r esm-wallaby -r ./init.js --experimental-vm-modules node_modules/.bin/jest --runInBand --logHeapUsage"
