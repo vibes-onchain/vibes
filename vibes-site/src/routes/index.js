@@ -29,17 +29,17 @@ export default function () {
       <div className="hero">
         {/* <img className="cover-wave" src={wave_gradient} alt="cover" /> */}
         <div className="hero-container">
-          <div class="snowflakes" aria-hidden="true">
-            <div class="snowflake"><img src={epic_sparkle} /></div>
-            <div class="snowflake"><img src={rare_sparkle} /></div>
-            <div class="snowflake"><img src={legendary_sparkle} /></div>
-            <div class="snowflake"><img src={og_sparkle} /></div>
-            <div class="snowflake"><img src={epic_sparkle} /></div>
-            <div class="snowflake"><img src={rare_sparkle} /></div>
-            <div class="snowflake"><img src={legendary_sparkle} /></div>
-            <div class="snowflake"><img src={og_sparkle} /></div>
-            <div class="snowflake"><img src={epic_sparkle} /></div>
-            <div class="snowflake"><img src={rare_sparkle} /></div>
+          <div className="snowflakes" aria-hidden="true">
+            <div className="snowflake"><img src={epic_sparkle} /></div>
+            <div className="snowflake"><img src={rare_sparkle} /></div>
+            <div className="snowflake"><img src={legendary_sparkle} /></div>
+            <div className="snowflake"><img src={og_sparkle} /></div>
+            <div className="snowflake"><img src={epic_sparkle} /></div>
+            <div className="snowflake"><img src={rare_sparkle} /></div>
+            <div className="snowflake"><img src={legendary_sparkle} /></div>
+            <div className="snowflake"><img src={og_sparkle} /></div>
+            <div className="snowflake"><img src={epic_sparkle} /></div>
+            <div className="snowflake"><img src={rare_sparkle} /></div>
           </div>
           <div className="h1">
             On-chain trust for massive, open, decentralized communities
