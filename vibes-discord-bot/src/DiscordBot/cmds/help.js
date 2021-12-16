@@ -41,7 +41,7 @@ ${emojis.ogvibe}         \`OG Vibe                97.72% - 99.99%\`
 
     **DEEP VIBES**
     :clipboard: full tx logs on **[vibescan.io](https://vibescan.io/ledger/${ledger_id}/entries)**
-    :eyes: full profiles on **[vibes.live](https://www.vibes.live/ledger/${ledger_id})**
+    :eyes: full profiles on **[vibes.live](${process.env.VIBES_LIVE_BASE_URL}/ledger/${ledger_id})**
     
     **CURRENT SETTINGS**
     :timer: \`!setvibeperiod\` to \`${vibe_period_text}\` ${vibe_period ? `ends ${vibe_period_remaining}` : ''}

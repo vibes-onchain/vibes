@@ -40,7 +40,7 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
     let vibecheckEmbed = {
       color: 0x00eeee,
       title: `${vibedust_emoji}${vibedust_emoji}  Vibe Period Changed  ${vibedust_emoji}${vibedust_emoji}`,
-      url: `https://www.vibes.live/ledger/${space.id}`,
+      url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
       description: `Set to ${vibeperiod} Get lots more vibe analytics on ***vibes.live***, click the vibedust to view more!`,
       image: {
         url: "https://media1.giphy.com/media/20x6qqJa4Hw7Zmz0bP/giphy.gif?cid=ecf05e470paz52q03nr1g2ez0ctzt1djnblcetq0kloqo343&rid=giphy.gif&ct=g",
@@ -54,7 +54,7 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
     vibecheckEmbed = {
       color: 0x00eeee,
       title: `${vibedust_emoji}${vibedust_emoji}  Vibe Period Changed  ${vibedust_emoji}${vibedust_emoji}`,
-      url: `https://www.vibes.live/ledger/${space.id}`,
+      url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
       description: `Set to ${vibeperiod}\nGet lots more vibe analytics on ***vibes.live***, click the vibedust to view more!`,
       thumbnail: {
         url: "https://media1.giphy.com/media/20x6qqJa4Hw7Zmz0bP/giphy.gif?cid=ecf05e470paz52q03nr1g2ez0ctzt1djnblcetq0kloqo343&rid=giphy.gif&ct=g",

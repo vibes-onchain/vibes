@@ -30,7 +30,7 @@ export default async function setviberate({ client, message, cmd_args }) {
   let viberateEmbed = {
     color: 0x00eeee,
     title: `${vibedust_emoji}${vibedust_emoji}  Vibe Rate Changed  ${vibedust_emoji}${vibedust_emoji}`,
-    url: `https://www.vibes.live/ledger/${space.id}`,
+    url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
     description: `Set to ${viberate_str} Get lots more vibe analytics on ***vibes.live***, click the vibedust to view more!`,
     image: {
       url: "https://media1.giphy.com/media/3owzW5c1tPq63MPmWk/giphy.gif?cid=ecf05e47aqgiqppc36lyfbzyuax1w8wf27k01hbkl875lf1f&rid=giphy.gif&ct=g",
@@ -45,7 +45,7 @@ export default async function setviberate({ client, message, cmd_args }) {
   viberateEmbed = {
     color: 0x00eeee,
     title: `${vibedust_emoji}${vibedust_emoji}  Vibe Rate Changed  ${vibedust_emoji}${vibedust_emoji}`,
-    url: `https://www.vibes.live/ledger/${space.id}`,
+    url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
     description: `Set to ${viberate_str} Get lots more vibe analytics on ***vibes.live***, click the vibedust to view more!`,
     thumbnail: {
       url: "https://media1.giphy.com/media/3owzW5c1tPq63MPmWk/giphy.gif?cid=ecf05e47aqgiqppc36lyfbzyuax1w8wf27k01hbkl875lf1f&rid=giphy.gif&ct=g",

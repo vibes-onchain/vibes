@@ -47,11 +47,11 @@ export default async function vibecheck({ client, message, cmd_args }) {
       cmd_args,
       `${emojis.vibes} **vibes of @${targetedUser.username}** ${emojis.vibes}`
     ),
-    url: `https://www.vibes.live/${profilePath}`,
+    url: `${process.env.VIBES_LIVE_BASE_URL}/${profilePath}`,
     description: await parseEmojisForMessage(
       message,
       cmd_args,
-      `:eyes: _see full profile at **[Vibes](https://www.vibes.live/${profilePath})**_
+      `:eyes: see full profile at **[Vibes](${process.env.VIBES_LIVE_BASE_URL}/${profilePath})**
 
       ${vibeLevelEmoji} \`VIBELEVEL\` – ${vibeLevelEmoji} ${
         targetedUser.vibeLevel || "Has no level"
@@ -80,7 +80,7 @@ export default async function vibecheck({ client, message, cmd_args }) {
     },
     // footer: {
     //   text: `Powered by Vibes`,
-    //   icon_url: "https://www.vibes.live/vibes-hand.png",
+    //   icon_url: "${process.env.VIBES_LIVE_BASE_URL}/vibes-hand.png",
     // },
   };
   const vibeFeedChannel = message.guild.channels.cache.find(

@@ -50,11 +50,11 @@ export default async function vibes({ client, message, cmd_args }) {
     }
       :pancakes: @${
         message_member.user.username
-      } has a **\`VIBESTACK\`** of ${0} this **\`VIBEPERIOD\`** [vibe.live](https://www.vibes.live/ledgers/${ledger.id}/profile/discord_member-${
+      } has a **\`VIBESTACK\`** of ${0} this **\`VIBEPERIOD\`** [vibe.live](${process.env.VIBES_LIVE_BASE_URL}/ledgers/${ledger.id}/profile/discord_member-${
       message_member.id
     })
       :timer: **\`VIBEPERIOD\`** ends in ${"time"}
-      :clipboard:Full Tx log – **[vibescan.io](http://vibescan.io/ledgers/${
+      :clipboard:Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledgers/${
         ledger.id
       })**`,
     // thumbnail: {
@@ -73,7 +73,7 @@ export default async function vibes({ client, message, cmd_args }) {
     const vibesChannelEmbed = {
       color: 0x00eeee,
       // url: parseEmojisForMessage(message, cmd_args, `https://www.vibesbot.gg`),
-      description: `:clipboard: ${emojis.vibedust} **[vibescan.io](http://vibescan.io/ledgers/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
+      description: `:clipboard: ${emojis.vibedust} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledgers/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
     };
 
     await message.channel.send({ embeds: [vibesChannelEmbed] }).catch((e) => {

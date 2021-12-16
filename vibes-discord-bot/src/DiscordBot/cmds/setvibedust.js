@@ -56,10 +56,10 @@ export default async function setvibedust({ client, message, cmd_args }) {
   const vibeFeedEmbed = {
     color: 0x00eeee,
     title: `:sparkles: :rocket: ${emojis.vibedust} Go Brrrr! ${emojis.vibes} ${emojis.vibes}`,
-    url: `https://www.vibes.live/ledger/${space.id}`,
+    url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
     description: `@${targetedUser.username} now has ${vibe_dust}${emojis.vibedust} vibedust
    :eyes: peep **[vibes.live](http://www.vibes.live/ledger/${space.id}/discord_member-${targetedUser.member_id})** to see what @${targetedUser.username} received
-   :clipboard: Full Tx log – **[vibescan.io](http://vibescan.io/ledger/${space.id}/entries)**`,
+   :clipboard: Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${space.id}/entries)**`,
     thumbnail: {
       url: "https://media4.giphy.com/media/azGJUrx592uc0/giphy.gif?cid=ecf05e47lrktsdr15ncs416w0n3bil6h37wy9h3zq1br5p6y&rid=giphy.gif&ct=g",
     },
@@ -76,9 +76,9 @@ export default async function setvibedust({ client, message, cmd_args }) {
 
   const dmEmbed = {
     title: `:sparkles: :rocket: You now have ${vibe_dust} ${emojis.vibedust} vibedust in ${message.guild.name} ${emojis.vibes} ${emojis.vibes}`,
-    url: `https://www.vibes.live/ledger/${space.id}`,
+    url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
     description: `:eyes: peep **[vibes.live](http://www.vibes.live/ledger/${space.id}/profile/discord_member-${targetedUser.member_id})** to see your profile
-    :clipboard: Full Tx log – **[vibescan.io](http://vibescan.io/ledger/${space.id}/entries)**`,
+    :clipboard: Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${space.id}/entries)**`,
     thumbnail: vibeFeedEmbed.thumbnail,
   };
   await member.send({ embeds: [dmEmbed] });
