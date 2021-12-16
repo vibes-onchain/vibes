@@ -61,8 +61,8 @@ export default function () {
                   <td>{EntryId.abbreviate(entry.id)}</td>
                   <td>{entry.authored_on}</td>
                   <td>{entry.type}</td>
-                  <td>{entry.value?.by_user_id}</td>
-                  <td>{entry.value?.user_id}</td>
+                  <td>{entry.sender?.id}</td>
+                  <td>{entry.receiver?.id}</td>
                   <td>
                     {entry.value?.vibe_rate ||
                       entry.value?.vibe_period ||

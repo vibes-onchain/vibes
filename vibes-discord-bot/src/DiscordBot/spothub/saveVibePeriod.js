@@ -13,6 +13,10 @@ export default async function saveVibePeriod(space_id, period, user_id) {
   const entry = LedgerEntry.build({
     ledger_id: space_id,
     type: "Set Vibe Period",
+    sender: {
+      type: 'discord_guild_member',
+      id: user_id
+    },
     value: {
       by_user_id: user_id,
       vibe_period: period,

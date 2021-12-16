@@ -18,7 +18,7 @@ export default async function setviberate({ client, message, cmd_args }) {
     return;
   }
   const viberate_str = cmd_args.join(" ");
-  await setVibeRate(space.id, viberate_str, member.user_id);
+  await setVibeRate(space.id, viberate_str, member.id);
 
   const vibedust_emoji =
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";

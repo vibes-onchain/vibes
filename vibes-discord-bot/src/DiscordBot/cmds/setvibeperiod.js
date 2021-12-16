@@ -31,7 +31,7 @@ export default async function setvibeperiod({ client, message, cmd_args }) {
   }
 
   try {
-    await saveVibePeriod(space.id, vibeperiod, member.user.id);
+    await saveVibePeriod(space.id, vibeperiod, member.id);
     const vibedust_emoji =
       guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
     const vibes_emoji =
