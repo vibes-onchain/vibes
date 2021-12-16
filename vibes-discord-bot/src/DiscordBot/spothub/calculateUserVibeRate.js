@@ -3,12 +3,11 @@ import { evaluate as ssEval } from "subscript";
 
 export default function calculateUserVibeRate(
   vibe_rate_str,
-  { user_id, user_vibes }
+  user_attrs
 ) {
   const vibe_rates = parseVibeRate(vibe_rate_str);
-  const vibedust = user_vibes[user_id];
   for (const tier of vibe_rates) {
-    const passed = ssEval(tier[0], { vibedust });
+    const passed = ssEval(tier[0], { ...user_attrs });
     if (passed) {
       return tier[1];
     }

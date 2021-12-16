@@ -50,7 +50,6 @@ export default function parseVibeRate(str) {
       const value = parseFloat(n[0]);
       rules.push([guard, value]);
     } else {
-      console.log({rule_str})
       const n = rule_str.match(numberMatcher);
       if (n === null || typeof n === undefined) {
         throw new Error("vibe rate not a number");

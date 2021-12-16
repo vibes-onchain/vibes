@@ -1,5 +1,4 @@
-
-import moment from 'moment';
+import moment from "moment";
 import LedgerEntry from "spothub/lib/LedgerEntry";
 import distributeVibeDust from "./distributeVibeDust";
 import * as ss from "simple-statistics";
@@ -85,7 +84,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
   const vibe_dust_mean = ss.mean(Object.values(user_vibes));
   const vibe_dust_sd = ss.standardDeviation(Object.values(user_vibes));
 
-  const facts = Object.entries(user_vibes).reduce(
+  const profiles = Object.entries(user_vibes).reduce(
     (acc, [user_id, vibe_dust]) => {
       const vibe_dust_zscore = ss.zScore(
         vibe_dust,
@@ -126,11 +125,15 @@ export default async function reduceVibesLedger({ ledger_id }) {
         vibe_dust_zscore,
         vibe_dust_percentile,
         vibedust_percentile: vibe_dust_percentile,
-        vibeLevel
+        vibeLevel,
       };
       return acc;
     },
     {}
   );
-  return facts;
+  return {
+    current_rate,
+    current_period,
+    profiles,
+  };
 }

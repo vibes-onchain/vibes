@@ -3,6 +3,7 @@ import saveBadVibe from "../spothub/saveBadVibe";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getEmojis from "../discord/getEmojis";
 import getVibeFeed from "../discord/getVibeFeed";
+import getMemberDetails from "../multi/getMemberDetails";
 
 export default async function badVibes({ client, message, cmd_args }) {
   const message_member = message.member;
@@ -39,6 +40,12 @@ export default async function badVibes({ client, message, cmd_args }) {
   const vibeFeed = await getVibeFeed({ client, guild_id: guild.id });
   const emojis = await getEmojis({ client, guild_id: guild.id });
 
+  const senderDetails = await getMemberDetails({
+    client,
+    guild_id: guild.id,
+    member_id: message_member.id,
+  });
+
   const vibesFeedEmbed = {
     color: 0x00eeee,
     url: `https://www.vibesbot.gg`,
@@ -50,7 +57,7 @@ export default async function badVibes({ client, message, cmd_args }) {
     }
       :pancakes: @${
         message_member.user.username
-      } has a **\`VIBESTACK\`** of ${0} this **\`VIBEPERIOD\`** [vibe.live](${process.env.VIBES_LIVE_BASE_URL}/ledgers/${ledger.id}/profile/discord_member-${
+      } has a **\`VIBESTACK\`** of ${senderDetails.vibestack} this **\`VIBEPERIOD\`** [vibe.live](${process.env.VIBES_LIVE_BASE_URL}/ledgers/${ledger.id}/profile/discord_member-${
       message_member.id
     })
       :timer: **\`VIBEPERIOD\`** ends in ${"time"}

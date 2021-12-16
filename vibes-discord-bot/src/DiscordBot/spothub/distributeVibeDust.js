@@ -1,4 +1,4 @@
-import calculateUserVibeRate from './calculateUserVibeRate';
+import calculateUserVibeRate from "./calculateUserVibeRate";
 
 export default function distributeVibeDust({
   current_rate,
@@ -13,8 +13,7 @@ export default function distributeVibeDust({
   // console.log('DISTRIBUTING', current_time, pending_vibes)
   for (const from_user_id of Object.keys(pending_vibes)) {
     const from_user_vibe_rate = calculateUserVibeRate(current_rate, {
-      user_vibes,
-      user_id: from_user_id,
+      vibedust: user_vibes[from_user_id],
     });
     const pending_vibes_sent = pending_vibes[from_user_id];
     let total_pending_vibes = 0;

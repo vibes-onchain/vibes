@@ -9,5 +9,6 @@ export default async function (args) {
   }
   const client = await DiscordBot.setupClient();
   const actionHandler = require(`${__dirname}/../DiscordBot/${task}`);
-  await actionHandler({client, ...args});
+  const r = await actionHandler({client, ...args});
+  console.log(r);
 }
