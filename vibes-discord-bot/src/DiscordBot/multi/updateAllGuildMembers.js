@@ -9,6 +9,7 @@ export default async function updateAllGuildMembers({ client, guild_id }) {
     throw new Error("guild not found");
   }
   for (const member of guild.members.cache.map((i) => i)) {
+    console.log('updating', member.id, member.user.username)
     const changed = await updateGuildMember({
       client,
       guild_id,
