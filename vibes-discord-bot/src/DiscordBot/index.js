@@ -100,6 +100,7 @@ DiscordBot.start = async function () {
   });
 
   client.on("messageReactionAdd", async (reaction, user) => {
+    console.log('messageReactionAdd', {reaction});
     return handleReaction(client, reaction, user);
   });
 
