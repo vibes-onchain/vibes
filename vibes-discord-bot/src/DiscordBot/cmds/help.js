@@ -100,9 +100,11 @@ ${emojis.ogvibe}         \`OG Vibe                97.72% - 99.99%\`
 
   // TODO send an embed with current vibe ledger settings
 
-  await message.channel.send({ embeds: [helpEmbedChannel] }).catch((e) => {
-    console.log(e);
-  });
+  if (vibeFeedChannel.id !== message.channel.id) {
+    await message.channel.send({ embeds: [helpEmbedChannel] }).catch((e) => {
+      console.log(e);
+    });
+  }
 
   // await message.author.send({ embeds: [helpEmbed] }).catch(e => {
   //   console.log(e);

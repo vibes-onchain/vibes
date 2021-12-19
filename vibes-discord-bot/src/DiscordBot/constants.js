@@ -159,4 +159,5 @@ export const GOOD_VIBE_EMOJI_NAMES = [
 ];
 
 export const BAD_VIBE_EMOJI_NAMES = [
+  "susvibe"
 ];
