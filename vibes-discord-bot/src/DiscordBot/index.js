@@ -4,6 +4,7 @@ import { TOKEN, GLOBAL_CMDS, REQUIRED_INTENTS } from "./constants";
 
 import handleMessage from "./discord/handleMessage";
 import handleReaction from "./discord/handleReaction";
+import handleSlashCommand from './discord/handleSlashCommand';
 import readyGuilds from "./discord/readyGuilds";
 import updateAllGuildMembers from "./multi/updateAllGuildMembers";
 import welcomeGuildMember from "./discord/welcomeGuildMember";
@@ -102,6 +103,11 @@ DiscordBot.start = async function () {
   client.on("messageReactionAdd", async (reaction, user) => {
     console.log('messageReactionAdd', {reaction});
     return handleReaction(client, reaction, user);
+  });
+
+  client.on('interactionCreate', interaction => {
+    if (!interaction.isCommand()) return;
+    return handleSlashCommand({client, command: interaction});
   });
 
   // TODO messageReactionRemove
