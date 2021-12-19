@@ -100,7 +100,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Frenly Vibe",
     icon: "frenly-vibes.png",
     hoist: true,
-    when: ["vibe_dust_zscore", ">", -0.5],
+    when: ["vibe_dust", ">", 0],
   },
 ];
 export const BAD_VIBES_START_HERE_ROLE = {
