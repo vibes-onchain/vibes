@@ -21,7 +21,11 @@ async function updateGuildsForPeriod(client, period) {
   for (const ledger of ledgers) {
     if (ledger.guild_id) {
       console.log(`UPDATING ledger_id: ${ledger.id}`);
-      await updateAllGuildMembers({ client, guild_id: ledger.guild_id });
+      try {
+        await updateAllGuildMembers({ client, guild_id: ledger.guild_id });
+      } catch (e) {
+        console.log(`ERROR ledger_id: ${ledger.id}`, e);
+      }
     }
   }
 }
