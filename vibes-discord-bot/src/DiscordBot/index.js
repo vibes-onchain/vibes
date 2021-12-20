@@ -9,6 +9,7 @@ import readyGuilds from "./discord/readyGuilds";
 import updateAllGuildMembers from "./multi/updateAllGuildMembers";
 import welcomeGuildMember from "./discord/welcomeGuildMember";
 import getLedgerIdsToUpdateEachPeriod from "./spothub/getLedgerIdsToUpdateEachPeriod";
+import updateGuildsForPeriod from './multi/updateGuildsForPeriod';
 
 import Cron from "croner";
 
@@ -16,44 +17,30 @@ let ready_guilds = [];
 
 class DiscordBot {}
 
-async function updateGuildsForPeriod(client, period) {
-  const ledgers = await getLedgerIdsToUpdateEachPeriod(period);
-  for (const ledger of ledgers) {
-    if (ledger.guild_id) {
-      console.log(`UPDATING ledger_id: ${ledger.id}`);
-      try {
-        await updateAllGuildMembers({ client, guild_id: ledger.guild_id });
-      } catch (e) {
-        console.log(`ERROR ledger_id: ${ledger.id}`, e);
-      }
-    }
-  }
-}
-
 async function setupCronJobs(client) {
   Cron("0 * * * * *", async () => {
     console.log("[CRON]", "starting minute tasks");
-    await updateGuildsForPeriod(client, "minute");
+    await updateGuildsForPeriod({client, period: "minute"});
   });
 
   Cron("0 0 * * * *", async () => {
     console.log("[CRON]", "starting hour tasks");
-    await updateGuildsForPeriod(client, "hour");
+    await updateGuildsForPeriod({client, period: "hour"});
   });
 
   Cron("0 0 0 * * *", async () => {
     console.log("[CRON]", "starting day tasks");
-    await updateGuildsForPeriod(client, "day");
+    await updateGuildsForPeriod({client, period: "day"});
   });
 
   Cron("0 0 0 * * 1", async () => {
     console.log("[CRON]", "starting week tasks");
-    await updateGuildsForPeriod(client, "week");
+    await updateGuildsForPeriod({client, period: "week"});
   });
 
   Cron("0 0 0 1 * *", async () => {
     console.log("[CRON]", "starting month tasks");
-    await updateGuildsForPeriod(client, "month");
+    await updateGuildsForPeriod({client, period: "month"});
   });
 }
 
