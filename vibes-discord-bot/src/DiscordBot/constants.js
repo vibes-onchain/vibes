@@ -1,33 +1,40 @@
 import { Intents } from "discord.js";
 
 export const GLOBAL_CMDS = [
+  /// Commands for Everyone
+  //
+  // vibe
   "vibe",
-  "badvibe",
   "vibes",
+  //
+  // susvibe
+  "badvibe",
   "badvibes",
   "susvibes",
   "susvibe",
-  "setviberate",
-  "setvibestack",
-  "setvibestacks",
+  //
+  // vibecheck
   "vibecheck",
+  "vibescheck",
   "vibechk",
-  "help",
-  "vibesbot",
-  "about",
-  "setvibeperiod",
-  "setvibeprd",
-  "setvibedust",
-  "genvibedust",
-  "vibedistro",
-  "vibedistribution",
-  "refreshvibes",
-  "vd",
+  "vibeschk",
   "vc",
-  "resetvibedust",
-  "setvibesparen",
-  "setvibestrait",
-  "setupvibes",
+  //
+  // vibesbot
+  "vibesbot",
+
+  /// Commands for Admins
+  // setvibenomics
+  "setvibenomics",
+  //
+  // setvibestack
+  "setvibestack",
+  //
+  // resetvibestacks
+  "resetvibestacks",
+  // TODO "startvibeparty",
+  // TODO "setvibesparen",
+  // TODO "setupvibes",
 ];
 
 export const REQUIRED_INTENTS = [

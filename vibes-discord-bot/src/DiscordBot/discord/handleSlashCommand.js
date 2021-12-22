@@ -8,8 +8,6 @@ import badvibes from "../cmds/badvibes";
 import setviberate from "../cmds/setviberate";
 import setvibeperiod from "../cmds/setvibeperiod";
 
-import vibedistro from "../cmds/vibedistro";
-
 import vibecheck from "../cmds/vibecheck";
 
 import resetvibedust from "../cmds/resetvibedust";

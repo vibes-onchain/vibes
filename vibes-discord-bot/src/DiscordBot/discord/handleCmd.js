@@ -1,23 +1,17 @@
 import help from "../cmds/help";
 
-import setvibedust from "../cmds/setvibedust";
-
 import vibes from "../cmds/vibes";
 import badvibes from "../cmds/badvibes";
-
-import setviberate from "../cmds/setviberate";
-import setvibeperiod from "../cmds/setvibeperiod";
-
-import vibedistro from "../cmds/vibedistro";
-
 import vibecheck from "../cmds/vibecheck";
 
+import setvibedust from "../cmds/setvibedust";
+import setviberate from "../cmds/setviberate";
 import resetvibedust from "../cmds/resetvibedust";
 
 import setvibesparen from "../cmds/setvibesparen";
 import setvibestrait from "../cmds/setvibestrait";
 
-import setupvibes from '../cmds/setupvibes';
+import setupvibes from "../cmds/setupvibes";
 
 export default async function handleCmd({ client, message, cmd, cmd_args }) {
   const guild_id = message?.guild?.id || message?.guild_id;
@@ -32,39 +26,25 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
       message.author.id
     } :: ARGS: (${cmd_args.join(", ")})`
   );
-  if (cmd === "about" || cmd === "help" || cmd === "vibesbot") {
+  if (cmd === "vibesbot") {
     return help({ client, message, cmd_args });
-  } else if (cmd === "vibe" || cmd === "vibes") {
+  } else if (["vibe", "vibes"].includes(cmd)) {
     return vibes({ client, message, cmd_args });
-  } else if (
-    cmd === "badvibe" ||
-    cmd === "badvibes" ||
-    cmd === "susvibes" ||
-    cmd === "susvibe"
-  ) {
+  } else if (["badvibe", "badvibes", "susvibes", "susvibe"].includes(cmd)) {
     return badvibes({ client, message, cmd_args });
-  } else if (cmd === "resetvibedust") {
+  } else if (["vibecheck", "vibescheck", "vc"].includes(cmd)) {
+    return vibecheck({ client, message, cmd_args });
+  } else if (["resetvibestacks"].includes(cmd)) {
     return resetvibedust({ client, message, cmd_args });
-  } else if (cmd === "setviberate" || cmd === "setvibestack" || cmd === "setvibestacks") {
+  } else if (["setvibenomics"].includes(cmd)) {
     return setviberate({ client, message, cmd_args });
-  } else if (cmd === "setvibeperiod" || cmd === "setvibeprd") {
-    return setvibeperiod({ client, message, cmd_args });
-  } else if (
-    cmd === "vibedistro" ||
-    cmd === "vd" ||
-    cmd === "vibedistribution" ||
-    cmd === "refreshvibes"
-  ) {
-    return vibedistro({ client, message, cmd_args });
-  } else if (cmd === "setvibedust" || cmd === "genvibedust") {
+  } else if (["setvibestack"].includes(cmd)) {
     return setvibedust({ client, message, cmd_args });
   } else if (cmd === "setvibesparen") {
     return setvibesparen({ client, message, cmd_args });
   } else if (cmd === "setvibestrait") {
     return setvibestrait({ client, message, cmd_args });
   } else if (cmd === "setupvibes") {
-    return setupvibes({ client, message, cmd_args, guild_id }); 
-  } else if (cmd === "vibechk" || cmd === "vibecheck" || cmd === "vc") {
-    return vibecheck({ client, message, cmd_args });
+    return setupvibes({ client, message, cmd_args, guild_id });
   }
 }

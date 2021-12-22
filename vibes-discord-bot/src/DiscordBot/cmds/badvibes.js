@@ -79,7 +79,6 @@ export default async function badVibes({ client, message, cmd_args }) {
   if (vibeFeed.id !== message.channel.id) {
     const vibesChannelEmbed = {
       color: 0x00eeee,
-      // url: parseEmojisForMessage(message, cmd_args, `https://www.vibesbot.gg`),
       description: `:clipboard: ${emojis.susvibe} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
     };
 

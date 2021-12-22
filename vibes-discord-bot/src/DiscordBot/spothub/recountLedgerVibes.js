@@ -7,7 +7,7 @@ export default async function recountLedgerVibes(space_id) {
     order: [["global_seq_number", "ASC"]],
   });
   let current_rate = null;
-  let current_period = null;
+  let current_period = "day";
   let current_time = null;
   let user_vibes = {};
   let pending_vibes = {};
