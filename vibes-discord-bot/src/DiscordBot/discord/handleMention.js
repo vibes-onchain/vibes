@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 
-import help from '../cmds/help';
+import vibesbot from '../cmds/vibesbot';
 
 export default async function handleMention({ client, message, cmd, cmd_args }) {
   const member = message.member;
@@ -18,7 +18,7 @@ export default async function handleMention({ client, message, cmd, cmd_args }) 
     cmd = cmd_args.shift();
   }
   if (cmd === "help") {
-    return help({ client, message, cmd_args });
+    return vibesbot({ client, message, cmd_args });
   } else if (cmd === "gm") {
     await message.channel.send(`gm`);
   } else if (cmd === "refresh" && canControlFrenlyBot) {
