@@ -68,7 +68,7 @@ export default function () {
               <div className="title">Vibenomics</div>
               <div className="text">
                 Not tokens, not XP. Vibes let your community socially recognize
-                members for being cool with a vibenomic policy set by you od
+                members for being cool with a vibenomic policy set by you or
                 your DAO.
               </div>
             </div>
