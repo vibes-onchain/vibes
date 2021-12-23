@@ -130,12 +130,12 @@ export default function () {
               <a href="https://twitter.com/vibesbotgg">Twitter</a>
               <a href="https://discord.gg/Ccae6XpDBV">Discord</a>
             </div>
-            <div className="link-list">
-              <p>👤 Company</p>
-              <a href="/">Team</a>
-              <a href="/">Terms of Use</a>
-              <a href="/">Privacy Policy</a>
-            </div>
+            {/* <div className="link-list"> */}
+              {/* <p>👤 Team</p> */}
+              {/* <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Team</a> */}
+              {/* <a href="/">Terms of Use</a>
+              <a href="/">Privacy Policy</a> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
