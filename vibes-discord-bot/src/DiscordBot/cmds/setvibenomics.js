@@ -2,7 +2,7 @@ import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
 import setVibeRate from "../spothub/setVibeRate";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 
-export default async function setviberate({ client, message, cmd_args }) {
+export default async function setvibenomics({ client, message, cmd_args }) {
   const member = message.member;
   const guild = member.guild;
   const space = await findOrCreateLedgerForGuild(

@@ -2,7 +2,7 @@ import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import LedgerEntry from 'spothub/lib/LedgerEntry';
 import updateAllGuildMembers from '../multi/updateAllGuildMembers';
 
-export default async function resetvibesdust({ client, message }) {
+export default async function resetvibestacks({ client, message }) {
   const ledger = await findOrCreateLedgerForGuild(
     message.guild.id,
     message.guild.name
@@ -20,5 +20,5 @@ export default async function resetvibesdust({ client, message }) {
   });
   await entry.save();
 
-  await updateAllGuildMembers({client, guild_id: message.guild.id})
+  await updateAllGuildMembers({ client, guild_id: message.guild.id });
 }

@@ -3,7 +3,7 @@ import getEmojis from "../discord/getEmojis";
 import getVibeFeed from "../discord/getVibeFeed";
 import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 
-export default async function help({ client, message, cmd_args }) {
+export default async function vibesbot({ client, message, cmd_args }) {
   const guild = message?.member?.guild;
   const member = message?.member;
   const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
@@ -13,7 +13,7 @@ export default async function help({ client, message, cmd_args }) {
   const emojis = await getEmojis({ client, guild_id: guild.id });
 
 
-  const vibesLedgerSummary = await getVibesLedgerSummary({guild_id: guild.id});
+  const vibesLedgerSummary = await getVibesLedgerSummary({ guild_id: guild.id });
   const vibe_period = vibesLedgerSummary.vibe_period;
   const vibe_period_text = vibesLedgerSummary.vibe_period ?? "OFF";
   const vibe_period_remaining = vibesLedgerSummary.vibe_period_remaining;

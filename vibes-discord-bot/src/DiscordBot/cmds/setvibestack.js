@@ -8,7 +8,7 @@ import getVibeFeed from "../discord/getVibeFeed";
 import updateGuildMember from "../multi/updateGuildMember";
 import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 
-export default async function setvibedust({ client, message, cmd_args }) {
+export default async function setvibestack({ client, message, cmd_args }) {
   const message_member = message.member;
   const guild = message_member.guild;
 
@@ -92,5 +92,5 @@ export default async function setvibedust({ client, message, cmd_args }) {
   await updateAllGuildMembers({
     client,
     guild_id: guild.id,
-  })
+  });
 }
