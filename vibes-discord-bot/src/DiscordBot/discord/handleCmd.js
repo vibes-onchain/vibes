@@ -25,7 +25,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     `[${cmd}] FROM: discord:${guild_id || "dm"}:${message.author.id
     } :: ARGS: (${cmd_args.join(", ")})`
   );
-  if (cmd === "vibesbot") {
+  if (["vibesbot", "help"].includes(cmd)) {
     return vibesbot({ client, message, cmd_args });
   } else if (["vibe", "vibes"].includes(cmd)) {
     return vibes({ client, message, cmd_args });

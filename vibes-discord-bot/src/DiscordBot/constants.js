@@ -22,7 +22,7 @@ export const GLOBAL_CMDS = [
   //
   // vibesbot
   "vibesbot",
-
+  "help",
   /// Commands for Admins
   // setvibenomics
   "setvibenomics",
