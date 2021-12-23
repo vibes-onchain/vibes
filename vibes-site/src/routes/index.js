@@ -39,7 +39,7 @@ export default function () {
             <div className="snowflake"><img src={legendary_sparkle} /></div>
             <div className="snowflake"><img src={og_sparkle} /></div>
             <div className="snowflake"><img src={epic_sparkle} /></div>
-            <div className="snowflake"><img src={rare_sparkle} /></div>
+          <div className="snowflake"><img src={rare_sparkle} /></div>
           </div>
           <div className="h1">
             On-chain trust for massive, open, decentralized communities
@@ -120,7 +120,8 @@ export default function () {
           </div>
           <div className="link-lists">
             <div className="link-list">
-              <p>📖 Docs</p>
+              <p>🛠️ Build</p>
+              <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Docs</a>
               <a href="https://github.com/spot-foundation/vibes">Github</a>
               <a href="https://discord.gg/Ccae6XpDBV">Support Server</a>
             </div>
@@ -130,7 +131,8 @@ export default function () {
               <a href="https://discord.gg/Ccae6XpDBV">Discord</a>
             </div>
             <div className="link-list">
-              <p>💻 Company</p>
+              <p>👤 Company</p>
+              <a href="/">Team</a>
               <a href="/">Terms of Use</a>
               <a href="/">Privacy Policy</a>
             </div>
