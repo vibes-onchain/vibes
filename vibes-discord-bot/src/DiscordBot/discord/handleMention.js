@@ -1,6 +1,6 @@
 import { execSync } from "child_process";
 
-import vibesbot from '../cmds/vibesbot';
+import vibesbot from '../cmds/help';
 
 export default async function handleMention({ client, message, cmd, cmd_args }) {
   const member = message.member;

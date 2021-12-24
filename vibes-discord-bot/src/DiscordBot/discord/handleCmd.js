@@ -1,4 +1,4 @@
-import vibesbot from "../cmds/vibesbot";
+import vibesbot from "../cmds/help";
 
 import vibes from "../cmds/vibes";
 import badvibes from "../cmds/badvibes";

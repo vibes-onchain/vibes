@@ -3,7 +3,8 @@ import { VIBE_EMOJIS } from "../constants";
 function getEmoji(guild, name) {
   return guild.emojis.cache.find((emoji) => emoji.name === name);
 }
-export default async function ({ client, guild_id }) {
+
+export default function ({ client, guild_id }) {
   if (!guild_id) {
     throw new Error("needs guild_id");
   }

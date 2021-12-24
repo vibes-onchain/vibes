@@ -1,9 +1,9 @@
-import vibesbot from "../cmds/vibesbot";
+import vibesbot from "../cmds/help";
 
 export default async function handleCmd({ client, command }) {
   if (!command) { return; }
 
-  await command.reply({ content: ':thumbsup:', ephemeral: true });
+  // await command.reply({ content: ':thumbsup:', ephemeral: true });
 
   const guild_id = command?.guildId;
   const cmd = command.commandName;
@@ -15,7 +15,7 @@ export default async function handleCmd({ client, command }) {
     } :: OPTIONS: (${cmd_args.join(", ")})`
   );
   if (cmd === "about" || cmd === "help" || cmd === "vibesbot") {
-    return vibesbot({ client, message: command, cmd_args });
+    return vibesbot({ client, cmd_args, command });
     // } else if (cmd === "vibe" || cmd === "vibes") {
     //   return vibes({ client, message: command, cmd_args });
     // } else if (
@@ -48,5 +48,7 @@ export default async function handleCmd({ client, command }) {
     //   return setupvibes({ client, message, cmd_args, guild_id }); 
     // } else if (cmd === "vibechk" || cmd === "vibecheck" || cmd === "vc") {
     //   return vibecheck({ client, message, cmd_args });
+  } else {
+    await command.reply({ content: ':check:', ephemeral: true });
   }
 }

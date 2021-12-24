@@ -1,4 +1,4 @@
-export default async function getVibeFeed({client, guild_id}) {
+export default function getVibeFeed({client, guild_id}) {
   if (!guild_id) {
     throw new Error("needs guild_id");
   }

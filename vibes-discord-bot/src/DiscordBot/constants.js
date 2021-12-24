@@ -3,11 +3,11 @@ import { Intents } from "discord.js";
 export const GLOBAL_CMDS = [
   /// Commands for Everyone
   //
-  // vibe
+  // vibes
   "vibe",
   "vibes",
   //
-  // susvibe
+  // susvibes
   "badvibe",
   "badvibes",
   "susvibes",

@@ -12,50 +12,59 @@ export default async function ({ client, guild_id }) {
   const commands = [
     new SlashCommandBuilder()
       .setName("vibesbot")
-      .setDescription("vibes help"),
-
-    // new SlashCommandBuilder()
-    //   .setName("vibe")
-    //   .setDescription("vibe fren")
-    //   .addUserOption((option) =>
-    //     option
-    //       // .setType("MENTIONABLE")
-    //       .setName("fren")
-    //       .setDescription("who you're vibing")
-    //       .setRequired(true)
-    //   )
-
-    //   .addStringOption((option) =>
-    //     option.setName("reason").setDescription("reason")
-    //   ),
-    // new SlashCommandBuilder()
-    //   .setName("susvibe")
-    //   .setDescription("susvibe fren")
-    //   .addUserOption((option) =>
-    //     option
-    //       // .setType("MENTIONABLE")
-    //       .setName("fren")
-    //       .setDescription("who is giving you a sus vibe")
-    //       .setRequired(true)
-    //   )
-    //   .addStringOption((option) =>
-    //     option.setName("reason").setDescription("reason")
-    //   ),
-    // new SlashCommandBuilder()
-    //   .setName("badvibe")
-    //   .setDescription("badvibe fren")
-    //   .addUserOption((option) =>
-    //     option
-    //       // .setType("MENTIONABLE")
-    //       .setName("fren")
-    //       .setDescription("who is giving you a bad vibe")
-    //       .setRequired(true)
-    //   )
-    //   .addStringOption((option) =>
-    //     option.setName("reason").setDescription("reason")
-    //   ),
+      .setDescription("vibebot help"),
+    new SlashCommandBuilder().setName("help").setDescription("vibebot help"),
+    new SlashCommandBuilder()
+      .setName("vibes")
+      .setDescription("vibes fren")
+      .addUserOption((option) =>
+        option
+          .setName("fren")
+          .setDescription("who you're vibing")
+          .setRequired(true)
+      )
+      .addStringOption((option) =>
+        option.setName("note").setDescription("note")
+      ),
+    new SlashCommandBuilder()
+      .setName("susvibes")
+      .setDescription("susvibes fren")
+      .addUserOption((option) =>
+        option
+          .setName("fren")
+          .setDescription("who's being uncool")
+          .setRequired(true)
+      )
+      .addStringOption((option) =>
+        option.setName("note").setDescription("note")
+      ),
+    new SlashCommandBuilder()
+      .setName("vibecheck")
+      .setDescription("vibecheck fren")
+      .addUserOption((option) =>
+        option.setName("fren").setDescription("who to check").setRequired(true)
+      ),
+    new SlashCommandBuilder()
+      .setName("setvibestack")
+      .setDescription("[ADMINS ONLY] set fren's vibestack")
+      .addUserOption((option) =>
+        option.setName("fren").setDescription("who to check").setRequired(true)
+      ),
+    new SlashCommandBuilder()
+      .setName("resetvibestacks")
+      .setDescription("[ADMINS ONLY] reset everyone's vibestacks")
+      .addUserOption((option) =>
+        option.setName("fren").setDescription("who to check").setRequired(true)
+      ),
+    new SlashCommandBuilder()
+      .setName("resetvibestacks")
+      .setDescription("[ADMINS ONLY] reset everyone's vibestacks")
+      .addUserOption((option) =>
+        option.setName("fren").setDescription("who to check").setRequired(true)
+      ),
   ].map((command) => command.toJSON());
   for (const command of commands) {
+    console.log(guild.commands.cache);
     await guild.commands.create(command, guild.id);
   }
 }
