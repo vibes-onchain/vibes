@@ -8,7 +8,7 @@ export default async function getMemberDetails({
   member_id,
 }) {
   const emojis = await getEmojis({client, guild_id});
-  const md = await getGuildMemberDetails({ client, guild_id, member_id });
+  const md = getGuildMemberDetails({ client, guild_id, member_id });
   const vu = await getVibesUserDetails({ client, guild_id, member_id });
   return {
     ...md,

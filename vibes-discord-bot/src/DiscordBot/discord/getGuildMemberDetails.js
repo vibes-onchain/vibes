@@ -1,4 +1,4 @@
-export default async function({client, guild_id, member_id}) {
+export default function getGuildMemberDetails({client, guild_id, member_id}) {
   if (!guild_id) {
     throw new Error("needs guild_id");
   }

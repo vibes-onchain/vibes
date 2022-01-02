@@ -1,19 +1,27 @@
-import LedgerEntry from 'spothub/lib/LedgerEntry';
+import LedgerEntry from "spothub/lib/LedgerEntry";
 
-export default async function saveBadVibe({ ledger_id, from_member_id, member_id, reason }) {
+export default async function saveBadVibe({
+  ledger_id,
+  from_member_id,
+  member_id,
+  reason,
+  note,
+  reaction_to_message_id,
+}) {
   const entry = LedgerEntry.build({
     ledger_id,
     type: "BadVibe",
     sender: {
-      type: 'discord_guild_member',
-      id: from_member_id
+      type: "discord_guild_member",
+      id: from_member_id,
     },
     receiver: {
-      type: 'discord_guild_member',
-      id: member_id
+      type: "discord_guild_member",
+      id: member_id,
     },
     value: {
-      reason: reason,
+      reaction_to_message_id,
+      note: note || reason,
     },
     authored_on: new Date(),
   });

@@ -62,7 +62,7 @@ DiscordBot.setupClient = async function () {
 DiscordBot.start = async function () {
   const client = new Client({
     intents: REQUIRED_INTENTS,
-    partials: ["CHANNEL"],
+    partials: ["MESSAGE", "CHANNEL", "REACTION"],
   });
 
   client.once("ready", async () => {
