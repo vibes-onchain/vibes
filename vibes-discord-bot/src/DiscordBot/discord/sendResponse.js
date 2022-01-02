@@ -1,9 +1,11 @@
 import getGuildStuff from "./getGuildStuff";
 
 import * as help from "../responses/help";
+import * as vibes from "../responses/vibes";
 
 const RESPONSES = {
   help,
+  vibes
 };
 
 export default async function ({

@@ -1,6 +1,6 @@
 import LedgerEntry from 'spothub/lib/LedgerEntry';
 
-export default async function saveVibe({ ledger_id, from_member_id, member_id, reason }) {
+export default async function saveVibe({ ledger_id, from_member_id, member_id, reason, note }) {
   const entry = LedgerEntry.build({
     ledger_id,
     type: "Vibe",
@@ -13,7 +13,7 @@ export default async function saveVibe({ ledger_id, from_member_id, member_id, r
       id: member_id
     },
     value: {
-      reason: reason,
+      note: note || reason,
     },
     authored_on: new Date(),
   });
