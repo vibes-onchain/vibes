@@ -64,15 +64,27 @@ export default async function ({ client, guild_id }) {
       ),
     new SlashCommandBuilder()
       .setName("resetvibestacks")
-      .setDescription("[ADMINS ONLY] reset everyone's vibestacks")
-      .addUserOption((option) =>
-        option.setName("fren").setDescription("who to check").setRequired(true)
+      .setDescription("[ADMINS ONLY] reset everyone's vibestacks"),
+    new SlashCommandBuilder()
+      .setName("setvibenomics")
+      .setDescription("[ADMINS ONLY] set vibenomics")
+      .addStringOption((option) =>
+        option
+          .setName("vibestack")
+          .setDescription("vibestack")
+          .setRequired(true)
       ),
     new SlashCommandBuilder()
-      .setName("resetvibestacks")
-      .setDescription("[ADMINS ONLY] reset everyone's vibestacks")
+      .setName("setvibestack")
+      .setDescription("[ADMINS ONLY] set someone's vibestack")
       .addUserOption((option) =>
-        option.setName("fren").setDescription("who to check").setRequired(true)
+        option.setName("fren").setDescription("who").setRequired(true)
+      )
+      .addStringOption((option) =>
+        option
+          .setName("vibestack")
+          .setDescription("vibestack")
+          .setRequired(true)
       ),
     new SlashCommandBuilder()
       .setName("setupvibes")

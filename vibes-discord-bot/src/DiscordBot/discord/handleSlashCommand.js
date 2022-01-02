@@ -41,33 +41,45 @@ export default async function handleCmd({ client, command }) {
     //   return vibecheck({ client, message, cmd_args });
     // } else if (["resetvibestacks"].includes(cmd)) {
     //   return resetvibestacks({ client, message, cmd_args });
-    // } else if (["setvibenomics"].includes(cmd)) {
-    //   return setvibenomics({ client, message, cmd_args });
-    // } else if (["setvibestack"].includes(cmd)) {
-    //   return setvibestack({ client, message, cmd_args });
+  } else if (["setvibenomics"].includes(cmd)) {
+    return setvibenomics({ client, message, cmd_args });
+  } else if (["setvibestack"].includes(cmd)) {
+    handled = await setvibestack({ client, command, cmd_args });
     // } else if (cmd === "setvibesparen") {
     //   return setvibesparen({ client, message, cmd_args });
     // } else if (cmd === "setvibestrait") {
     //   return setvibestrait({ client, message, cmd_args });
-    } else if (cmd === "setupvibes") {
-      handled = await setupvibes({ client, command, cmd_args, guild_id });
+  } else if (cmd === "setupvibes") {
+    handled = await setupvibes({ client, command, cmd_args, guild_id });
   }
   if (!command.replied) {
     if (handled && !handled?.error) {
-      await command.reply({
-        content: ":ballot_box_with_check: ok",
-        ephemeral: true,
-      });
+      await command
+        .reply({
+          content: ":ballot_box_with_check: ok",
+          ephemeral: true,
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } else if (handled && handled?.error) {
-      await command.reply({
-        content: `:no_entry_sign: ${handled.error}`,
-        ephemeral: true,
-      });
+      await command
+        .reply({
+          content: `:no_entry_sign: ${handled.error}`,
+          ephemeral: true,
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } else {
-      await command.reply({
-        content: ":bug:  something went wrong",
-        ephemeral: true,
-      });
+      await command
+        .reply({
+          content: ":bug:  something went wrong",
+          ephemeral: true,
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
   }
 }

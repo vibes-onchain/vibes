@@ -62,7 +62,7 @@ export function forChannel({ client, guild_id }) {
       {
         color: DISCORD_EMBED_COLOR,
         url: process.env.VIBES_LIVE_BASE_URL,
-        description: `see <#${vibeFeedChannel?.id}> for ${emojis.vibedust} Wat VibesBot? ${emojis.vibedust}`,
+        description: `see <#${vibeFeedChannel?.id}> for ${':sparkles:'} Wat VibesBot? ${':sparkles:'}`,
       },
     ],
   };

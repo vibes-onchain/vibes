@@ -1,8 +1,8 @@
 import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
-import setVibeRate from "../spothub/setVibeRate";
+import setVibenomics from "../spothub/setVibenomics";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 
-export default async function setvibenomics({ client, message, cmd_args }) {
+export default async function setvibenomics({ client, command, message, cmd_args }) {
   const member = message.member;
   const guild = member.guild;
   const space = await findOrCreateLedgerForGuild(
@@ -18,7 +18,7 @@ export default async function setvibenomics({ client, message, cmd_args }) {
     return;
   }
   const viberate_str = cmd_args.join(" ");
-  await setVibeRate(space.id, viberate_str, member.id);
+  await setVibenomics(space.id, viberate_str, member.id);
 
   const vibedust_emoji =
     guild.emojis.cache.find((emoji) => emoji.name === "vibedust") || "✨";
@@ -29,7 +29,7 @@ export default async function setvibenomics({ client, message, cmd_args }) {
   );
   let viberateEmbed = {
     color: 0x00eeee,
-    title: `${vibedust_emoji}${vibedust_emoji}  Vibe Rate Changed  ${vibedust_emoji}${vibedust_emoji}`,
+    title: `${vibedust_emoji}${vibedust_emoji}  Vibenomics Changed  ${vibedust_emoji}${vibedust_emoji}`,
     url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
     description: `Set to ${viberate_str} Get lots more vibe analytics on ***vibes.live***, click the vibedust to view more!`,
     image: {
@@ -44,7 +44,7 @@ export default async function setvibenomics({ client, message, cmd_args }) {
 
   viberateEmbed = {
     color: 0x00eeee,
-    title: `${vibedust_emoji}${vibedust_emoji}  Vibe Rate Changed  ${vibedust_emoji}${vibedust_emoji}`,
+    title: `${vibedust_emoji}${vibedust_emoji}  Vibenomics Changed  ${vibedust_emoji}${vibedust_emoji}`,
     url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
     description: `Set to ${viberate_str} Get lots more vibe analytics on ***vibes.live***, click the vibedust to view more!`,
     thumbnail: {

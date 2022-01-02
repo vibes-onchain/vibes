@@ -19,7 +19,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
     if (current_time === null) {
       current_time = entry.authored_on;
     }
-    if (entry.type === "Reset Vibe Dust") {
+    if (entry.type === "Reset Vibestacks") {
       pending_vibes = {};
       user_vibes = {};
     }
@@ -39,14 +39,14 @@ export default async function reduceVibesLedger({ ledger_id }) {
       });
       pending_vibes = {};
     }
-    if (entry.type === "Set Vibe Period") {
-      current_period = entry.value.vibe_period;
+    // if (entry.type === "Set Vibe Period") {
+    //   current_period = entry.value.vibe_period;
+    // }
+    if (entry.type === "Set Vibenomics") {
+      current_rate = entry.value.vibenomics;
     }
-    if (entry.type === "Set Vibe Rate") {
-      current_rate = entry.value.vibe_rate;
-    }
-    if (entry.type === "Set Vibe Dust") {
-      user_vibes[entry.receiver.id] = entry.value.vibe_dust;
+    if (entry.type === "Set Vibestack") {
+      user_vibes[entry.receiver.id] = entry.value.vibestack;
     }
     if (entry.type === "Vibe") {
       pending_vibes[entry.sender.id] ||= {};
@@ -81,26 +81,26 @@ export default async function reduceVibesLedger({ ledger_id }) {
     user_vibes,
     pending_vibes,
   });
-  const vibe_dust_mean = Object.values(user_vibes).length ? ss.mean(Object.values(user_vibes)) : 0;
-  const vibe_dust_sd = Object.values(user_vibes).length ? ss.standardDeviation(Object.values(user_vibes)) : 0;
+  const vibestack_mean = Object.values(user_vibes).length ? ss.mean(Object.values(user_vibes)) : 0;
+  const vibestack_sd = Object.values(user_vibes).length ? ss.standardDeviation(Object.values(user_vibes)) : 0;
 
   const profiles = Object.entries(user_vibes).reduce(
-    (acc, [user_id, vibe_dust]) => {
-      const vibe_dust_zscore = ss.zScore(
-        vibe_dust,
-        vibe_dust_mean,
-        vibe_dust_sd
+    (acc, [user_id, vibestack]) => {
+      const vibestack_score = ss.zScore(
+        vibestack,
+        vibestack_mean,
+        vibestack_sd
       );
-      const vibe_dust_percentile =
-        ss.cumulativeStdNormalProbability(vibe_dust_zscore);
+      const vibestack_percentile =
+        ss.cumulativeStdNormalProbability(vibestack_score);
       let vibeLevel;
       for (const role of [...BAD_VIBE_ROLES, ...GOOD_VIBE_ROLES]) {
         const key = role.when[0];
         const keys_value = (() => {
-          if (key === "vibe_dust") {
-            return vibe_dust;
-          } else if (key === "vibe_dust_zscore") {
-            return vibe_dust_zscore;
+          if (key === "vibestack") {
+            return vibestack;
+          } else if (key === "vibestack_score") {
+            return vibestack_score;
           }
         })();
         const op = role.when[1];
@@ -120,11 +120,11 @@ export default async function reduceVibesLedger({ ledger_id }) {
         }
       }
       acc[user_id] = {
-        vibe_dust,
-        vibedust: vibe_dust,
-        vibe_dust_zscore,
-        vibe_dust_percentile,
-        vibedust_percentile: vibe_dust_percentile,
+        vibestack,
+        vibedust: vibestack,
+        vibestack_score,
+        vibestack_percentile,
+        vibedust_percentile: vibestack_percentile,
         vibeLevel,
       };
       return acc;

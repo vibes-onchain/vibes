@@ -75,7 +75,7 @@ export const GOOD_VIBE_ROLES = [
     name: "OG Vibe",
     icon: "og-vibes.png",
     hoist: true,
-    when: ["vibe_dust_zscore", ">", 2],
+    when: ["vibestack_score", ">", 2],
   },
   {
     color: 15105570,
@@ -83,7 +83,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Legendary Vibe",
     hoist: true,
     icon: "legendary-vibes.png",
-    when: ["vibe_dust_zscore", ">", 1.5],
+    when: ["vibestack_score", ">", 1.5],
   },
   {
     color: 10181046,
@@ -91,7 +91,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Epic Vibe",
     icon: "epic-vibes.png",
     hoist: true,
-    when: ["vibe_dust_zscore", ">", 1],
+    when: ["vibestack_score", ">", 1],
   },
   {
     color: 3447003,
@@ -99,7 +99,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Rare Vibe",
     icon: "rare-vibes.png",
     hoist: true,
-    when: ["vibe_dust_zscore", ">", 0],
+    when: ["vibestack_score", ">", 0],
   },
   {
     color: 0,
@@ -107,7 +107,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Frenly Vibe",
     icon: "frenly-vibes.png",
     hoist: true,
-    when: ["vibe_dust", ">", 0],
+    when: ["vibestack", ">", 0],
   },
 ];
 export const BAD_VIBES_START_HERE_ROLE = {
@@ -123,7 +123,7 @@ export const BAD_VIBE_ROLES = [
     hoist: false,
     icon: "sus-vibes.gif",
     hoist: true,
-    when: ["vibe_dust", "<", 0],
+    when: ["vibestack", "<", 0],
   },
 ];
 

@@ -2,6 +2,7 @@ import _ from 'lodash';
 import { parse as ssParse, evaluate as ssEval } from "subscript";
 
 export default function parseVibeRate(str) {
+  console.log({str});
   const numberMatcher = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
 
   const m = str.match(/^case\s+(.*)\s+end$/i);
@@ -33,11 +34,9 @@ export default function parseVibeRate(str) {
       const unknownTokens = _.uniq(tokens).filter(
         (i) =>
           [
-            "days_in_period",
-            "vibelevel",
-            "vibedust_zscore",
-            "vibedust_percentile",
-            "vibedust",
+            "vibestack_zscore",
+            "vibestack_percentile",
+            "vibestack",
           ].indexOf(i) === -1
       );
       if (unknownTokens.length > 0) {

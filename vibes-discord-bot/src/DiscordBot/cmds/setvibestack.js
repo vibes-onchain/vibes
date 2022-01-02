@@ -1,96 +1,105 @@
 import getMemberDetails from "../multi/getMemberDetails";
 import getTargetMember from "../message/getTargetMember";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
-import setVibeDust from "../spothub/setVibeDust";
+import setVibestack from "../spothub/setVibestack";
 import canControlVibesBot from "../discord/canControlVibesBot";
-import getEmojis from "../discord/getEmojis";
-import getVibeFeed from "../discord/getVibeFeed";
 import updateGuildMember from "../multi/updateGuildMember";
 import updateAllGuildMembers from "../multi/updateAllGuildMembers";
+import sendResponse from "../discord/sendResponse";
+import sendQuickCommandResponse from "../discord/sendQuickCommandResponse";
 
-export default async function setvibestack({ client, message, cmd_args }) {
-  const message_member = message.member;
+export default async function setvibestack({
+  client,
+  command,
+  message,
+  cmd_args,
+}) {
+  const message_member = message ? message.member : command.member;
+
   const guild = message_member.guild;
+  const guild_id = guild.id;
 
   if (
     !(await canControlVibesBot({
       client,
-      guild_id: guild.id,
-      member_id: message.member?.id,
+      guild_id,
+      member_id: message_member?.id,
     }))
   ) {
-    return;
+    return { error: "you must be a vibesbot admin" };
   }
 
-  const member = await getTargetMember({ message, cmd_args });
-  if (!member) {
+  const target_member = command
+    ? cmd_args.find((i) => i.name === "fren").member
+    : await getTargetMember({ message, cmd_args });
+  if (!target_member) {
     await message_member.send(
-      "ERROR: !setvibedust must specify receiver and amount"
+      "ERROR: !setvibestack must specify receiver and amount"
     );
     return;
   }
   if (cmd_args.length <= 1) {
     await message_member.send(
-      "ERROR: !setvibedust must specify receiver and amount"
+      "ERROR: !setvibestack must specify receiver and amount"
     );
     return;
   }
 
-  const vibe_dust = parseFloat(cmd_args[1]);
+  await sendQuickCommandResponse({ command });
 
-  const space = await findOrCreateLedgerForGuild(guild.id, guild.name);
-  await setVibeDust({
-    ledger_id: space.id,
-    by_member_id: message.member.id,
-    member_id: member.id,
-    vibe_dust: vibe_dust,
-  });
+  const vibestack = command
+    ? parseFloat(cmd_args.find((i) => i.name === "vibestack")?.value)
+    : parseFloat(cmd_args[1]);
 
-  const emojis = await getEmojis({ client, guild_id: guild.id });
-
-  const targetedUser = await getMemberDetails({
-    client,
-    guild_id: guild.id,
-    member_id: member.id,
-  });
-
-  const vibeFeedEmbed = {
-    color: 0x00eeee,
-    title: `:sparkles: :rocket: ${emojis.vibedust} Go Brrrr! ${emojis.vibes} ${emojis.vibes}`,
-    url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
-    description: `@${targetedUser.username} now has ${vibe_dust}${emojis.vibedust} vibedust
-   :eyes: peep **[vibes.live](http://www.vibes.live/ledger/${space.id}/discord_member-${targetedUser.member_id})** to see what @${targetedUser.username} received
-   :clipboard: Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${space.id}/entries)**`,
-    thumbnail: {
-      url: "https://media4.giphy.com/media/azGJUrx592uc0/giphy.gif?cid=ecf05e47lrktsdr15ncs416w0n3bil6h37wy9h3zq1br5p6y&rid=giphy.gif&ct=g",
-    },
-  };
-  const vibeFeed = await getVibeFeed({ client, guild_id: guild.id });
-  await vibeFeed?.send({ embeds: [vibeFeedEmbed] });
-
-  const channelEmbed = {
-    ...vibeFeedEmbed,
-  };
-  if (vibeFeed.id !== message.channel.id) {
-    await message.channel.send({ embeds: [channelEmbed] });
+  if (command) {
   }
 
-  const dmEmbed = {
-    title: `:sparkles: :rocket: You now have ${vibe_dust} ${emojis.vibedust} vibedust in ${message.guild.name} ${emojis.vibes} ${emojis.vibes}`,
-    url: `${process.env.VIBES_LIVE_BASE_URL}/ledger/${space.id}`,
-    description: `:eyes: peep **[vibes.live](http://www.vibes.live/ledger/${space.id}/profile/discord_member-${targetedUser.member_id})** to see your profile
-    :clipboard: Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${space.id}/entries)**`,
-    thumbnail: vibeFeedEmbed.thumbnail,
-  };
-  await member.send({ embeds: [dmEmbed] });
+  const ledger = await findOrCreateLedgerForGuild(guild_id, guild.name);
+  const ledger_id = ledger.id;
 
-  await updateGuildMember({
-    client,
-    guild_id: guild.id,
-    member_id: member.id,
+  await setVibestack({
+    ledger_id,
+    by_member_id: message_member.id,
+    member_id: target_member.id,
+    vibestack,
   });
-  await updateAllGuildMembers({
+
+  const sending_member = await getMemberDetails({
     client,
-    guild_id: guild.id,
+    guild_id,
+    member_id: message_member.id,
   });
+  const receiving_member = await getMemberDetails({
+    client,
+    guild_id,
+    member_id: target_member.id,
+  });
+
+  await sendResponse({
+    client,
+    guild_id,
+    message,
+    command,
+    response: "setvibestack",
+    ledger_id,
+    sending_member,
+    receiving_member,
+    vibestack,
+  });
+
+  try {
+    await updateGuildMember({
+      client,
+      guild_id: guild.id,
+      member_id: target_member.id,
+    });
+    await updateAllGuildMembers({
+      client,
+      guild_id: guild.id,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+
+  return true;
 }

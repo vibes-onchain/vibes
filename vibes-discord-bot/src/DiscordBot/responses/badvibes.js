@@ -10,9 +10,9 @@ function description({
   receiving_member,
   vibesLedgerSummary,
 }) {
-  return `:arrow_right: ${emojis.vibedust} @${
+  return `:arrow_right: ${':sparkles:'} @${
     receiving_member.username
-  } – u got susvibes ${emojis.vibes} from @${sending_member.username} ${
+  } – u got susvibes ${':sparkles:'} from @${sending_member.username} ${
     note ? `\nfor "${note}"` : ""
   }
     :pancakes: @${sending_member.username} has a **\`VIBESTACK\`** of ${
@@ -40,7 +40,7 @@ export function forVibeFeed({
       {
         color: DISCORD_EMBED_COLOR,
         url: process.env.VIBES_LIVE_BASE_URL,
-        title: `${emojis.susvibe}  **!susvibes**  ${emojis.susvibe}`,
+        title: `${':warning:'}  **!susvibes**  ${':warning:'}`,
         description: description({
           emojis,
           ledger_id,
@@ -68,7 +68,7 @@ export function forChannel({
       {
         color: DISCORD_EMBED_COLOR,
         url: process.env.VIBES_LIVE_BASE_URL,
-        description: `:clipboard: ${emojis.susvibe} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})** @${sending_member.username} :arrow_right: @${receiving_member.username}`,
+        description: `:clipboard: ${':warning:'} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})** @${sending_member.username} :arrow_right: @${receiving_member.username}`,
       },
     ],
   };

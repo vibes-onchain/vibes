@@ -3,11 +3,13 @@ import getGuildStuff from "./getGuildStuff";
 import * as help from "../responses/help";
 import * as vibes from "../responses/vibes";
 import * as badvibes from "../responses/badvibes";
+import * as setvibestack from "../responses/setvibestack";
 
 const RESPONSES = {
   help,
   vibes,
   badvibes,
+  setvibestack,
 };
 
 export default async function ({
@@ -70,17 +72,25 @@ export default async function ({
 
   // DM SENDER
   if (sender && Response.forSender) {
-    await command.reply({
-      ...Response.forSender({ client, guild_id, ...args }),
-      ephemeral,
-    });
+    try {
+      await command.reply({
+        ...Response.forSender({ client, guild_id, ...args }),
+        ephemeral,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   // DM RECEIVER
   if (receiver && Response.forReceiver) {
-    await command.reply({
-      ...Response.forReceiver({ client, guild_id, ...args }),
-      ephemeral,
-    });
+    try {
+      await command.reply({
+        ...Response.forReceiver({ client, guild_id, ...args }),
+        ephemeral,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

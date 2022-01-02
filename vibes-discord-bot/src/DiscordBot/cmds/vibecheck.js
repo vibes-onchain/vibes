@@ -42,7 +42,7 @@ export default async function vibecheck({ client, message, cmd_args }) {
 
   const vibecheckEmbed = {
     color: 0x00eeee,
-    title: `${emojis.vibes} **vibes of @${targetedUser.username}** ${emojis.vibes}`,
+    title: `${':sparkles:'} **vibes of @${targetedUser.username}** ${':sparkles:'}`,
     url: `${process.env.VIBES_LIVE_BASE_URL}/${profilePath}`,
     description: `:eyes: see full profile at **[Vibes](${
       process.env.VIBES_LIVE_BASE_URL
@@ -50,7 +50,7 @@ export default async function vibecheck({ client, message, cmd_args }) {
 
       ${vibeLevelEmoji} \`VIBELEVEL\` – ${vibeLevelEmoji} ${
       targetedUser.vibeLevel || "Has no level"
-    } with ${targetedUser.vibedust}${emojis.vibedust} (${formatNumber(
+    } with ${targetedUser.vibedust}${':sparkles:'} (${formatNumber(
       targetedUser.vibedust_percentile,
       "percent2f"
     )})
@@ -77,7 +77,7 @@ export default async function vibecheck({ client, message, cmd_args }) {
   const vibeFeedChannel = await getVibeFeed({ client, guild_id });
 
   await message.channel.send(
-    `see <#${vibeFeedChannel.id}> for ${emojis.vibedust} Vibe Check ${emojis.vibedust}`
+    `see <#${vibeFeedChannel.id}> for ${':sparkles:'} Vibe Check ${':sparkles:'}`
   );
   await vibeFeedChannel?.send({ embeds: [vibecheckEmbed] });
 }

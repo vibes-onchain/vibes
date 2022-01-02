@@ -3,7 +3,7 @@ import formatNumber from '../../lib/formatNumber';
 
 function formatValue(value) {
   if (isNumber(value)) {
-    return formatNumber(value, 'decimal2f');
+    return formatNumber(value, 'decimal0f');
   } else {
     return value;
   }

@@ -15,11 +15,11 @@ export default async function ({ guild_id }) {
     vibe_period_remaining = moment.utc().endOf(vibe_period).from(moment.utc()); 
   }
   let vibe_rate;
-  const setVibeRateLE = await LedgerEntry.findLast({
+  const setVibenomicsLE = await LedgerEntry.findLast({
     where: { ledger_id, type: "Set Vibe Rate" },
   });
-  if (setVibeRateLE && setVibeRateLE.id) {
-    vibe_rate = setVibeRateLE.value?.vibe_rate;
+  if (setVibenomicsLE && setVibenomicsLE.id) {
+    vibe_rate = setVibenomicsLE.value?.vibe_rate;
   } 
   return {
     vibe_period,
