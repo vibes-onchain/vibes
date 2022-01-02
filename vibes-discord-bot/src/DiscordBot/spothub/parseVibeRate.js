@@ -1,8 +1,11 @@
-import _ from 'lodash';
+import _ from "lodash";
 import { parse as ssParse, evaluate as ssEval } from "subscript";
 
 export default function parseVibeRate(str) {
-  console.log({str});
+  if (str === null || typeof str === undefined) {
+    return [[1], 0];
+  }
+
   const numberMatcher = /^[+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)$/;
 
   const m = str.match(/^case\s+(.*)\s+end$/i);
@@ -33,11 +36,9 @@ export default function parseVibeRate(str) {
       });
       const unknownTokens = _.uniq(tokens).filter(
         (i) =>
-          [
-            "vibestack_zscore",
-            "vibestack_percentile",
-            "vibestack",
-          ].indexOf(i) === -1
+          ["vibestack_zscore", "vibestack_percentile", "vibestack"].indexOf(
+            i
+          ) === -1
       );
       if (unknownTokens.length > 0) {
         throw new Error("unknown variable used");

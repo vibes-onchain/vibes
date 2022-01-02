@@ -34,7 +34,9 @@ export const GLOBAL_CMDS = [
   // TODO "startvibeparty",
   "resetvibestacks",
   "setvibesparen",
-  "setupvibes"
+  "setupvibes",
+  //
+  "newvibesledger"
 ];
 
 export const REQUIRED_INTENTS = [
