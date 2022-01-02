@@ -140,31 +140,36 @@ export const VIBE_FEED_CHANNEL = { name: "vibe-feed", type: "GUILD_TEXT" };
 const iconsDir = `${__dirname}/../../assets/icons`;
 
 export const VIBE_EMOJIS = {
-  susvibe: { location: `${iconsDir}/sus-vibes.gif`, name: "susvibe" },
-  ogvibe: { location: `${iconsDir}/og-vibes.png`, name: "ogvibe" },
-  epicvibe: { location: `${iconsDir}/epic-vibes.png`, name: "epicvibe" },
-  rarevibe: { location: `${iconsDir}/rare-vibes.png`, name: "rarevibe" },
-  legendaryvibe: {
-    location: `${iconsDir}/legendary-vibes.png`,
-    name: "legendaryvibe",
-  },
-  frenlyvibe: { location: `${iconsDir}/frenly-vibes.png`, name: "frenlyvibe" },
-  vibes: { location: `${iconsDir}/frenly-vibes.png`, name: "vibes" },
-  vibe: { location: `${iconsDir}/frenly-vibes.png`, name: "vibe" },
-  vibedust: { location: `${iconsDir}/vibedust.gif`, name: "vibedust" },
+  vibes: { location: `${iconsDir}/vibes.png`, name: "vibes" },
+  susvibes: { location: `${iconsDir}/susvibes.png`, name: "susvibes" },
+  // susvibe: { location: `${iconsDir}/sus-vibes.gif`, name: "susvibe" },
+  // ogvibe: { location: `${iconsDir}/og-vibes.png`, name: "ogvibe" },
+  // epicvibe: { location: `${iconsDir}/epic-vibes.png`, name: "epicvibe" },
+  // rarevibe: { location: `${iconsDir}/rare-vibes.png`, name: "rarevibe" },
+  // legendaryvibe: {
+  //   location: `${iconsDir}/legendary-vibes.png`,
+  //   name: "legendaryvibe",
+  // },
+  // frenlyvibe: { location: `${iconsDir}/frenly-vibes.png`, name: "frenlyvibe" },
+  // vibes: { location: `${iconsDir}/frenly-vibes.png`, name: "vibes" },
+  // vibe: { location: `${iconsDir}/frenly-vibes.png`, name: "vibe" },
+  // vibedust: { location: `${iconsDir}/vibedust.gif`, name: "vibedust" },
 };
 
 export const GOOD_VIBE_EMOJI_NAMES = [
-  "ogvibe",
-  "epicvibe",
-  "rarevibe",
-  "legendaryvibe",
-  "frenlyvibe",
-  "vibes",
-  "vibe",
-  "vibedust",
+  "sparkles",
+  "vibes"
+  // "ogvibe",
+  // "epicvibe",
+  // "rarevibe",
+  // "legendaryvibe",
+  // "frenlyvibe",
+  // "vibes",
+  // "vibe",
+  // "vibedust",
 ];
 
 export const BAD_VIBE_EMOJI_NAMES = [
+  "warning",
   "susvibe"
 ];

@@ -3,25 +3,32 @@ import { DISCORD_EMBED_COLOR } from "../constants";
 import getGuildStuff from "../discord/getGuildStuff";
 
 function description({ emojis, ledger_id }) {
-  return `**I AM VIBES BOT ${emojis.vibes} :robot:**
-  :eyes: i help you show people's vibes  ${emojis.vibes} \n
-  **DURING A NEW VIBE PERIOD**
-  :timer: u get a new **\`VIBESTACK\`** at bgn of each **\`VIBEPERIOD\`** 
-  ${emojis.vibedust}  use this react wen fren has **\`!VIBES\`**
-  ${emojis.susvibe}   use this react wen fren has **\`!susvibes\`** \n
-  **AT THE END OF A VIBE PERIOD**
-  :arrow_right:  ${emojis.vibedust}  ur whole **\`VIBESTACK\`**:pancakes: distros as **\`VIBEDUST\`** based on who you gave \`!VIBES\`
-  :arrow_left:  ${emojis.vibedust}  u get **\`VIBEDUST\`** based on who gave you **\`!VIBES\`** ${emojis.vibes} and their \`VIBESTACK\`:pancakes:
-  :mechanical_arm: ur **\`VIBELEVEL\`** is calculated by ranking your **\`VIBEDUST\`** in community\n
-  **HOW VIBE LEVELS WORK**
-                    \`   VIBELEVEL              VIBEDUST %ILE  \`
-  ${emojis.vibes}          \`Frenly Vibe            15.87% - 69.15%\`
-  ${emojis.rarevibe}       \`Rare Vibe              69.15% - 84.15%\`
-  ${emojis.epicvibe}       \`Epic Vibe              84.15% - 93.32%\`
-  ${emojis.legendaryvibe}  \`Legendary Vibe         93.32% - 97.72%\`
-  ${emojis.ogvibe}         \`OG Vibe                97.72% - 99.99%\`
+  return `**I AM VIBES BOT :sparkles: :robot:**
+  i help you show people's vibes  :sparkles:
+
+  **HOW IT WORKS**
+  :sunrise_over_mountains: each day @vibesbot will give you a new bag of vibe dust
+
+  :sparkles: when someone has good vibes:
+  \`  \`**\`!vibes @frenName\`**
+  \`  \`or react with :sparkles:
   
-  :rocket: ur **\`VIBELEVEL\`** will boost ur **\`VIBESTACK\`** before each new **\`VIBEPERIOD\`**
+  :warning: when someone is being uncool
+  \`  \`**\`!susvibes @frenName\`** 
+  \`  \`or react with :warning:
+
+  :mechanical_arm: @vibesbot keeps track of all the vibe dust you receive and turns it into your vibe stack :pancakes:
+
+  :pancakes: your vibe stack determines your vibe level and how much vibe dust you get the next day
+
+  **VIBE LEVELS**
+                    \`   VIBELEVEL              VIBESTACK\`
+  :warning:                \`Sus Vibe               negative\`
+  :green_square:           \`Frenly Vibe            positive\`
+  :blue_square:            \`Rare Vibe              69.15 - 84.15 %tile\`
+  :purple_square:          \`Epic Vibe              84.15 - 93.32 %tile\`
+  :orange_square:          \`Legendary Vibe         93.32 - 97.72 %tile\`
+  :yellow_square:          \`OG Vibe                97.72 - 99.99 %tile\`
   
   **DEEP VIBES**
   :clipboard: full tx logs on **[vibescan.io](https://vibescan.io/ledger/${ledger_id}/entries)**

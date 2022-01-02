@@ -4,12 +4,12 @@ import { TOKEN, GLOBAL_CMDS, REQUIRED_INTENTS } from "./constants";
 
 import handleMessage from "./discord/handleMessage";
 import handleReaction from "./discord/handleReaction";
-import handleSlashCommand from './discord/handleSlashCommand';
+import handleSlashCommand from "./discord/handleSlashCommand";
 import readyGuilds from "./discord/readyGuilds";
 import updateAllGuildMembers from "./multi/updateAllGuildMembers";
 import welcomeGuildMember from "./discord/welcomeGuildMember";
 import getLedgerIdsToUpdateEachPeriod from "./spothub/getLedgerIdsToUpdateEachPeriod";
-import updateAllGuildsForPeriod from './multi/updateAllGuildsForPeriod';
+import updateAllGuildsForPeriod from "./multi/updateAllGuildsForPeriod";
 
 import Cron from "croner";
 
@@ -20,34 +20,34 @@ class DiscordBot {}
 async function setupCronJobs(client) {
   Cron("0 * * * * *", async () => {
     console.log("[CRON]", "starting minute tasks");
-    await updateAllGuildsForPeriod({client, period: "minute"});
+    await updateAllGuildsForPeriod({ client, period: "minute" });
   });
 
   Cron("0 0 * * * *", async () => {
     console.log("[CRON]", "starting hour tasks");
-    await updateAllGuildsForPeriod({client, period: "hour"});
+    await updateAllGuildsForPeriod({ client, period: "hour" });
   });
 
   Cron("0 0 0 * * *", async () => {
     console.log("[CRON]", "starting day tasks");
-    await updateAllGuildsForPeriod({client, period: "day"});
+    await updateAllGuildsForPeriod({ client, period: "day" });
   });
 
   Cron("0 0 0 * * 1", async () => {
     console.log("[CRON]", "starting week tasks");
-    await updateAllGuildsForPeriod({client, period: "week"});
+    await updateAllGuildsForPeriod({ client, period: "week" });
   });
 
   Cron("0 0 0 1 * *", async () => {
     console.log("[CRON]", "starting month tasks");
-    await updateAllGuildsForPeriod({client, period: "month"});
+    await updateAllGuildsForPeriod({ client, period: "month" });
   });
 }
 
 DiscordBot.setupClient = async function () {
   const client = new Client({
     intents: REQUIRED_INTENTS,
-    partials: ["CHANNEL"],
+    partials: ["MESSAGE", "CHANNEL", "REACTION"],
   });
   const connect = new Promise((resolve) => {
     client.once("ready", async () => {
@@ -92,13 +92,13 @@ DiscordBot.start = async function () {
   });
 
   client.on("messageReactionAdd", async (reaction, user) => {
-    console.log('messageReactionAdd', {reaction});
+    console.log("messageReactionAdd", { reaction });
     return handleReaction(client, reaction, user);
   });
 
-  client.on('interactionCreate', interaction => {
+  client.on("interactionCreate", (interaction) => {
     if (!interaction.isCommand()) return;
-    return handleSlashCommand({client, command: interaction});
+    return handleSlashCommand({ client, command: interaction });
   });
 
   // TODO messageReactionRemove
