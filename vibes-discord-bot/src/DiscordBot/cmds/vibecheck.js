@@ -70,10 +70,9 @@ export default async function vibecheck({ client, message, cmd_args }) {
     thumbnail: {
       url: "https://media3.giphy.com/media/L3RMqVU2LRnSLQVO2a/giphy.gif?cid=ecf05e47902q2hpged7tqv0ytxoxveomvuwvqy5sdetze0bu&rid=giphy.gif&ct=g",
     },
-    // footer: {
-    //   text: `Powered by Vibes`,
-    //   icon_url: "${process.env.VIBES_LIVE_BASE_URL}/vibes-hand.png",
-    // },
+    image: process.env.VIBES_SHARE_BASE_URL && {
+      url: `${process.env.VIBES_SHARE_BASE_URL}/{profilePath}/shareable`,
+    },
   };
   const vibeFeedChannel = await getVibeFeed({ client, guild_id });
 
