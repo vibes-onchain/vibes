@@ -1,4 +1,4 @@
-import vibesbot from "../cmds/help";
+import help from "../cmds/help";
 
 import vibes from "../cmds/vibes";
 import badvibes from "../cmds/badvibes";
@@ -26,7 +26,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     } :: ARGS: (${cmd_args.join(", ")})`
   );
   if (["vibesbot", "help"].includes(cmd)) {
-    return vibesbot({ client, message, cmd_args });
+    return help({ client, message, cmd_args });
   } else if (["vibe", "vibes"].includes(cmd)) {
     return vibes({ client, message, cmd_args });
   } else if (["badvibe", "badvibes", "susvibes", "susvibe"].includes(cmd)) {

@@ -2,10 +2,12 @@ import getGuildStuff from "./getGuildStuff";
 
 import * as help from "../responses/help";
 import * as vibes from "../responses/vibes";
+import * as badvibes from "../responses/badvibes";
 
 const RESPONSES = {
   help,
-  vibes
+  vibes,
+  badvibes,
 };
 
 export default async function ({
@@ -24,25 +26,35 @@ export default async function ({
   if (command) {
     // RESPOND TO INTERACTION
     if (Response.forCommandReply) {
-      await command.reply({
-        ...Response.forCommandReply({ client, guild_id, ...args }),
-        ephemeral,
-      });
+      await command
+        .reply({
+          ...Response.forCommandReply({ client, guild_id, ...args }),
+          ephemeral,
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } else {
-      await command.reply({ content: ":check:", ephemeral });
-    }
-  } else if (message) {
-    const {vibeFeedChannel} = getGuildStuff({ client, guild_id });
-    // MESSAGE VIBE_FEED
-    if (Response.forVibeFeed) {
-      await vibeFeedChannel
-        ?.send(Response.forVibeFeed({ client, guild_id, ...args }))
+      await command
+        .reply({ content: ":ballot_box_with_check:", ephemeral })
         .catch((e) => {
           console.log(e);
         });
     }
+  }
 
-    // MESSAGE CHANNEL
+  // MESSAGE VIBE_FEED
+  const { vibeFeedChannel } = getGuildStuff({ client, guild_id });
+  if (Response.forVibeFeed) {
+    await vibeFeedChannel
+      ?.send(Response.forVibeFeed({ client, guild_id, ...args }))
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  // MESSAGE CHANNEL
+  if (message) {
     if (
       Response.forChannel &&
       message?.channel?.id &&

@@ -1,89 +1,68 @@
 import getTargetMember from "../message/getTargetMember";
 import saveBadVibe from "../spothub/saveBadVibe";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
-import getEmojis from "../discord/getEmojis";
-import getVibeFeed from "../discord/getVibeFeed";
+import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 import getMemberDetails from "../multi/getMemberDetails";
+import sendResponse from "../discord/sendResponse";
 
-export default async function badVibes({ client, message, cmd_args }) {
-  const message_member = message.member;
+export default async function badvibes({ client, message, command, cmd_args }) {
+  const message_member = message ? message.member : command.member;
+
   const guild = message_member.guild;
+  const guild_id = guild.id;
+
   const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
-  const member = await getTargetMember({ message, cmd_args });
-  if (!member) {
-    console.log("receiver not found");
-    return;
+  const ledger_id = ledger.id;
+
+  const target_member = command
+    ? cmd_args.find((i) => i.name === "fren").member
+    : await getTargetMember({ message, cmd_args });
+  if (!target_member) {
+    return { error: "receiver not found" };
   }
 
-  if (member.user.id === message_member.user.id) {
-    // await message.channel.send(
-      // `@${target_user.username} you can only vibe others`
-    // );
-    return;
+  if (target_member.user.id === message_member.user.id) {
+    return { error: `you can only vibe with others` };
   }
 
-  // if (cmd_args.length < 2) {
-  //   await message.channel.send(
-  //     "fren. i am not allowed to !vibe someone without reasons! enter some reasons after the @user in your command. or you can use vibe dust emoji to react to a post. \n\n!vibe <@member> <reason for vibin>"
-  //   );
-  //   return;
-  // }
+  const note = command
+    ? cmd_args.find((i) => i.name === "note")?.value
+    : cmd_args.slice(1).join(" ");
 
-  const reason = cmd_args.slice(1).join(" ");
   await saveBadVibe({
-    ledger_id: ledger.id,
+    ledger_id: ledger_id,
     from_member_id: message_member.id,
-    member_id: member.id,
-    reason,
+    member_id: target_member.id,
+    note,
   });
 
-  const vibeFeed = await getVibeFeed({ client, guild_id: guild.id });
-  const emojis = await getEmojis({ client, guild_id: guild.id });
-
-  const senderDetails = await getMemberDetails({
+  const sending_member = await getMemberDetails({
     client,
-    guild_id: guild.id,
+    guild_id,
     member_id: message_member.id,
   });
-
-  const vibesFeedEmbed = {
-    color: 0x00eeee,
-    url: `https://www.vibesbot.gg`,
-    title: `${emojis.susvibe}  **!susvibes**  ${emojis.susvibe}`,
-    description: `:arrow_right: ${emojis.susvibe} @${
-      member.user.username
-    } – u got susvibes ${emojis.susvibe} from @${message_member.user.username} ${
-      reason ? `\nfor "${reason}"` : ""
-    }
-      :pancakes: @${
-        message_member.user.username
-      } has a **\`VIBESTACK\`** of ${senderDetails.vibestack} this **\`VIBEPERIOD\`** [vibe.live](${process.env.VIBES_LIVE_BASE_URL}/ledger/${ledger.id}/profile/discord_member-${
-      message_member.id
-    })
-      :timer: **\`VIBEPERIOD\`** ends in ${"time"}
-      :clipboard:Full Tx log – **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${
-        ledger.id
-      })**`,
-    // thumbnail: {
-    //   url: "https://media2.giphy.com/media/BzM7MRs96dYpLSeUTy/giphy.gif?cid=ecf05e47yk8rvloiy4yh52cdlyzqoil3ksr606xmluc3p6ox&rid=giphy.gif&ct=ts",
-    // },
-    // footer: {
-    //   text: `Powered by Spot`,
-    //   icon_url: "https://i.imgur.com/1c0avUE.png",
-    // },
-  };
-  await vibeFeed?.send({ embeds: [vibesFeedEmbed] }).catch((e) => {
-    console.log(e);
+  const receiving_member = await getMemberDetails({
+    client,
+    guild_id,
+    member_id: target_member.id,
   });
 
-  if (vibeFeed.id !== message.channel.id) {
-    const vibesChannelEmbed = {
-      color: 0x00eeee,
-      description: `:clipboard: ${emojis.susvibe} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger.id})** @${message_member.user.username} :arrow_right: @${member.user.username}`,
-    };
+  const vibesLedgerSummary = await getVibesLedgerSummary({
+    guild_id,
+  });
 
-    await message.channel.send({ embeds: [vibesChannelEmbed] }).catch((e) => {
-      console.log(e);
-    });
-  }
+  await sendResponse({
+    client,
+    guild_id,
+    message,
+    command,
+    response: "badvibes",
+    ledger_id,
+    sending_member,
+    receiving_member,
+    note,
+    vibesLedgerSummary,
+  });
+
+  return true;
 }

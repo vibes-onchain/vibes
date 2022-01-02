@@ -11,7 +11,7 @@ export default async function findOrCreateLedgerForGuild(guild_id, guild_name) {
 
   const ledger = await Ledger.build();
   await ledger.save();
-  console.log("attributes", ledger?.attributes);
+  // console.log("attributes", ledger?.attributes);
   const le = LedgerEntry.build({
     ledger_id: ledger.id,
     type: "Set Ledger Metadata",

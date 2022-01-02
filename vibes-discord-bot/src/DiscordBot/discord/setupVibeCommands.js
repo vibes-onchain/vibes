@@ -27,6 +27,18 @@ export default async function ({ client, guild_id }) {
         option.setName("note").setDescription("note")
       ),
     new SlashCommandBuilder()
+      .setName("badvibes")
+      .setDescription("badvibes fren")
+      .addUserOption((option) =>
+        option
+          .setName("fren")
+          .setDescription("who's being uncool")
+          .setRequired(true)
+      )
+      .addStringOption((option) =>
+        option.setName("note").setDescription("note")
+      ),
+    new SlashCommandBuilder()
       .setName("susvibes")
       .setDescription("susvibes fren")
       .addUserOption((option) =>
@@ -62,9 +74,15 @@ export default async function ({ client, guild_id }) {
       .addUserOption((option) =>
         option.setName("fren").setDescription("who to check").setRequired(true)
       ),
+    new SlashCommandBuilder()
+      .setName("setupvibes")
+      .setDescription(
+        "[ADMINS ONLY] create roles, emojis, channels, and commands for your server"
+      ),
   ].map((command) => command.toJSON());
   for (const command of commands) {
-    console.log(guild.commands.cache);
+    console.log(guild.id, "setting up cmd", command.name);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     await guild.commands.create(command, guild.id);
   }
 }

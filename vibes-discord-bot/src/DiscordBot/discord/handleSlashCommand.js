@@ -1,7 +1,22 @@
-import vibesbot from "../cmds/help";
+import help from "../cmds/help";
+
+import vibes from "../cmds/vibes";
+import badvibes from "../cmds/badvibes";
+import vibecheck from "../cmds/vibecheck";
+
+import setvibestack from "../cmds/setvibestack";
+import setvibenomics from "../cmds/setvibenomics";
+import resetvibestacks from "../cmds/resetvibestacks";
+
+import setvibesparen from "../cmds/setvibesparen";
+import setvibestrait from "../cmds/setvibestrait";
+
+import setupvibes from "../cmds/setupvibes";
 
 export default async function handleCmd({ client, command }) {
-  if (!command) { return; }
+  if (!command) {
+    return;
+  }
 
   // await command.reply({ content: ':thumbsup:', ephemeral: true });
 
@@ -11,44 +26,48 @@ export default async function handleCmd({ client, command }) {
   const from_member_id = command.member.id;
 
   console.log(
-    `[${cmd}] FROM: discord:${guild_id || "dm"}:${from_member_id
-    } :: OPTIONS: (${cmd_args.join(", ")})`
+    `[${cmd}] FROM: discord:${
+      guild_id || "dm"
+    }:${from_member_id} :: OPTIONS: (${cmd_args.join(", ")})`
   );
-  if (cmd === "about" || cmd === "help" || cmd === "vibesbot") {
-    return vibesbot({ client, cmd_args, command });
-    // } else if (cmd === "vibe" || cmd === "vibes") {
-    //   return vibes({ client, message: command, cmd_args });
-    // } else if (
-    //   cmd === "badvibe" ||
-    //   cmd === "badvibes" ||
-    //   cmd === "susvibes" ||
-    //   cmd === "susvibe"
-    // ) {
-    //   return badvibes({ client, message, cmd_args });
-    // } else if (cmd === "resetvibedust") {
-    //   return resetvibedust({ client, message, cmd_args });
-    // } else if (cmd === "setviberate" || cmd === "setvibestack" || cmd === "setvibestacks") {
-    //   return setviberate({ client, message, cmd_args });
-    // } else if (cmd === "setvibeperiod" || cmd === "setvibeprd") {
-    //   return setvibeperiod({ client, message, cmd_args });
-    // } else if (
-    //   cmd === "vibedistro" ||
-    //   cmd === "vd" ||
-    //   cmd === "vibedistribution" ||
-    //   cmd === "refreshvibes"
-    // ) {
-    //   return vibedistro({ client, message, cmd_args });
-    // } else if (cmd === "setvibedust" || cmd === "genvibedust") {
-    //   return setvibedust({ client, message, cmd_args });
+  let handled = false;
+  if (["vibesbot", "help"].includes(cmd)) {
+    handled = await help({ client, command, cmd_args });
+  } else if (["vibe", "vibes"].includes(cmd)) {
+    handled = await vibes({ client, command, cmd_args });
+  } else if (["badvibe", "badvibes", "susvibes", "susvibe"].includes(cmd)) {
+    handled = await badvibes({ client, command, cmd_args });
+    // } else if (["vibecheck", "vibescheck", "vc"].includes(cmd)) {
+    //   return vibecheck({ client, message, cmd_args });
+    // } else if (["resetvibestacks"].includes(cmd)) {
+    //   return resetvibestacks({ client, message, cmd_args });
+    // } else if (["setvibenomics"].includes(cmd)) {
+    //   return setvibenomics({ client, message, cmd_args });
+    // } else if (["setvibestack"].includes(cmd)) {
+    //   return setvibestack({ client, message, cmd_args });
     // } else if (cmd === "setvibesparen") {
     //   return setvibesparen({ client, message, cmd_args });
     // } else if (cmd === "setvibestrait") {
     //   return setvibestrait({ client, message, cmd_args });
-    // } else if (cmd === "setupvibes") {
-    //   return setupvibes({ client, message, cmd_args, guild_id }); 
-    // } else if (cmd === "vibechk" || cmd === "vibecheck" || cmd === "vc") {
-    //   return vibecheck({ client, message, cmd_args });
-  } else {
-    await command.reply({ content: ':check:', ephemeral: true });
+    } else if (cmd === "setupvibes") {
+      handled = await setupvibes({ client, command, cmd_args, guild_id });
+  }
+  if (!command.replied) {
+    if (handled && !handled?.error) {
+      await command.reply({
+        content: ":ballot_box_with_check: ok",
+        ephemeral: true,
+      });
+    } else if (handled && handled?.error) {
+      await command.reply({
+        content: `:no_entry_sign: ${handled.error}`,
+        ephemeral: true,
+      });
+    } else {
+      await command.reply({
+        content: ":bug:  something went wrong",
+        ephemeral: true,
+      });
+    }
   }
 }

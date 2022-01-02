@@ -6,7 +6,7 @@ export default async function getVibesUserDetails({ guild_id, member_id }) {
   const ledger = await findOrCreateLedgerForGuild(guild_id);
   const ledger_id = ledger.id;
   const reduced = await reduceVibesLedger({ ledger_id });
-  console.log(reduced);
+  // console.log(reduced);
   const vibestack = calculateUserVibeRate(
     reduced.current_rate,
     reduced?.profiles[member_id]
