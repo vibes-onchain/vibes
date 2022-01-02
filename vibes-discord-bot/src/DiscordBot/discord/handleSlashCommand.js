@@ -37,12 +37,12 @@ export default async function handleCmd({ client, command }) {
     handled = await vibes({ client, command, cmd_args });
   } else if (["badvibe", "badvibes", "susvibes", "susvibe"].includes(cmd)) {
     handled = await badvibes({ client, command, cmd_args });
-    // } else if (["vibecheck", "vibescheck", "vc"].includes(cmd)) {
-    //   return vibecheck({ client, message, cmd_args });
+  } else if (["vibecheck", "vibescheck", "vc"].includes(cmd)) {
+    handled = vibecheck({ client, command, cmd_args });
   } else if (["resetvibestacks"].includes(cmd)) {
-    return resetvibestacks({ client, command, cmd_args });
+    handled = resetvibestacks({ client, command, cmd_args });
   } else if (["setvibenomics"].includes(cmd)) {
-    return setvibenomics({ client, command, cmd_args });
+    handled = setvibenomics({ client, command, cmd_args });
   } else if (["setvibestack"].includes(cmd)) {
     handled = await setvibestack({ client, command, cmd_args });
     // } else if (cmd === "setvibesparen") {

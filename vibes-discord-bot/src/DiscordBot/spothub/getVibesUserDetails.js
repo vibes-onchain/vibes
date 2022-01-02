@@ -6,19 +6,19 @@ export default async function getVibesUserDetails({ guild_id, member_id }) {
   const ledger = await findOrCreateLedgerForGuild(guild_id);
   const ledger_id = ledger.id;
   const reduced = await reduceVibesLedger({ ledger_id });
-  // console.log(reduced);
-  const vibestack = calculateUserVibeRate(
+  const vibedust = calculateUserVibeRate(
     reduced.current_rate,
     reduced?.profiles[member_id]
   );
   if (reduced?.profiles[member_id]) {
     return {
-      vibestack,
       ...reduced?.profiles[member_id],
+      vibedust,
     };
   } else {
     return {
-      vibedust: null,
+      vibestack: 0,
+      vibedust: vibedust || 0,
       vibeLevel: null,
       nicknameParen: null,
     };

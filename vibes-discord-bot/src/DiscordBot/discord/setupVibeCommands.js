@@ -70,8 +70,8 @@ export default async function ({ client, guild_id }) {
       .setDescription("[ADMINS ONLY] set vibenomics")
       .addStringOption((option) =>
         option
-          .setName("vibestack")
-          .setDescription("vibestack")
+          .setName("vibenomics")
+          .setDescription("vibenomics")
           .setRequired(true)
       ),
     new SlashCommandBuilder()
