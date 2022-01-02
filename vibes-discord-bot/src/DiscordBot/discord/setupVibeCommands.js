@@ -75,6 +75,15 @@ export default async function ({ client, guild_id }) {
           .setRequired(true)
       ),
     new SlashCommandBuilder()
+      .setName("setvibesparen")
+      .setDescription("[ADMINS ONLY] set descriptive paren template for nicknames")
+      .addStringOption((option) =>
+        option
+          .setName("template")
+          .setDescription("template")
+          .setRequired(true)
+      ),
+    new SlashCommandBuilder()
       .setName("setvibestack")
       .setDescription("[ADMINS ONLY] set someone's vibestack")
       .addUserOption((option) =>

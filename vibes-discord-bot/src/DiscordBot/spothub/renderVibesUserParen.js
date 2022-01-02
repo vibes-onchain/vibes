@@ -11,7 +11,7 @@ function formatValue(value) {
 
 function evalParen(paren, context) {
   if (!paren) {
-    paren = "{vibedust}";
+    paren = "{vibestack}";
   }
   for (const [key, value] of Object.entries(context)) {
     paren = paren.replaceAll(

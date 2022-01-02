@@ -45,8 +45,8 @@ export default async function handleCmd({ client, command }) {
     handled = setvibenomics({ client, command, cmd_args });
   } else if (["setvibestack"].includes(cmd)) {
     handled = await setvibestack({ client, command, cmd_args });
-    // } else if (cmd === "setvibesparen") {
-    //   return setvibesparen({ client, message, cmd_args });
+  } else if (cmd === "setvibesparen") {
+    handled = await setvibesparen({ client, command, cmd_args });
     // } else if (cmd === "setvibestrait") {
     //   return setvibestrait({ client, message, cmd_args });
   } else if (cmd === "setupvibes") {

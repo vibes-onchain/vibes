@@ -121,10 +121,8 @@ export default async function reduceVibesLedger({ ledger_id }) {
       }
       acc[user_id] = {
         vibestack,
-        vibedust: vibestack,
         vibestack_score,
         vibestack_percentile,
-        vibedust_percentile: vibestack_percentile,
         vibeLevel,
       };
       return acc;

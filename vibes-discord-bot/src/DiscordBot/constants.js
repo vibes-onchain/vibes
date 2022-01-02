@@ -30,10 +30,10 @@ export const GLOBAL_CMDS = [
   // setvibestack
   "setvibestack",
   //
-  // resetvibestacks
-  "resetvibestacks",
+  // other
   // TODO "startvibeparty",
-  // TODO "setvibesparen",
+  "resetvibestacks",
+  "setvibesparen",
   "setupvibes"
 ];
 
