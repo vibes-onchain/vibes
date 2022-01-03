@@ -17,10 +17,7 @@ function description({
   }
     :pancakes: @${sending_member.username} has a **\`VIBESTACK\`** of ${
     sending_member.vibestack
-  } this **\`VIBEPERIOD\`** [vibe.live](${
-    process.env.VIBES_LIVE_BASE_URL
-  }/ledger/${ledger_id}/profile/discord_member-${sending_member.member_id})
-    :timer: **\`VIBEPERIOD\`** ends ${vibesLedgerSummary.vibe_period_remaining}
+  }
     :clipboard:Full Tx log – **[vibescan.io](${
       process.env.VIBESCAN_BASE_URL
     }/ledger/${ledger_id})**`;
