@@ -37,6 +37,7 @@ export const GLOBAL_CMDS = [
   "setupvibes",
   //
   "newvibesledger",
+  "refreshvibeparens"
 ];
 
 export const REQUIRED_INTENTS = [

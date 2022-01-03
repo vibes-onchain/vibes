@@ -14,6 +14,7 @@ import setvibestrait from "../cmds/setvibestrait";
 import setupvibes from "../cmds/setupvibes";
 
 import newvibesledger from "../cmds/newvibesledger";
+import refreshvibeparens from "../cmds/refreshvibeparens";
 
 export default async function handleCmd({ client, message, cmd, cmd_args }) {
   const guild_id = message?.guild?.id || message?.guild_id;
@@ -49,5 +50,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return setupvibes({ client, message, cmd_args, guild_id });
   } else if (cmd === "newvibesledger") {
     return newvibesledger({ client, message, cmd_args, guild_id });
+  } else if (cmd === "refreshvibeparens") {
+    return refreshvibeparens({ client, message, cmd_args, guild_id });
   }
 }

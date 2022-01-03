@@ -12,6 +12,7 @@ import setvibesparen from "../cmds/setvibesparen";
 import setvibestrait from "../cmds/setvibestrait";
 
 import setupvibes from "../cmds/setupvibes";
+import refreshvibeparens from "../cmds/refreshvibeparens";
 
 export default async function handleCmd({ client, command }) {
   if (!command) {
@@ -51,6 +52,8 @@ export default async function handleCmd({ client, command }) {
     //   return setvibestrait({ client, message, cmd_args });
   } else if (cmd === "setupvibes") {
     handled = await setupvibes({ client, command, cmd_args, guild_id });
+  } else if (cmd === "refreshvibeparens") {
+    handled = await refreshvibeparens({ client, command, cmd_args, guild_id });
   }
   if (!command.replied) {
     if (handled && !handled?.error) {

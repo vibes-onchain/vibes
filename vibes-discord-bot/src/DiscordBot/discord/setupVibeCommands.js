@@ -76,12 +76,11 @@ export default async function ({ client, guild_id }) {
       ),
     new SlashCommandBuilder()
       .setName("setvibesparen")
-      .setDescription("[ADMINS ONLY] set descriptive paren template for nicknames")
+      .setDescription(
+        "[ADMINS ONLY] set descriptive paren template for nicknames"
+      )
       .addStringOption((option) =>
-        option
-          .setName("template")
-          .setDescription("template")
-          .setRequired(true)
+        option.setName("template").setDescription("template").setRequired(true)
       ),
     new SlashCommandBuilder()
       .setName("setvibestack")
@@ -99,6 +98,11 @@ export default async function ({ client, guild_id }) {
       .setName("setupvibes")
       .setDescription(
         "[ADMINS ONLY] create roles, emojis, channels, and commands for your server"
+      ),
+    new SlashCommandBuilder()
+      .setName("refreshvibeparens")
+      .setDescription(
+        "[ADMINS ONLY] refreshvibeparens"
       ),
   ].map((command) => command.toJSON());
   for (const command of commands) {
