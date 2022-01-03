@@ -6,6 +6,8 @@ import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 import formatNumber from "../../lib/formatNumber";
 import getVibeFeed from "../discord/getVibeFeed";
 
+const disable_in_channel_messages = true
+
 export default async function vibecheck({
   client,
   command,
@@ -93,7 +95,7 @@ export default async function vibecheck({
   };
   const vibeFeedChannel = await getVibeFeed({ client, guild_id });
 
-  if (message?.channel?.id !== vibeFeedChannel.id) {
+  if (!disable_in_channel_messages && message?.channel?.id !== vibeFeedChannel.id) {
     await message?.channel?.send(
       `see <#${
         vibeFeedChannel.id

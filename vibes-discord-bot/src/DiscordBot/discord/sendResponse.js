@@ -18,9 +18,10 @@ export default async function ({
   response,
   message,
   command,
-  ephemeral = true,
   sender,
   receiver,
+  ephemeral = true,
+  disable_in_channel_messages = true,
   ...args
 }) {
   const Response = RESPONSES[response];
@@ -56,7 +57,7 @@ export default async function ({
   }
 
   // MESSAGE CHANNEL
-  if (message) {
+  if (!disable_in_channel_messages && message) {
     if (
       Response.forChannel &&
       message?.channel?.id &&
