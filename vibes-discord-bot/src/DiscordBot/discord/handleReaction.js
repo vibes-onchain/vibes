@@ -141,6 +141,9 @@ export default async function handleReaction(client, reaction, user) {
     const from_member_username = fromMember.user.username;
     const note = message.content;
 
+    if (from_member_id === to_member_id) {
+      continue;
+    }
     await handleVibeReaction({
       client,
       guild_id,
