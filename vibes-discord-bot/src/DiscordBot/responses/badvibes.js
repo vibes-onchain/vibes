@@ -1,4 +1,5 @@
 import { DISCORD_EMBED_COLOR } from "../constants";
+import formatNumber from "../../lib/formatNumber";
 
 import getGuildStuff from "../discord/getGuildStuff";
 
@@ -16,7 +17,7 @@ function description({
     note ? `\nfor "${note}"` : ""
   }
     :pancakes: @${sending_member.username} has a **\`VIBESTACK\`** of ${
-    sending_member.vibestack
+    formatNumber(sending_member.vibestack, 'decimal0f')
   }
     :clipboard:Full Tx log – **[vibescan.io](${
       process.env.VIBESCAN_BASE_URL
