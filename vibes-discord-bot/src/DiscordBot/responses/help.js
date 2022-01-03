@@ -55,15 +55,15 @@ export function forVibeFeed({ client, guild_id, ledger_id }) {
 
 export const forCommandReply = forVibeFeed;
 
-export function forChannel({ client, guild_id }) {
-  const { emojis, vibeFeedChannel } = getGuildStuff({ client, guild_id });
-  return {
-    embeds: [
-      {
-        color: DISCORD_EMBED_COLOR,
-        url: process.env.VIBES_LIVE_BASE_URL,
-        description: `see <#${vibeFeedChannel?.id}> for ${':sparkles:'} Wat VibesBot? ${':sparkles:'}`,
-      },
-    ],
-  };
-}
+// export function forChannel({ client, guild_id }) {
+//   const { emojis, vibeFeedChannel } = getGuildStuff({ client, guild_id });
+//   return {
+//     embeds: [
+//       {
+//         color: DISCORD_EMBED_COLOR,
+//         url: process.env.VIBES_LIVE_BASE_URL,
+//         description: `see <#${vibeFeedChannel?.id}> for ${':sparkles:'} Wat VibesBot? ${':sparkles:'}`,
+//       },
+//     ],
+//   };
+// }

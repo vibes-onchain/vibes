@@ -10,9 +10,9 @@ function description({
   receiving_member,
   vibesLedgerSummary,
 }) {
-  return `:arrow_right: ${':sparkles:'} @${
+  return `:arrow_right: ${":sparkles:"} @${
     receiving_member.username
-  } – u got susvibes ${':sparkles:'} from @${sending_member.username} ${
+  } – u got susvibes ${":sparkles:"} from @${sending_member.username} ${
     note ? `\nfor "${note}"` : ""
   }
     :pancakes: @${sending_member.username} has a **\`VIBESTACK\`** of ${
@@ -40,7 +40,7 @@ export function forVibeFeed({
       {
         color: DISCORD_EMBED_COLOR,
         url: process.env.VIBES_LIVE_BASE_URL,
-        title: `${':warning:'}  **!susvibes**  ${':warning:'}`,
+        title: `${":warning:"}  **!susvibes**  ${":warning:"}`,
         description: description({
           emojis,
           ledger_id,
@@ -55,21 +55,21 @@ export function forVibeFeed({
 
 export const forCommandReply = forVibeFeed;
 
-export function forChannel({
-  client,
-  guild_id,
-  ledger_id,
-  sending_member,
-  receiving_member,
-}) {
-  const { emojis } = getGuildStuff({ client, guild_id });
-  return {
-    embeds: [
-      {
-        color: DISCORD_EMBED_COLOR,
-        url: process.env.VIBES_LIVE_BASE_URL,
-        description: `:clipboard: ${':warning:'} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})** @${sending_member.username} :arrow_right: @${receiving_member.username}`,
-      },
-    ],
-  };
-}
+// export function forChannel({
+//   client,
+//   guild_id,
+//   ledger_id,
+//   sending_member,
+//   receiving_member,
+// }) {
+//   const { emojis } = getGuildStuff({ client, guild_id });
+//   return {
+//     embeds: [
+//       {
+//         color: DISCORD_EMBED_COLOR,
+//         url: process.env.VIBES_LIVE_BASE_URL,
+//         description: `:clipboard: ${':warning:'} **[vibescan.io](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})** @${sending_member.username} :arrow_right: @${receiving_member.username}`,
+//       },
+//     ],
+//   };
+// }
