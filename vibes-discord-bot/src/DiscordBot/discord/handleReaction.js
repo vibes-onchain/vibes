@@ -9,9 +9,12 @@ import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 import getMemberDetails from "../multi/getMemberDetails";
 import getGuildMemberFromUserId from "./getGuildMemberFromUserId";
 import getGuildMemberDetails from "./getGuildMemberDetails";
+import sendResponse from "../discord/sendResponse";
 import _ from "lodash";
 
 async function handleVibeReaction({
+  client,
+  guild_id,
   ledger_id,
   from_member_id,
   to_member_id,
@@ -24,8 +27,31 @@ async function handleVibeReaction({
       ledger_id: ledger_id,
       from_member_id: from_member_id,
       member_id: to_member_id,
-      reason,
+      note: reason,
       reaction_to_message_id,
+    });
+    const sending_member = await getMemberDetails({
+      client,
+      guild_id,
+      member_id: from_member_id,
+    });
+    const receiving_member = await getMemberDetails({
+      client,
+      guild_id,
+      member_id: to_member_id,
+    });
+    const vibesLedgerSummary = await getVibesLedgerSummary({
+      guild_id,
+    });
+    await sendResponse({
+      client,
+      guild_id,
+      response: "vibes",
+      ledger_id,
+      sending_member,
+      receiving_member,
+      note: reason,
+      vibesLedgerSummary,
     });
   } else if (entryType === "BadVibe") {
     await saveBadVibe({
@@ -34,6 +60,29 @@ async function handleVibeReaction({
       member_id: to_member_id,
       reason,
       reaction_to_message_id,
+    });
+    const sending_member = await getMemberDetails({
+      client,
+      guild_id,
+      member_id: from_member_id,
+    });
+    const receiving_member = await getMemberDetails({
+      client,
+      guild_id,
+      member_id: to_member_id,
+    });
+    const vibesLedgerSummary = await getVibesLedgerSummary({
+      guild_id,
+    });
+    await sendResponse({
+      client,
+      guild_id,
+      response: "badvibes",
+      ledger_id,
+      sending_member,
+      receiving_member,
+      note: reason,
+      vibesLedgerSummary,
     });
   }
 }

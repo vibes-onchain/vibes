@@ -101,9 +101,7 @@ export default async function ({ client, guild_id }) {
       ),
     new SlashCommandBuilder()
       .setName("refreshvibeparens")
-      .setDescription(
-        "[ADMINS ONLY] refreshvibeparens"
-      ),
+      .setDescription("[ADMINS ONLY] refreshvibeparens"),
   ].map((command) => command.toJSON());
   for (const command of commands) {
     console.log(guild.id, "setting up cmd", command.name);
