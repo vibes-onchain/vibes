@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="text">
           <div className="links">
             <a href="https://twitter.com/vibesbotgg">Twitter</a>
-            <a href="https://discord.gg/Ccae6XpDBV">Discord</a>
+            <a href={REACT_APP_DISCORD_INVITE}>Discord</a>
             <a href="https://github.com/spot-foundation/vibes">Github</a>
             {/* <a href="/terms">Terms</a>
             <a href="/privacy">Privacy</a> */}

@@ -123,12 +123,12 @@ export default function () {
               <p>🛠️ Build</p>
               <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Docs</a>
               <a href="https://github.com/spot-foundation/vibes">Github</a>
-              <a href="https://discord.gg/Ccae6XpDBV">Support Server</a>
+              <a href={REACT_APP_DISCORD_INVITE}>Support Server</a>
             </div>
             <div className="link-list">
               <p>🌎 Connect</p>
               <a href="https://twitter.com/vibesbotgg">Twitter</a>
-              <a href="https://discord.gg/Ccae6XpDBV">Discord</a>
+              <a href={REACT_APP_DISCORD_INVITE}>Discord</a>
             </div>
             {/* <div className="link-list"> */}
               {/* <p>👤 Team</p> */}
