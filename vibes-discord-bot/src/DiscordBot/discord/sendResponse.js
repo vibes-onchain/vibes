@@ -4,12 +4,14 @@ import * as help from "../responses/help";
 import * as vibes from "../responses/vibes";
 import * as badvibes from "../responses/badvibes";
 import * as setvibestack from "../responses/setvibestack";
+import * as no_vibing_vibe_commands from "../responses/no_vibing_vibe_commands";
 
 const RESPONSES = {
   help,
   vibes,
   badvibes,
   setvibestack,
+  no_vibing_vibe_commands
 };
 
 export default async function ({

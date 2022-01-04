@@ -11,12 +11,12 @@ function description({
   receiving_member,
   vibesLedgerSummary,
 }) {
-  return `:arrow_right: ${":sparkles:"} @${
-    receiving_member.username
-  } – u got susvibes ${":sparkles:"} from @${sending_member.username} ${
+  return `:arrow_right: ${":sparkles:"} <@${
+    receiving_member.user_id
+  }> – u got susvibes ${":sparkles:"} from <@${sending_member.user_id}> ${
     note ? `\nfor "${note}"` : ""
   }
-    :pancakes: @${sending_member.username} has a **\`VIBESTACK\`** of ${
+    :pancakes: <@${sending_member.user_id}> has a **\`VIBE STACK\`** of ${
     formatNumber(sending_member.vibestack, 'decimal0f')
   }
     :clipboard:Full Tx log – **[vibescan.io](${

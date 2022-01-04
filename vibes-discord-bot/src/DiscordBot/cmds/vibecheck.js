@@ -6,7 +6,7 @@ import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 import formatNumber from "../../lib/formatNumber";
 import getVibeFeed from "../discord/getVibeFeed";
 
-const disable_in_channel_messages = true
+const disable_in_channel_messages = true;
 
 export default async function vibecheck({
   client,
@@ -46,20 +46,20 @@ export default async function vibecheck({
   const profilePath = `ledger/${ledger.id}/profile/discord_member-${receiving_member.member_id}`;
 
   const vibeLevelEmoji = (() => {
-    if (receiving_member.vibeLevel === 'Sus Vibe') {
-      return ':warning:';
-    } else if (receiving_member.vibeLevel === 'OG Vibe') {
-      return ':yellow_square:';
-    } else if (receiving_member.vibeLevel === 'Legendary Vibe') {
-      return ':orange_square:';
-    } else if (receiving_member.vibeLevel === 'Epic Vibe') {
-      return ':purple_square:';
-    } else if (receiving_member.vibeLevel === 'Rare Vibe') {
-      return ':blue_square:';
-    } else if (receiving_member.vibeLevel === 'Frenly Vibe') {
-      return ':green_square:';
+    if (receiving_member.vibeLevel === "Sus Vibe") {
+      return ":warning:";
+    } else if (receiving_member.vibeLevel === "OG Vibe") {
+      return ":yellow_square:";
+    } else if (receiving_member.vibeLevel === "Legendary Vibe") {
+      return ":orange_square:";
+    } else if (receiving_member.vibeLevel === "Epic Vibe") {
+      return ":purple_square:";
+    } else if (receiving_member.vibeLevel === "Rare Vibe") {
+      return ":blue_square:";
+    } else if (receiving_member.vibeLevel === "Frenly Vibe") {
+      return ":green_square:";
     } else {
-      return ':green_square:';
+      return ":green_square:";
     }
   })();
 
@@ -73,17 +73,25 @@ export default async function vibecheck({
       process.env.VIBES_LIVE_BASE_URL
     }/${profilePath})**
 
+      <@${receiving_member.user_id}>
+
       :rocket: \`VIBE LEVEL \` ${vibeLevelEmoji} ${
       receiving_member.vibeLevel || "Has no level"
     } (${formatNumber(receiving_member.vibestack_percentile, "percent2f")})
-      :pancakes: \`VIBE STACK \` ${receiving_member.vibestack}
-      :sparkler: \`VIBE DUST  \` ${receiving_member.vibedust} today
+      :pancakes: \`VIBE STACK \` ${formatNumber(
+        receiving_member.vibestack,
+        "decimal0f"
+      )}
+      :sparkler: \`VIBE DUST  \` ${formatNumber(
+        receiving_member.vibedust,
+        "decimal0f"
+      )} today
       
       :clipboard: Full Tx log at **[vibescan.io](${
         process.env.VIBESCAN_BASE_URL
       }/${profilePath}/entries)**
       
-      :detective: _requested by @${sending_member.username}_
+      :detective: _requested by <@${sending_member.user_id}>_
       `,
     // TODO /* :mechanical_arm: \`BOOSTS\` – [=${receiving_member.vibeLevelBoost}*${receiving_member.stakeMoBoost}] ${receiving_member.vibeLevelBoost}x for ${receiving_member.vibeLevel} Vibe Level and ${receiving_member.stakeMoBoost}x for ${receiving_member.stakeMo} Months Staked ${receiving_member.stakeMoBoost} */}
     thumbnail: {
@@ -95,7 +103,10 @@ export default async function vibecheck({
   };
   const vibeFeedChannel = await getVibeFeed({ client, guild_id });
 
-  if (!disable_in_channel_messages && message?.channel?.id !== vibeFeedChannel.id) {
+  if (
+    !disable_in_channel_messages &&
+    message?.channel?.id !== vibeFeedChannel.id
+  ) {
     await message?.channel?.send(
       `see <#${
         vibeFeedChannel.id

@@ -18,16 +18,32 @@ async function handleVibeReaction({
   ledger_id,
   from_member_id,
   to_member_id,
-  reason,
+  note,
   reaction_to_message_id,
   entryType,
 }) {
+  if (["Vibe","BadVibe"].includes(entryType) && note?.trim?.().match('^!(vibe|vibes|susvibe|susvibes|badvibes|badvibe)')) {
+    const sending_member = await getMemberDetails({
+      client,
+      guild_id,
+      member_id: from_member_id,
+    });
+    await sendResponse({
+      client,
+      guild_id,
+      response: "no_vibing_vibe_commands",
+      ledger_id,
+      sending_member,
+    }); 
+    return;
+  }
+  
   if (entryType === "Vibe") {
     await saveVibe({
       ledger_id: ledger_id,
       from_member_id: from_member_id,
       member_id: to_member_id,
-      note: reason,
+      note,
       reaction_to_message_id,
     });
     const sending_member = await getMemberDetails({
@@ -50,7 +66,7 @@ async function handleVibeReaction({
       ledger_id,
       sending_member,
       receiving_member,
-      note: reason,
+      note,
       vibesLedgerSummary,
     });
   } else if (entryType === "BadVibe") {
@@ -58,7 +74,7 @@ async function handleVibeReaction({
       ledger_id: ledger_id,
       from_member_id: from_member_id,
       member_id: to_member_id,
-      reason,
+      note,
       reaction_to_message_id,
     });
     const sending_member = await getMemberDetails({
@@ -81,7 +97,7 @@ async function handleVibeReaction({
       ledger_id,
       sending_member,
       receiving_member,
-      note: reason,
+      note,
       vibesLedgerSummary,
     });
   }

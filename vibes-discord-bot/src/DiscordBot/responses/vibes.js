@@ -10,14 +10,14 @@ function description({
   receiving_member,
   vibesLedgerSummary,
 }) {
-  return `:arrow_right: ${":sparkles:"} @${
-    receiving_member.username
-  } – u got vibes ${":sparkles:"} from @${sending_member.username} ${
+  return `:arrow_right: ${":sparkles:"} <@${
+    receiving_member.user_id
+  }> – u got vibes ${":sparkles:"} from <@${sending_member.user_id}> ${
     note ? `\nfor "${note}"` : ""
   }
-    :pancakes: @${
-      sending_member.username
-    } has a **\`VIBESTACK\`** of ${formatNumber(
+    :pancakes: <@${
+      sending_member.user_id
+    }> has a **\`VIBE STACK\`** of ${formatNumber(
     sending_member.vibestack,
     "decimal0f"
   )}
