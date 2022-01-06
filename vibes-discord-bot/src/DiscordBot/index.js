@@ -44,27 +44,7 @@ async function setupCronJobs(client) {
   });
 }
 
-DiscordBot.setupClient = async function () {
-  const client = new Client({
-    intents: REQUIRED_INTENTS,
-    partials: ["MESSAGE", "CHANNEL", "REACTION"],
-  });
-  const connect = new Promise((resolve) => {
-    client.once("ready", async () => {
-      resolve(client);
-    });
-  });
-  client.login(TOKEN);
-  await connect;
-  return client;
-};
-
-DiscordBot.start = async function () {
-  const client = new Client({
-    intents: REQUIRED_INTENTS,
-    partials: ["MESSAGE", "CHANNEL", "REACTION"],
-  });
-
+async function setupListeners(client) {
   client.once("ready", async () => {
     // console.log(`connected as @${process.env.APP_DISCORD_BOT_USERNAME}`);
     ready_guilds = await readyGuilds(client, ready_guilds);
@@ -100,12 +80,36 @@ DiscordBot.start = async function () {
     if (!interaction.isCommand()) return;
     return handleSlashCommand({ client, command: interaction });
   });
-
   // TODO messageReactionRemove
+}
 
+DiscordBot.setupClient = async function () {
+  const client = new Client({
+    intents: REQUIRED_INTENTS,
+    partials: ["MESSAGE", "CHANNEL", "REACTION"],
+  });
+  const connect = new Promise((resolve) => {
+    client.once("ready", async () => {
+      resolve(client);
+    });
+  });
   client.login(TOKEN);
+  await connect;
+  return client;
+};
 
-  await setupCronJobs(client);
+DiscordBot.start = async function () {
+  const client = await DiscordBot.setupClient();
+
+  if (!!parseInt(process.env.APP_DISCORD_BOT_LISTENS)) {
+    console.log("[CLIENT] Starting listeners");
+    await setupListeners(client);
+  }
+
+  if (!!parseInt(process.env.APP_DISCORD_BOT_RUNS_CRON_JOBS)) {
+    console.log("[CLIENT] Starting cron handlers");
+    await setupCronJobs(client);
+  }
 
   await new Promise((resolve, reject) => {});
 };
