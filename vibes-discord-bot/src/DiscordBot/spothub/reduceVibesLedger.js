@@ -10,7 +10,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
     order: [["global_seq_number", "ASC"]],
   });
   let current_rate = null;
-  let current_period = null;
+  let current_period = 'day';
   let current_time = null;
   let user_vibes = {};
   let pending_vibes = {};
@@ -18,6 +18,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
   for (const entry of entries) {
     if (current_time === null) {
       current_time = entry.authored_on;
+      // console.log("STARTING AT", current_time);
     }
     if (entry.type === "Reset Vibestacks") {
       pending_vibes = {};
@@ -37,6 +38,8 @@ export default async function reduceVibesLedger({ ledger_id }) {
         user_vibes,
         pending_vibes,
       });
+      // console.log("MOVING TO", current_time);
+      // console.log({user_vibes});
       pending_vibes = {};
     }
     // if (entry.type === "Set Vibe Period") {
