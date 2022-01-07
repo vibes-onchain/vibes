@@ -1,0 +1,115 @@
+{
+  "name": "express-simple-api-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec \"./bin/run_action\" app/serve",
+    "start_server": "./bin/run_action app/serve",
+    "mockapi": "APP_MOCKAPI=1 nodemon --exec \"./bin/run_action\" app/serve",
+    "test:watch": "APP_ENV=test jest --watch",
+    "test": "APP_ENV=test node --async-stack-traces --harmony -r esm-wallaby -r ./init.js --experimental-vm-modules node_modules/.bin/jest --forceExit",
+    "test:inspect": "APP_ENV=test node --inspect-brk --expose-gc --async-stack-traces --harmony -r esm-wallaby -r ./init.js --experimental-vm-modules node_modules/.bin/jest --runInBand --logHeapUsage"
+  },
+  "jest": {
+    "testEnvironment": "jest-environment-node",
+    "transform": {
+      "\\.m?jsx?$": "jest-esm-transformer"
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
+    "globalTeardown": "./jest/teardown.js",
+    "globalSetup": "./jest/setup.js",
+    "setupFilesAfterEnv": [
+      "./jest/aroundTest.js"
+    ],
+    "moduleNameMapper": {
+      "test:/(.*)": "<rootDir>/test/$1",
+      ":/(.*)": "<rootDir>/src/$1"
+    }
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1052.0",
+    "blakejs": "^1.1.1",
+    "body-parser": "^1.19.1",
+    "chalk": "^5.0.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.0.0",
+    "core-js": "^3.20.2",
+    "cors": "^2.8.5",
+    "croner": "^4.0.83",
+    "d3-format": "^3.1.0",
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "db-migrate-shared": "^1.2.0",
+    "deep-keys": "^0.5.0",
+    "dotenv": "^10.0.0",
+    "email-templates": "^8.0.8",
+    "es6-template-string": "^1.2.0",
+    "esm-wallaby": "^3.2.25",
+    "express": "^4.17.2",
+    "express-paths-as-routes": "^1.0.1",
+    "express-pino-logger": "^7.0.0",
+    "faker": "^5.5.3",
+    "fetch-absolute": "^1.0.0",
+    "forever-monitor": "^3.0.3",
+    "formdata-polyfill": "^4.0.10",
+    "fs-extra": "^10.0.0",
+    "js-to-formdata": "^1.2.2",
+    "jsep": "^1.2.0",
+    "leaked-handles": "^5.2.0",
+    "lodash": "^4.17.21",
+    "mockdate": "^3.0.5",
+    "module-alias": "^2.2.2",
+    "moment": "^2.29.1",
+    "multer": "^1.4.4",
+    "mz": "^2.7.0",
+    "nodemon": "^2.0.15",
+    "object-to-formdata": "^4.4.1",
+    "pg": "^8.7.1",
+    "pino-http": "^6.5.0",
+    "pino-pretty": "^7.3.0",
+    "scmp": "^2.1.0",
+    "sequelize": "^6.12.5",
+    "short-uuid": "^4.2.0",
+    "sqlite3": "^5.0.2",
+    "subscript": "^6.1.0",
+    "svg64": "^1.1.0",
+    "test-listen": "^1.1.0",
+    "update": "^0.7.4",
+    "uuid": "^8.3.2",
+    "uuid-validate": "0.0.3",
+    "weak-napi": "^2.0.2",
+    "xmldom": "^0.6.0",
+    "yargs": "^17.3.1",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7",
+    "jest-esm-transformer": "^1.0.0"
+  },
+  "engines": {
+    "node": "16",
+    "npm": "7"
+  },
+  "esm": {
+    "cjs": {
+      "dedefault": true,
+      "topLevelReturn": true
+    },
+    "mainFields": [
+      "module",
+      "main"
+    ],
+    "mode": "auto"
+  },
+  "_moduleAliases": {
+    ":": "src",
+    "test:": "test"
+  }
+}
