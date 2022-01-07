@@ -53,6 +53,7 @@ const routes = [
   "/ledger/:ledger_id/profile/:profile_id",
   "/ledger/:ledger_id/entries",
   "/ledger/:ledger_id",
+  "/community",
   "/",
 ];
 

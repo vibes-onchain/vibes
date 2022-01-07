@@ -24,7 +24,7 @@
     "object-to-formdata": "^4.1.0",
     "plotly.js-cartesian-dist": "^2.2.1",
     "prop-types": "^15.7.2",
-    "qrcode": "^1.4.4",
+    "qrcode": "^1.5.0",
     "react": "^16.13.1",
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
@@ -47,7 +47,7 @@
     "source-map-explorer": "^2.5.2",
     "spothub": "github:spot-foundation/spothub-js",
     "uuid-validate": "0.0.3",
-    "validator": "^13.6.0",
+    "validator": "^13.7.0",
     "yup": "^0.29.3"
   },
   "scripts": {
