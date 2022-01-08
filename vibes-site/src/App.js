@@ -14,6 +14,16 @@ import BackendContext, { BackendStore } from "./contexts/BackendContext";
 import "semantic-ui-css/semantic.min.css";
 import { ChakraProvider } from "@chakra-ui/react";
 
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query';
+
+const queryClient = new QueryClient();
+
 function AppRouter() {
   return (
     <Router>
@@ -39,9 +49,9 @@ function NoMatch() {
 
 function App() {
   return (
-    <BackendStore>
+    <QueryClientProvider client={queryClient}>
       <AppRouter />
-    </BackendStore>
+    </QueryClientProvider>
   );
 }
 

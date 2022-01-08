@@ -13,12 +13,16 @@ import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
 import Ledger from 'spothub/lib/Ledger';
 import LedgerEntry from 'spothub/lib/LedgerEntry';
+import LedgerEntryUserLabel from ':/components/LedgerEntryUserLabel';
 
 export default function () {
   const router = useRouter();
   const ledger_id = router.match.params.ledger_id;
+  const profile_id = router.match.params.profile_id;
   const [ledger, setLedger] = React.useState(null);
+  const [guildId, setGuildId] = React.useState(null);
   const [ledgerEntries, setLedgerEntries] = React.useState(null);
+  const [profile, setProfile] = React.useState(null);
 
   React.useEffect(() => {
     if (ledger_id) {
@@ -29,10 +33,24 @@ export default function () {
   }, [ledger_id]);
 
   React.useEffect(() => {
+    const discord_member_id = profile_id.split('discord_member-')[1];
     LedgerEntry.findAll({where: {ledger_id}}).then(r => {
-      setLedgerEntries(r);
+      const r2 = r.filter(entry => entry.sender?.id === discord_member_id || entry.receiver?.id === discord_member_id);
+      setLedgerEntries(r2);
     });
   }, [ledger_id]);
+
+  React.useEffect(() => {
+    if (profile_id.match('discord_member-')) {
+      const discord_member_id = profile_id.split('discord_member-')[1];
+      Backend.get(`/discord/user/${discord_member_id}`).then(r => {
+        setProfile({
+          username: r.result?.user?.username,
+          displayAvatarURL: r.result?.user?.displayAvatarURL
+        });
+      })
+    }
+  }, [guildId, profile_id]);
 
   if (!ledger || !ledgerEntries) {
     return <Loading />;
@@ -43,7 +61,11 @@ export default function () {
       <Header />
       <div className="page-container">
         <div css={CSS}>
-          <h1>{ledger.name}</h1>
+          <h1>
+            {ledger.name}
+            <img src={profile?.displayAvatarURL} />
+            <span>@{profile?.username}</span>
+          </h1>
           <table>
             <thead>
               <tr>
@@ -61,8 +83,8 @@ export default function () {
                   <td>{EntryId.abbreviate(entry.id)}</td>
                   <td>{entry.authored_on}</td>
                   <td>{entry.type}</td>
-                  <td>{entry.sender?.id}</td>
-                  <td>{entry.receiver?.id}</td>
+                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
+                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
                   <td>
                     {entry.value?.vibe_rate ||
                       entry.value?.vibe_period ||

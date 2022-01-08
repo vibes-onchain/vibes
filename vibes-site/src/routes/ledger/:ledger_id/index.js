@@ -13,6 +13,7 @@ import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
 import Ledger from 'spothub/lib/Ledger';
 import LedgerEntry from 'spothub/lib/LedgerEntry';
+import LedgerEntryUserLabel from ':/components/LedgerEntryUserLabel';
 
 export default function () {
   const router = useRouter();
@@ -61,8 +62,8 @@ export default function () {
                   <td>{EntryId.abbreviate(entry.id)}</td>
                   <td>{entry.authored_on}</td>
                   <td>{entry.type}</td>
-                  <td>{entry.sender?.id}</td>
-                  <td>{entry.receiver?.id}</td>
+                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
+                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
                   <td>
                     {entry.value?.vibe_rate ||
                       entry.value?.vibe_period ||
