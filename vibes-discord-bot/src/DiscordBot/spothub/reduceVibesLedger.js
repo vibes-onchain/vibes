@@ -59,7 +59,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
       };
       pending_vibes[entry.sender.id][entry.receiver.id].good++;
     }
-    if (entry.type === "Bad Vibe") {
+    if (entry.type === "BadVibe") {
       pending_vibes[entry.sender.id] ||= {};
       pending_vibes[entry.sender.id][entry.receiver.id] ||= {
         good: 0,
