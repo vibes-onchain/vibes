@@ -45,12 +45,15 @@ async function setupCronJobs(client) {
 }
 
 async function setupListeners(client) {
-  client.once("ready", async () => {
-    // console.log(`connected as @${process.env.APP_DISCORD_BOT_USERNAME}`);
-    ready_guilds = await readyGuilds(client, ready_guilds);
-    console.log("[CLIENT]", `Guilds: `, ready_guilds);
-  });
-
+  if (client.isReady()) {
+      ready_guilds = await readyGuilds(client, ready_guilds);
+      console.log("[CLIENT]", `Guilds: `, ready_guilds);
+  } else {
+    client.once("ready", async () => {
+      ready_guilds = await readyGuilds(client, ready_guilds);
+      console.log("[CLIENT]", `Guilds: `, ready_guilds);
+    });
+  }
   // TODO guildCreate, handle addition to guild
   // TODO guildDelete, handle removal from guild
 
