@@ -8,9 +8,8 @@ import "react-tagsinput/react-tagsinput.css";
 import "./App.css";
 
 import Error404 from "./components/Error404";
-import BackendContext, { BackendStore } from "./contexts/BackendContext";
 
-// import "./index.css";
+import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 import { ChakraProvider } from "@chakra-ui/react";
 
