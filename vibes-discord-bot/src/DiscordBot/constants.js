@@ -37,7 +37,7 @@ export const GLOBAL_CMDS = [
   "setupvibes",
   //
   "newvibesledger",
-  "refreshvibeparens"
+  "refreshvibeparens",
 ];
 
 export const REQUIRED_INTENTS = [
@@ -160,6 +160,7 @@ export const VIBE_EMOJIS = {
 };
 
 export const GOOD_VIBE_EMOJI_NAMES = [
+  "✨",
   "sparkles",
   "vibes",
   // "ogvibe",
@@ -172,4 +173,4 @@ export const GOOD_VIBE_EMOJI_NAMES = [
   // "vibedust",
 ];
 
-export const BAD_VIBE_EMOJI_NAMES = ["warning", "susvibes"];
+export const BAD_VIBE_EMOJI_NAMES = ["⚠️", "warning", "susvibes"];
