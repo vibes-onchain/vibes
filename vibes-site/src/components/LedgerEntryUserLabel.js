@@ -1,21 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {useQuery} from 'react-query';
-import Backend from ':/lib/Backend';
 
-export default function LedgerEntryUserLabel({ id, to }) {
-  const {data} = useQuery(`discordUserData:${id}`, async () => {
-    if (id) {
-      const r = await Backend.get(`/discord/user/${id}`);
-      return r.result?.user;
-    }
-  });
+import LedgerEntryUserAvatar from "./LedgerEntryUserAvatar";
+import LedgerEntryUserName from "./LedgerEntryUserName";
 
-  const name = data?.username || id;
-
+export default function LedgerEntryUserLabel({ type, id, to, imgClassName }) {
   if (to) {
-    return <Link to={to}>{name}</Link>;
+    return (
+      <Link to={to}>
+        {" "}
+        <span className="space-x-2">
+          <LedgerEntryUserAvatar id={id} imgClassName={imgClassName} />{" "}
+          <LedgerEntryUserName id={id} />
+        </span>
+      </Link>
+    );
   } else {
-    return <span>{name}</span>;
+    return (
+      <span className="space-x-2">
+        <LedgerEntryUserAvatar id={id} imgClassName={imgClassName} />{" "}
+        <LedgerEntryUserName id={id} />
+      </span>
+    );
   }
 }

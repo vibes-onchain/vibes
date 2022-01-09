@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/core";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Button, Icon, Dropdown, Label } from "semantic-ui-react";

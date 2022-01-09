@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css, keyframes } from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import { css, keyframes } from "@emotion/core";
 
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -11,9 +11,9 @@ import Header from ":/components/Header";
 import useRouter from ":/lib/useRouter";
 import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
-import Ledger from 'spothub/lib/Ledger';
-import LedgerEntry from 'spothub/lib/LedgerEntry';
-import LedgerEntryUserLabel from ':/components/LedgerEntryUserLabel';
+import Ledger from "spothub/lib/Ledger";
+import LedgerEntry from "spothub/lib/LedgerEntry";
+import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
 
 export default function () {
   const router = useRouter();
@@ -26,29 +26,33 @@ export default function () {
 
   React.useEffect(() => {
     if (ledger_id) {
-      Ledger.findOne({where: {id: ledger_id}}).then(r => {
+      Ledger.findOne({ where: { id: ledger_id } }).then((r) => {
         setLedger(r);
-      })
+      });
     }
   }, [ledger_id]);
 
   React.useEffect(() => {
-    const discord_member_id = profile_id.split('discord_member-')[1];
-    LedgerEntry.findAll({where: {ledger_id}}).then(r => {
-      const r2 = r.filter(entry => entry.sender?.id === discord_member_id || entry.receiver?.id === discord_member_id);
+    const discord_member_id = profile_id.split("discord_member-")[1];
+    LedgerEntry.findAll({ where: { ledger_id } }).then((r) => {
+      const r2 = r.filter(
+        (entry) =>
+          entry.sender?.id === discord_member_id ||
+          entry.receiver?.id === discord_member_id
+      );
       setLedgerEntries(r2);
     });
   }, [ledger_id]);
 
   React.useEffect(() => {
-    if (profile_id.match('discord_member-')) {
-      const discord_member_id = profile_id.split('discord_member-')[1];
-      Backend.get(`/discord/user/${discord_member_id}`).then(r => {
+    if (profile_id.match("discord_member-")) {
+      const discord_member_id = profile_id.split("discord_member-")[1];
+      Backend.get(`/discord/user/${discord_member_id}`).then((r) => {
         setProfile({
           username: r.result?.user?.username,
-          displayAvatarURL: r.result?.user?.displayAvatarURL
+          displayAvatarURL: r.result?.user?.displayAvatarURL,
         });
-      })
+      });
     }
   }, [guildId, profile_id]);
 
@@ -83,8 +87,24 @@ export default function () {
                   <td>{EntryId.abbreviate(entry.id)}</td>
                   <td>{entry.authored_on}</td>
                   <td>{entry.type}</td>
-                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
-                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
+                  <td>
+                    {entry.sender && (
+                      <LedgerEntryUserLabel
+                        to={`/ledger/${ledger_id}/profile/discord_member-${entry.sender?.id}`}
+                        id={entry.sender?.id}
+                        imgClassName={"w-7 h-7 rounded-full inline-block"}
+                      />
+                    )}
+                  </td>
+                  <td>
+                    {entry.receiver && (
+                      <LedgerEntryUserLabel
+                        to={`/ledger/${ledger_id}/profile/discord_member-${entry.receiver?.id}`}
+                        id={entry.receiver?.id}
+                        imgClassName={"w-7 h-7 rounded-full inline-block"}
+                      />
+                    )}
+                  </td>
                   <td>
                     {entry.value?.vibe_rate ||
                       entry.value?.vibe_period ||

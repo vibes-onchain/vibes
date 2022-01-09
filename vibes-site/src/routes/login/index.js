@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css, keyframes } from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import { css, keyframes } from "@emotion/core";
 
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";

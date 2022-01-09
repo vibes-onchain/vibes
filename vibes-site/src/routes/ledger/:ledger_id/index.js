@@ -1,5 +1,5 @@
-/** @jsx jsx */
-import { jsx, css, keyframes } from "@emotion/core";
+/** @jsxImportSource @emotion/react */
+import { css, keyframes } from "@emotion/core";
 
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
@@ -11,9 +11,9 @@ import Header from ":/components/Header";
 import useRouter from ":/lib/useRouter";
 import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
-import Ledger from 'spothub/lib/Ledger';
-import LedgerEntry from 'spothub/lib/LedgerEntry';
-import LedgerEntryUserLabel from ':/components/LedgerEntryUserLabel';
+import Ledger from "spothub/lib/Ledger";
+import LedgerEntry from "spothub/lib/LedgerEntry";
+import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
 
 export default function () {
   const router = useRouter();
@@ -23,14 +23,14 @@ export default function () {
 
   React.useEffect(() => {
     if (ledger_id) {
-      Ledger.findOne({where: {id: ledger_id}}).then(r => {
+      Ledger.findOne({ where: { id: ledger_id } }).then((r) => {
         setLedger(r);
-      })
+      });
     }
   }, [ledger_id]);
 
   React.useEffect(() => {
-    LedgerEntry.findAll({where: {ledger_id}}).then(r => {
+    LedgerEntry.findAll({ where: { ledger_id } }).then((r) => {
       setLedgerEntries(r);
     });
   }, [ledger_id]);
@@ -62,8 +62,24 @@ export default function () {
                   <td>{EntryId.abbreviate(entry.id)}</td>
                   <td>{entry.authored_on}</td>
                   <td>{entry.type}</td>
-                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
-                  <td><LedgerEntryUserLabel id={entry.sender?.id} /></td>
+                  <td>
+                    {entry.sender && (
+                      <LedgerEntryUserLabel
+                        to={`/ledger/${ledger_id}/profile/discord_member-${entry.sender?.id}`}
+                        id={entry.sender?.id}
+                        imgClassName={"w-7 h-7 rounded-full inline-block"}
+                      />
+                    )}
+                  </td>
+                  <td>
+                    {entry.receiver && (
+                      <LedgerEntryUserLabel
+                        to={`/ledger/${ledger_id}/profile/discord_member-${entry.receiver?.id}`}
+                        id={entry.receiver?.id}
+                        imgClassName={"w-7 h-7 rounded-full inline-block"}
+                      />
+                    )}
+                  </td>
                   <td>
                     {entry.value?.vibe_rate ||
                       entry.value?.vibe_period ||
