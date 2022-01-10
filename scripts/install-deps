@@ -3,4 +3,4 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 (cd $DIR/../vibes-discord-bot && npm i)
-(cd $DIR/../vibes-site && yarn i)
+(cd $DIR/../vibes-site && yarn install)
