@@ -13,6 +13,7 @@ import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
 import Ledger from 'spothub/lib/Ledger';
 import LedgerEntry from 'spothub/lib/LedgerEntry';
+import LedgerTable from ':/components/LedgerTable';
 
 export default function () {
   const router = useRouter();
@@ -44,34 +45,7 @@ export default function () {
       <div className="page-container">
         <div css={CSS}>
           <h1>{ledger.name}</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Entry ID</th>
-                <th>Time</th>
-                <th>Type</th>
-                <th>Sender</th>
-                <th>Receiver</th>
-                <th>Data</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ledgerEntries.map((entry) => (
-                <tr>
-                  <td>{EntryId.abbreviate(entry.id)}</td>
-                  <td>{entry.authored_on}</td>
-                  <td>{entry.type}</td>
-                  <td>{entry.sender?.id}</td>
-                  <td>{entry.receiver?.id}</td>
-                  <td>
-                    {entry.value?.vibe_rate ||
-                      entry.value?.vibe_period ||
-                      entry.value?.reason}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <LedgerTable ledger_id={ledger_id} ledgerEntries={ledgerEntries} />
         </div>
       </div>
       <Footer />
