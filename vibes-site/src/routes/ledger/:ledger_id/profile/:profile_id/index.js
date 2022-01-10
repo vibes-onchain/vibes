@@ -42,7 +42,7 @@ export default function () {
       );
       setLedgerEntries(r2);
     });
-  }, [ledger_id]);
+  }, [ledger_id, profile_id]);
 
   React.useEffect(() => {
     if (profile_id.match("discord_member-")) {
