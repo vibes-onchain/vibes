@@ -10,7 +10,10 @@ export default function LedgerEntryUserLabel({ type, id, to, imgClassName }) {
       <Link to={to}>
         {" "}
         <span className="space-x-2">
-          <LedgerEntryUserAvatar id={id} imgClassName={imgClassName} />{" "}
+          <LedgerEntryUserAvatar
+            id={id}
+            imgClassName={imgClassName || "rounded-full inline-block w-10"}
+          />{" "}
           <LedgerEntryUserName id={id} />
         </span>
       </Link>
@@ -18,7 +21,10 @@ export default function LedgerEntryUserLabel({ type, id, to, imgClassName }) {
   } else {
     return (
       <span className="space-x-2">
-        <LedgerEntryUserAvatar id={id} imgClassName={imgClassName} />{" "}
+        <LedgerEntryUserAvatar
+          id={id}
+          imgClassName={imgClassName || "rounded-full inline-block w-10"}
+        />{" "}
         <LedgerEntryUserName id={id} />
       </span>
     );

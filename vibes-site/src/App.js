@@ -3,13 +3,15 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import "react-tagsinput/react-tagsinput.css";
-import "./App.css";
-
 import Error404 from "./components/Error404";
 
-import "./index.css";
+import "./assets/css/reset.css";
+import "./assets/css/tailwind.css";
 import "semantic-ui-css/semantic.min.css";
+import "./assets/css/semantic-ui-overrides.css";
+import "react-tagsinput/react-tagsinput.css";
+import "./index.css"
+import "./App.css";
 
 import {
   useQuery,
