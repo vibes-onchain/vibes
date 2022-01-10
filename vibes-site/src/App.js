@@ -10,7 +10,6 @@ import Error404 from "./components/Error404";
 
 import "./index.css";
 import "semantic-ui-css/semantic.min.css";
-import { ChakraProvider } from "@chakra-ui/react";
 
 import {
   useQuery,
@@ -18,7 +17,7 @@ import {
   useQueryClient,
   QueryClient,
   QueryClientProvider,
-} from 'react-query';
+} from "react-query";
 
 const queryClient = new QueryClient();
 
@@ -28,9 +27,7 @@ function AppRouter() {
       <Switch>
         {routes.map((path) => (
           <Route key={path} path={path} exact={true || path === "/"}>
-            <ChakraProvider>
-              {React.createElement(require(`./routes${path}`).default)}
-            </ChakraProvider>
+            {React.createElement(require(`./routes${path}`).default)}
           </Route>
         ))}
         <Route path="*">

@@ -12,29 +12,29 @@ import useSession from ":/lib/useSession";
 import useRouter from ":/lib/useRouter";
 import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
-import {
-  Box,
-  Container,
-  Button,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  Tab,
-  Tabs,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Heading,
-  Switch,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+// import {
+//   Box,
+//   Container,
+//   Button,
+//   Input,
+//   InputGroup,
+//   InputLeftAddon,
+//   Tab,
+//   Tabs,
+//   TabList,
+//   TabPanel,
+//   TabPanels,
+//   Heading,
+//   Switch,
+//   Grid,
+//   GridItem,
+// } from "@chakra-ui/react";
 import { DimmerInner } from "semantic-ui-react";
+import Ledger from 'spothub/lib/Ledger';
 
 export default function () {
-  const session = useSession();
   const router = useRouter();
-  const space_id = router.match.params.space_id;
+  const ledger_id = router.match.params.ledger_id;
   const [space, setSpace] = React.useState(null);
   const [helpMessage, setHelpMessage] = useState("");
   const [helpMessageTitle, setHelpMessageTitle] = useState("");
@@ -50,17 +50,17 @@ export default function () {
         },
       },
     };
-    await Backend.put(`/spaces/${space_id}`, spaceData);
-    await Backend.get(`/spaces/${space_id}`).then((r) => {
-      setSpace(r.data);
-    });
+    // await Backend.put(`/spaces/${ledger_id}`, spaceData);
+    // await Backend.get(`/spaces/${ledger_id}`).then((r) => {
+    //   setSpace(r.data);
+    // });
   };
 
   React.useEffect(() => {
-    Backend.get(`/spaces/${space_id}`).then((r) => {
-      setSpace(r.data);
+    Ledger.findOne({ where: { id: ledger_id } }).then((r) => {
+      setSpace(r);
     });
-  }, [space_id]);
+  }, [ledger_id]);
 
   if (!space) {
     return <Loading />;
@@ -73,7 +73,7 @@ export default function () {
         <div css={CSS}>
           <p>{JSON.stringify(space.meta)}</p>
           <h1>{space.name}</h1>
-          <Container maxW="xl" centerContent>
+          {/* <Container maxW="xl" centerContent>
             <Box padding="4" bg="green.300" maxW="3xl">
               <Heading m={4}>Edit Messages Sent by Bot</Heading>
               <Tabs variant="soft-rounded" colorScheme="green">
@@ -226,7 +226,7 @@ export default function () {
                 </TabPanels>
               </Tabs>
             </Box>
-          </Container>
+          </Container> */}
         </div>
       </div>
     </>
