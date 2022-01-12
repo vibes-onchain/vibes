@@ -11,29 +11,53 @@ import Header from ":/components/Header";
 import useRouter from ":/lib/useRouter";
 import Loading from ":/components/Loading";
 import EntryId from ":/lib/EntryId";
-import Ledger from 'spothub/lib/Ledger';
-import LedgerEntry from 'spothub/lib/LedgerEntry';
-import LedgerTable from ':/components/LedgerTable';
+import Ledger from "spothub/lib/Ledger";
+import LedgerEntry from "spothub/lib/LedgerEntry";
+import LedgerTable from ":/components/LedgerTable";
+import DiscordGuildLabel from ":/components/DiscordGuildLabel";
+import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
 
 export default function () {
   const router = useRouter();
   const ledger_id = router.match.params.ledger_id;
+  const profile_id = router.match.params.profile_id;
   const [ledger, setLedger] = React.useState(null);
+  const [guildId, setGuildId] = React.useState(null);
   const [ledgerEntries, setLedgerEntries] = React.useState(null);
+  const [profile, setProfile] = React.useState(null);
 
   React.useEffect(() => {
     if (ledger_id) {
-      Ledger.findOne({where: {id: ledger_id}}).then(r => {
+      Ledger.findOne({ where: { id: ledger_id } }).then((r) => {
         setLedger(r);
-      })
+      });
     }
   }, [ledger_id]);
 
   React.useEffect(() => {
-    LedgerEntry.findAll({where: {ledger_id}}).then(r => {
-      setLedgerEntries(r);
+    const discord_member_id = profile_id.split("discord_member-")[1];
+    LedgerEntry.findAll({ where: { ledger_id } }).then((r) => {
+      const r2 = r.filter(
+        (entry) =>
+          entry.sender?.id === discord_member_id ||
+          entry.receiver?.id === discord_member_id
+      );
+      setLedgerEntries(r2);
     });
-  }, [ledger_id]);
+  }, [ledger_id, profile_id]);
+
+  React.useEffect(() => {
+    if (profile_id.match("discord_member-")) {
+      const discord_member_id = profile_id.split("discord_member-")[1];
+      Backend.get(`/discord/user/${discord_member_id}`).then((r) => {
+        setProfile({
+          user_id: r.result?.user?.id,
+          username: r.result?.user?.username,
+          displayAvatarURL: r.result?.user?.displayAvatarURL,
+        });
+      });
+    }
+  }, [guildId, profile_id]);
 
   if (!ledger || !ledgerEntries) {
     return <Loading />;
@@ -44,7 +68,16 @@ export default function () {
       <Header />
       <div className="page-container">
         <div css={CSS}>
-          <h1>{ledger.name}</h1>
+          <div className="breadcrumbs space-x-10 my-5">
+            {ledger.meta?.["vibes:discord_guild_id"] && (
+              <DiscordGuildLabel
+                to={`/ledger/${ledger_id}`}
+                guild_id={ledger.meta?.["vibes:discord_guild_id"]}
+              />
+            )}
+            <span>&gt;</span>
+            <LedgerEntryUserLabel id={profile?.user_id} />
+          </div>
           <LedgerTable ledger_id={ledger_id} ledgerEntries={ledgerEntries} />
         </div>
       </div>
@@ -103,3 +136,4 @@ const CSS = css`
     }
   }
 `;
+
