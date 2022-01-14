@@ -1,4 +1,8 @@
+import _ from 'lodash';
+
 const { SlashCommandBuilder } = require("@discordjs/builders");
+
+const DEPRECATED_COMMANDS = ["setupvibesparen"];
 
 export default async function ({ client, guild_id }) {
   if (!guild_id) {
@@ -8,6 +12,11 @@ export default async function ({ client, guild_id }) {
   if (!guild) {
     throw new Error("guild not found");
   }
+
+  await guild.commands.fetch();
+  const appCommands = guild.commands.cache
+    .map((i) => i)
+    .filter((i) => i.applicationId === process.env.APP_DISCORD_APP_ID);
 
   const commands = [
     new SlashCommandBuilder()
@@ -19,7 +28,7 @@ export default async function ({ client, guild_id }) {
       .setDescription("vibes fren")
       .addUserOption((option) =>
         option
-          .setName("fren")
+          .setName("user")
           .setDescription("who you're vibing")
           .setRequired(true)
       )
@@ -31,7 +40,7 @@ export default async function ({ client, guild_id }) {
       .setDescription("badvibes fren")
       .addUserOption((option) =>
         option
-          .setName("fren")
+          .setName("user")
           .setDescription("who's being uncool")
           .setRequired(true)
       )
@@ -43,7 +52,7 @@ export default async function ({ client, guild_id }) {
       .setDescription("susvibes fren")
       .addUserOption((option) =>
         option
-          .setName("fren")
+          .setName("user")
           .setDescription("who's being uncool")
           .setRequired(true)
       )
@@ -54,13 +63,13 @@ export default async function ({ client, guild_id }) {
       .setName("vibecheck")
       .setDescription("vibecheck fren")
       .addUserOption((option) =>
-        option.setName("fren").setDescription("who to check").setRequired(true)
+        option.setName("user").setDescription("who to check").setRequired(true)
       ),
     new SlashCommandBuilder()
       .setName("setvibestack")
       .setDescription("[ADMINS ONLY] set fren's vibestack")
       .addUserOption((option) =>
-        option.setName("fren").setDescription("who to check").setRequired(true)
+        option.setName("user").setDescription("who to check").setRequired(true)
       ),
     new SlashCommandBuilder()
       .setName("resetvibestacks")
@@ -75,7 +84,7 @@ export default async function ({ client, guild_id }) {
           .setRequired(true)
       ),
     new SlashCommandBuilder()
-      .setName("setvibesparen")
+      .setName("set_vibes_nickname_template")
       .setDescription(
         "[ADMINS ONLY] set descriptive paren template for nicknames"
       )
@@ -86,7 +95,7 @@ export default async function ({ client, guild_id }) {
       .setName("setvibestack")
       .setDescription("[ADMINS ONLY] set someone's vibestack")
       .addUserOption((option) =>
-        option.setName("fren").setDescription("who").setRequired(true)
+        option.setName("user").setDescription("who").setRequired(true)
       )
       .addStringOption((option) =>
         option
@@ -103,6 +112,15 @@ export default async function ({ client, guild_id }) {
       .setName("refreshvibeparens")
       .setDescription("[ADMINS ONLY] refreshvibeparens"),
   ].map((command) => command.toJSON());
+
+  const extraCommandNames = _.difference(appCommands.map(i => i.name), commands.map(i => i.name));
+  for (const commandName of extraCommandNames) {
+    const id = appCommands.find(i => i.name === commandName)?.id;
+    console.log(guild.id, 'deleting old cmd', commandName);
+    await guild.commands.delete(id);
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+
   for (const command of commands) {
     console.log(guild.id, "setting up cmd", command.name);
     await new Promise((resolve) => setTimeout(resolve, 2000));

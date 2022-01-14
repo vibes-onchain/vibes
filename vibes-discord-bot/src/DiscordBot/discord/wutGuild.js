@@ -9,9 +9,28 @@ export default async function ({ client, guild_id }) {
     throw new Error("guild not found");
   }
   console.log(guild);
-  console.log('roles',
+  await guild.commands.fetch();
+  console.log(
+    "commands",
     _.sortBy(
-      guild.roles.cache.map((i) => ({ name: i.name, position: i.position, color: i.color })),
+      guild.commands.cache
+        .map((i) => i)
+        .filter((i) => i.applicationId === process.env.APP_DISCORD_APP_ID)
+        .map((i) => ({
+          ..._.pick(i, ["name", "description"]),
+          options: i.options.map((i) => i.name),
+        })),
+      "name"
+    )
+  );
+  console.log(
+    "roles",
+    _.sortBy(
+      guild.roles.cache.map((i) => ({
+        name: i.name,
+        position: i.position,
+        color: i.color,
+      })),
       "position"
     )
   );

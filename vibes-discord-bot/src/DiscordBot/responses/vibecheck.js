@@ -14,17 +14,17 @@ export function forVibeFeed({
   const profilePath = `ledger/${ledger_id}/profile/discord_member-${receiving_member.member_id}`;
 
   const vibeLevelEmoji = (() => {
-    if (receiving_member.vibeLevel === "Sus Vibe") {
+    if (receiving_member.vibe_level_name === "Sus Vibe") {
       return ":warning:";
-    } else if (receiving_member.vibeLevel === "OG Vibe") {
+    } else if (receiving_member.vibe_level_name === "OG Vibe") {
       return ":yellow_square:";
-    } else if (receiving_member.vibeLevel === "Legendary Vibe") {
+    } else if (receiving_member.vibe_level_name === "Legendary Vibe") {
       return ":orange_square:";
-    } else if (receiving_member.vibeLevel === "Epic Vibe") {
+    } else if (receiving_member.vibe_level_name === "Epic Vibe") {
       return ":purple_square:";
-    } else if (receiving_member.vibeLevel === "Rare Vibe") {
+    } else if (receiving_member.vibe_level_name === "Rare Vibe") {
       return ":blue_square:";
-    } else if (receiving_member.vibeLevel === "Frenly Vibe") {
+    } else if (receiving_member.vibe_level_name === "Frenly Vibe") {
       return ":green_square:";
     } else {
       return ":green_square:";
@@ -46,7 +46,7 @@ export function forVibeFeed({
           <@${receiving_member.user_id}>
     
           :rocket: \`VIBE LEVEL \` ${vibeLevelEmoji} ${
-          receiving_member.vibeLevel || "Has no level"
+          receiving_member.vibe_level_name || "Has no level"
         } (${formatNumber(receiving_member.vibestack_percentile, "percent2f")})
           :pancakes: \`VIBE STACK \` ${formatNumber(
             receiving_member.vibestack,

@@ -15,7 +15,7 @@ export default async function vibes({ client, message, command, cmd_args }) {
   const ledger_id = ledger.id;
 
   const target_member = command
-    ? cmd_args.find((i) => i.name === "fren").member
+    ? cmd_args.find((i) => i.name === "user").member
     : await getTargetMember({ message, cmd_args });
   if (!target_member) {
     return { error: "receiver not found" };

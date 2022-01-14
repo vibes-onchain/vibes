@@ -8,7 +8,7 @@ import setvibestack from "../cmds/setvibestack";
 import setvibenomics from "../cmds/setvibenomics";
 import resetvibestacks from "../cmds/resetvibestacks";
 
-import setvibesparen from "../cmds/setvibesparen";
+import set_vibes_nickname_template from "../cmds/set_vibes_nickname_template";
 import setvibestrait from "../cmds/setvibestrait";
 
 import setupvibes from "../cmds/setupvibes";
@@ -46,8 +46,8 @@ export default async function handleCmd({ client, command }) {
     handled = setvibenomics({ client, command, cmd_args });
   } else if (["setvibestack"].includes(cmd)) {
     handled = await setvibestack({ client, command, cmd_args });
-  } else if (cmd === "setvibesparen") {
-    handled = await setvibesparen({ client, command, cmd_args });
+  } else if (cmd === "set_vibes_nickname_template") {
+    handled = await set_vibes_nickname_template({ client, command, cmd_args });
     // } else if (cmd === "setvibestrait") {
     //   return setvibestrait({ client, message, cmd_args });
   } else if (cmd === "setupvibes") {

@@ -96,7 +96,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
       );
       const vibestack_percentile =
         ss.cumulativeStdNormalProbability(vibestack_score);
-      let vibeLevel;
+      let vibe_level, vibe_level_name;
       for (const role of [...BAD_VIBE_ROLES, ...GOOD_VIBE_ROLES]) {
         const key = role.when[0];
         const keys_value = (() => {
@@ -111,12 +111,14 @@ export default async function reduceVibesLedger({ ledger_id }) {
         if (role.when) {
           if (op === "<") {
             if (keys_value < value) {
-              vibeLevel = role.name;
+              vibe_level_name = role.name;
+              vibe_level = role.level;
               break;
             }
           } else if (op === ">") {
             if (keys_value > value) {
-              vibeLevel = role.name;
+              vibe_level_name = role.name;
+              vibe_level = role.level;
               break;
             }
           }
@@ -126,7 +128,9 @@ export default async function reduceVibesLedger({ ledger_id }) {
         vibestack,
         vibestack_score,
         vibestack_percentile,
-        vibeLevel,
+        vibeLevel: vibe_level_name,
+        vibe_level_name,
+        vibe_level,
       };
       return acc;
     },

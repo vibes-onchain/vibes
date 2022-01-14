@@ -33,7 +33,7 @@ export const GLOBAL_CMDS = [
   // other
   // TODO "startvibeparty",
   "resetvibestacks",
-  "setvibesparen",
+  "set_vibes_nickname_template",
   "setupvibes",
   //
   "newvibesledger",
@@ -79,6 +79,7 @@ export const GOOD_VIBE_ROLES = [
     icon: "og-vibes.png",
     hoist: true,
     when: ["vibestack_score", ">", 2],
+    level: 5,
   },
   {
     color: 15105570,
@@ -87,6 +88,7 @@ export const GOOD_VIBE_ROLES = [
     hoist: true,
     icon: "legendary-vibes.png",
     when: ["vibestack_score", ">", 1.5],
+    level: 4,
   },
   {
     color: 10181046,
@@ -95,6 +97,7 @@ export const GOOD_VIBE_ROLES = [
     icon: "epic-vibes.png",
     hoist: true,
     when: ["vibestack_score", ">", 1],
+    level: 3,
   },
   {
     color: 3447003,
@@ -103,6 +106,7 @@ export const GOOD_VIBE_ROLES = [
     icon: "rare-vibes.png",
     hoist: true,
     when: ["vibestack_score", ">", 0],
+    level: 2,
   },
   {
     color: 0,
@@ -111,6 +115,7 @@ export const GOOD_VIBE_ROLES = [
     icon: "frenly-vibes.png",
     hoist: true,
     when: ["vibestack", ">", 0],
+    level: 1,
   },
 ];
 export const BAD_VIBES_START_HERE_ROLE = {
@@ -127,6 +132,7 @@ export const BAD_VIBE_ROLES = [
     icon: "sus-vibes.gif",
     hoist: true,
     when: ["vibestack", "<", 0],
+    level: -1,
   },
 ];
 

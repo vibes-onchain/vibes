@@ -18,7 +18,7 @@ export default async function vibecheck({
   const guild_id = guild.id;
 
   const target_member = command
-    ? cmd_args.find((i) => i.name === "fren").member
+    ? cmd_args.find((i) => i.name === "user").member
     : await getTargetMember({ message, cmd_args });
   if (!target_member) {
     return { error: "receiver not found" };

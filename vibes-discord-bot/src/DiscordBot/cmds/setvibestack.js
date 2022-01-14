@@ -30,7 +30,7 @@ export default async function setvibestack({
   }
 
   const target_member = command
-    ? cmd_args.find((i) => i.name === "fren").member
+    ? cmd_args.find((i) => i.name === "user").member
     : await getTargetMember({ message, cmd_args });
   if (!target_member) {
     await message_member.send(
