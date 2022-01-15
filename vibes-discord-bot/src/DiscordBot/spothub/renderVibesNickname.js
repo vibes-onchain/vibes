@@ -7,9 +7,6 @@ const MAX_NICKNAME_LENGTH = 32;
 const DEFAULT_TEMPLATE =
   "{{username | truncate_late}} {% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ⩔ {%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %} ·{% endif %}{% if vibe_level == 2 %} ∶{% endif %}{% if vibe_level == 3 %} ⁖{% endif %}{% if vibe_level == 4 %} ⁘{% endif %}{% if vibe_level == 5 %} ⁙{% endif %}";
 
-const GROUPIES_TEMPLATE =
-  "{{username | truncate_late}} {% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ⩔ {%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %} 🍄{% endif %}{% if vibe_level == 2 %} 🍄🍄{% endif %}{% if vibe_level == 3 %} 🍄🍄🍄{% endif %}{% if vibe_level == 4 %} 🍄🍄🍄🍄{% endif %}{% if vibe_level == 5 %} 🍄🍄🍄🍄🍄{% endif %}";
-
 async function evalTemplate(template, context) {
   const engine = new Liquid();
   try {
