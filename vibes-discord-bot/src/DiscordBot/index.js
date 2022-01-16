@@ -10,6 +10,7 @@ import updateAllGuildMembers from "./multi/updateAllGuildMembers";
 import welcomeGuildMember from "./discord/welcomeGuildMember";
 import getLedgerIdsToUpdateEachPeriod from "./spothub/getLedgerIdsToUpdateEachPeriod";
 import updateAllGuildsForPeriod from "./multi/updateAllGuildsForPeriod";
+import updateSomeGuildsThisMinute from "./multi/updateSomeGuildsThisMinute";
 
 import Cron from "croner";
 
@@ -20,27 +21,28 @@ class DiscordBot {}
 async function setupCronJobs(client) {
   Cron("0 * * * * *", async () => {
     console.log("[CRON]", "starting minute tasks");
-    await updateAllGuildsForPeriod({ client, period: "minute" });
+    await updateSomeGuildsThisMinute({client})
+    // await updateAllGuildsForPeriod({ client, period: "minute" });
   });
 
   Cron("0 0 * * * *", async () => {
     console.log("[CRON]", "starting hour tasks");
-    await updateAllGuildsForPeriod({ client, period: "hour" });
+    // await updateAllGuildsForPeriod({ client, period: "hour" });
   });
 
   Cron("0 0 0 * * *", async () => {
     console.log("[CRON]", "starting day tasks");
-    await updateAllGuildsForPeriod({ client, period: "day" });
+    // await updateAllGuildsForPeriod({ client, period: "day" });
   });
 
   Cron("0 0 0 * * 1", async () => {
     console.log("[CRON]", "starting week tasks");
-    await updateAllGuildsForPeriod({ client, period: "week" });
+    // await updateAllGuildsForPeriod({ client, period: "week" });
   });
 
   Cron("0 0 0 1 * *", async () => {
     console.log("[CRON]", "starting month tasks");
-    await updateAllGuildsForPeriod({ client, period: "month" });
+    // await updateAllGuildsForPeriod({ client, period: "month" });
   });
 }
 
