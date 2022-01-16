@@ -164,7 +164,9 @@ const CSS = css`
     background-size: cover;
     @media (min-width: 500px) {
       background-size: contain;
-      background-repeat: repeat-x no-repeat;
+      background-repeat-x: repeat;
+      background-position: center bottom;
+      background-repeat-y: no-repeat;
     }
     .hero-container {
       width: 100%;
