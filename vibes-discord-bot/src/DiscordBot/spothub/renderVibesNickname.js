@@ -17,16 +17,16 @@ async function evalTemplate(template, context) {
   }
   engine.registerFilter("truncate_last", (v) => v);
   engine.registerFilter("only_characters", (v) => {
-    v.replace(
+    return v.replace(
       /[^0-9_\- A-Za-zÀ-ÖØ-öø-ÿ一-龠ぁ-ゔァ-ヴー々〆〤ａ-ｚＡ-Ｚ０-９\u3131-\uD79D\p{Unified_Ideograph=yes}]/gi,
       ""
     );
   });
   engine.registerFilter("only_alphanumerics", (v) => {
-    v.replace(/[^0-9_\- A-Za-zÀ-ÖØ-öø-ÿ]/gi, "");
+    return v.replace(/[^0-9_\- A-Za-zÀ-ÖØ-öø-ÿ]/gi, "");
   });
   engine.registerFilter("remove_brackets", (v) => {
-    v.replace(/[\[\]\(\)]/g,'')
+    return v.replace(/[\[\]\(\)]/g,'')
   });
   engine.registerFilter("remove_emojis", (v) => {
     return v.replace(
