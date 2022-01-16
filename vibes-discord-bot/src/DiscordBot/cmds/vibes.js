@@ -28,7 +28,7 @@ export default async function vibes({ client, message, command, cmd_args }) {
   const note = command
     ? cmd_args.find((i) => i.name === "note")?.value
     : cmd_args.slice(1).join(" ");
-    
+
   await saveVibe({
     ledger_id,
     from_member_id: message_member.id,

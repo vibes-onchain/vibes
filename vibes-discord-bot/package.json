@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec \"./bin/run_action\" start",
+    "start": "nodemon -w ./src --ignore ./tmp --exec \"./bin/run_action\" start",
     "test:watch": "APP_ENV=test jest --watch",
     "test": "APP_ENV=test node --async-stack-traces --harmony -r esm-wallaby -r ./init.js --experimental-vm-modules node_modules/.bin/jest --forceExit",
     "test:inspect": "APP_ENV=test node --inspect-brk --expose-gc --async-stack-traces --harmony -r esm-wallaby -r ./init.js --experimental-vm-modules node_modules/.bin/jest --runInBand --logHeapUsage"
@@ -35,6 +35,9 @@
     "@discordjs/rest": "^0.1.0-canary.0",
     "async-mutex": "^0.3.2",
     "blakejs": "^1.1.1",
+    "cache-manager": "^3.6.0",
+    "cache-manager-fs-hash": "^1.0.0",
+    "cache-manager-memory-store": "^1.1.0",
     "chalk": "^3.0.0",
     "compression": "^1.7.4",
     "core-js": "^3.6.4",
@@ -47,6 +50,7 @@
     "dotenv": "^8.2.0",
     "es6-template-string": "^1.2.0",
     "esm-wallaby": "^3.2.25",
+    "fs-extra": "^10.0.0",
     "isomorphic-fetch": "^3.0.0",
     "isomorphic-form-data": "^2.0.0",
     "leaked-handles": "^5.2.0",
@@ -61,7 +65,7 @@
     "pino-pretty": "^7.0.1",
     "save": "^2.4.0",
     "simple-statistics": "^7.7.0",
-    "spothub": "github:spot-foundation/spothub-js",
+    "spothub": "github:spotchain-org/spothub-js",
     "subscript": "^3.0.3",
     "uuid": "^3.4.0",
     "yargs": "^15.1.0"

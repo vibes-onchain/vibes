@@ -3,17 +3,34 @@ import LedgerEntry from "spothub/lib/LedgerEntry";
 import distributeVibeDust from "./distributeVibeDust";
 import * as ss from "simple-statistics";
 import { GOOD_VIBE_ROLES, BAD_VIBE_ROLES } from "../constants";
+import AppCache from ':/lib/AppCache';
 
 export default async function reduceVibesLedger({ ledger_id }) {
-  const entries = await LedgerEntry.findAll({
-    where: { ledger_id: ledger_id },
-    order: [["global_seq_number", "ASC"]],
-  });
+  if (!ledger_id) {
+    return {};
+  }
+
   let current_rate = null;
   let current_period = 'day';
   let current_time = null;
   let user_vibes = {};
   let pending_vibes = {};
+  let latest_entry_id = null;
+
+  const ledgerCache = await AppCache.get(`ledger-${ledger_id}`);
+  const last_cached_entry_id = ledgerCache?.latest_entry_id;
+  if (ledgerCache && ledgerCache?.latest_entry_id) {
+    latest_entry_id = ledgerCache?.latest_entry_id;
+    current_rate = ledgerCache.current_rate;
+    current_time = ledgerCache.current_time;
+    user_vibes = ledgerCache.user_vibes;
+    pending_vibes = ledgerCache.pending_vibes; 
+  }
+
+  const entries = await LedgerEntry.findAll({
+    where: { ledger_id: ledger_id },
+    after: latest_entry_id
+  });
 
   for (const entry of entries) {
     if (current_time === null) {
@@ -68,6 +85,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
       pending_vibes[entry.sender.id][entry.receiver.id].bad++;
     }
     current_time = entry.authored_on;
+    latest_entry_id = entry.id;
     // console.log(entry.dataValues);
     // console.log({
     //   current_rate,
@@ -77,6 +95,24 @@ export default async function reduceVibesLedger({ ledger_id }) {
     //   pending_vibes,
     // });
   }
+
+  if (entries.length && latest_entry_id && last_cached_entry_id != latest_entry_id) {
+    await AppCache.set(`ledger-${ledger_id}`, {
+      latest_entry_id,
+      current_rate,
+      current_time,
+      user_vibes,
+      pending_vibes
+    });
+  }
+  if (ledgerCache && ledgerCache?.latest_entry_id) {
+    latest_entry_id = ledgerCache?.latest_entry_id;
+    current_rate = ledgerCache.current_rate;
+    current_time = ledgerCache.current_time;
+    user_vibes = ledgerCache.user_vibes;
+    pending_vibes = ledgerCache.pending_vibes; 
+  }
+
   user_vibes = distributeVibeDust({
     current_rate,
     current_period,
