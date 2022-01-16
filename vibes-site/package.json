@@ -45,7 +45,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.4",
     "source-map-explorer": "^2.5.2",
-    "spothub": "github:spotchain-org/spothub-js",
+    "spothub": "https://github.com/spotchain-org/spothub-js",
     "uuid-validate": "0.0.3",
     "validator": "^13.7.0",
     "yup": "^0.29.3"
