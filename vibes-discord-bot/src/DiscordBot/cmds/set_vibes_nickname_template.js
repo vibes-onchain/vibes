@@ -4,7 +4,7 @@ import canControlVibesBot from "../discord/canControlVibesBot";
 import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 import sendQuickCommandResponse from "../discord/sendQuickCommandResponse";
 import { Liquid } from "liquidjs";
-
+import AppCache from ':/lib/AppCache';
 
 export default async function set_vibes_nickname_template({
   client,
@@ -50,6 +50,7 @@ export default async function set_vibes_nickname_template({
   });
   await le.save();
 
+  await AppCache.del(`ledger_for_guild-${guild.id}`);
   await updateAllGuildMembers({ client, guild_id: guild.id });
 
   return true;
