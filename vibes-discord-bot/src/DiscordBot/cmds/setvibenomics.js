@@ -39,7 +39,7 @@ export default async function setvibenomics({
     
     Each member's daily vibe dust bag size will be based on the formula above.
 
-    Get lots more vibe analytics on ***vibes.live***!`,
+    Get lots more vibe analytics on ***vibes.app***!`,
     image: {
       url: "https://media1.giphy.com/media/3owzW5c1tPq63MPmWk/giphy.gif?cid=ecf05e47aqgiqppc36lyfbzyuax1w8wf27k01hbkl875lf1f&rid=giphy.gif&ct=g",
     },

@@ -32,7 +32,7 @@ function description({ emojis, ledger_id }) {
   
   **DEEP VIBES**
   :clipboard: full tx logs on **[vibescan.io](https://vibescan.io/ledger/${ledger_id}/entries)**
-  :eyes: full profiles on **[vibes.live](${process.env.VIBES_LIVE_BASE_URL}/ledger/${ledger_id})**
+  :eyes: full profiles on **[vibes.app](${process.env.VIBES_LIVE_BASE_URL}/ledger/${ledger_id})**
   `;
 }
 
