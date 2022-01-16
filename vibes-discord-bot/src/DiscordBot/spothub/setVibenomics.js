@@ -1,5 +1,6 @@
 import parseVibeRate from "./parseVibeRate";
 import LedgerEntry from 'spothub/lib/LedgerEntry';
+import AppCache from ':/lib/AppCache';
 
 export default async function setVibenomics(ledger_id, str, user_id) {
   const vibe_rate = parseVibeRate(str);
@@ -18,4 +19,5 @@ export default async function setVibenomics(ledger_id, str, user_id) {
     authored_on: new Date(),
   });
   await entry.save();
+  await AppCache.del(`ledger_latest_entries-${ledger_id}`);
 }

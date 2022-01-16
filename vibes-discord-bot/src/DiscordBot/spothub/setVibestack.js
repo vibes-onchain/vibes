@@ -1,5 +1,5 @@
-import findOrCreateLedgerForGuild from "./findOrCreateLedgerForGuild";
 import LedgerEntry from "spothub/lib/LedgerEntry";
+import AppCache from ':/lib/AppCache';
 
 export default async function setVibestack({
   ledger_id,
@@ -25,5 +25,7 @@ export default async function setVibestack({
     },
     authored_on: new Date(),
   });
-  return await entry.save();
+  await entry.save();
+  await AppCache.del(`ledger_latest_entries-${ledger_id}`);
+  return entry;
 }

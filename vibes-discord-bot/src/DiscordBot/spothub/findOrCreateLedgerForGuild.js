@@ -1,10 +1,18 @@
 import Ledger from "spothub/lib/Ledger";
 import LedgerEntry from "spothub/lib/LedgerEntry";
+import AppCache from ':/lib/AppCache';
 
 export default async function findOrCreateLedgerForGuild(guild_id, guild_name) {
-  const existingLedger = await Ledger.findOne({
+  let existingLedger;
+  existingLedger = await AppCache.get(`ledger_for_guild-${guild_id}`);
+  if (existingLedger) {
+    return existingLedger;
+  }
+
+  existingLedger = await Ledger.findOne({
     where: { meta: { "vibes:discord_guild_id": guild_id } },
   });
+  await AppCache.set(`ledger_for_guild-${guild_id}`, existingLedger, {ttl: 2*60});
   if (existingLedger) {
     return existingLedger;
   }

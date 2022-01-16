@@ -19,10 +19,11 @@ export default async function updateGuildMemberNickname({
     throw new Error("member not found");
   }
 
+  const member_nickname = member.nickname || member.user.username;
   if (member.user.id === client.user.id || member.user.bot || !member.manageable) {
     // do nothing
   } else if (!nickname || nickname.length === 0) {
-    if (member.nickname !== member.user.username) {
+    if (member_nickname !== member.user.username) {
       await member.setNickname(`${member.user.username}`.substring(0, 32)).catch((e) => {
         console.log(e);
       });
@@ -30,7 +31,7 @@ export default async function updateGuildMemberNickname({
     }
   } else {
     const nn = nickname.substring(0, 32);
-    if (member.nickname !== nn) {
+    if (member_nickname !== nn) {
       await member
         .setNickname(nn)
         .catch((e) => {

@@ -1,4 +1,5 @@
 import LedgerEntry from "spothub/lib/LedgerEntry";
+import AppCache from ':/lib/AppCache';
 
 export default async function saveBadVibe({
   ledger_id,
@@ -26,4 +27,5 @@ export default async function saveBadVibe({
     authored_on: new Date(),
   });
   await entry.save();
+  await AppCache.del(`ledger_latest_entries-${ledger_id}`);
 }

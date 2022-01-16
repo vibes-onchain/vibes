@@ -1,4 +1,5 @@
 import LedgerEntry from 'spothub/lib/LedgerEntry';
+import AppCache from ':/lib/AppCache';
 
 export default async function saveVibe({ ledger_id, from_member_id, member_id, reason, note, reaction_to_message_id }) {
   const entry = LedgerEntry.build({
@@ -19,4 +20,5 @@ export default async function saveVibe({ ledger_id, from_member_id, member_id, r
     authored_on: new Date(),
   });
   await entry.save();
+  await AppCache.del(`ledger_latest_entries-${ledger_id}`);
 }

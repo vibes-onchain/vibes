@@ -3,6 +3,7 @@ import LedgerEntry from "spothub/lib/LedgerEntry";
 import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 import sendQuickCommandResponse from "../discord/sendQuickCommandResponse";
 import canControlVibesBot from "../discord/canControlVibesBot";
+import AppCache from ':/lib/AppCache';
 
 export default async function resetvibestacks({ client, command, message }) {
   const message_member = message ? message.member : command.member;
@@ -34,6 +35,7 @@ export default async function resetvibestacks({ client, command, message }) {
     authored_on: new Date(),
   });
   await entry.save();
+  await AppCache.del(`ledger_latest_entries-${ledger_id}`);
 
   await sendQuickCommandResponse({ command });
 

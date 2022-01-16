@@ -27,10 +27,14 @@ export default async function reduceVibesLedger({ ledger_id }) {
     pending_vibes = ledgerCache.pending_vibes; 
   }
 
-  const entries = await LedgerEntry.findAll({
-    where: { ledger_id: ledger_id },
-    after: latest_entry_id
-  });
+
+  let entries;
+  entries = await AppCache.wrap(`ledger_latest_entries-${ledger_id}`, async () => {
+    return LedgerEntry.findAll({
+      where: { ledger_id: ledger_id },
+      after: latest_entry_id
+    });
+  }, {ttl: 5});
 
   for (const entry of entries) {
     if (current_time === null) {

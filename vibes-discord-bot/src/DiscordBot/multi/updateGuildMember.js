@@ -19,7 +19,7 @@ export default async function updateGuildMember({
   if (!guild) {
     throw new Error("guild not found");
   }
-  await guild.members.fetch(member_id).catch(e => console.log(e));
+  await guild.members.fetch(member_id).catch((e) => console.log(e));
   const member = guild.members.cache.find((m) => m.id === member_id);
   if (!member) {
     throw new Error("member not found");
@@ -30,15 +30,18 @@ export default async function updateGuildMember({
   }
 
   const ledger = await findOrCreateLedgerForGuild(guild_id);
-  const template = ledger.meta?.['vibes:nickname_template'];
+  const template = ledger.meta?.["vibes:nickname_template"];
   const memberDetails = await getVibesUserDetails({ guild_id, member_id });
   // TODO include vibe traits
-  const nickname = await renderNickname({template, context: {...memberDetails, username}});
+  const nickname = await renderNickname({
+    template,
+    context: { ...memberDetails, username },
+  });
   const updatedNickname = await updateGuildMemberNickname({
     client,
     guild_id,
     member_id,
-    nickname: nickname.substring(0, 32)
+    nickname: nickname.substring(0, 32),
   });
 
   // TODO figure out vibe role
@@ -50,5 +53,14 @@ export default async function updateGuildMember({
     role_name: memberDetails.vibeLevel,
   });
 
+  console.log(
+    `update {nickname:${!!updatedNickname ? "1" : "0"}, role:${
+      !!updatedVibesRole ? "1" : "0"
+    }} ${guild_id}:${member_id} ${
+      member.user.username
+    } => ${nickname}`
+  );
+
+  // console.log({updatedNickname, updatedVibesRole});
   return updatedNickname || updatedVibesRole;
 }
