@@ -5,7 +5,7 @@ import { Liquid } from "liquidjs";
 const MAX_NICKNAME_LENGTH = 32;
 
 const DEFAULT_TEMPLATE =
-  "{{username | truncate_late}} {% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ⩔ {%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %} ·{% endif %}{% if vibe_level == 2 %} ∶{% endif %}{% if vibe_level == 3 %} ⁖{% endif %}{% if vibe_level == 4 %} ⁘{% endif %}{% if vibe_level == 5 %} ⁙{% endif %}";
+  "{{username | truncate_last}} {% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ⩔ {%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %} ·{% endif %}{% if vibe_level == 2 %} ∶{% endif %}{% if vibe_level == 3 %} ⁖{% endif %}{% if vibe_level == 4 %} ⁘{% endif %}{% if vibe_level == 5 %} ⁙{% endif %}";
 
 async function evalTemplate(template, context) {
   const engine = new Liquid();
@@ -16,6 +16,24 @@ async function evalTemplate(template, context) {
     return { error: "invalid template" };
   }
   engine.registerFilter("truncate_last", (v) => v);
+  engine.registerFilter("only_characters", (v) => {
+    v.replace(
+      /[^0-9_\- A-Za-zÀ-ÖØ-öø-ÿ一-龠ぁ-ゔァ-ヴー々〆〤ａ-ｚＡ-Ｚ０-９\u3131-\uD79D\p{Unified_Ideograph=yes}]/gi,
+      ""
+    );
+  });
+  engine.registerFilter("only_alphanumerics", (v) => {
+    v.replace(/[^0-9_\- A-Za-zÀ-ÖØ-öø-ÿ]/gi, "");
+  });
+  engine.registerFilter("remove_brackets", (v) => {
+    v.replace(/[\[\]\(\)]/g,'')
+  });
+  engine.registerFilter("remove_emojis", (v) => {
+    return v.replace(
+      /(?![*#0-9]+)[\p{Emoji}\p{Emoji_Modifier}\p{Emoji_Component}\p{Emoji_Modifier_Base}\p{Emoji_Presentation}]/gu,
+      ""
+    );
+  });
   engine.registerFilter("unsigned", (v) => {
     return _.isNumber(v) && v < 0 ? -1 * v : v;
   });
