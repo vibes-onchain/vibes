@@ -5,7 +5,9 @@ import { Liquid } from "liquidjs";
 const MAX_NICKNAME_LENGTH = 32;
 
 const DEFAULT_TEMPLATE =
-  "{{username | truncate_last}} {% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ⩔ {%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %} ·{% endif %}{% if vibe_level == 2 %} ∶{% endif %}{% if vibe_level == 3 %} ⁖{% endif %}{% if vibe_level == 4 %} ⁘{% endif %}{% if vibe_level == 5 %} ⁙{% endif %}";
+  "{{username | truncate_last}}{% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ✦{%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %}·{% endif %}{% if vibe_level == 2 %}∶{% endif %}{% if vibe_level == 3 %}⁖{% endif %}{% if vibe_level == 4 %}⁘{% endif %}{% if vibe_level == 5 %}⁙{% endif %}";
+const DEFAULT_V_TEMPLATE =
+  "{{username | truncate_last}}{% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ⩔ {%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %} ·{% endif %}{% if vibe_level == 2 %} ∶{% endif %}{% if vibe_level == 3 %} ⁖{% endif %}{% if vibe_level == 4 %} ⁘{% endif %}{% if vibe_level == 5 %} ⁙{% endif %}";
 
 async function evalTemplate(template, context) {
   const engine = new Liquid();
@@ -26,7 +28,7 @@ async function evalTemplate(template, context) {
     return v.replace(/[^0-9_\- A-Za-zÀ-ÖØ-öø-ÿ]/gi, "");
   });
   engine.registerFilter("remove_brackets", (v) => {
-    return v.replace(/[\[\]\(\)]/g,'')
+    return v.replace(/[\[\]\(\)]/g, "");
   });
   engine.registerFilter("remove_emojis", (v) => {
     return v.replace(
