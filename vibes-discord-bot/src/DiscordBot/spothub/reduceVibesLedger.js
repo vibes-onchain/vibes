@@ -29,7 +29,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
 
 
   let entries;
-  entries = await AppCache.wrap(`ledger_latest_entries-${ledger_id}`, async () => {
+  entries = await AppCache.wrap(`ledger_entries-${ledger_id}-after-${last_cached_entry_id}`, async () => {
     return LedgerEntry.findAll({
       where: { ledger_id: ledger_id },
       after: latest_entry_id
@@ -100,7 +100,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
     // });
   }
 
-  if (entries.length && latest_entry_id && last_cached_entry_id != latest_entry_id) {
+  if (entries.length && latest_entry_id && last_cached_entry_id !== latest_entry_id) {
     await AppCache.set(`ledger-${ledger_id}`, {
       latest_entry_id,
       current_rate,
