@@ -26,7 +26,7 @@ export default async function use_default_nickname({
   }
 
   const template =
-    "{{username | truncate_last}}{% if vibestack < 0 %} ⊖{%endif%}{% if vibestack > 0 %} ✦{%endif%}{% if vibestack < 0 %} {% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %}˙{% endif %}{% if vibe_level == 2 %}⁚‧{% endif %}{% if vibe_level == 3 %}⁚⁛{% endif %}{% if vibe_level == 4 %}⁚⁛⁚{% endif %}{% if vibe_level == 5 %}⁚⁛⁚⁛{% endif %}";
+    "{{username | truncate_last}}{% if vibestack < 0 %} ⊖{%endif%}{% if vibestack > 0 %} ✦{%endif%}{% if vibestack < 0 %} {% endif %}{% if vibe_level == 1 %}˙{% endif %}{% if vibe_level == 2 %}⁚‧{% endif %}{% if vibe_level == 3 %}⁚⁛{% endif %}{% if vibe_level == 4 %}⁚⁛⁚{% endif %}{% if vibe_level == 5 %}⁚⁛⁚⁛{% endif %}";
   const engine = new Liquid();
   try {
     await engine.parse(template);

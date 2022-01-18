@@ -34,6 +34,9 @@ export const GLOBAL_CMDS = [
   // TODO "startvibeparty",
   "resetvibestacks",
   "set_vibes_nickname_template",
+  "use_default_nickname",
+  "use_numeric_nickname",
+
   "setupvibes",
   //
   "newvibesledger",

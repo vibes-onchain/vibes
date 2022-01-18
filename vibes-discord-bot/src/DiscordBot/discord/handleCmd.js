@@ -12,6 +12,8 @@ import set_vibes_nickname_template from "../cmds/set_vibes_nickname_template";
 import setvibestrait from "../cmds/setvibestrait";
 
 import setupvibes from "../cmds/setupvibes";
+import use_default_nickname from "../cmds/use_default_nickname";
+import use_numeric_nickname from "../cmds/use_numeric_nickname";
 
 import newvibesledger from "../cmds/newvibesledger";
 import refreshvibeparens from "../cmds/refreshvibeparens";
@@ -25,7 +27,8 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     cmd = cmd_args.shift();
   }
   console.log(
-    `[${cmd}] FROM: discord:${guild_id || "dm"}:${message.author.id
+    `[${cmd}] FROM: discord:${guild_id || "dm"}:${
+      message.author.id
     } :: ARGS: (${cmd_args.join(", ")})`
   );
   if (["vibesbot", "help"].includes(cmd)) {
@@ -52,5 +55,14 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return newvibesledger({ client, message, cmd_args, guild_id });
   } else if (cmd === "refreshvibeparens") {
     return refreshvibeparens({ client, message, cmd_args, guild_id });
+  } else if (cmd === "use_default_nickname") {
+    return use_default_nickname({ client, message, cmd_args, guild_id });
+  } else if (cmd === "use_numeric_nickname") {
+    return use_numeric_nickname({
+      client,
+      message,
+      cmd_args,
+      guild_id,
+    });
   }
 }
