@@ -5,7 +5,7 @@ import { Liquid } from "liquidjs";
 const MAX_NICKNAME_LENGTH = 32;
 
 const DEFAULT_TEMPLATE =
-  "{{username | truncate_last}}{% if vibestack < 0 %} ⊖{%endif%}{% if vibestack > 0 %} ✦{%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %}·{% endif %}{% if vibe_level == 2 %}∶{% endif %}{% if vibe_level == 3 %}⁖{% endif %}{% if vibe_level == 4 %}⁘{% endif %}{% if vibe_level == 5 %}⁙{% endif %}";
+  "{{username | truncate_last}}{% if vibestack < 0 %} ⊖{%endif%}{% if vibestack > 0 %} ✦{%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %}˙{% endif %}{% if vibe_level == 2 %}⁚‧{% endif %}{% if vibe_level == 3 %}⁚⁛{% endif %}{% if vibe_level == 4 %}⁚⁛⁚{% endif %}{% if vibe_level == 5 %}⁚⁛⁚⁛{% endif %}";
 const DEFAULT_V_TEMPLATE =
   "{{username | truncate_last}}{% if vibestack < 0 %}⊖{%endif%}{% if vibestack > 0 %} ⩔ {%endif%}{% if vibestack < 0 %}{{ vibestack | unsigned | rounded }}{% endif %}{% if vibestack > 0 %}{{ vibestack | rounded }}{% endif %}{% if vibe_level == 1 %} ·{% endif %}{% if vibe_level == 2 %} ∶{% endif %}{% if vibe_level == 3 %} ⁖{% endif %}{% if vibe_level == 4 %} ⁘{% endif %}{% if vibe_level == 5 %} ⁙{% endif %}";
 
