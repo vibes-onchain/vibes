@@ -9416,7 +9416,7 @@ npm-normalize-package-bin@^1.0.0, npm-normalize-package-bin@^1.0.1:
   resolved "https://registry.npmjs.org/npm-normalize-package-bin/-/npm-normalize-package-bin-1.0.1.tgz"
   integrity sha512-EPfafl6JL5/rU+ot6P3gRSCpPDW5VmIzX959Ob1+ySFUuuYHWHekXpwdUZcKP5C+DS4GEtdJluwBjnsNDl+fSA==
 
-npm-package-arg@^8.0.0, npm-package-arg@^8.0.1, npm-package-arg@^8.1.0, npm-package-arg@^8.1.1, npm-package-arg@^8.1.2, npm-package-arg@^8.1.5:
+npm-package-arg@^8.0.0, npm-package-arg@^8.0.1, npm-package-arg@^8.1.0, npm-package-arg@^8.1.2, npm-package-arg@^8.1.4, npm-package-arg@^8.1.5:
   version "8.1.5"
   resolved "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-8.1.5.tgz"
   integrity sha512-LhgZrg0n0VgvzVdSm1oiZworPbTxYHUJCgtsJW8mGvlDpxTM1vSJc3m5QZeUkhAHIzbz3VCHd/R4osi1L1Tg/Q==
@@ -9904,7 +9904,7 @@ p-try@^2.0.0:
   resolved "https://registry.npmjs.org/p-try/-/p-try-2.2.0.tgz"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-pacote@^11.1.11, pacote@^11.2.6, pacote@^11.3.0, pacote@^11.3.1, pacote@^11.3.5:
+pacote@^11.1.11, pacote@^11.2.6, pacote@^11.3.1, pacote@^11.3.4, pacote@^11.3.5:
   version "11.3.5"
   resolved "https://registry.npmjs.org/pacote/-/pacote-11.3.5.tgz"
   integrity sha512-fT375Yczn4zi+6Hkk2TBe1x1sP8FgFsEIZ2/iWaXY2r/NkhDJfxbcn5paz1+RTFCyNf+dPnaoBDJoAxXSU8Bkg==
@@ -11053,7 +11053,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.6, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -11274,6 +11274,14 @@ react-app-polyfill@^2.0.0:
     regenerator-runtime "^0.13.7"
     whatwg-fetch "^3.4.1"
 
+react-body-classname@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/react-body-classname/-/react-body-classname-1.3.1.tgz#f9542289fb99ee7eaf5792e1d852cc88e4d810a0"
+  integrity sha512-PxskbhmoV8kzIyspjiIc/smQkyyBOQHeUsrh1oj9CC5O1Kg/4gvHWPKsYGWEIq0X51TtCT941u/ulM1dTZ/bOw==
+  dependencies:
+    prop-types "^15.5.6"
+    react-side-effect "^1.1.0 || ^2.1.0"
+
 react-csv@^2.0.3:
   version "2.2.1"
   resolved "https://registry.npmjs.org/react-csv/-/react-csv-2.2.1.tgz"
@@ -11319,10 +11327,10 @@ react-dom@^16.13.1:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-error-overlay@^6.0.9:
-  version "6.0.10"
-  resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.10.tgz"
-  integrity sha512-mKR90fX7Pm5seCOfz8q9F+66VCc1PGsWSBxKbITjfKVQHMNF2zudxHnMdJiB1fRCb+XsbQV9sO9DCkgsMQgBIA==
+react-error-overlay@6.0.9, react-error-overlay@^6.0.9:
+  version "6.0.9"
+  resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
+  integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
 
 react-fast-compare@^3.0.1:
   version "3.2.0"
@@ -11333,6 +11341,11 @@ react-hook-form@^6.11.2:
   version "6.15.8"
   resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-6.15.8.tgz"
   integrity sha512-prq82ofMbnRyj5wqDe8hsTRcdR25jQ+B8KtCS7BLCzjFHAwNuCjRwzPuP4eYLsEBjEIeYd6try+pdLdw0kPkpg==
+
+react-icons@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.npmjs.org/react-icons/-/react-icons-4.3.1.tgz"
+  integrity sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==
 
 react-is@^16.13.1, react-is@^16.6.0, react-is@^16.6.3, react-is@^16.7.0, react-is@^16.8.6:
   version "16.13.1"
@@ -11522,6 +11535,11 @@ react-semantic-toasts@^0.6.5:
   version "0.6.5"
   resolved "https://registry.npmjs.org/react-semantic-toasts/-/react-semantic-toasts-0.6.5.tgz"
   integrity sha512-XsSvlix69XbzXkT728sRx9TnP7c7g8rGf31KS37Hf/DQLEuAJzsUwqHmo70Q6u7tIcWbCF58UnCzg9mNlYlijA==
+
+"react-side-effect@^1.1.0 || ^2.1.0":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
+  integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
 
 react-table@^7.6.2:
   version "7.7.0"
@@ -12645,7 +12663,7 @@ split-string@^3.0.1, split-string@^3.0.2:
 
 "spothub@https://github.com/spotchain-org/spothub-js":
   version "1.0.0"
-  resolved "https://github.com/spotchain-org/spothub-js#186a447bd70a407b078326efde3e508c440055fe"
+  resolved "git+ssh://git@github.com/spotchain-org/spothub-js.git#186a447bd70a407b078326efde3e508c440055fe"
   dependencies:
     esm-wallaby "^3.2.25"
     isomorphic-fetch "^3.0.0"

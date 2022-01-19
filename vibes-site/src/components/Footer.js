@@ -94,4 +94,12 @@ const CSS = css`
       }
     }
   }
+  body.dark-theme & {
+    .copyright, .copyright a {
+      color: #ccc;
+    }
+    .text .links a {
+      color: #ccc;
+    }
+  }
 `;

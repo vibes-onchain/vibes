@@ -10,8 +10,12 @@ import "./assets/css/tailwind.css";
 import "semantic-ui-css/semantic.min.css";
 import "./assets/css/semantic-ui-overrides.css";
 import "react-tagsinput/react-tagsinput.css";
-import "./index.css"
+import "./index.css";
 import "./App.css";
+
+import ThemeContext, {
+  ThemeContextExtendedProvider,
+} from "./contexts/ThemeContext";
 
 import {
   useQuery,
@@ -47,7 +51,9 @@ function NoMatch() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AppRouter />
+      <ThemeContextExtendedProvider>
+        <AppRouter />
+      </ThemeContextExtendedProvider>
     </QueryClientProvider>
   );
 }
