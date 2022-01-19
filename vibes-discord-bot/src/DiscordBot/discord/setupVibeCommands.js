@@ -1,8 +1,6 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 const { SlashCommandBuilder } = require("@discordjs/builders");
-
-const DEPRECATED_COMMANDS = ["setupvibesparen"];
 
 export default async function ({ client, guild_id }) {
   if (!guild_id) {
@@ -92,6 +90,15 @@ export default async function ({ client, guild_id }) {
         option.setName("template").setDescription("template").setRequired(true)
       ),
     new SlashCommandBuilder()
+      .setName("set_vibes_metadata")
+      .setDescription("[ADMINS ONLY] set ledger metadata for vibes")
+      .addStringOption((option) =>
+        option.setName("key").setDescription("key").setRequired(true)
+      )
+      .addStringOption((option) =>
+        option.setName("value").setDescription("value").setRequired(true)
+      ),
+    new SlashCommandBuilder()
       .setName("setvibestack")
       .setDescription("[ADMINS ONLY] set someone's vibestack")
       .addUserOption((option) =>
@@ -113,10 +120,13 @@ export default async function ({ client, guild_id }) {
       .setDescription("[ADMINS ONLY] refreshvibeparens"),
   ].map((command) => command.toJSON());
 
-  const extraCommandNames = _.difference(appCommands.map(i => i.name), commands.map(i => i.name));
+  const extraCommandNames = _.difference(
+    appCommands.map((i) => i.name),
+    commands.map((i) => i.name)
+  );
   for (const commandName of extraCommandNames) {
-    const id = appCommands.find(i => i.name === commandName)?.id;
-    console.log(guild.id, 'deleting old cmd', commandName);
+    const id = appCommands.find((i) => i.name === commandName)?.id;
+    console.log(guild.id, "deleting old cmd", commandName);
     await guild.commands.delete(id);
     await new Promise((resolve) => setTimeout(resolve, 2000));
   }
