@@ -10,6 +10,7 @@ import Ledger from "spothub/lib/Ledger";
 import LedgerEntry from "spothub/lib/LedgerEntry";
 import LedgerTable from ":/components/LedgerTable";
 import DiscordGuildLabel from ":/components/DiscordGuildLabel";
+import DiscordGuildBanner from ':/components/DiscordGuildBanner';
 
 export default function () {
   const router = useRouter();
@@ -36,16 +37,19 @@ export default function () {
     return <Loading />;
   }
 
+  const guild_id = ledger.meta?.["vibes:discord_guild_id"];
+
   return (
     <>
       <Header />
+      {guild_id && <DiscordGuildBanner guild_id={guild_id} />}
       <div className="page-container">
         <div css={CSS}>
           <div className="breadcrumbs space-x-10 my-5">
-            {ledger.meta?.["vibes:discord_guild_id"] && (
+            {guild_id && (
               <DiscordGuildLabel
                 to={`/ledger/${ledger_id}`}
-                guild_id={ledger.meta?.["vibes:discord_guild_id"]}
+                guild_id={guild_id}
               />
             )}
           </div>

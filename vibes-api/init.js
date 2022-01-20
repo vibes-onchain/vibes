@@ -14,3 +14,8 @@ if (fs.existsSync(`${__dirname}/config/.env`)) {
     process.env[k] = envConfig[k];
   }
 }
+
+
+globalThis.SPOTHUB_CONNECTION = {
+  prefixUrl: process.env.APP_SPOTHUB_CONNECTION_prefixUrl
+}
