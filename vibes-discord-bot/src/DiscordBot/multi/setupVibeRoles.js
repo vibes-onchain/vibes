@@ -6,8 +6,10 @@ import {
   GOOD_VIBE_ROLES,
   BAD_VIBES_START_HERE_ROLE,
   BAD_VIBE_ROLES,
-  VIBES_BOT_ROLE_NAME
-} from '../constants';
+  VIBES_BOT_ROLE_NAME,
+} from "../constants";
+
+import getVibeRoleAliases from "../spothub/getVibeRoleAliases";
 
 const iconsDir = `${__dirname}/../../../assets/icons`;
 
@@ -66,7 +68,12 @@ export default async function ({ client, guild_id }) {
     throw new Error("guild not found");
   }
 
-  await createOrUpdateRole(guild, CAN_CONTROL_VIBES_BOT_ROLE, -1, VIBES_BOT_ROLE_NAME);
+  await createOrUpdateRole(
+    guild,
+    CAN_CONTROL_VIBES_BOT_ROLE,
+    -1,
+    VIBES_BOT_ROLE_NAME
+  );
 
   if (!findRole(guild, GOOD_VIBES_START_HERE_ROLE.name)) {
     await createOrUpdateRole(
@@ -76,8 +83,15 @@ export default async function ({ client, guild_id }) {
       CAN_CONTROL_VIBES_BOT_ROLE.name
     );
   }
+
+  const role_aliases = await getVibeRoleAliases({ guild_id });
+
   for (let i = 0; i < GOOD_VIBE_ROLES.length; i++) {
     const vibeRoleAttrs = { ...GOOD_VIBE_ROLES[i] };
+    if (role_aliases[vibeRoleAttrs.name]) {
+      vibeRoleAttrs.name = role_aliases[vibeRoleAttrs.name];
+    }
+    console.log(vibeRoleAttrs);
     await createOrUpdateRole(
       guild,
       vibeRoleAttrs,
@@ -91,6 +105,9 @@ export default async function ({ client, guild_id }) {
   }
   for (let i = 0; i < BAD_VIBE_ROLES.length; i++) {
     const vibeRoleAttrs = { ...BAD_VIBE_ROLES[i] };
+    if (role_aliases[vibeRoleAttrs.name]) {
+      vibeRoleAttrs.name = role_aliases[vibeRoleAttrs.name];
+    }
     await createOrUpdateRole(
       guild,
       vibeRoleAttrs,

@@ -1,5 +1,5 @@
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
-import setupVibeRoles from "./setupVibeRoles";
+import setupVibeRoles from "../multi/setupVibeRoles";
 import setupVibeEmojis from "./setupVibeEmojis";
 import setupVibeChannels from "./setupVibeChannels";
 

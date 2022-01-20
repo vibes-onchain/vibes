@@ -3,6 +3,7 @@ import updateGuildMemberNickname from "../discord/updateGuildMemberNickname";
 import getVibesUserDetails from "../spothub/getVibesUserDetails";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import renderNickname from "../spothub/renderVibesNickname";
+import getVibeRoleAliases from "../spothub/getVibeRoleAliases";
 
 export default async function updateGuildMember({
   client,
@@ -44,13 +45,16 @@ export default async function updateGuildMember({
     nickname: nickname.substring(0, 32),
   });
 
+  const role_aliases = await getVibeRoleAliases({ guild_id });
+  const role_name = role_aliases[memberDetails.vibeLevel] || memberDetails.vibeLevel;
+
   // TODO figure out vibe role
   // updateGuildMemberVibeRoles
   const updatedVibesRole = await updateGuildMemberVibeRole({
     client,
     guild_id,
     member_id,
-    role_name: memberDetails.vibeLevel,
+    role_name,
   });
 
   console.log(
