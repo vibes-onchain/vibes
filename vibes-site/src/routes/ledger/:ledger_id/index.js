@@ -10,7 +10,9 @@ import Ledger from "spothub/lib/Ledger";
 import LedgerEntry from "spothub/lib/LedgerEntry";
 import LedgerTable from ":/components/LedgerTable";
 import DiscordGuildLabel from ":/components/DiscordGuildLabel";
-import DiscordGuildBanner from ':/components/DiscordGuildBanner';
+import DiscordGuildName from ":/components/DiscordGuildName";
+import DiscordGuildAvatar from ":/components/DiscordGuildAvatar";
+import DiscordGuildBanner from ":/components/DiscordGuildBanner";
 
 export default function () {
   const router = useRouter();
@@ -40,25 +42,44 @@ export default function () {
   const guild_id = ledger.meta?.["vibes:discord_guild_id"];
 
   return (
-    <>
+    <div css={CSS}>
       <Header />
-      {guild_id && <DiscordGuildBanner guild_id={guild_id} />}
+      <DiscordGuildBanner guild_id={guild_id} />
       <div className="page-container">
-        <div css={CSS}>
-          <div className="breadcrumbs space-x-10 my-5">
-            {guild_id && (
-              <DiscordGuildLabel
-                to={`/ledger/${ledger_id}`}
-                guild_id={guild_id}
-              />
-            )}
-          </div>
-          <LedgerTable ledger_id={ledger_id} ledgerEntries={ledgerEntries} />
+        <div className="guild-avatar-holder">
+          <DiscordGuildAvatar
+            guild_id={guild_id}
+            imgClassName={"rounded-full inline-block h-30 w-30"}
+          />
         </div>
+        <div className="guild-name-holder"><DiscordGuildName guild_id={guild_id} /></div>
+        {/* <div className="breadcrumbs space-x-10 my-5">
+          {guild_id && (
+            <DiscordGuildLabel
+              to={`/ledger/${ledger_id}`}
+              guild_id={guild_id}
+            />
+          )}
+        </div> */}
+      </div>
+      <div className="page-container">
+        <LedgerTable ledger_id={ledger_id} ledgerEntries={ledgerEntries} />
       </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
-const CSS = css``;
+const CSS = css`
+  width: 100%;
+  .guild-avatar-holder {
+    margin-top: -80px;
+    margin-bottom: 40px;
+  }
+  .guild-name-holder {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: 600;
+  }
+`;
