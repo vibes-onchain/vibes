@@ -9,7 +9,6 @@ import Loading from ":/components/Loading";
 import Ledger from "spothub/lib/Ledger";
 import LedgerEntry from "spothub/lib/LedgerEntry";
 import LedgerTable from ":/components/LedgerTable";
-import DiscordGuildLabel from ":/components/DiscordGuildLabel";
 import DiscordGuildName from ":/components/DiscordGuildName";
 import DiscordGuildAvatar from ":/components/DiscordGuildAvatar";
 import DiscordGuildBanner from ":/components/DiscordGuildBanner";
@@ -31,22 +30,12 @@ export default function () {
     }
   }, [ledger_id]);
 
-  React.useEffect(() => {
-    LedgerEntry.findAll({ where: { ledger_id } }).then((r) => {
-      setLedgerEntries(r);
-    });
-  }, [ledger_id]);
-
   const guild_id = ledger?.meta?.["vibes:discord_guild_id"];
 
   return (
     <div css={CSS}>
       <Header />
-      {guild_id && <CommunityHeader guild_id={guild_id} tab={'ledger'} />}
-      <div className="page-container">
-        {!ledgerEntries && <Loading />}
-        {ledgerEntries && <LedgerTable ledger_id={ledger_id} ledgerEntries={ledgerEntries} />}
-      </div>
+      {guild_id && <CommunityHeader guild_id={guild_id} tab={'vibenomics'} />}
       <Footer />
     </div>
   );
