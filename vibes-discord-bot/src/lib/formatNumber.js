@@ -19,7 +19,7 @@ export const isKnownFormat = function (as) {
   else if (as === 'decimal4f') { return '.4~f'; }
   else if (as === 'count') { return '.0f'; }
   else if (as === 'round_number') { return '.0f'; }
-  else if (as === 'si_rounded') { return '.2~s'; }
+  else if (as === 'si_rounded') { return '.3~s'; }
   else if (as === 'si_rounded_3') { return '.3~s'; }
   else if (as === 'si_rounded_2') { return '.2~s'; }
   else if (as === 'si_rounded_1') { return '.1~s'; }
