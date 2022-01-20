@@ -2,7 +2,7 @@ import parseVibeRate from "./parseVibeRate";
 import LedgerEntry from 'spothub/lib/LedgerEntry';
 import AppCache from ':/lib/AppCache';
 
-export default async function setVibenomics(ledger_id, str, user_id) {
+export default async function set_vibenomics(ledger_id, str, user_id) {
   const vibe_rate = parseVibeRate(str);
   const entry = LedgerEntry.build({
     ledger_id,

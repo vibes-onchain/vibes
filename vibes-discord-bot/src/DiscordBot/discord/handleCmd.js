@@ -4,20 +4,21 @@ import vibes from "../cmds/vibes";
 import badvibes from "../cmds/badvibes";
 import vibecheck from "../cmds/vibecheck";
 
-import setvibestack from "../cmds/setvibestack";
-import setvibenomics from "../cmds/setvibenomics";
-import resetvibestacks from "../cmds/resetvibestacks";
+import set_user_vibes from "../cmds/set_user_vibes";
+import set_vibenomics from "../cmds/set_vibenomics";
+import reset_all_vibes from "../cmds/reset_all_vibes";
+
+import setup_vibes from "../cmds/setup_vibes";
 
 import set_vibes_nickname_template from "../cmds/set_vibes_nickname_template";
-import setvibestrait from "../cmds/setvibestrait";
+import import_vibes_nickname_template from "../cmds/import_vibes_nickname_template";
 import set_vibes_metadata from "../cmds/set_vibes_metadata";
 
-import setupvibes from "../cmds/setupvibes";
 import use_default_nickname from "../cmds/use_default_nickname";
 import use_numeric_nickname from "../cmds/use_numeric_nickname";
 
-import newvibesledger from "../cmds/newvibesledger";
-import refreshvibeparens from "../cmds/refreshvibeparens";
+import new_vibes_ledger from "../cmds/new_vibes_ledger";
+import refresh_vibes from "../cmds/refresh_vibes";
 
 export default async function handleCmd({ client, message, cmd, cmd_args }) {
   const guild_id = message?.guild?.id || message?.guild_id;
@@ -40,24 +41,24 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return badvibes({ client, message, cmd_args });
   } else if (["vibecheck", "vibescheck", "vc"].includes(cmd)) {
     return vibecheck({ client, message, cmd_args });
-  } else if (["resetvibestacks"].includes(cmd)) {
-    return resetvibestacks({ client, message, cmd_args });
-  } else if (["setvibenomics"].includes(cmd)) {
-    return setvibenomics({ client, message, cmd_args });
-  } else if (["setvibestack"].includes(cmd)) {
-    return setvibestack({ client, message, cmd_args });
+  } else if (["reset_all_vibes"].includes(cmd)) {
+    return reset_all_vibes({ client, message, cmd_args });
+  } else if (["set_vibenomics"].includes(cmd)) {
+    return set_vibenomics({ client, message, cmd_args });
+  } else if (["set_user_vibes"].includes(cmd)) {
+    return set_user_vibes({ client, message, cmd_args });
   } else if (cmd === "set_vibes_nickname_template") {
     return set_vibes_nickname_template({ client, message, cmd_args });
+  } else if (cmd === "import_vibes_nickname_template") {
+    return import_vibes_nickname_template({ client, message, cmd_args });
   } else if (cmd === "set_vibes_metadata") {
     return set_vibes_metadata({ client, message, cmd_args });
-  } else if (cmd === "setvibestrait") {
-    return setvibestrait({ client, message, cmd_args });
-  } else if (cmd === "setupvibes") {
-    return setupvibes({ client, message, cmd_args, guild_id });
-  } else if (cmd === "newvibesledger") {
-    return newvibesledger({ client, message, cmd_args, guild_id });
-  } else if (cmd === "refreshvibeparens") {
-    return refreshvibeparens({ client, message, cmd_args, guild_id });
+  } else if (cmd === "setup_vibes") {
+    return setup_vibes({ client, message, cmd_args, guild_id });
+  } else if (cmd === "new_vibes_ledger") {
+    return new_vibes_ledger({ client, message, cmd_args, guild_id });
+  } else if (cmd === "refresh_vibes") {
+    return refresh_vibes({ client, message, cmd_args, guild_id });
   } else if (cmd === "use_default_nickname") {
     return use_default_nickname({ client, message, cmd_args, guild_id });
   } else if (cmd === "use_numeric_nickname") {

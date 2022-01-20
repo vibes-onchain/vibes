@@ -2,7 +2,7 @@ import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
 import setVibenomics from "../spothub/setVibenomics";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 
-export default async function setvibenomics({
+export default async function set_vibenomics({
   client,
   command,
   message,

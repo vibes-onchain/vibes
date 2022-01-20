@@ -2,7 +2,7 @@ import canControlVibesBot from "../discord/canControlVibesBot";
 import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 import sendQuickCommandResponse from "../discord/sendQuickCommandResponse";
 
-export default async function refreshvibeparens({
+export default async function refresh_vibes({
   client,
   command,
   message,

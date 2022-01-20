@@ -8,7 +8,7 @@ import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 import sendResponse from "../discord/sendResponse";
 import sendQuickCommandResponse from "../discord/sendQuickCommandResponse";
 
-export default async function setvibestack({
+export default async function set_user_vibes({
   client,
   command,
   message,
@@ -34,13 +34,13 @@ export default async function setvibestack({
     : await getTargetMember({ message, cmd_args });
   if (!target_member) {
     await message_member.send(
-      "ERROR: !setvibestack must specify receiver and amount"
+      "ERROR: !set_user_vibes must specify receiver and amount"
     );
     return;
   }
   if (cmd_args.length <= 1) {
     await message_member.send(
-      "ERROR: !setvibestack must specify receiver and amount"
+      "ERROR: !set_user_vibes must specify receiver and amount"
     );
     return;
   }
@@ -80,7 +80,7 @@ export default async function setvibestack({
     guild_id,
     message,
     command,
-    response: "setvibestack",
+    response: "set_user_vibes",
     ledger_id,
     sending_member,
     receiving_member,

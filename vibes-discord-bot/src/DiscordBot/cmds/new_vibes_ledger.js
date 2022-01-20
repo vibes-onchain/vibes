@@ -6,7 +6,7 @@ import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 import sendQuickCommandResponse from "../discord/sendQuickCommandResponse";
 import getVibeFeed from "../discord/getVibeFeed";
 
-export default async function newvibesledger({
+export default async function new_vibes_ledger({
   client,
   command,
   message,

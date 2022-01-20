@@ -10,7 +10,7 @@ export default async function setVibestack({
 }) {
   const entry = LedgerEntry.build({
     ledger_id,
-    type: "Set Vibestack",
+    type: "Set User Vibes",
     sender: {
       type: "discord_guild_member",
       id: by_member_id,

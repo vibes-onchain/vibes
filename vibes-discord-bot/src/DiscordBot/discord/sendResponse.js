@@ -4,14 +4,14 @@ import * as help from "../responses/help";
 import * as vibes from "../responses/vibes";
 import * as badvibes from "../responses/badvibes";
 import * as vibecheck from "../responses/vibecheck";
-import * as setvibestack from "../responses/setvibestack";
+import * as set_user_vibes from "../responses/set_user_vibes";
 import * as no_vibing_vibe_commands from "../responses/no_vibing_vibe_commands";
 
 const RESPONSES = {
   help,
   vibes,
   badvibes,
-  setvibestack,
+  set_user_vibes,
   no_vibing_vibe_commands,
   vibecheck
 };

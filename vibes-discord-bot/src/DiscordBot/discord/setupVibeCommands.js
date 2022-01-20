@@ -64,16 +64,16 @@ export default async function ({ client, guild_id }) {
         option.setName("user").setDescription("who to check").setRequired(true)
       ),
     new SlashCommandBuilder()
-      .setName("setvibestack")
+      .setName("set_user_vibes")
       .setDescription("[ADMINS ONLY] set fren's vibestack")
       .addUserOption((option) =>
         option.setName("user").setDescription("who to check").setRequired(true)
       ),
     new SlashCommandBuilder()
-      .setName("resetvibestacks")
+      .setName("reset_all_vibes")
       .setDescription("[ADMINS ONLY] reset everyone's vibestacks"),
     new SlashCommandBuilder()
-      .setName("setvibenomics")
+      .setName("set_vibenomics")
       .setDescription("[ADMINS ONLY] set vibenomics")
       .addStringOption((option) =>
         option
@@ -99,7 +99,7 @@ export default async function ({ client, guild_id }) {
         option.setName("value").setDescription("value").setRequired(true)
       ),
     new SlashCommandBuilder()
-      .setName("setvibestack")
+      .setName("set_user_vibes")
       .setDescription("[ADMINS ONLY] set someone's vibestack")
       .addUserOption((option) =>
         option.setName("user").setDescription("who").setRequired(true)
@@ -111,13 +111,13 @@ export default async function ({ client, guild_id }) {
           .setRequired(true)
       ),
     new SlashCommandBuilder()
-      .setName("setupvibes")
+      .setName("setup_vibes")
       .setDescription(
         "[ADMINS ONLY] create roles, emojis, channels, and commands for your server"
       ),
     new SlashCommandBuilder()
-      .setName("refreshvibeparens")
-      .setDescription("[ADMINS ONLY] refreshvibeparens"),
+      .setName("refresh_vibes")
+      .setDescription("[ADMINS ONLY] refresh_vibes"),
   ].map((command) => command.toJSON());
 
   const extraCommandNames = _.difference(

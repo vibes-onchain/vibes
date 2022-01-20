@@ -41,7 +41,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
       current_time = entry.authored_on;
       // console.log("STARTING AT", current_time);
     }
-    if (entry.type === "Reset Vibestacks") {
+    if (entry.type === "Reset Vibestacks" || entry.type === "Reset All Vibes") {
       pending_vibes = {};
       user_vibes = {};
     }
@@ -69,7 +69,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
     if (entry.type === "Set Vibenomics") {
       current_rate = entry.value.vibenomics;
     }
-    if (entry.type === "Set Vibestack") {
+    if (entry.type === "Set Vibestack" || entry.type === "Set User Vibes") {
       user_vibes[entry.receiver.id] = entry.value.vibestack;
     }
     if (entry.type === "Vibe") {

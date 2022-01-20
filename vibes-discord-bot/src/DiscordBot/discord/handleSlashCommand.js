@@ -4,16 +4,15 @@ import vibes from "../cmds/vibes";
 import badvibes from "../cmds/badvibes";
 import vibecheck from "../cmds/vibecheck";
 
-import setvibestack from "../cmds/setvibestack";
-import setvibenomics from "../cmds/setvibenomics";
-import resetvibestacks from "../cmds/resetvibestacks";
+import set_user_vibes from "../cmds/set_user_vibes";
+import set_vibenomics from "../cmds/set_vibenomics";
+import reset_all_vibes from "../cmds/reset_all_vibes";
 
 import set_vibes_nickname_template from "../cmds/set_vibes_nickname_template";
 import set_vibes_metadata from "../cmds/set_vibes_metadata";
-import setvibestrait from "../cmds/setvibestrait";
 
-import setupvibes from "../cmds/setupvibes";
-import refreshvibeparens from "../cmds/refreshvibeparens";
+import setup_vibes from "../cmds/setup_vibes";
+import refresh_vibes from "../cmds/refresh_vibes";
 
 export default async function handleCmd({ client, command }) {
   if (!command) {
@@ -41,22 +40,20 @@ export default async function handleCmd({ client, command }) {
     handled = await badvibes({ client, command, cmd_args });
   } else if (["vibecheck", "vibescheck", "vc"].includes(cmd)) {
     handled = vibecheck({ client, command, cmd_args });
-  } else if (["resetvibestacks"].includes(cmd)) {
-    handled = resetvibestacks({ client, command, cmd_args });
-  } else if (["setvibenomics"].includes(cmd)) {
-    handled = setvibenomics({ client, command, cmd_args });
-  } else if (["setvibestack"].includes(cmd)) {
-    handled = await setvibestack({ client, command, cmd_args });
+  } else if (["reset_all_vibes"].includes(cmd)) {
+    handled = reset_all_vibes({ client, command, cmd_args });
+  } else if (["set_vibenomics"].includes(cmd)) {
+    handled = set_vibenomics({ client, command, cmd_args });
+  } else if (["set_user_vibes"].includes(cmd)) {
+    handled = await set_user_vibes({ client, command, cmd_args });
   } else if (cmd === "set_vibes_nickname_template") {
     handled = await set_vibes_nickname_template({ client, command, cmd_args });
   } else if (cmd === "set_vibes_metadata") {
     handled = await set_vibes_metadata({ client, command, cmd_args });
-    // } else if (cmd === "setvibestrait") {
-    //   return setvibestrait({ client, message, cmd_args });
-  } else if (cmd === "setupvibes") {
-    handled = await setupvibes({ client, command, cmd_args, guild_id });
-  } else if (cmd === "refreshvibeparens") {
-    handled = await refreshvibeparens({ client, command, cmd_args, guild_id });
+  } else if (cmd === "setup_vibes") {
+    handled = await setup_vibes({ client, command, cmd_args, guild_id });
+  } else if (cmd === "refresh_vibes") {
+    handled = await refresh_vibes({ client, command, cmd_args, guild_id });
   }
   if (!command.replied) {
     if (handled && !handled?.error) {

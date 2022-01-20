@@ -5,7 +5,7 @@ import sendQuickCommandResponse from "../discord/sendQuickCommandResponse";
 import canControlVibesBot from "../discord/canControlVibesBot";
 import AppCache from ':/lib/AppCache';
 
-export default async function resetvibestacks({ client, command, message }) {
+export default async function reset_all_vibes({ client, command, message }) {
   const message_member = message ? message.member : command.member;
 
   const guild = message_member.guild;
@@ -26,7 +26,7 @@ export default async function resetvibestacks({ client, command, message }) {
 
   const entry = LedgerEntry.build({
     ledger_id,
-    type: "Reset Vibestacks",
+    type: "Reset All Vibes",
     sender: {
       type: "discord_guild_member",
       id: message_member.id,

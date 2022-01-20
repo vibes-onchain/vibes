@@ -24,24 +24,24 @@ export const GLOBAL_CMDS = [
   "vibesbot",
   "help",
   /// Commands for Admins
-  // setvibenomics
-  "setvibenomics",
+  // set_vibenomics
+  "set_vibenomics",
   //
-  // setvibestack
-  "setvibestack",
+  // set_user_vibes
+  "set_user_vibes",
   //
   // other
   // TODO "startvibeparty",
-  "resetvibestacks",
+  "reset_all_vibes",
   "set_vibes_nickname_template",
+  "import_vibes_nickname_template",
   "use_default_nickname",
   "use_numeric_nickname",
   "set_vibes_metadata",
-
-  "setupvibes",
+  "setup_vibes",
   //
-  "newvibesledger",
-  "refreshvibeparens",
+  "new_vibes_ledger",
+  "refresh_vibes",
 ];
 
 export const REQUIRED_INTENTS = [
