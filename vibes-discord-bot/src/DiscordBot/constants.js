@@ -82,7 +82,7 @@ export const GOOD_VIBE_ROLES = [
     name: "OG Vibe",
     icon: "og-vibes.png",
     hoist: true,
-    when: ["vibestack_score", ">", 2],
+    when: ["vibestack_zscore", ">", 2],
     level: 5,
   },
   {
@@ -91,7 +91,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Legendary Vibe",
     hoist: true,
     icon: "legendary-vibes.png",
-    when: ["vibestack_score", ">", 1.5],
+    when: ["vibestack_zscore", ">", 1.5],
     level: 4,
   },
   {
@@ -100,7 +100,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Epic Vibe",
     icon: "epic-vibes.png",
     hoist: true,
-    when: ["vibestack_score", ">", 1],
+    when: ["vibestack_zscore", ">", 1],
     level: 3,
   },
   {
@@ -109,7 +109,7 @@ export const GOOD_VIBE_ROLES = [
     name: "Rare Vibe",
     icon: "rare-vibes.png",
     hoist: true,
-    when: ["vibestack_score", ">", 0],
+    when: ["vibestack_zscore", ">", 0],
     level: 2,
   },
   {

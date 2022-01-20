@@ -129,21 +129,21 @@ export default async function reduceVibesLedger({ ledger_id }) {
 
   const profiles = Object.entries(user_vibes).reduce(
     (acc, [user_id, vibestack]) => {
-      const vibestack_score = ss.zScore(
+      const vibestack_zscore = ss.zScore(
         vibestack,
         vibestack_mean,
         vibestack_sd
       );
       const vibestack_percentile =
-        ss.cumulativeStdNormalProbability(vibestack_score);
+        ss.cumulativeStdNormalProbability(vibestack_zscore);
       let vibe_level, vibe_level_name;
       for (const role of [...BAD_VIBE_ROLES, ...GOOD_VIBE_ROLES]) {
         const key = role.when[0];
         const keys_value = (() => {
           if (key === "vibestack") {
             return vibestack;
-          } else if (key === "vibestack_score") {
-            return vibestack_score;
+          } else if (key === "vibestack_zscore") {
+            return vibestack_zscore;
           }
         })();
         const op = role.when[1];
@@ -166,7 +166,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
       }
       acc[user_id] = {
         vibestack,
-        vibestack_score,
+        vibestack_zscore,
         vibestack_percentile,
         vibeLevel: vibe_level_name,
         vibe_level_name,
