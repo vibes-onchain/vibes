@@ -91,7 +91,6 @@ export default async function ({ client, guild_id }) {
     if (role_aliases[vibeRoleAttrs.name]) {
       vibeRoleAttrs.name = role_aliases[vibeRoleAttrs.name];
     }
-    console.log(vibeRoleAttrs);
     await createOrUpdateRole(
       guild,
       vibeRoleAttrs,

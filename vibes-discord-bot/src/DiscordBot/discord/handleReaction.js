@@ -11,6 +11,7 @@ import getGuildMemberFromUserId from "./getGuildMemberFromUserId";
 import getGuildMemberDetails from "./getGuildMemberDetails";
 import sendResponse from "../discord/sendResponse";
 import _ from "lodash";
+import getVibeReactionAliases from "../spothub/getVibeReactionAliases";
 
 async function handleVibeReaction({
   client,
@@ -22,7 +23,10 @@ async function handleVibeReaction({
   reaction_to_message_id,
   entryType,
 }) {
-  if (["Vibe","BadVibe"].includes(entryType) && note?.trim?.().match('^!(vibe|vibes|susvibe|susvibes|badvibes|badvibe)')) {
+  if (
+    ["Vibe", "BadVibe"].includes(entryType) &&
+    note?.trim?.().match("^!(vibe|vibes|susvibe|susvibes|badvibes|badvibe)")
+  ) {
     const sending_member = await getMemberDetails({
       client,
       guild_id,
@@ -34,10 +38,10 @@ async function handleVibeReaction({
       response: "no_vibing_vibe_commands",
       ledger_id,
       sending_member,
-    }); 
+    });
     return;
   }
-  
+
   if (entryType === "Vibe") {
     await saveVibe({
       ledger_id: ledger_id,
@@ -116,8 +120,23 @@ export default async function handleReaction(client, reaction, user) {
     }
   }
 
+  const message = reaction.message;
+  const message_member = message.member;
+  const to_member_id = message_member.id;
+  const to_member_username = message_member.user.username;
+  const guild = message_member.guild;
+  const guild_id = guild.id;
+
+  const vibe_reaction_aliases = await getVibeReactionAliases({ guild_id });
+
+  console.log({vibe_reaction_aliases});
+  console.log(reaction.emoji)
   let entryType = null;
-  if (GOOD_VIBE_EMOJI_NAMES.includes(reaction.emoji.name)) {
+  if (
+    [...vibe_reaction_aliases, ...GOOD_VIBE_EMOJI_NAMES].includes(
+      reaction.emoji.name
+    )
+  ) {
     entryType = "Vibe";
   } else if (BAD_VIBE_EMOJI_NAMES.includes(reaction.emoji.name)) {
     entryType = "BadVibe";
@@ -125,12 +144,7 @@ export default async function handleReaction(client, reaction, user) {
     return;
   }
 
-  const message = reaction.message;
-  const message_member = message.member;
-  const to_member_id = message_member.id;
-  const to_member_username = message_member.user.username;
-  const guild = message_member.guild;
-  const guild_id = guild.id;
+
   const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
   const ledger_id = ledger.id;
 
