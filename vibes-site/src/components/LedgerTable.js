@@ -3,6 +3,7 @@ import { css, keyframes } from "@emotion/core";
 
 import EntryId from ":/lib/EntryId";
 import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
+import moment from 'moment';
 
 export default function LedgerTable({ ledger_id, ledgerEntries }) {
   return (
@@ -22,7 +23,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
           {ledgerEntries.map((entry) => (
             <tr key={entry.id}>
               <td>{EntryId.abbreviate(entry.id)}</td>
-              <td>{entry.authored_on}</td>
+              <td>{entry.authored_on && moment(entry.authored_on).format('YYYY-MM-DD k:mm')}</td>
               <td>{entry.type}</td>
               <td>
                 {entry.sender && (
