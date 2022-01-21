@@ -27,9 +27,9 @@ function description({
   return `<@${sending_member.user_id}>${"`"}!SUS-VIBES${"`"}<@${
     receiving_member.user_id
   }>
-  *${vibe_level_ascii}Tx written to ${guildName} Ledger → **[vibes.app](${
+  ${vibe_level_ascii}*Tx written to ${guildName} Ledger* → **[vibes.app](${
     process.env.VIBESCAN_BASE_URL
-  }/ledger/${ledger_id})***`;
+  }/ledger/${ledger_id})**`;
 }
 
 export function forVibeFeed({
