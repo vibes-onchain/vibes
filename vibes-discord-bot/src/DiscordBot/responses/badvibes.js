@@ -10,18 +10,26 @@ function description({
   sending_member,
   receiving_member,
   vibesLedgerSummary,
+  guildName,
 }) {
-  return `:arrow_right: ${":sparkles:"} <@${
+  let vibe_level_ascii = "";
+  if (receiving_member.vibe_level == 1) {
+    vibe_level_ascii = "˙";
+  } else if (receiving_member.vibe_level == 2) {
+    vibe_level_ascii = "⁚‧";
+  } else if (receiving_member.vibe_level == 3) {
+    vibe_level_ascii = "⁚⁛";
+  } else if (receiving_member.vibe_level == 4) {
+    vibe_level_ascii = "⁚⁛⁚";
+  } else if (receiving_member.vibe_level == 5) {
+    vibe_level_ascii = "⁚⁛⁚⁛";
+  }
+  return `<@${sending_member.user_id}>${"`"}!SUS-VIBES${"`"}<@${
     receiving_member.user_id
-  }> – u got susvibes ${":sparkles:"} from <@${sending_member.user_id}> ${
-    note ? `\nfor "${note}"` : ""
-  }
-    :pancakes: <@${sending_member.user_id}> has a **\`VIBE STACK\`** of ${
-    formatNumber(sending_member.vibestack, 'decimal0f')
-  }
-    :clipboard:Full Tx log – **[vibescan.io](${
-      process.env.VIBESCAN_BASE_URL
-    }/ledger/${ledger_id})**`;
+  }>
+  *${vibe_level_ascii}Tx written to ${guildName} Ledger → **[vibes.app](${
+    process.env.VIBESCAN_BASE_URL
+  }/ledger/${ledger_id})***`;
 }
 
 export function forVibeFeed({
@@ -33,18 +41,21 @@ export function forVibeFeed({
   ledger_id,
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
+  const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
+
   return {
     embeds: [
       {
-        color: DISCORD_EMBED_COLOR,
-        url: process.env.VIBES_LIVE_BASE_URL,
-        title: `${":warning:"}  **!susvibes**  ${":warning:"}`,
+        title: "⚠️ !sus-vibes recorded ↺",
+        color: "#EE4B2B",
+        url: `${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id}`,
         description: description({
           emojis,
           ledger_id,
           sending_member,
           receiving_member,
           vibesLedgerSummary,
+          guildName,
         }),
       },
     ],
