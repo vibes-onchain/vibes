@@ -134,7 +134,7 @@ const CSS = css`
       margin: 10px 0;
       display: flex;
       flex-wrap: no-wrap;
-      border-bottom: 1px solid #eaeaea;
+      border-bottom: 1px solid rgba(234, 234, 234);
       margin-bottom: 20px;
       padding-bottom: 20px;
       > span {
@@ -147,6 +147,7 @@ const CSS = css`
           flex-grow: 1;
           flex-basis: calc(100% - 30px);
           align-self: center;
+          font-weight: 700;
         }
         &.vibestack,
         &.percentile,

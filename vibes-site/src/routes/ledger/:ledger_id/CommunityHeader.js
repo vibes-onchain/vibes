@@ -87,21 +87,27 @@ const CSS = css`
         margin: 0 35px !important;
       }
     }
-  }
-  body.dark-theme & {
-    .ui.secondary.pointing.menu {
-      border-bottom: 1px solid #aaa;
-    }
-    .ui.secondary.menu {
+    &.ui.secondary.menu {
       .active.item {
-        border-color: #f2f2f2;
         padding: 0px;
         padding-bottom: 10px;
       }
       .active.item, .item {
-        color: #f2f2f2;
         padding: 0px;
         padding-bottom: 10px;
+      }
+    }
+  }
+  body.dark-theme & {
+    .ui.secondary.pointing.menu {
+      border-bottom: 1px solid #5b5b5b;
+    }
+    .ui.secondary.menu {
+      .active.item {
+        border-color: #f2f2f2;
+      }
+      .active.item, .item {
+        color: #f2f2f2;
       }
     }
   }
