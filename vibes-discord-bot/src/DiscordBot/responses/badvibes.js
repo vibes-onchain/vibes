@@ -24,10 +24,10 @@ function description({
   } else if (receiving_member.vibe_level == 5) {
     vibe_level_ascii = "⁚⁛⁚⁛";
   }
-  return `<@${sending_member.user_id}>${"`"}!SUS-VIBES${"`"}<@${
+  return `<@${sending_member.user_id}>${"`"} → <@${
     receiving_member.user_id
   }>
-  ${vibe_level_ascii}*Tx written to ${guildName} Ledger* → **[vibes.app](${
+  ${vibe_level_ascii}*Tx written to ${guildName} Ledger by* **[vibes.app](${
     process.env.VIBESCAN_BASE_URL
   }/ledger/${ledger_id})**`;
 }
@@ -46,7 +46,7 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: "⚠️ !sus-vibes recorded ↺",
+        title: "⚠️ sus-vibes recorded ↗",
         color: "#c8354a",
         url: `${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id}`,
         description: description({
