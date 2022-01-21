@@ -47,7 +47,7 @@ export function forVibeFeed({
     embeds: [
       {
         title: "⚠️ !sus-vibes recorded ↺",
-        color: "#EE4B2B",
+        color: "#c8354a",
         url: `${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id}`,
         description: description({
           emojis,
