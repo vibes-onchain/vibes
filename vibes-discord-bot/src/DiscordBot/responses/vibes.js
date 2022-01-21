@@ -12,15 +12,15 @@ function description({
   guildName,
 }) {
   let vibe_level_ascii = "";
-  if (receiving_member.vibe_level == 1) {
+  if (sending_member.vibe_level == 1) {
     vibe_level_ascii = "˙";
-  } else if (receiving_member.vibe_level == 2) {
+  } else if (sending_member.vibe_level == 2) {
     vibe_level_ascii = "⁚‧";
-  } else if (receiving_member.vibe_level == 3) {
+  } else if (sending_member.vibe_level == 3) {
     vibe_level_ascii = "⁚⁛";
-  } else if (receiving_member.vibe_level == 4) {
+  } else if (sending_member.vibe_level == 4) {
     vibe_level_ascii = "⁚⁛⁚";
-  } else if (receiving_member.vibe_level == 5) {
+  } else if (sending_member.vibe_level == 5) {
     vibe_level_ascii = "⁚⁛⁚⁛";
   }
   return `<@${sending_member.user_id}>${"`"}!VIBES${"`"}<@${
@@ -43,15 +43,15 @@ export function forVibeFeed({
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
 
   let embed_color = "";
-  if (receiving_member.vibe_level == 1) {
+  if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
-  } else if (receiving_member.vibe_level == 2) {
+  } else if (sending_member.vibe_level == 2) {
     embed_color = "#5397d5";
-  } else if (receiving_member.vibe_level == 3) {
+  } else if (sending_member.vibe_level == 3) {
     embed_color = "#915db1";
-  } else if (receiving_member.vibe_level == 4) {
+  } else if (sending_member.vibe_level == 4) {
     embed_color = "#d7823b";
-  } else if (receiving_member.vibe_level == 5) {
+  } else if (sending_member.vibe_level == 5) {
     embed_color = "#eac545";
   }
   return {
