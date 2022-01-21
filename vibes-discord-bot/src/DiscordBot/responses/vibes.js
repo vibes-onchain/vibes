@@ -9,21 +9,26 @@ function description({
   sending_member,
   receiving_member,
   vibesLedgerSummary,
+  guildName,
 }) {
-  return `:arrow_right: ${":sparkles:"} <@${
-    receiving_member.user_id
-  }> – u got vibes ${":sparkles:"} from <@${sending_member.user_id}> ${
-    note ? `\nfor "${note}"` : ""
+  let vibe_level_ascii = "";
+  if (receiving_member.vibe_level == 1) {
+    vibe_level_ascii = "˙";
+  } else if (receiving_member.vibe_level == 2) {
+    vibe_level_ascii = "⁚‧";
+  } else if (receiving_member.vibe_level == 3) {
+    vibe_level_ascii = "⁚⁛";
+  } else if (receiving_member.vibe_level == 4) {
+    vibe_level_ascii = "⁚⁛⁚";
+  } else if (receiving_member.vibe_level == 5) {
+    vibe_level_ascii = "⁚⁛⁚⁛";
   }
-    :pancakes: <@${
-      sending_member.user_id
-    }> has a **\`VIBE STACK\`** of ${formatNumber(
-    sending_member.vibestack,
-    "decimal0f"
-  )}
-    :clipboard:Full Tx log – **[vibescan.io](${
-      process.env.VIBESCAN_BASE_URL
-    }/ledger/${ledger_id})**`;
+  return `<@${sending_member.user_id}>${"`"}!VIBES${"`"}<@${
+    receiving_member.user_id
+  }>
+  *${vibe_level_ascii}Tx written to ${guildName} Ledger → **[vibes.app](${
+    process.env.VIBESCAN_BASE_URL
+  }/ledger/${ledger_id})***`;
 }
 
 export function forVibeFeed({
@@ -35,18 +40,33 @@ export function forVibeFeed({
   ledger_id,
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
+  const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
+
+  let embed_color = "";
+  if (receiving_member.vibe_level == 1) {
+    embed_color = "#2ecc71";
+  } else if (receiving_member.vibe_level == 2) {
+    embed_color = "#3498db";
+  } else if (receiving_member.vibe_level == 3) {
+    embed_color = "#9b59b6";
+  } else if (receiving_member.vibe_level == 4) {
+    embed_color = "#e74c3c";
+  } else if (receiving_member.vibe_level == 5) {
+    embed_color = "#e91e63";
+  }
   return {
     embeds: [
       {
-        color: DISCORD_EMBED_COLOR,
-        url: process.env.VIBES_LIVE_BASE_URL,
-        title: `${":sparkles:"}  **!vibes**  ${":sparkles:"}`,
+        title: "✨ !vibes recorded ↺",
+        color: embed_color,
+        url: `${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id}`,
         description: description({
           emojis,
           ledger_id,
           sending_member,
           receiving_member,
           vibesLedgerSummary,
+          guildName,
         }),
       },
     ],
