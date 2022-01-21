@@ -26,9 +26,9 @@ function description({
   return `<@${sending_member.user_id}>${"`"}!VIBES${"`"}<@${
     receiving_member.user_id
   }>
-  *${vibe_level_ascii}Tx written to ${guildName} Ledger → **[vibes.app](${
+  ${vibe_level_ascii}*Tx written to ${guildName} Ledger* → **[vibes.app](${
     process.env.VIBESCAN_BASE_URL
-  }/ledger/${ledger_id})***`;
+  }/ledger/${ledger_id})**`;
 }
 
 export function forVibeFeed({
@@ -44,15 +44,15 @@ export function forVibeFeed({
 
   let embed_color = "";
   if (receiving_member.vibe_level == 1) {
-    embed_color = "#2ecc71";
+    embed_color = "#8f9296";
   } else if (receiving_member.vibe_level == 2) {
-    embed_color = "#3498db";
+    embed_color = "#5397d5";
   } else if (receiving_member.vibe_level == 3) {
-    embed_color = "#9b59b6";
+    embed_color = "#915db1";
   } else if (receiving_member.vibe_level == 4) {
-    embed_color = "#e74c3c";
+    embed_color = "#d7823b";
   } else if (receiving_member.vibe_level == 5) {
-    embed_color = "#e91e63";
+    embed_color = "#eac545";
   }
   return {
     embeds: [
