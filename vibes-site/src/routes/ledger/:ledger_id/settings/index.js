@@ -43,20 +43,4 @@ export default function () {
 
 const CSS = css`
   width: 100%;
-  .guild-avatar-holder {
-    margin-top: -80px;
-    margin-bottom: 40px;
-  }
-  .guild-name-holder {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 25px;
-    font-weight: 600;
-  }
-  .tabs {
-    justify-content: center;
-    .item {
-      margin: 0 20px !important;
-    }
-  }
 `;

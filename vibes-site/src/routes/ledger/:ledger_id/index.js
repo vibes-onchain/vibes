@@ -75,14 +75,14 @@ export default function () {
       {guild_id && <CommunityHeader guild_id={guild_id} tab={"leaderboard"} />}
       {!ledgerVibes && <Loading />}
       {ledgerVibes && (
-        <div className="page-container">
+        <div className="page-container leaderboard-holder">
           <div className="leaderboard">
             <div className="member header">
-              <span></span>
-              <span></span>
-              <span>Vibe Stack</span>
-              <span>Percentile</span>
-              <span>Role</span>
+              <span className="rank"></span>
+              <span className="username"></span>
+              <span className="vibestack">Vibe Stack</span>
+              <span className="percentile">Percentile</span>
+              <span className="role_name">Role</span>
             </div>
             {leaderBoardMembers.map((member, index) => (
               <div className="member" key={member.member_id}>
@@ -114,37 +114,76 @@ export default function () {
 
 const CSS = css`
   width: 100%;
-  .guild-avatar-holder {
-    margin-top: -80px;
-    margin-bottom: 40px;
-  }
-  .guild-name-holder {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 25px;
-    font-weight: 600;
-  }
-  .tabs {
-    justify-content: center;
-    .item {
-      margin: 0 20px !important;
+  .leaderboard-holder {
+    padding: 0;
+    overflow: hidden;
+    @media (min-width: 500px) {
+      padding: 20px;
     }
   }
   .leaderboard {
-    display: table;
+    .member.header {
+      > span {
+        font-weight: bold;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: space-around;
+      }
+    }
     .member {
-      display: table-row;
       margin: 10px 0;
-      &.header {
-        > span {
-          font-weight: bold;
+      display: flex;
+      flex-wrap: no-wrap;
+      border-bottom: 1px solid #eaeaea;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      > span {
+        &.rank {
+          flex-basis: 30px;
+          flex-shrink: 0;
+          align-self: center;
+        }
+        &.username {
+          flex-grow: 1;
+          flex-basis: calc(100% - 30px);
+          align-self: center;
+        }
+        &.vibestack,
+        &.percentile,
+        &.role_name {
+          margin-top: 10px;
+          flex-basis: 33%;
+          text-align: center;
+          margin-bottom: 10px;
+          align-self: center;
         }
       }
-      > span {
-        display: table-cell;
-        padding: 20px 5px;
-        @media (min-width: 500px) {
-          padding: 20px 20px;
+    }
+    @media (min-width: 50000px) {
+      display: grid;
+      grid-template-columns: 0.2fr 1fr 1fr 1fr 1fr;
+      .member {
+        display: contents;
+        margin: 10px 0;
+        &.header {
+          > span {
+            font-weight: bold;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-around;
+          }
+        }
+        > span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &.username {
+            justify-content: flex-start;
+          }
+          padding: 10px 5px;
+          @media (min-width: 500px) {
+            padding: 20px 20px;
+          }
         }
       }
     }

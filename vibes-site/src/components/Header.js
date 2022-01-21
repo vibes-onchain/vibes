@@ -133,7 +133,7 @@ const headerCSS = css`
       padding: 15px 0;
       img {
         margin-right: 5px;
-        height: 30px;
+        height: 21px;
       }
       font-size: 28px;
       font-weight: 800;
@@ -149,8 +149,8 @@ const headerCSS = css`
       }
     }
     .right > .item {
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 15px;
+      font-weight: 700;
       padding: 0 10px;
       color: #0f0f0f;
       display: flex;
@@ -163,8 +163,9 @@ const headerCSS = css`
       .theme {
         text-align: left;
         justify-content: left;
-        border: 2px solid #333;
+        border: 1px solid #f2f2f2;
         border-radius: 20px;
+        padding: 2px;
         .option {
           display: inline-block;
           vertical-align: middle;
@@ -173,7 +174,7 @@ const headerCSS = css`
             color: black;
           }
           &.dark {
-            color: #ccc;
+            color: #2f3136;
           }
         }
       }
@@ -182,16 +183,17 @@ const headerCSS = css`
   body.dark-theme & {
     .navbar {
       .right > .item {
-        color: #ddd;
+        color: #f2f2f2;
         .theme {
-          background: black;
-          border: 2px solid #ddd;
+          background: #2f3136;
+          border: 1px solid #f2f2f2;
+          padding: 2px;
           .option {
             &.light {
               color: #777;
             }
             &.dark {
-              color: #ddd;
+              color: #f2f2f2;
             }
           }
         }
