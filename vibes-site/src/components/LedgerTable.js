@@ -1,33 +1,141 @@
 /** @jsxImportSource @emotion/react */
 import { css, keyframes } from "@emotion/core";
 
+import React from "react";
 import EntryId from ":/lib/EntryId";
 import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
-import moment from 'moment';
-
+import moment from "moment";
+import { useTable, useSortBy, useFilters, usePagination } from "react-table";
+import _ from "lodash";
 
 export default function LedgerTable({ ledger_id, ledgerEntries }) {
-  
-  ledgerEntries.sort((a,b)=> (a.authored_on < b.authored_on) ? 1 : ((b.authored_on < a.authored_on) ? -1 : 0));
+  const data = React.useMemo(() => {
+    const r = ledgerEntries
+      .reverse()
+      .map((i) =>
+        _.pick(i, ["id", "authored_on", "type", "sender", "receiver", "value"])
+      );
+    return r;
+  }, [ledgerEntries]);
+
+  const columns = React.useMemo(() => [
+    {
+      Header: "Entry ID",
+      accessor: "id",
+      Cell: ({ value }) => <>{EntryId.abbreviate(value)}</>,
+    },
+    {
+      Header: "Time",
+      accessor: "authored_on",
+      Cell: ({ value }) => (
+        <>{value && moment(value).format("YYYY-MM-DD k:mm")}</>
+      ),
+    },
+    {
+      Header: "Type",
+      accessor: "type",
+    },
+    {
+      Header: "Sender",
+      accessor: "sender.id",
+      Cell: ({ row: { original: entry }, value }) => (
+        <>
+          {entry?.sender && (
+            <LedgerEntryUserLabel
+              to={`/ledger/${ledger_id}/profile/discord_member-${entry.sender?.id}`}
+              id={entry.sender?.id}
+              imgClassName={"w-7 h-7 rounded-full inline-block"}
+            />
+          )}
+        </>
+      ),
+    },
+    {
+      Header: "Receiver",
+      accessor: "receiver.id",
+      Cell: ({ row: { original: entry }, value }) => (
+        <>
+          {entry?.receiver && (
+            <LedgerEntryUserLabel
+              to={`/ledger/${ledger_id}/profile/discord_member-${entry.receiver?.id}`}
+              id={entry.receiver?.id}
+              imgClassName={"w-7 h-7 rounded-full inline-block"}
+            />
+          )}
+        </>
+      ),
+    },
+    {
+      Header: "Data",
+      accessor: "value",
+      Cell: ({ value }) => (
+        <>{value?.vibe_rate || value?.vibe_period || value?.reason}</>
+      ),
+    },
+  ]);
+
+  const initialSortBy = React.useMemo(
+    () => [{ id: "authored_on", desc: true }],
+    []
+  );
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable(
+      {
+        data,
+        columns,
+        initialState: {
+          sortBy: initialSortBy,
+        },
+      },
+      useFilters,
+      useSortBy,
+      usePagination,
+    );
 
   return (
     <div css={CSS}>
-      <table>
+      <table {...getTableProps()}>
         <thead>
-          <tr>
-            <th>Entry ID</th>
-            <th>Time</th>
-            <th>Type</th>
-            <th>Sender</th>
-            <th>Receiver</th>
-            <th>Data</th>
-          </tr>
+          {headerGroups.map((headerGroup) => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map((column) => (
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                  {column.render("Header")}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </span>
+                </th>
+              ))}
+            </tr>
+          ))}
         </thead>
-        <tbody>
+        <tbody {...getTableBodyProps()}>
+          {rows.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => {
+                  return (
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+        {/* <tbody>
           {ledgerEntries.map((entry) => (
             <tr key={entry.id}>
               <td>{EntryId.abbreviate(entry.id)}</td>
-              <td>{entry.authored_on && moment(entry.authored_on).format('YYYY-MM-DD k:mm')}</td>
+              <td>
+                {entry.authored_on &&
+                  moment(entry.authored_on).format("YYYY-MM-DD k:mm")}
+              </td>
               <td>{entry.type}</td>
               <td>
                 {entry.sender && (
@@ -54,7 +162,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
               </td>
             </tr>
           ))}
-        </tbody>
+        </tbody> */}
       </table>
     </div>
   );

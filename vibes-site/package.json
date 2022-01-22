@@ -41,7 +41,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.0",
     "react-semantic-toasts": "^0.6.5",
-    "react-table": "^7.6.2",
+    "react-table": "^7.7.0",
     "react-tagsinput": "^3.19.0",
     "react-tsparticles": "^1.27.0",
     "react-webcam-barcode-scanner": "^0.0.2-rc2",
