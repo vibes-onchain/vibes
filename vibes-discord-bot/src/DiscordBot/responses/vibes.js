@@ -54,7 +54,7 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: "✨ vibes recorded ↗",
+        title: "✨ recorded ↗",
         color: embed_color,
         url: message.url,
         description: description({
