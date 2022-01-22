@@ -22,6 +22,7 @@ async function handleVibeReaction({
   note,
   reaction_to_message_id,
   entryType,
+  message,
 }) {
   if (
     ["Vibe", "BadVibe"].includes(entryType) &&
@@ -38,6 +39,7 @@ async function handleVibeReaction({
       response: "no_vibing_vibe_commands",
       ledger_id,
       sending_member,
+      message,
     });
     return;
   }
@@ -72,6 +74,7 @@ async function handleVibeReaction({
       receiving_member,
       note,
       vibesLedgerSummary,
+      message,
     });
   } else if (entryType === "BadVibe") {
     await saveBadVibe({
@@ -103,6 +106,7 @@ async function handleVibeReaction({
       receiving_member,
       note,
       vibesLedgerSummary,
+      message,
     });
   }
 }
@@ -129,8 +133,8 @@ export default async function handleReaction(client, reaction, user) {
 
   const vibe_reaction_aliases = await getVibeReactionAliases({ guild_id });
 
-  console.log({vibe_reaction_aliases});
-  console.log(reaction.emoji)
+  console.log({ vibe_reaction_aliases });
+  console.log(reaction.emoji);
   let entryType = null;
   if (
     [...vibe_reaction_aliases, ...GOOD_VIBE_EMOJI_NAMES].includes(
@@ -143,7 +147,6 @@ export default async function handleReaction(client, reaction, user) {
   } else {
     return;
   }
-
 
   const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
   const ledger_id = ledger.id;
@@ -184,6 +187,7 @@ export default async function handleReaction(client, reaction, user) {
       to_member_username,
       note,
       reaction_to_message_id: message.id,
+      message,
       entryType,
     });
   }
