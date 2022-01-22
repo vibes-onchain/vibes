@@ -24,9 +24,7 @@ function description({
   } else if (receiving_member.vibe_level == 5) {
     vibe_level_ascii = "⁚⁛⁚⁛";
   }
-  return `<@${sending_member.user_id}>${"`"} → <@${
-    receiving_member.user_id
-  }>
+  return `<@${sending_member.user_id}>${"`"} → <@${receiving_member.user_id}>
   ${vibe_level_ascii}*Tx written to ${guildName} Ledger by* **[vibes.app](${
     process.env.VIBESCAN_BASE_URL
   }/ledger/${ledger_id})**`;
@@ -39,6 +37,7 @@ export function forVibeFeed({
   receiving_member,
   vibesLedgerSummary,
   ledger_id,
+  message,
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
@@ -48,7 +47,7 @@ export function forVibeFeed({
       {
         title: "⚠️ sus-vibes recorded ↗",
         color: "#c8354a",
-        url: `${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id}`,
+        url: message.url,
         description: description({
           emojis,
           ledger_id,
