@@ -10,7 +10,7 @@ if (process.env.APP_USE_CACHE === "1") {
     store: fsStore,
     options: {
       path: CACHE_DIR,
-      ttl: 60 * 60, //time to life in seconds
+      ttl: 5 * 60, //time to life in seconds
       subdirs: true, //create subdirectories to reduce the
       zip: false, //zip files to save diskspace (default: false)
     },
