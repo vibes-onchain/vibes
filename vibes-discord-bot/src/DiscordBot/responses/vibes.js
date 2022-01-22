@@ -17,18 +17,14 @@ function description({
   } else if (sending_member.vibe_level == 2) {
     vibe_level_ascii = "⁚‧";
   } else if (sending_member.vibe_level == 3) {
-    vibe_level_ascii = "⁚⁛";
+    vibe_level_ascii = "⁛⁚";
   } else if (sending_member.vibe_level == 4) {
     vibe_level_ascii = "⁚⁛⁚";
   } else if (sending_member.vibe_level == 5) {
-    vibe_level_ascii = "⁚⁛⁚⁛";
+    vibe_level_ascii = "⁛⁚⁛⁚";
   }
-  return `<@${sending_member.user_id}> → <@${
-    receiving_member.user_id
-  }>
-  ${vibe_level_ascii}*Tx written to ${guildName} Ledger by* **[vibes.app](${
-    process.env.VIBESCAN_BASE_URL
-  }/ledger/${ledger_id})**`;
+  return `<@${sending_member.user_id}> → <@${receiving_member.user_id}>
+  ${vibe_level_ascii}*Tx writtennn to ${guildName} Ledger by* **[vibes.app](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})**`;
 }
 
 export function forVibeFeed({
