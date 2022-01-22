@@ -34,6 +34,7 @@ export function forVibeFeed({
   receiving_member,
   vibesLedgerSummary,
   ledger_id,
+  message,
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
@@ -55,7 +56,7 @@ export function forVibeFeed({
       {
         title: "✨ vibes recorded ↗",
         color: embed_color,
-        url: `${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id}`,
+        url: message.url,
         description: description({
           emojis,
           ledger_id,
