@@ -1,8 +1,13 @@
 import { execSync } from "child_process";
 
-import vibesbot from '../cmds/help';
+import vibesbot from "../cmds/help";
 
-export default async function handleMention({ client, message, cmd, cmd_args }) {
+export default async function handleMention({
+  client,
+  message,
+  cmd,
+  cmd_args,
+}) {
   const member = message.member;
   const guild = member.guild;
   const guild_members = guild.members;
@@ -21,6 +26,18 @@ export default async function handleMention({ client, message, cmd, cmd_args }) 
     return vibesbot({ client, message, cmd_args });
   } else if (cmd === "gm") {
     await message.channel.send(`gm`);
+  } else if (cmd === "ping") {
+    await message.channel.send(`pong`);
+  } else if (cmd === "world") {
+    await message.channel.send(`peace`);
+  } else if (cmd === "hi") {
+    await message.channel.send(`hey fren`);
+  } else if (cmd === "hello") {
+    await message.channel.send(`hey fren`);
+  } else if (cmd === "where do you live") {
+    await message.channel.send(`the good vibes universe`);
+  } else if (cmd === "space") {
+    await message.channel.send(`my favorite frontier`);
   } else if (cmd === "refresh" && canControlFrenlyBot) {
     // for (const [member_id, member] of guild_members.cache) {
     //   const user = await DiscordDevKeyValue.findOrCreateMember(member);
