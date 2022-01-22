@@ -5,7 +5,11 @@ import EntryId from ":/lib/EntryId";
 import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
 import moment from 'moment';
 
+
 export default function LedgerTable({ ledger_id, ledgerEntries }) {
+  
+  ledgerEntries.sort((a,b)=> (a.authored_on < b.authored_on) ? 1 : ((b.authored_on < a.authored_on) ? -1 : 0));
+
   return (
     <div css={CSS}>
       <table>
