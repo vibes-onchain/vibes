@@ -10,21 +10,16 @@ function description({
   receiving_member,
   vibesLedgerSummary,
   guildName,
+  vibe_level_ascii,
+  vibe_level_action,
+  reaction_emoji,
 }) {
-  let vibe_level_ascii = "";
-  if (sending_member.vibe_level == 1) {
-    vibe_level_ascii = "˙";
-  } else if (sending_member.vibe_level == 2) {
-    vibe_level_ascii = "⁚‧";
-  } else if (sending_member.vibe_level == 3) {
-    vibe_level_ascii = "⁛⁚";
-  } else if (sending_member.vibe_level == 4) {
-    vibe_level_ascii = "⁚⁛⁚";
-  } else if (sending_member.vibe_level == 5) {
-    vibe_level_ascii = "⁛⁚⁛⁚";
-  }
-  return `<@${sending_member.user_id}> → <@${receiving_member.user_id}>
-  ${vibe_level_ascii}*Tx written to ${guildName} Ledger by* **[vibes.app](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})**`;
+  return `<@${sending_member.user_id}>→
+  ${"`"}${vibe_level_action}${"`"}${reaction_emoji}
+  <@${receiving_member.user_id}>←
+  ${""}
+  *Tx written to ${guildName} Ledger*
+  **[vibes.app](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})**`;
 }
 
 export function forVibeFeed({
@@ -35,26 +30,44 @@ export function forVibeFeed({
   vibesLedgerSummary,
   ledger_id,
   message,
+  reaction,
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
 
   let embed_color = "";
+  let vibe_level_ascii = "";
+  let vibe_level_action = "";
+  let reaction_emoji = "";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
+    vibe_level_ascii = "˙";
+    vibe_level_action = "!FRENLY-VIBE";
   } else if (sending_member.vibe_level == 2) {
     embed_color = "#5397d5";
+    vibe_level_ascii = "⁚‧";
+    vibe_level_action = "!RARE-VIBE";
   } else if (sending_member.vibe_level == 3) {
     embed_color = "#915db1";
+    vibe_level_ascii = "⁛⁚";
+    vibe_level_action = "!EPIC-VIBE";
   } else if (sending_member.vibe_level == 4) {
     embed_color = "#d7823b";
+    vibe_level_ascii = "⁚⁛⁚";
+    vibe_level_action = "!LEGENDARY-VIBE";
   } else if (sending_member.vibe_level == 5) {
     embed_color = "#eac545";
+    vibe_level_ascii = "⁛⁚⁛⁚";
+    vibe_level_action = "!OG-VIBE";
   }
+  if (reaction) {
+    reaction_emoji = "✨";
+  }
+
   return {
     embeds: [
       {
-        title: "✨ recorded ↗",
+        title: `${vibe_level_ascii}✨ recorded`,
         color: embed_color,
         url: message.url,
         description: description({
@@ -64,6 +77,10 @@ export function forVibeFeed({
           receiving_member,
           vibesLedgerSummary,
           guildName,
+          vibe_level_ascii,
+          message,
+          vibe_level_action,
+          reaction_emoji,
         }),
       },
     ],
