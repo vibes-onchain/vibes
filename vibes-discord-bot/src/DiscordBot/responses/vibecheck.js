@@ -2,6 +2,29 @@ import { DISCORD_EMBED_COLOR } from "../constants";
 import formatNumber from "../../lib/formatNumber";
 import getGuildStuff from "../discord/getGuildStuff";
 
+function description({
+  emojis,
+  ledger_id,
+  sending_member,
+  receiving_member,
+  vibesLedgerSummary,
+  profilePath,
+}) {
+  let vibe_level_ascii = "";
+  if (sending_member.vibe_level == 1) {
+    vibe_level_ascii = "˙";
+  } else if (sending_member.vibe_level == 2) {
+    vibe_level_ascii = "⁚‧";
+  } else if (sending_member.vibe_level == 3) {
+    vibe_level_ascii = "⁛⁚";
+  } else if (sending_member.vibe_level == 4) {
+    vibe_level_ascii = "⁚⁛⁚";
+  } else if (sending_member.vibe_level == 5) {
+    vibe_level_ascii = "⁛⁚⁛⁚";
+  }
+  return `<@${sending_member.user_id}> → <@${receiving_member.user_id}>
+  ${vibe_level_ascii}*See Vibes profile at* **[vibes.app](${process.env.VIBES_LIVE_BASE_URL}/${profilePath})**`;
+}
 export function forVibeFeed({
   client,
   guild_id,
@@ -34,41 +57,17 @@ export function forVibeFeed({
   return {
     embeds: [
       {
+        title: "👀 vibe check ↗",
         color: DISCORD_EMBED_COLOR,
-        title: `${":sparkles:"} **vibes of @${
-          receiving_member.username
-        }** ${":sparkles:"}`,
         url: `${process.env.VIBES_LIVE_BASE_URL}/${profilePath}`,
-        description: `:eyes: see full profile at **[Vibes](${
-          process.env.VIBES_LIVE_BASE_URL
-        }/${profilePath})**
-    
-          <@${receiving_member.user_id}>
-    
-          :rocket: \`VIBE LEVEL \` ${vibeLevelEmoji} ${
-          receiving_member.vibe_level_name || "Has no level"
-        } (${formatNumber(receiving_member.vibestack_percentile, "percent2f")})
-          :pancakes: \`VIBE STACK \` ${formatNumber(
-            receiving_member.vibestack,
-            "decimal0f"
-          )}
-          :sparkler: \`VIBE DUST  \` ${formatNumber(
-            receiving_member.vibedust,
-            "decimal0f"
-          )} today
-          
-          :clipboard: Full Tx log at **[vibescan.io](${
-            process.env.VIBESCAN_BASE_URL
-          }/${profilePath}/entries)**
-          
-          :detective: _requested by <@${sending_member.user_id}>_
-          `,
-        thumbnail: {
-          url: "https://media3.giphy.com/media/L3RMqVU2LRnSLQVO2a/giphy.gif?cid=ecf05e47902q2hpged7tqv0ytxoxveomvuwvqy5sdetze0bu&rid=giphy.gif&ct=g",
-        },
-        // image: process.env.VIBES_SHARE_BASE_URL && {
-        //   url: `${process.env.VIBES_SHARE_BASE_URL}/{profilePath}/shareable`,
-        // },
+        description: description({
+          emojis,
+          ledger_id,
+          sending_member,
+          receiving_member,
+          vibesLedgerSummary,
+          profilePath,
+        }),
       },
     ],
   };
