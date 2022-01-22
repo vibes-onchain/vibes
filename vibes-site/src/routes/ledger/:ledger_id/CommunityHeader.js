@@ -5,6 +5,7 @@ import useRouter from ":/lib/useRouter";
 import LedgerTable from ":/components/LedgerTable";
 import DiscordGuildLabel from ":/components/DiscordGuildLabel";
 import DiscordGuildName from ":/components/DiscordGuildName";
+import DiscordGuildDescription from ":/components/DiscordGuildDescription";
 import DiscordGuildAvatar from ":/components/DiscordGuildAvatar";
 import DiscordGuildBanner from ":/components/DiscordGuildBanner";
 import { Menu, Segment } from "semantic-ui-react";
@@ -25,6 +26,9 @@ export default function CommunityHeader({ guild_id, tab }) {
         </div>
         <div className="guild-name-holder">
           <DiscordGuildName guild_id={guild_id} />
+        </div>
+        <div className="guild-description-holder">
+          <DiscordGuildDescription guild_id={guild_id} />
         </div>
       </div>
       <div className="page-container tabs-holder">
@@ -69,6 +73,16 @@ const CSS = css`
     font-size: 38px;
     font-weight: 700;
     line-height: 1.1em;
+    text-align: justify; 
+  }
+  .guild-description-holder{
+    width: 35%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 1.25em;
+    font-family: 'Inter', sans-serif;
   }
   .tabs-holder {
     padding: 0;
