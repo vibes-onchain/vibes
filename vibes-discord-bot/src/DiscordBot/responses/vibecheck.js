@@ -9,6 +9,7 @@ function description({
   receiving_member,
   vibesLedgerSummary,
   profilePath,
+  vibeLevelEmoji
 }) {
   let vibe_level_ascii = "";
   if (sending_member.vibe_level == 1) {
@@ -22,8 +23,22 @@ function description({
   } else if (sending_member.vibe_level == 5) {
     vibe_level_ascii = "⁛⁚⁛⁚";
   }
-  return `<@${sending_member.user_id}> → <@${receiving_member.user_id}>
-  ${vibe_level_ascii}*See Vibes profile at* **[vibes.app](${process.env.VIBES_LIVE_BASE_URL}/${profilePath})**`;
+  return `<@${receiving_member.user_id}>
+
+  :rocket: \`VIBE LEVEL \` ${vibeLevelEmoji} ${
+    receiving_member.vibe_level_name || "Has no level"
+  } (${formatNumber(receiving_member.vibestack_percentile, "percent2f")})
+  :pancakes: \`VIBE STACK \` ${formatNumber(
+    receiving_member.vibestack,
+    "decimal0f"
+  )}
+
+  ${vibe_level_ascii}*See Vibes profile at* **[vibes.app](${
+    process.env.VIBES_LIVE_BASE_URL
+  }/${profilePath})**
+  
+  :detective: _requested by <@${sending_member.user_id}>_ 
+  `;
 }
 export function forVibeFeed({
   client,
@@ -67,6 +82,7 @@ export function forVibeFeed({
           receiving_member,
           vibesLedgerSummary,
           profilePath,
+          vibeLevelEmoji
         }),
       },
     ],
