@@ -14,10 +14,10 @@ function description({
   vibe_level_action,
   reaction_emoji,
 }) {
-  return `<@${sending_member.user_id}>→
-  ${"`"}${vibe_level_action}${"`"}${reaction_emoji}
-  <@${receiving_member.user_id}>←
-  ${""}
+  return `<@${sending_member.user_id}> →
+  ${"`"}${vibe_level_action}${"`"}${vibe_level_ascii}${reaction_emoji}
+  <@${receiving_member.user_id}> ←
+  ${""} 
   *Tx written to ${guildName} Ledger*
   **[vibes.app](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})**`;
 }
@@ -37,28 +37,28 @@ export function forVibeFeed({
 
   let embed_color = "";
   let vibe_level_ascii = "";
-  let vibe_level_action = "";
-  let reaction_emoji = "";
+  let vibe_level_action = "!VIBES";
+  let reaction_emoji = "✨";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
     vibe_level_ascii = "˙";
-    vibe_level_action = "!FRENLY-VIBE";
+    vibe_level_action = "!FRENLY-VIBES";
   } else if (sending_member.vibe_level == 2) {
     embed_color = "#5397d5";
     vibe_level_ascii = "⁚‧";
-    vibe_level_action = "!RARE-VIBE";
+    vibe_level_action = "!RARE-VIBES";
   } else if (sending_member.vibe_level == 3) {
     embed_color = "#915db1";
     vibe_level_ascii = "⁛⁚";
-    vibe_level_action = "!EPIC-VIBE";
+    vibe_level_action = "!EPIC-VIBES";
   } else if (sending_member.vibe_level == 4) {
     embed_color = "#d7823b";
     vibe_level_ascii = "⁚⁛⁚";
-    vibe_level_action = "!LEGENDARY-VIBE";
+    vibe_level_action = "!LEGENDARY-VIBES";
   } else if (sending_member.vibe_level == 5) {
     embed_color = "#eac545";
     vibe_level_ascii = "⁛⁚⁛⁚";
-    vibe_level_action = "!OG-VIBE";
+    vibe_level_action = "!OG-VIBES";
   }
   if (reaction) {
     reaction_emoji = "✨";
@@ -67,7 +67,7 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii}✨ recorded`,
+        title: `${vibe_level_ascii}✨ recorded ↺`,
         color: embed_color,
         url: message.url,
         description: description({

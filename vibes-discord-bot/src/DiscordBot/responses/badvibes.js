@@ -15,9 +15,9 @@ function description({
   vibe_level_action,
   reaction_emoji,
 }) {
-  return `<@${sending_member.user_id}>→
-  ${"`"}${vibe_level_action}${"`"}${reaction_emoji}
-  <@${receiving_member.user_id}>←
+  return `<@${sending_member.user_id}> →
+  ${"`"}${vibe_level_action}${"`"}${vibe_level_ascii}${reaction_emoji}
+  <@${receiving_member.user_id}> ←
   ${""}
   *Tx written to ${guildName} Ledger*
   **[vibes.app](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})**`;
@@ -37,8 +37,8 @@ export function forVibeFeed({
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
   let embed_color = "";
   let vibe_level_ascii = "";
-  let vibe_level_action = "!SUS-VIBE";
-  let reaction_emoji = "";
+  let vibe_level_action = "!SUS-VIBES";
+  let reaction_emoji = "⚠️";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
     vibe_level_ascii = "˙";
@@ -61,7 +61,7 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii}⚠️ recorded`,
+        title: `${vibe_level_ascii}⚠️ recorded ↺`,
         color: "#c8354a",
         url: message.url,
         description: description({
