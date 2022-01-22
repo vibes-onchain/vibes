@@ -23,6 +23,7 @@ async function handleVibeReaction({
   reaction_to_message_id,
   entryType,
   message,
+  reaction,
 }) {
   if (
     ["Vibe", "BadVibe"].includes(entryType) &&
@@ -40,6 +41,7 @@ async function handleVibeReaction({
       ledger_id,
       sending_member,
       message,
+      reaction,
     });
     return;
   }
@@ -75,6 +77,7 @@ async function handleVibeReaction({
       note,
       vibesLedgerSummary,
       message,
+      reaction,
     });
   } else if (entryType === "BadVibe") {
     await saveBadVibe({
@@ -107,6 +110,7 @@ async function handleVibeReaction({
       note,
       vibesLedgerSummary,
       message,
+      reaction,
     });
   }
 }
@@ -174,9 +178,9 @@ export default async function handleReaction(client, reaction, user) {
     const from_member_username = fromMember.user.username;
     const note = message.content;
 
-    if (from_member_id === to_member_id) {
-      continue;
-    }
+    // if (from_member_id === to_member_id) {
+    //   continue;
+    // }
     await handleVibeReaction({
       client,
       guild_id,
@@ -188,6 +192,7 @@ export default async function handleReaction(client, reaction, user) {
       note,
       reaction_to_message_id: message.id,
       message,
+      reaction,
       entryType,
     });
   }
