@@ -13,7 +13,7 @@ const RESPONSES = {
   badvibes,
   set_user_vibes,
   no_vibing_vibe_commands,
-  vibecheck
+  vibecheck,
 };
 
 export default async function ({
@@ -57,7 +57,14 @@ export default async function ({
   const { vibeFeedChannel } = getGuildStuff({ client, guild_id });
   if (Response.forVibeFeed) {
     await vibeFeedChannel
-      ?.send(Response.forVibeFeed({ client, guild_id, ...args }))
+      ?.send(
+        Response.forVibeFeed({
+          client,
+          guild_id,
+          message,
+          ...args,
+        })
+      )
       .catch((e) => {
         console.log(e);
       });
