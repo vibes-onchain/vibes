@@ -32,7 +32,7 @@ export default async function handleMessage(client, message) {
   ) {
     await handleMention({ client, message });
   }
-  const prefixCmdMention = /^\!([a-zA-Z0-9_]*)\s*(.*)/;
+  const prefixCmdMention = /^\!([a-zA-Z0-9_-]*)\s*(.*)/;
   const cmdM = message.content.match(prefixCmdMention);
   if (cmdM && GLOBAL_CMDS.indexOf(cmdM[1]) !== -1) {
     const cmd = cmdM[1];
