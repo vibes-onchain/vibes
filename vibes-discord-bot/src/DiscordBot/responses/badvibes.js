@@ -44,7 +44,7 @@ export function forVibeFeed({
     vibe_level_ascii = "˙";
   } else if (sending_member.vibe_level == 2) {
     embed_color = "#5397d5";
-    vibe_level_ascii = "⁚‧";
+    vibe_level_ascii = "‧⁚";
   } else if (sending_member.vibe_level == 3) {
     embed_color = "#915db1";
     vibe_level_ascii = "⁛⁚";
