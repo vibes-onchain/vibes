@@ -13,10 +13,10 @@ function description({
   vibe_level_ascii,
 }) {
   return `<@${sending_member.user_id}> →
-  ${"`"}!VIBECHECK${"`"}
+${"`"}!VIBECHECK${"`"}
   
-  <@${receiving_member.user_id}> ←
-  ${vibeLevelEmoji}${"`"}${
+<@${receiving_member.user_id}> ←
+${vibeLevelEmoji} ${"`"}${
     receiving_member.vibe_level_name.replace(" Vibe", "").toUpperCase() ||
     "Has no level"
   } ~ ✦${formatNumber(
@@ -27,8 +27,8 @@ function description({
     "percent2f"
   )})${"`"}
   
-  *View full @${receiving_member.username} ledger at* 
-  **[vibes.app](${process.env.VIBES_LIVE_BASE_URL}/${profilePath})**`;
+*View full @${receiving_member.username} ledger at* 
+**[vibes.app](${process.env.VIBES_LIVE_BASE_URL}/${profilePath})**`;
 }
 export function forVibeFeed({
   client,
