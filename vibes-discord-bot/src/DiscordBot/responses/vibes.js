@@ -1,7 +1,7 @@
 import { DISCORD_EMBED_COLOR } from "../constants";
 import formatNumber from "../../lib/formatNumber";
 import getGuildStuff from "../discord/getGuildStuff";
-
+import getVibeRoleAliases from "../spothub/getVibeRoleAliases";
 function description({
   emojis,
   ledger_id,
@@ -34,32 +34,31 @@ export function forVibeFeed({
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
-
+  const role_alias = getVibeRoleAliases({ guild_id });
+  console.log(sending_member);
   let embed_color = "";
   let vibe_level_ascii = "";
-  let vibe_level_action = "!VIBES";
+  let vibe_level_action =
+    role_alias[sending_member.vibe_level_name] ||
+    sending_member.vibe_level_name;
   let reaction_emoji = "✨";
-  if (sending_member.vibe_level == 1) {
-    embed_color = "#8f9296";
-    vibe_level_ascii = "˙";
-    vibe_level_action = "!FRENLY-VIBES";
-  } else if (sending_member.vibe_level == 2) {
-    embed_color = "#5397d5";
-    vibe_level_ascii = "⁚‧";
-    vibe_level_action = "!RARE-VIBES";
-  } else if (sending_member.vibe_level == 3) {
-    embed_color = "#915db1";
-    vibe_level_ascii = "⁛⁚";
-    vibe_level_action = "!EPIC-VIBES";
-  } else if (sending_member.vibe_level == 4) {
-    embed_color = "#d7823b";
-    vibe_level_ascii = "⁚⁛⁚";
-    vibe_level_action = "!LEGENDARY-VIBES";
-  } else if (sending_member.vibe_level == 5) {
-    embed_color = "#eac545";
-    vibe_level_ascii = "⁛⁚⁛⁚";
-    vibe_level_action = "!OG-VIBES";
-  }
+  if (sending_member.vibe_level_name)
+    if (sending_member.vibe_level == 1) {
+      embed_color = "#8f9296";
+      vibe_level_ascii = "˙";
+    } else if (sending_member.vibe_level == 2) {
+      embed_color = "#5397d5";
+      vibe_level_ascii = "⁚‧";
+    } else if (sending_member.vibe_level == 3) {
+      embed_color = "#915db1";
+      vibe_level_ascii = "⁛⁚";
+    } else if (sending_member.vibe_level == 4) {
+      embed_color = "#d7823b";
+      vibe_level_ascii = "⁚⁛⁚";
+    } else if (sending_member.vibe_level == 5) {
+      embed_color = "#eac545";
+      vibe_level_ascii = "⁛⁚⁛⁚";
+    }
   if (reaction) {
     reaction_emoji = "✨";
   }
