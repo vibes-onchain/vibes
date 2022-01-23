@@ -10,23 +10,21 @@ function description({
   vibesLedgerSummary,
   profilePath,
   vibeLevelEmoji,
-  vibe_level_ascii,
+  vibe_level_ascii_sender,
+  vibe_level_ascii_receiver,
 }) {
   return `<@${sending_member.user_id}> →
 ${"`"}!VIBECHECK${"`"}
-  
+${""}
 <@${receiving_member.user_id}> ←
 ${vibeLevelEmoji} ${"`"}${
     receiving_member.vibe_level_name.replace(" Vibe", "").toUpperCase() ||
     "Has no level"
-  } ~ ✦${formatNumber(
-    receiving_member.vibestack,
-    "decimal0f"
-  )}${vibe_level_ascii} (${formatNumber(
+  } ~ ✦${formatNumber(receiving_member.vibestack, "decimal0f")} (${formatNumber(
     receiving_member.vibestack_percentile,
     "percent2f"
   )})${"`"}
-  
+${""}
 *View full @${receiving_member.username} ledger at* 
 **[vibes.app](${process.env.VIBES_LIVE_BASE_URL}/${profilePath})**`;
 }
@@ -41,22 +39,34 @@ export function forVibeFeed({
   const { emojis } = getGuildStuff({ client, guild_id });
   const profilePath = `ledger/${ledger_id}/profile/discord_member-${receiving_member.member_id}`;
   let embed_color = "";
-  let vibe_level_ascii = "";
+  let vibe_level_ascii_sender = "";
+  let vibe_level_ascii_receiver = "";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
-    vibe_level_ascii = "˙";
+    vibe_level_ascii_sender = "˙";
   } else if (sending_member.vibe_level == 2) {
     embed_color = "#5397d5";
-    vibe_level_ascii = "⁚‧";
+    vibe_level_ascii_sender = "‧⁚";
   } else if (sending_member.vibe_level == 3) {
     embed_color = "#915db1";
-    vibe_level_ascii = "⁛⁚";
+    vibe_level_ascii_sender = "⁛⁚";
   } else if (sending_member.vibe_level == 4) {
     embed_color = "#d7823b";
-    vibe_level_ascii = "⁚⁛⁚";
+    vibe_level_ascii_sender = "⁚⁛⁚";
   } else if (sending_member.vibe_level == 5) {
     embed_color = "#eac545";
-    vibe_level_ascii = "⁛⁚⁛⁚";
+    vibe_level_ascii_sender = "⁛⁚⁛⁚";
+  }
+  if (receiving_member.vibe_level == 1) {
+    vibe_level_ascii_receiver = "˙";
+  } else if (receiving_member.vibe_level == 2) {
+    vibe_level_ascii_receiver = "‧⁚";
+  } else if (receiving_member.vibe_level == 3) {
+    vibe_level_ascii_receiver = "⁛⁚";
+  } else if (receiving_member.vibe_level == 4) {
+    vibe_level_ascii_receiver = "⁚⁛⁚";
+  } else if (receiving_member.vibe_level == 5) {
+    vibe_level_ascii_receiver = "⁛⁚⁛⁚";
   }
 
   const vibeLevelEmoji = (() => {
@@ -80,7 +90,7 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii}🔍 recorded ↺`,
+        title: `${vibe_level_ascii_sender}🔍 recorded ↺`,
         color: "#000000",
         url: `${process.env.VIBES_LIVE_BASE_URL}/${profilePath}`,
         description: description({
@@ -91,7 +101,8 @@ export function forVibeFeed({
           vibesLedgerSummary,
           profilePath,
           vibeLevelEmoji,
-          vibe_level_ascii,
+          vibe_level_ascii_sender,
+          vibe_level_ascii_receiver,
         }),
       },
     ],
