@@ -9,36 +9,25 @@ function description({
   receiving_member,
   vibesLedgerSummary,
   profilePath,
-  vibeLevelEmoji
+  vibeLevelEmoji,
+  vibe_level_ascii,
 }) {
-  let vibe_level_ascii = "";
-  if (sending_member.vibe_level == 1) {
-    vibe_level_ascii = "˙";
-  } else if (sending_member.vibe_level == 2) {
-    vibe_level_ascii = "⁚‧";
-  } else if (sending_member.vibe_level == 3) {
-    vibe_level_ascii = "⁛⁚";
-  } else if (sending_member.vibe_level == 4) {
-    vibe_level_ascii = "⁚⁛⁚";
-  } else if (sending_member.vibe_level == 5) {
-    vibe_level_ascii = "⁛⁚⁛⁚";
-  }
-  return `<@${receiving_member.user_id}>
-
-  :rocket: \`VIBE LEVEL \` ${vibeLevelEmoji} ${
+  return `<@${sending_member.user_id}> →
+  ${"`"}!VIBE-CHECK${"`"}
+  
+  <@${receiving_member.user_id}> ←
+  ${vibeLevelEmoji}${"`"}${
     receiving_member.vibe_level_name || "Has no level"
-  } (${formatNumber(receiving_member.vibestack_percentile, "percent2f")})
-  :pancakes: \`VIBE STACK \` ${formatNumber(
+  } ~ ✦${formatNumber(
     receiving_member.vibestack,
     "decimal0f"
-  )}
-
-  ${vibe_level_ascii}*See Vibes profile at* **[vibes.app](${
-    process.env.VIBES_LIVE_BASE_URL
-  }/${profilePath})**
+  )}${vibe_level_ascii} (${formatNumber(
+    receiving_member.vibestack_percentile,
+    "percent2f"
+  )})${"`"}
   
-  :detective: _requested by <@${sending_member.user_id}>_ 
-  `;
+  *View full @${receiving_member.username} ledger at* 
+  **[vibes.app](${process.env.VIBES_LIVE_BASE_URL}/${profilePath})**`;
 }
 export function forVibeFeed({
   client,
@@ -50,6 +39,24 @@ export function forVibeFeed({
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const profilePath = `ledger/${ledger_id}/profile/discord_member-${receiving_member.member_id}`;
+  let embed_color = "";
+  let vibe_level_ascii = "";
+  if (sending_member.vibe_level == 1) {
+    embed_color = "#8f9296";
+    vibe_level_ascii = "˙";
+  } else if (sending_member.vibe_level == 2) {
+    embed_color = "#5397d5";
+    vibe_level_ascii = "⁚‧";
+  } else if (sending_member.vibe_level == 3) {
+    embed_color = "#915db1";
+    vibe_level_ascii = "⁛⁚";
+  } else if (sending_member.vibe_level == 4) {
+    embed_color = "#d7823b";
+    vibe_level_ascii = "⁚⁛⁚";
+  } else if (sending_member.vibe_level == 5) {
+    embed_color = "#eac545";
+    vibe_level_ascii = "⁛⁚⁛⁚";
+  }
 
   const vibeLevelEmoji = (() => {
     if (receiving_member.vibe_level_name === "Sus Vibe") {
@@ -72,8 +79,8 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: "👀 vibe check ↗",
-        color: DISCORD_EMBED_COLOR,
+        title: `${vibe_level_ascii}🔍 recorded ↺`,
+        color: "#000000",
         url: `${process.env.VIBES_LIVE_BASE_URL}/${profilePath}`,
         description: description({
           emojis,
@@ -82,7 +89,8 @@ export function forVibeFeed({
           receiving_member,
           vibesLedgerSummary,
           profilePath,
-          vibeLevelEmoji
+          vibeLevelEmoji,
+          vibe_level_ascii,
         }),
       },
     ],
