@@ -39,7 +39,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return vibes({ client, message, cmd_args });
   } else if (["badvibe", "badvibes", "susvibes", "susvibe"].includes(cmd)) {
     return badvibes({ client, message, cmd_args });
-  } else if (["vibecheck", "vibescheck", "vc"].includes(cmd)) {
+  } else if (["vibecheck", "vibescheck", "vc", "vibe-check"].includes(cmd)) {
     return vibecheck({ client, message, cmd_args });
   } else if (["reset_all_vibes"].includes(cmd)) {
     return reset_all_vibes({ client, message, cmd_args });

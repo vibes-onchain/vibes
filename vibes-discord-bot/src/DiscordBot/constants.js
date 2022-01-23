@@ -16,6 +16,7 @@ export const GLOBAL_CMDS = [
   // vibecheck
   "vibecheck",
   "vibescheck",
+  "vibe-check",
   "vibechk",
   "vibeschk",
   "vc",
