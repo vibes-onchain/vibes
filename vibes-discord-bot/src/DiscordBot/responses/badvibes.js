@@ -37,7 +37,7 @@ export function forVibeFeed({
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
   let embed_color = "";
   let vibe_level_ascii = "";
-  let vibe_level_action = "!SUS-VIBES";
+  let vibe_level_action = "!SUSVIBES";
   let reaction_emoji = "⚠️";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
