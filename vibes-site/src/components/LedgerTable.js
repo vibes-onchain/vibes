@@ -63,7 +63,11 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     {
       Header: "Sender",
       accessor: "sender.id",
+<<<<<<< HEAD
       //filter: 'fuzzyText',
+=======
+      filter: 'fuzzyText',
+>>>>>>> d4434ae (slice of shown results + wip of filtering)
       Cell: ({ row: { original: entry }, value }) => (
         <>
           {entry?.sender && (
@@ -105,7 +109,11 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     []
   );
   
+<<<<<<< HEAD
   /*const filterTypes = React.useMemo(
+=======
+  const filterTypes = React.useMemo(
+>>>>>>> d4434ae (slice of shown results + wip of filtering)
     () => ({
       // Add a new fuzzyTextFilterFn filter type.
       fuzzyText: fuzzyTextFilterFn,
@@ -123,7 +131,11 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
       },
     }),
     []
+<<<<<<< HEAD
   )*/
+=======
+  )
+>>>>>>> d4434ae (slice of shown results + wip of filtering)
 
 
   const defaultColumn = React.useMemo(
@@ -133,6 +145,10 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     }),
     []
   )
+<<<<<<< HEAD
+=======
+
+>>>>>>> d4434ae (slice of shown results + wip of filtering)
 
 
   const { 
@@ -161,15 +177,24 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
           pageIndex: 0,
           pageSize: 50,
         },
+<<<<<<< HEAD
         //filterTypes,
+=======
+        filterTypes,
+>>>>>>> d4434ae (slice of shown results + wip of filtering)
       },
       useFilters,
       useSortBy,
       usePagination,
     );
   
+<<<<<<< HEAD
   //const firstPageRows = rows.slice(0, 50)
   
+=======
+  const firstPageRows = rows.slice(0, 50)
+
+>>>>>>> d4434ae (slice of shown results + wip of filtering)
   return (
     <div css={CSS}>
       <table {...getTableProps()}>
@@ -192,7 +217,11 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
+<<<<<<< HEAD
           {page.map((row, i) => {
+=======
+          {firstPageRows.map((row, i) => {
+>>>>>>> d4434ae (slice of shown results + wip of filtering)
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
