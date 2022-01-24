@@ -71,7 +71,7 @@ export async function forVibeFeed({
       {
         title: `${vibe_level_ascii}✨ Recorded →`,
         color: embed_color,
-        url: message.url,
+        url: message?.url,
         description: description({
           emojis,
           ledger_id,
