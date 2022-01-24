@@ -41,7 +41,9 @@ export async function forVibeFeed({
   let embed_color = "#ffffff";
   let vibe_level_ascii = "";
   let vibe_level_action = `${
-    role_alias[sending_member.vibe_level_name] || sending_member.vibe_level_name
+    role_alias[sending_member.vibe_level_name] ||
+    sending_member.vibe_level_name ||
+    "!VIBES"
   }`
     .replace(" ", "-")
     .toUpperCase();
