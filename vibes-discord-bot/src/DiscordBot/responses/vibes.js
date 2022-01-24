@@ -69,7 +69,7 @@ export async function forVibeFeed({
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii}✨ recorded ↺`,
+        title: `${vibe_level_ascii}✨ Recorded ↺`,
         color: embed_color,
         url: message.url,
         description: description({
