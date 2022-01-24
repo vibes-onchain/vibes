@@ -63,7 +63,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     {
       Header: "Sender",
       accessor: "sender.id",
-      filter: 'fuzzyText',
+      //filter: 'fuzzyText',
       Cell: ({ row: { original: entry }, value }) => (
         <>
           {entry?.sender && (
@@ -105,7 +105,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     []
   );
   
-  const filterTypes = React.useMemo(
+  /*const filterTypes = React.useMemo(
     () => ({
       // Add a new fuzzyTextFilterFn filter type.
       fuzzyText: fuzzyTextFilterFn,
@@ -123,7 +123,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
       },
     }),
     []
-  )
+  )*/
 
 
   const defaultColumn = React.useMemo(
@@ -135,7 +135,22 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
   )
 
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+  const { 
+    getTableProps, 
+    getTableBodyProps, 
+    headerGroups, /*rows,*/
+    page, 
+    prepareRow,
+    canPreviousPage, 
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+   } =
     useTable(
       {
         data,
@@ -143,16 +158,18 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
         defaultColumn,
         initialState: {
           sortBy: initialSortBy,
+          pageIndex: 0,
+          pageSize: 50,
         },
-        filterTypes,
+        //filterTypes,
       },
       useFilters,
       useSortBy,
       usePagination,
     );
   
-  const firstPageRows = rows.slice(0, 50)
-
+  //const firstPageRows = rows.slice(0, 50)
+  
   return (
     <div css={CSS}>
       <table {...getTableProps()}>
@@ -175,7 +192,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {firstPageRows.map((row, i) => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
@@ -224,6 +241,50 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
           ))}
         </tbody> */}
       </table>
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>{' '}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </button>{' '}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>{' '}
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to page:{' '}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(page)
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+        {/*<select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value))
+          }}
+        >
+          {[50, 100, 150, 200, 250].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>*/}
+      </div>
     </div>
   );
 }
