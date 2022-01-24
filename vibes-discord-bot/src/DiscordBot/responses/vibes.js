@@ -38,7 +38,7 @@ export async function forVibeFeed({
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
   const role_alias = await getVibeRoleAliases({ guild_id });
   const reaction_alias = await getVibeReactionAliases({ guild_id });
-  let embed_color = "#ffffff";
+  let embed_color = "#202225";
   let vibe_level_ascii = "";
   let vibe_level_action = `${
     role_alias[sending_member.vibe_level_name] ||
