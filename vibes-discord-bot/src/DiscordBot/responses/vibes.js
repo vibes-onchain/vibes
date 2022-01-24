@@ -2,6 +2,8 @@ import { DISCORD_EMBED_COLOR } from "../constants";
 import formatNumber from "../../lib/formatNumber";
 import getGuildStuff from "../discord/getGuildStuff";
 import getVibeRoleAliases from "../spothub/getVibeRoleAliases";
+import getVibeReactionAliases from "../spothub/getVibeReactionAliases";
+
 function description({
   emojis,
   ledger_id,
@@ -15,7 +17,7 @@ function description({
   reaction_emoji,
 }) {
   return `<@${sending_member.user_id}> →
-${"`"}${vibe_level_action}${"`"}${vibe_level_ascii}${reaction_emoji}
+${"`"}!${vibe_level_action}${"`"}${vibe_level_ascii}${reaction_emoji}
 <@${receiving_member.user_id}> ←
 ${""} 
 *Tx written to ${guildName} Ledger*
@@ -34,14 +36,16 @@ export function forVibeFeed({
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
-  const role_alias = await getVibeRoleAliases({ guild_id });
-
-  console.log(sending_member);
+  const role_alias = getVibeRoleAliases({ guild_id });
+  const reaction_alias = getVibeReactionAliases({ guild_id });
+  console.log(reaction_alias);
   let embed_color = "";
   let vibe_level_ascii = "";
-  let vibe_level_action =
-    role_alias[sending_member.vibe_level_name] ||
-    sending_member.vibe_level_name;
+  let vibe_level_action = `${
+    role_alias[sending_member.vibe_level_name] || sending_member.vibe_level_name
+  }`
+    .replace(" ", "-")
+    .toUpperCase();
   let reaction_emoji = "✨";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
