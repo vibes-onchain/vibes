@@ -7,6 +7,31 @@ import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
 import moment from "moment";
 import { useTable, useSortBy, useFilters, usePagination } from "react-table";
 import _ from "lodash";
+import {matchSorter} from 'match-sorter'
+
+
+function fuzzyTextFilterFn(rows, id, filterValue) {
+  return matchSorter(rows, filterValue, { keys: [row => row.values[id]] })
+}
+
+// Let the table remove the filter if the string is empty
+fuzzyTextFilterFn.autoRemove = val => !val
+// Define a default UI for filtering
+function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}) {
+  const count = preFilteredRows.length
+
+  return (
+    <input
+      value={filterValue || ''}
+      onChange={e => {
+        setFilter(e.target.value || undefined) // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${count} records...`}
+    />
+  )
+}
 
 export default function LedgerTable({ ledger_id, ledgerEntries }) {
   const data = React.useMemo(() => {
@@ -38,6 +63,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     {
       Header: "Sender",
       accessor: "sender.id",
+      filter: 'fuzzyText',
       Cell: ({ row: { original: entry }, value }) => (
         <>
           {entry?.sender && (
@@ -72,26 +98,60 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
         <>{value?.vibe_rate || value?.vibe_period || value?.reason}</>
       ),
     },
-  ]);
+  ],[ledger_id]);
 
   const initialSortBy = React.useMemo(
     () => [{ id: "authored_on", desc: true }],
     []
   );
+  
+  const filterTypes = React.useMemo(
+    () => ({
+      // Add a new fuzzyTextFilterFn filter type.
+      fuzzyText: fuzzyTextFilterFn,
+      // Or, override the default text filter to use
+      // "startWith"
+      text: (rows, id, filterValue) => {
+        return rows.filter(row => {
+          const rowValue = row.values[id]
+          return rowValue !== undefined
+            ? String(rowValue)
+                .toLowerCase()
+                .startsWith(String(filterValue).toLowerCase())
+            : true
+        })
+      },
+    }),
+    []
+  )
+
+
+  const defaultColumn = React.useMemo(
+    () => ({
+      // Let's set up our default Filter UI
+      Filter: DefaultColumnFilter,
+    }),
+    []
+  )
+
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable(
       {
         data,
         columns,
+        defaultColumn,
         initialState: {
           sortBy: initialSortBy,
         },
+        filterTypes,
       },
       useFilters,
       useSortBy,
       usePagination,
     );
+  
+  const firstPageRows = rows.slice(0, 50)
 
   return (
     <div css={CSS}>
@@ -115,7 +175,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map((row, i) => {
+          {firstPageRows.map((row, i) => {
             prepareRow(row);
             return (
               <tr {...row.getRowProps()}>
