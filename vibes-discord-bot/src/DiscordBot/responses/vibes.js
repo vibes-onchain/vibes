@@ -24,7 +24,7 @@ ${""}
 **[vibes.app](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})**`;
 }
 
-export function forVibeFeed({
+export async function forVibeFeed({
   client,
   guild_id,
   sending_member,
@@ -36,9 +36,8 @@ export function forVibeFeed({
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
-  const role_alias = getVibeRoleAliases({ guild_id });
-  const reaction_alias = getVibeReactionAliases({ guild_id });
-  console.log(reaction_alias);
+  const role_alias = await getVibeRoleAliases({ guild_id });
+  const reaction_alias = await getVibeReactionAliases({ guild_id });
   let embed_color = "";
   let vibe_level_ascii = "";
   let vibe_level_action = `${

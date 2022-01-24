@@ -38,7 +38,7 @@ export default async function ({
     if (Response.forCommandReply) {
       await command
         .reply({
-          ...Response.forCommandReply({ client, guild_id, ...args }),
+          ...(await Response.forCommandReply({ client, guild_id, ...args })),
           ephemeral,
         })
         .catch((e) => {
@@ -58,7 +58,7 @@ export default async function ({
   if (Response.forVibeFeed) {
     await vibeFeedChannel
       ?.send(
-        Response.forVibeFeed({
+        await Response.forVibeFeed({
           client,
           guild_id,
           message,
@@ -78,7 +78,7 @@ export default async function ({
       vibeFeedChannel.id !== message.channel.id
     ) {
       await message.channel
-        ?.send(Response.forChannel({ client, guild_id, ...args }))
+        ?.send((await Response.forChannel({ client, guild_id, ...args })))
         .catch((e) => {
           console.log(e);
         });
@@ -89,7 +89,7 @@ export default async function ({
   if (sender && Response.forSender) {
     try {
       await command.reply({
-        ...Response.forSender({ client, guild_id, ...args }),
+        ...(await Response.forSender({ client, guild_id, ...args })),
         ephemeral,
       });
     } catch (e) {
@@ -101,7 +101,7 @@ export default async function ({
   if (receiver && Response.forReceiver) {
     try {
       await command.reply({
-        ...Response.forReceiver({ client, guild_id, ...args }),
+        ...(await Response.forReceiver({ client, guild_id, ...args })),
         ephemeral,
       });
     } catch (e) {
