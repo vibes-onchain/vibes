@@ -90,7 +90,7 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii_sender}🔎 Recorded ↺`,
+        title: `${vibe_level_ascii_sender}🔎 Recorded →`,
         color: "#000000",
         url: `${process.env.VIBES_LIVE_BASE_URL}/${profilePath}`,
         description: description({

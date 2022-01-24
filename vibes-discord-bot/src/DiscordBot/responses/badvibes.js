@@ -61,7 +61,7 @@ export function forVibeFeed({
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii}⚠️ Recorded ↺`,
+        title: `${vibe_level_ascii}⚠️ Recorded →`,
         color: "#c8354a",
         url: message.url,
         description: description({
