@@ -162,6 +162,12 @@ export default async function reduceVibesLedger({ ledger_id }) {
     }
     if (entry.type === "Set Vibestack" || entry.type === "Set User Vibes") {
       user_vibes[entry.receiver.id] = entry.value.vibestack;
+      const receiver_id = entry.receiver.id;
+      for (const sender_id of Object.keys(pending_vibes)) {
+        if (pending_vibes[sender_id][receiver_id]) {
+          delete pending_vibes[sender_id][receiver_id];
+        }
+      }
     }
     if (entry.type === "Vibe") {
       pending_vibes[entry.sender.id] ||= {};
