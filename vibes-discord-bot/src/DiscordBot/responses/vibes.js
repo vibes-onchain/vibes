@@ -43,7 +43,7 @@ export async function forVibeFeed({
   let vibe_level_action = `${
     role_alias[sending_member.vibe_level_name] ||
     sending_member.vibe_level_name ||
-    "!VIBES"
+    "VIBES"
   }`
     .replace(" ", "-")
     .toUpperCase();
