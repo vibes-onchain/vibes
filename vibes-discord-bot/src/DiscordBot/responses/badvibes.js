@@ -15,9 +15,9 @@ function description({
   vibe_level_action,
   reaction_emoji,
 }) {
-  return `<@${sending_member.user_id}> →
+  return `<@${sending_member.user_id}>  ⟩
 ${"`"}${vibe_level_action}${"`"}${vibe_level_ascii}${reaction_emoji}
-<@${receiving_member.user_id}> ←
+<@${receiving_member.user_id}>  ⟨
 ${""}
 *Tx written to ${guildName} Ledger*
 **[vibes.app](${process.env.VIBESCAN_BASE_URL}/ledger/${ledger_id})**`;
