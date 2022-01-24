@@ -70,19 +70,18 @@ const CSS = css`
   .guild-name-holder {
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 38px;
-    font-weight: 700;
+    font-size: 45px;
+    font-weight: 800;
     line-height: 1.1em;
     text-align: justify; 
   }
   .guild-description-holder{
-    width: 35%;
+    width: 400px;
+    max-width: 95%;
     margin-top: 20px;
     margin-bottom: 20px;
-    font-size: 18px;
-    font-weight: 300;
+    font-size: 16px;
     line-height: 1.25em;
-    font-family: 'Inter', sans-serif;
   }
   .tabs-holder {
     padding: 0;
@@ -96,6 +95,8 @@ const CSS = css`
   }
   .tabs {
     .item {
+      font-weight: 700;
+      font-size: 15px;
       margin: 0 10px !important;
       @media (min-width: 500px) {
         margin: 0 35px !important;

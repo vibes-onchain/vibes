@@ -123,8 +123,10 @@ const CSS = css`
   }
   .leaderboard {
     .member.header {
+      padding-bottom: 10px;
       > span {
         font-weight: bold;
+        font-size: 13px;
         text-transform: uppercase;
         display: flex;
         justify-content: space-around;
@@ -134,9 +136,12 @@ const CSS = css`
       margin: 10px 0;
       display: flex;
       flex-wrap: no-wrap;
-      border-bottom: 1px solid rgba(234, 234, 234);
+      border-bottom: 1px solid #eaeaea;
       margin-bottom: 20px;
       padding-bottom: 20px;
+      font-size: 15px;
+      font-weight: 500;
+
       > span {
         &.rank {
           flex-basis: 30px;
@@ -187,6 +192,11 @@ const CSS = css`
           }
         }
       }
+    }
+  }
+  body.dark-theme & {
+    .member {
+      border-bottom: 1px solid #5b5b5b;
     }
   }
 `;
