@@ -37,7 +37,6 @@ export async function forVibeFeed({
   const { emojis } = getGuildStuff({ client, guild_id });
   const guildName = client.guilds.cache.find((g) => g.id === guild_id).name;
   const role_alias = await getVibeRoleAliases({ guild_id });
-  const reaction_alias = await getVibeReactionAliases({ guild_id });
   let embed_color = "#202225";
   let vibe_level_ascii = "";
   let vibe_level_action = `${
@@ -47,7 +46,7 @@ export async function forVibeFeed({
   }`
     .replace(" ", "-")
     .toUpperCase();
-  let reaction_emoji = "✨";
+  let reaction_emoji = reaction.emoji || "✨";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
     vibe_level_ascii = "˙";
@@ -64,14 +63,11 @@ export async function forVibeFeed({
     embed_color = "#eac545";
     vibe_level_ascii = "⁛⁚⁛⁚";
   }
-  if (reaction) {
-    reaction_emoji = "✨";
-  }
 
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii}✨ Recorded →`,
+        title: `${vibe_level_ascii}${reaction_emoji} Recorded →`,
         color: embed_color,
         url: message?.url,
         description: description({

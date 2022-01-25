@@ -38,7 +38,8 @@ export function forVibeFeed({
   let embed_color = "";
   let vibe_level_ascii = "";
   let vibe_level_action = "!SUS-VIBES";
-  let reaction_emoji = "⚠️";
+  let reaction_emoji = reaction.emoji || "⚠️";
+
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
     vibe_level_ascii = "˙";
@@ -55,9 +56,7 @@ export function forVibeFeed({
     embed_color = "#eac545";
     vibe_level_ascii = "⁛⁚⁛⁚";
   }
-  if (reaction) {
-    reaction_emoji = "⚠️";
-  }
+
   return {
     embeds: [
       {
