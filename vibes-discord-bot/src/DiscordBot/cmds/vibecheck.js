@@ -1,3 +1,5 @@
+import {stripIndent} from 'common-tags'
+
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getTargetMember from "../message/getTargetMember";
 import getEmojis from "../discord/getEmojis";
@@ -69,14 +71,13 @@ export default async function vibecheck({
   let message_url = `<#${vibeFeed.id}>`;
   await vibeFeed.messages.fetch({ limit: 1 }).then((messages) => {
     let lastMessage = messages.first();
-    console.log(lastMessage);
     message_url = lastMessage.url;
   });
   await message.channel.send({
     embeds: [
       {
         color: "#000000",
-        description: `${"`"}!VIBECHECK"${"`"}${vibe_level_ascii}🔎<@${
+        description: stripIndent`${"`"}!VIBECHECK"${"`"}${vibe_level_ascii}🔎<@${
           receiving_member.user_id
         }>
         ${""}
