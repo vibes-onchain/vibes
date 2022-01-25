@@ -76,7 +76,14 @@ export default async function vibecheck({
     embeds: [
       {
         color: "#000000",
-        description: `<@${receiving_member.user_id}> ${vibe_level_ascii}🔎 | **[more](${message_url})**`,
+        description: `${"`"}!VIBECHECK"${"`"}${vibe_level_ascii}🔎<@${
+          receiving_member.user_id
+        }>
+        ${""}
+        *Check from @${
+          sending_member.username
+        }*    **[see result →](${message_url})**
+        `,
       },
     ],
   });
