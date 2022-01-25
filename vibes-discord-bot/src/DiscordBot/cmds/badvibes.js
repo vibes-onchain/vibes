@@ -89,7 +89,14 @@ export default async function badvibes({ client, message, command, cmd_args }) {
     embeds: [
       {
         color: "#c8354a",
-        description: `<@${receiving_member.user_id}> ⟨ ⚠️${vibe_level_ascii} | **[more](${message_url})**`,
+        description: `${"`"}!SUS-VIBES${"`"}${vibe_level_ascii}⚠️<@${
+          receiving_member.user_id
+        }>
+        ${""}
+        *Vibes from @${sending_member.username}*    **[recorded onchain →](${
+          process.env.VIBESCAN_BASE_URL
+        }/ledger/${ledger_id})**
+        `,
       },
     ],
   });
