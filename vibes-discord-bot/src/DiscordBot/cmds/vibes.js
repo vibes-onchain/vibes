@@ -5,7 +5,7 @@ import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 import getMemberDetails from "../multi/getMemberDetails";
 import sendResponse from "../discord/sendResponse";
 import getVibeFeed from "../discord/getVibeFeed";
-
+import getVibeRoleAliases from "../spothub/getVibeRoleAliases";
 export default async function vibes({ client, message, command, cmd_args }) {
   const message_member = message ? message.member : command.member;
   const guild = message_member.guild;
@@ -51,6 +51,7 @@ export default async function vibes({ client, message, command, cmd_args }) {
   const vibesLedgerSummary = await getVibesLedgerSummary({
     guild_id,
   });
+  const role_alias = await getVibeRoleAliases({ guild_id });
 
   await sendResponse({
     client,
@@ -66,6 +67,13 @@ export default async function vibes({ client, message, command, cmd_args }) {
   });
   let vibe_level_ascii = "";
   let embed_color = "";
+  let vibe_level_action = `${
+    role_alias[sending_member.vibe_level_name] ||
+    sending_member.vibe_level_name ||
+    "VIBES"
+  }`
+    .replace(" ", "-")
+    .toUpperCase();
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
     vibe_level_ascii = "˙";
@@ -93,7 +101,14 @@ export default async function vibes({ client, message, command, cmd_args }) {
     embeds: [
       {
         color: embed_color,
-        description: `<@${receiving_member.user_id}> ⟨ ✨${vibe_level_ascii} | **[more](${message_url})**`,
+        description: `${"`"}!${vibe_level_action}${"`"}${vibe_level_ascii}✨<@${
+          receiving_member.user_id
+        }>
+        ${""}
+        *Vibes from @${sending_member.username}*    **[recorded onchain →](${
+          process.env.VIBESCAN_BASE_URL
+        }/ledger/${ledger_id})**
+        `,
       },
     ],
   });
