@@ -35,6 +35,7 @@ export function forVibeFeed({
   receiving_member,
   vibesLedgerSummary,
   ledger_id,
+  message,
 }) {
   const { emojis } = getGuildStuff({ client, guild_id });
   const profilePath = `ledger/${ledger_id}/profile/discord_member-${receiving_member.member_id}`;
@@ -92,7 +93,7 @@ export function forVibeFeed({
       {
         title: `${vibe_level_ascii_sender}🔎 Recorded →`,
         color: "#000000",
-        url: `${process.env.VIBES_LIVE_BASE_URL}/${profilePath}`,
+        url: message.url,
         description: description({
           emojis,
           ledger_id,
