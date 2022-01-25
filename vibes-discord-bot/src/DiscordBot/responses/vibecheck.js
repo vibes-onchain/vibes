@@ -13,10 +13,10 @@ function description({
   vibe_level_ascii_sender,
   vibe_level_ascii_receiver,
 }) {
-  return `<@${sending_member.user_id}>  ⟩
+  return `<@${sending_member.user_id}>     ⟩
 ${"`"}!VIBECHECK${"`"}
 ${""}
-<@${receiving_member.user_id}>  ⟨
+<@${receiving_member.user_id}>     ⟨
 ${vibeLevelEmoji} ${"`"}${
     receiving_member.vibe_level_name?.replace(" Vibe", "").toUpperCase() ||
     "Has no level"
