@@ -79,28 +79,28 @@ export default async function badvibes({ client, message, command, cmd_args }) {
   } else if (sending_member.vibe_level == 5) {
     vibe_level_ascii = "⁛⁚⁛⁚";
   }
-  await message.delete();
-  let message_url = `<#${vibeFeed.id}>`;
-  await vibeFeed.messages.fetch({ limit: 1 }).then((messages) => {
-    let lastMessage = messages.first();
-    console.log(lastMessage);
-    message_url = lastMessage.url;
-  });
-  await message.channel.send({
-    embeds: [
-      {
-        color: "#c8354a",
-        description: `${"`"}!SUS-VIBES${"`"}${vibe_level_ascii}⚠️<@${
-          receiving_member.user_id
-        }>
-        ${""}
-        *Vibes from @${sending_member.username}*    **[recorded onchain →](${
-          process.env.VIBESCAN_BASE_URL
-        }/ledger/${ledger_id})**
-        `,
-      },
-    ],
-  });
+  // await message.delete();
+  // let message_url = `<#${vibeFeed.id}>`;
+  // await vibeFeed.messages.fetch({ limit: 1 }).then((messages) => {
+  //   let lastMessage = messages.first();
+  //   console.log(lastMessage);
+  //   message_url = lastMessage.url;
+  // });
+  // await message.channel.send({
+  //   embeds: [
+  //     {
+  //       color: "#c8354a",
+  //       description: `${"`"}!SUS-VIBES${"`"}${vibe_level_ascii}⚠️<@${
+  //         receiving_member.user_id
+  //       }>
+  //       ${""}
+  //       *Vibes from @${sending_member.username}*    **[recorded onchain →](${
+  //         process.env.VIBESCAN_BASE_URL
+  //       }/ledger/${ledger_id})**
+  //       `,
+  //     },
+  //   ],
+  // });
 
   return true;
 }

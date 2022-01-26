@@ -91,27 +91,27 @@ export default async function vibes({ client, message, command, cmd_args }) {
     embed_color = "#eac545";
     vibe_level_ascii = "⁛⁚⁛⁚";
   }
-  await message.delete();
-  let message_url = `<#${vibeFeed.id}>`;
-  await vibeFeed.messages.fetch({ limit: 1 }).then((messages) => {
-    let lastMessage = messages.first();
-    console.log(lastMessage);
-    message_url = lastMessage.url;
-  });
-  await message.channel.send({
-    embeds: [
-      {
-        color: embed_color,
-        description: `${"`"}!${vibe_level_action}${"`"}${vibe_level_ascii}✨<@${
-          receiving_member.user_id
-        }>
-        ${""}
-        *Vibes from @${sending_member.username}*    **[recorded onchain →](${
-          process.env.VIBESCAN_BASE_URL
-        }/ledger/${ledger_id})**
-        `,
-      },
-    ],
-  });
+  // await message.delete();
+  // let message_url = `<#${vibeFeed.id}>`;
+  // await vibeFeed.messages.fetch({ limit: 1 }).then((messages) => {
+  //   let lastMessage = messages.first();
+  //   console.log(lastMessage);
+  //   message_url = lastMessage.url;
+  // });
+  // await message.channel.send({
+  //   embeds: [
+  //     {
+  //       color: embed_color,
+  //       description: `${"`"}!${vibe_level_action}${"`"}${vibe_level_ascii}✨<@${
+  //         receiving_member.user_id
+  //       }>
+  //       ${""}
+  //       *Vibes from @${sending_member.username}*    **[recorded onchain →](${
+  //         process.env.VIBESCAN_BASE_URL
+  //       }/ledger/${ledger_id})**
+  //       `,
+  //     },
+  //   ],
+  // });
   return true;
 }
