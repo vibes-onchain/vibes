@@ -34,6 +34,7 @@ export default async function vibes({ client, message, command, cmd_args }) {
     ledger_id,
     from_member_id: message_member.id,
     member_id: target_member.id,
+    note_url: message?.url,
     note,
   });
 

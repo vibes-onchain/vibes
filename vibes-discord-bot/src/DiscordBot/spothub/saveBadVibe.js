@@ -7,6 +7,7 @@ export default async function saveBadVibe({
   member_id,
   reason,
   note,
+  note_url,
   reaction_to_message_id,
 }) {
   const entry = LedgerEntry.build({
@@ -23,6 +24,7 @@ export default async function saveBadVibe({
     value: {
       reaction_to_message_id,
       note: note || reason,
+      note_url,
     },
     authored_on: new Date(),
   });

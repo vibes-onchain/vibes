@@ -20,6 +20,7 @@ async function handleVibeReaction({
   from_member_id,
   to_member_id,
   note,
+  note_url,
   reaction_to_message_id,
   entryType,
   message,
@@ -52,6 +53,7 @@ async function handleVibeReaction({
       from_member_id: from_member_id,
       member_id: to_member_id,
       note,
+      note_url,
       reaction_to_message_id,
     });
     const sending_member = await getMemberDetails({
@@ -108,6 +110,7 @@ async function handleVibeReaction({
       sending_member,
       receiving_member,
       note,
+      note_url,
       vibesLedgerSummary,
       message,
       reaction,
@@ -177,6 +180,7 @@ export default async function handleReaction(client, reaction, user) {
     const from_member_id = fromMember.id;
     const from_member_username = fromMember.user.username;
     const note = message.content;
+    const note_url = message?.url;
 
     if (from_member_id === to_member_id) {
       continue;
@@ -190,6 +194,7 @@ export default async function handleReaction(client, reaction, user) {
       to_member_id,
       to_member_username,
       note,
+      note_url,
       reaction_to_message_id: message.id,
       message,
       reaction,
