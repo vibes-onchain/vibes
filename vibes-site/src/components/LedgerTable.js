@@ -8,6 +8,7 @@ import moment from "moment";
 import { useTable, useSortBy, useFilters, usePagination } from "react-table";
 import _ from "lodash";
 import { matchSorter } from "match-sorter";
+import {BiLinkExternal} from 'react-icons/bi';
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
@@ -42,62 +43,69 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     return r;
   }, [ledgerEntries]);
 
-  const columns = React.useMemo(() => [
-    {
-      Header: "Entry ID",
-      accessor: "id",
-      Cell: ({ value }) => <>{EntryId.abbreviate(value)}</>,
-    },
-    {
-      Header: "Time",
-      accessor: "authored_on",
-      Cell: ({ value }) => (
-        <>{value && moment(value).format("YYYY-MM-DD k:mm")}</>
-      ),
-    },
-    {
-      Header: "Type",
-      accessor: "type",
-    },
-    {
-      Header: "Sender",
-      accessor: "sender.id",
-      //filter: 'fuzzyText',
-      Cell: ({ row: { original: entry }, value }) => (
-        <>
-          {entry?.sender && (
-            <LedgerEntryUserLabel
-              to={`/ledger/${ledger_id}/profile/discord_member-${entry.sender?.id}`}
-              id={entry.sender?.id}
-              imgClassName={"w-7 h-7 rounded-full inline-block"}
-            />
-          )}
-        </>
-      ),
-    },
-    {
-      Header: "Receiver",
-      accessor: "receiver.id",
-      Cell: ({ row: { original: entry }, value }) => (
-        <>
-          {entry?.receiver && (
-            <LedgerEntryUserLabel
-              to={`/ledger/${ledger_id}/profile/discord_member-${entry.receiver?.id}`}
-              id={entry.receiver?.id}
-              imgClassName={"w-7 h-7 rounded-full inline-block"}
-            />
-          )}
-        </>
-      ),
-    },
-    {
-      Header: "Data",
-      accessor: "value",
-      Cell: ({ value }) => (
-        <>{value?.vibe_rate || value?.vibe_period || value?.reason}</>
-      ),
-    },
-  ],[ledger_id]);
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Entry ID",
+        accessor: "id",
+        Cell: ({ value }) => <>{EntryId.abbreviate(value)}</>,
+      },
+      {
+        Header: "Time",
+        accessor: "authored_on",
+        Cell: ({ value }) => (
+          <>{value && moment(value).format("YYYY-MM-DD k:mm")}</>
+        ),
+      },
+      {
+        Header: "Type",
+        accessor: "type",
+      },
+      {
+        Header: "Sender",
+        accessor: "sender.id",
+        //filter: 'fuzzyText',
+        Cell: ({ row: { original: entry }, value }) => (
+          <>
+            {entry?.sender && (
+              <LedgerEntryUserLabel
+                to={`/ledger/${ledger_id}/profile/discord_member-${entry.sender?.id}`}
+                id={entry.sender?.id}
+                imgClassName={"w-7 h-7 rounded-full inline-block"}
+              />
+            )}
+          </>
+        ),
+      },
+      {
+        Header: "Receiver",
+        accessor: "receiver.id",
+        Cell: ({ row: { original: entry }, value }) => (
+          <>
+            {entry?.receiver && (
+              <LedgerEntryUserLabel
+                to={`/ledger/${ledger_id}/profile/discord_member-${entry.receiver?.id}`}
+                id={entry.receiver?.id}
+                imgClassName={"w-7 h-7 rounded-full inline-block"}
+              />
+            )}
+          </>
+        ),
+      },
+      {
+        Header: "Data",
+        accessor: "value",
+        Cell: ({ value }) =>
+          value?.note_url ? (
+            <a href={value.note_url} target={'_blank'}><BiLinkExternal /></a>
+          ) : 
+          (
+            <>{value?.vibe_rate || value?.vibe_period || value?.reason}</>
+          ),
+      },
+    ],
+    [ledger_id]
+  );
 
   const initialSortBy = React.useMemo(
     () => [{ id: "authored_on", desc: true }],
@@ -123,7 +131,7 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     }),
     []
   )*/
-  
+
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
@@ -147,26 +155,25 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize },
-   } =
-    useTable(
-      {
-        data,
-        columns,
-        defaultColumn,
-        initialState: {
-          sortBy: initialSortBy,
-          pageIndex: 0,
-          pageSize: 50,
-        },
-        //filterTypes,
+  } = useTable(
+    {
+      data,
+      columns,
+      defaultColumn,
+      initialState: {
+        sortBy: initialSortBy,
+        pageIndex: 0,
+        pageSize: 50,
       },
-      useFilters,
-      useSortBy,
-      usePagination,
-    );
-  
+      //filterTypes,
+    },
+    useFilters,
+    useSortBy,
+    usePagination
+  );
+
   //const firstPageRows = rows.slice(0, 50)
-  
+
   return (
     <div css={CSS}>
       <table {...getTableProps()}>
