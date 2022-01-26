@@ -77,7 +77,7 @@ export default async function vibecheck({
     embeds: [
       {
         color: "#000000",
-        description: stripIndent`${"`"}!VIBECHECK"${"`"}${vibe_level_ascii}🔎<@${
+        description: stripIndent`${"`"}!VIBECHECK${"`"}${vibe_level_ascii}🔎<@${
           receiving_member.user_id
         }>
         ${""}
