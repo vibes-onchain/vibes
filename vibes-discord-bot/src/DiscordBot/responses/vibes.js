@@ -46,7 +46,9 @@ export async function forVibeFeed({
   }`
     .replace(" ", "-")
     .toUpperCase();
-  let reaction_emoji = reaction?.emoji?.name.match(/\p{Emoji_Presentation}/gu) ? reaction?.emoji : "✨";
+  let reaction_emoji = reaction?.emoji?.name.match(/\p{Emoji_Presentation}/gu)
+    ? reaction?.emoji
+    : "✨";
   if (sending_member.vibe_level == 1) {
     embed_color = "#8f9296";
     vibe_level_ascii = "˙";
@@ -67,7 +69,7 @@ export async function forVibeFeed({
   return {
     embeds: [
       {
-        title: `${vibe_level_ascii}${reaction_emoji} Recorded →`,
+        title: `${vibe_level_ascii}✨ Recorded →`,
         color: embed_color,
         url: message?.url,
         description: description({
