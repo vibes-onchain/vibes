@@ -1,4 +1,4 @@
-import {stripIndent} from 'common-tags'
+import { stripIndent } from "common-tags";
 
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getTargetMember from "../message/getTargetMember";
@@ -81,7 +81,7 @@ export default async function vibecheck({
           receiving_member.user_id
         }>
         ${""}
-        *Check from @${
+        *Check by @${
           sending_member.username
         }*    **[see result →](${message_url})**
         `,
