@@ -80,10 +80,7 @@ export default async function vibecheck({
         description: stripIndent`${"`"}!VIBECHECK${"`"}${vibe_level_ascii}🔎<@${
           receiving_member.user_id
         }>
-        ${""}
-        *Check by @${
-          sending_member.username
-        }*    **[see result →](${message_url})**
+*Check by @${sending_member.username}*    **[see result →](${message_url})**
         `,
       },
     ],
