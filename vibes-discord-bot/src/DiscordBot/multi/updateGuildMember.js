@@ -9,6 +9,7 @@ export default async function updateGuildMember({
   client,
   guild_id,
   member_id,
+  skipIfUnknown = false
 }) {
   if (!guild_id) {
     throw new Error("needs guild_id");
@@ -33,6 +34,10 @@ export default async function updateGuildMember({
   const ledger = await findOrCreateLedgerForGuild(guild_id);
   const template = ledger.meta?.["vibes:nickname_template"];
   const memberDetails = await getVibesUserDetails({ guild_id, member_id });
+  
+  if (skipIfUnknown && memberDetails.vibe_level === 0) {
+    return false;
+  }
   // TODO include vibe traits
   const nickname = await renderNickname({
     template,

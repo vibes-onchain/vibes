@@ -6,10 +6,7 @@ import handleMessage from "./discord/handleMessage";
 import handleReaction from "./discord/handleReaction";
 import handleSlashCommand from "./discord/handleSlashCommand";
 import readyGuilds from "./discord/readyGuilds";
-import updateAllGuildMembers from "./multi/updateAllGuildMembers";
 import welcomeGuildMember from "./discord/welcomeGuildMember";
-import getLedgerIdsToUpdateEachPeriod from "./spothub/getLedgerIdsToUpdateEachPeriod";
-import updateAllGuildsForPeriod from "./multi/updateAllGuildsForPeriod";
 import updateSomeGuildsThisMinute from "./multi/updateSomeGuildsThisMinute";
 
 import Cron from "croner";

@@ -38,20 +38,4 @@ export default async function updateAllGuildMembers({ client, guild_id }) {
       console.log(e);
     }
   }
-  for (const member of sorted_guild_members) {
-    try {
-      const changed = await updateGuildMember({
-        client,
-        guild_id,
-        member_id: member.id
-      });
-      if (changed) {
-        await new Promise((resolve, reject) => {
-          setTimeout(resolve, 500);
-        });
-      }
-    } catch(e) {
-      console.log(e);
-    }
-  }
 }

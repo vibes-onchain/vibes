@@ -11,7 +11,7 @@ export default async function getVibesUserDetails({ guild_id, member_id }) {
     reduced?.profiles[member_id]
   );
   if (reduced?.profiles[member_id]) {
-    console.log(reduced?.profiles[member_id]);
+    // console.log(reduced?.profiles[member_id]);
     return {
       ...reduced?.profiles[member_id],
       vibedust,
