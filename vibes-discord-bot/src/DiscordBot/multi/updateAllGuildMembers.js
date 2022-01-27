@@ -21,15 +21,19 @@ export default async function updateAllGuildMembers({ client, guild_id }) {
   const all_guild_members = guild.members.cache.map((i) => i);
   const sorted_guild_members = _.sortBy(all_guild_members, i => STATUS_PRIORITY[i.presence?.status]);
   for (const member of sorted_guild_members) {
-    const changed = await updateGuildMember({
-      client,
-      guild_id,
-      member_id: member.id,
-    });
-    if (changed) {
-      await new Promise((resolve, reject) => {
-        setTimeout(resolve, 500);
+    try {
+      const changed = await updateGuildMember({
+        client,
+        guild_id,
+        member_id: member.id,
       });
+      if (changed) {
+        await new Promise((resolve, reject) => {
+          setTimeout(resolve, 500);
+        });
+      }
+    } catch(e) {
+      console.log(e);
     }
   }
 }
