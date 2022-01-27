@@ -3,8 +3,8 @@ import LedgerEntry from "spothub/lib/LedgerEntry";
 import distributeVibeDust from "./distributeVibeDust";
 import * as ss from "simple-statistics";
 import { GOOD_VIBE_ROLES, BAD_VIBE_ROLES } from "../constants";
-import AppCache from ':/lib/AppCache';
-import _ from 'lodash';
+import AppCache from ":/lib/AppCache";
+import _ from "lodash";
 
 export default async function reduceVibesLedger({ ledger_id }) {
   if (!ledger_id) {
@@ -12,7 +12,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
   }
 
   let current_rate = null;
-  let current_period = 'day';
+  let current_period = "day";
   let current_time = null;
   let user_vibes = {};
   let pending_vibes = {};
@@ -25,17 +25,20 @@ export default async function reduceVibesLedger({ ledger_id }) {
     current_rate = ledgerCache.current_rate;
     current_time = ledgerCache.current_time;
     user_vibes = ledgerCache.user_vibes;
-    pending_vibes = ledgerCache.pending_vibes; 
+    pending_vibes = ledgerCache.pending_vibes;
   }
 
-
   let entries;
-  entries = await AppCache.wrap(`ledger_entries-${ledger_id}-after-${last_cached_entry_id}`, async () => {
-    return LedgerEntry.findAll({
-      where: { ledger_id: ledger_id },
-      after: latest_entry_id
-    });
-  }, {ttl: 5});
+  entries = await AppCache.wrap(
+    `ledger_entries-${ledger_id}-after-${last_cached_entry_id}`,
+    async () => {
+      return LedgerEntry.findAll({
+        where: { ledger_id: ledger_id },
+        after: latest_entry_id,
+      });
+    },
+    { ttl: 5 }
+  );
 
   for (const entry of entries) {
     if (current_time === null) {
@@ -107,13 +110,17 @@ export default async function reduceVibesLedger({ ledger_id }) {
     // });
   }
 
-  if (entries.length && latest_entry_id && last_cached_entry_id !== latest_entry_id) {
+  if (
+    entries.length &&
+    latest_entry_id &&
+    last_cached_entry_id !== latest_entry_id
+  ) {
     await AppCache.set(`ledger-${ledger_id}`, {
       latest_entry_id,
       current_rate,
       current_time,
       user_vibes,
-      pending_vibes
+      pending_vibes,
     });
   }
   if (ledgerCache && ledgerCache?.latest_entry_id) {
@@ -121,7 +128,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
     current_rate = ledgerCache.current_rate;
     current_time = ledgerCache.current_time;
     user_vibes = ledgerCache.user_vibes;
-    pending_vibes = ledgerCache.pending_vibes; 
+    pending_vibes = ledgerCache.pending_vibes;
   }
 
   user_vibes = distributeVibeDust({
@@ -131,8 +138,12 @@ export default async function reduceVibesLedger({ ledger_id }) {
     user_vibes,
     pending_vibes,
   });
-  const vibestack_mean = Object.values(user_vibes).length ? ss.mean(Object.values(user_vibes)) : 0;
-  const vibestack_sd = Object.values(user_vibes).length ? ss.standardDeviation(Object.values(user_vibes)) : 0;
+  const vibestack_mean = Object.values(user_vibes).length
+    ? ss.mean(Object.values(user_vibes))
+    : 0;
+  const vibestack_sd = Object.values(user_vibes).length
+    ? ss.standardDeviation(Object.values(user_vibes))
+    : 0;
 
   const profiles = Object.entries(user_vibes).reduce(
     (acc, [user_id, vibestack]) => {
@@ -144,7 +155,10 @@ export default async function reduceVibesLedger({ ledger_id }) {
       const vibestack_percentile =
         ss.cumulativeStdNormalProbability(vibestack_zscore);
       let vibe_level, vibe_level_name;
-      for (const role of [..._.reverse(_.cloneDeep(BAD_VIBE_ROLES)), ...GOOD_VIBE_ROLES]) {
+      for (const role of [
+        ..._.reverse(_.cloneDeep(BAD_VIBE_ROLES)),
+        ...GOOD_VIBE_ROLES,
+      ]) {
         const key = role.when[0];
         const keys_value = (() => {
           if (key === "vibestack") {
@@ -156,7 +170,13 @@ export default async function reduceVibesLedger({ ledger_id }) {
         const op = role.when[1];
         const value = role.when[2];
         if (role.when) {
-          if (op === "<") {
+          if (op === "==") {
+            if (keys_value == value) {
+              vibe_level_name = role.name;
+              vibe_level = role.level;
+              break;
+            }
+          } else if (op === "<") {
             if (keys_value < value) {
               vibe_level_name = role.name;
               vibe_level = role.level;

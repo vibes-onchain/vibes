@@ -130,10 +130,17 @@ export const BAD_VIBES_START_HERE_ROLE = {
 };
 export const BAD_VIBE_ROLES = [
   {
+    color: "9aaab6",
+    reason: "",
+    name: "Unknown Vibe",
+    hoist: false,
+    when: ["vibestack", "==", 0],
+    level: 0,
+  },
+  {
     color: 10038562,
     reason: "",
     name: "Sus Vibe",
-    hoist: false,
     icon: "sus-vibes.gif",
     hoist: true,
     when: ["vibestack", "<", 0],
@@ -143,7 +150,6 @@ export const BAD_VIBE_ROLES = [
     color: 10038562,
     reason: "",
     name: "Sus Timeout",
-    hoist: false,
     icon: "sus-vibes.gif",
     hoist: true,
     when: ["vibestack", "<", -20],
