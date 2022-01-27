@@ -146,7 +146,7 @@ export const BAD_VIBE_ROLES = [
     hoist: false,
     icon: "sus-vibes.gif",
     hoist: true,
-    when: ["vibestack", "<", 20],
+    when: ["vibestack", "<", -20],
     level: -2,
   },
 ];
