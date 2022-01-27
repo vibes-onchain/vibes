@@ -69,7 +69,7 @@ Join [#vibes-support](https://discord.gg/2ezqyrYy) in the Spotchain Discord to *
   GROOVY                     30 p/day
   COOL                     20 p/day
   GOOD                     300 p/day
-  SUS                     300 p/day`,
+  SUS                     0 p/day`,
   ],
   "vibe-feed": [],
 };
