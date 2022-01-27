@@ -15,7 +15,7 @@ export default function Footer() {
         </div>
         <div className="text">
           <div className="links">
-            <a href="https://twitter.com/vibesbotgg">Twitter</a>
+            <a href="https://twitter.com/vibesonchain">Twitter</a>
             <a href={process.env.REACT_APP_DISCORD_INVITE}>Discord</a>
             <a href="https://github.com/spot-foundation/vibes">Github</a>
             {/* <a href="/terms">Terms</a>
@@ -95,7 +95,8 @@ const CSS = css`
     }
   }
   body.dark-theme & {
-    .copyright, .copyright a {
+    .copyright,
+    .copyright a {
       color: #ccc;
     }
     .text .links a {

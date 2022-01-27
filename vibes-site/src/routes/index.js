@@ -30,16 +30,36 @@ export default function () {
         {/* <img className="cover-wave" src={wave_gradient} alt="cover" /> */}
         <div className="hero-container">
           <div className="snowflakes" aria-hidden="true">
-            <div className="snowflake"><img src={epic_sparkle} /></div>
-            <div className="snowflake"><img src={rare_sparkle} /></div>
-            <div className="snowflake"><img src={legendary_sparkle} /></div>
-            <div className="snowflake"><img src={og_sparkle} /></div>
-            <div className="snowflake"><img src={epic_sparkle} /></div>
-            <div className="snowflake"><img src={rare_sparkle} /></div>
-            <div className="snowflake"><img src={legendary_sparkle} /></div>
-            <div className="snowflake"><img src={og_sparkle} /></div>
-            <div className="snowflake"><img src={epic_sparkle} /></div>
-          <div className="snowflake"><img src={rare_sparkle} /></div>
+            <div className="snowflake">
+              <img src={epic_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={rare_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={legendary_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={og_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={epic_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={rare_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={legendary_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={og_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={epic_sparkle} />
+            </div>
+            <div className="snowflake">
+              <img src={rare_sparkle} />
+            </div>
           </div>
           <div className="h1">
             On-chain trust for massive, open, decentralized communities
@@ -127,13 +147,13 @@ export default function () {
             </div>
             <div className="link-list">
               <p>🌎 Connect</p>
-              <a href="https://twitter.com/vibesbotgg">Twitter</a>
+              <a href="https://twitter.com/vibesonchain">Twitter</a>
               <a href={process.env.REACT_APP_DISCORD_INVITE}>Discord</a>
             </div>
             {/* <div className="link-list"> */}
-              {/* <p>👤 Team</p> */}
-              {/* <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Team</a> */}
-              {/* <a href="/">Terms of Use</a>
+            {/* <p>👤 Team</p> */}
+            {/* <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Team</a> */}
+            {/* <a href="/">Terms of Use</a>
               <a href="/">Privacy Policy</a> */}
             {/* </div> */}
           </div>
@@ -220,7 +240,9 @@ const CSS = css`
       font-size: 40px;
       font-family: Arial;
       text-shadow: 0 0 1px #000;
-      img { width: 35px; }
+      img {
+        width: 35px;
+      }
     }
 
     @-webkit-keyframes snowflakes-fall {
