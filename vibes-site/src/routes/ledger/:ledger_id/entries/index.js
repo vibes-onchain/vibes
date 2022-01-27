@@ -14,7 +14,7 @@ import DiscordGuildName from ":/components/DiscordGuildName";
 import DiscordGuildAvatar from ":/components/DiscordGuildAvatar";
 import DiscordGuildBanner from ":/components/DiscordGuildBanner";
 import { Menu, Segment } from "semantic-ui-react";
-import CommunityHeader from ':/routes/ledger/:ledger_id/CommunityHeader';
+import CommunityHeader from ":/routes/ledger/:ledger_id/CommunityHeader";
 
 export default function () {
   const router = useRouter();
@@ -42,11 +42,11 @@ export default function () {
   return (
     <div css={CSS}>
       <Header />
-      {guild_id && <CommunityHeader guild_id={guild_id} tab={'ledger'} />}
-      <div className="page-container">
-        {!ledgerEntries && <Loading />}
-        {ledgerEntries && <LedgerTable ledger_id={ledger_id} ledgerEntries={ledgerEntries} />}
-      </div>
+      {guild_id && <CommunityHeader guild_id={guild_id} tab={"ledger"} />}
+      {!ledgerEntries && <Loading />}
+      {ledgerEntries && (
+        <LedgerTable ledger_id={ledger_id} ledgerEntries={ledgerEntries} />
+      )}
       <Footer />
     </div>
   );

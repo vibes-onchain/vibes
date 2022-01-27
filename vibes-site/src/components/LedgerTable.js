@@ -5,10 +5,17 @@ import React from "react";
 import EntryId from ":/lib/EntryId";
 import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
 import moment from "moment";
-import { useTable, useSortBy, useFilters, usePagination } from "react-table";
+import {
+  useTable,
+  useSortBy,
+  useFilters,
+  usePagination,
+  useFlexLayout,
+} from "react-table";
+import { useWindowWidth } from "@react-hook/window-size";
 import _ from "lodash";
 import { matchSorter } from "match-sorter";
-import {BiLinkExternal} from 'react-icons/bi';
+import { BiLinkExternal } from "react-icons/bi";
 
 function fuzzyTextFilterFn(rows, id, filterValue) {
   return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
@@ -34,6 +41,7 @@ function DefaultColumnFilter({
 }
 
 export default function LedgerTable({ ledger_id, ledgerEntries }) {
+  const windowWidth = useWindowWidth();
   const data = React.useMemo(() => {
     const r = ledgerEntries
       .reverse()
@@ -97,9 +105,10 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
         accessor: "value",
         Cell: ({ value }) =>
           value?.note_url ? (
-            <a href={value.note_url} target={'_blank'}><BiLinkExternal /></a>
-          ) : 
-          (
+            <a href={value.note_url} target={"_blank"} rel={"noreferrer"}>
+              <BiLinkExternal />
+            </a>
+          ) : (
             <>{value?.vibe_rate || value?.vibe_period || value?.reason}</>
           ),
       },
@@ -112,26 +121,6 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     []
   );
 
-  /*const filterTypes = React.useMemo(
-    () => ({
-      // Add a new fuzzyTextFilterFn filter type.
-      fuzzyText: fuzzyTextFilterFn,
-      // Or, override the default text filter to use
-      // "startWith"
-      text: (rows, id, filterValue) => {
-        return rows.filter(row => {
-          const rowValue = row.values[id]
-          return rowValue !== undefined
-            ? String(rowValue)
-                .toLowerCase()
-                .startsWith(String(filterValue).toLowerCase())
-            : true
-        })
-      },
-    }),
-    []
-  )*/
-
   const defaultColumn = React.useMemo(
     () => ({
       // Let's set up our default Filter UI
@@ -139,6 +128,14 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
     }),
     []
   );
+
+  const useTableStuff = React.useMemo(() => {
+    const r = [useFilters, useSortBy, usePagination];
+    if (windowWidth > 800) {
+      r.push(useFlexLayout);
+    }
+    return r;
+  }, [windowWidth]);
 
   const {
     getTableProps,
@@ -167,84 +164,49 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
       },
       //filterTypes,
     },
-    useFilters,
-    useSortBy,
-    usePagination
+    ...useTableStuff
   );
 
-  //const firstPageRows = rows.slice(0, 50)
+  const headerGroup = headerGroups?.[0];
 
   return (
     <div css={CSS}>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
+      <div className="table responsiveTable" {...getTableProps()}>
+        <div className="thead">
+          <div className="tr" {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <div
+                className="th"
+                {...column.getHeaderProps(column.getSortByToggleProps())}
+              >
+                {column.render("Header")}
+                <span>
+                  {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="tbody" {...getTableBodyProps()}>
           {page.map((row, i) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <div className="tr" {...row.getRowProps()}>
                 {row.cells.map((cell) => {
                   return (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                    <div className="td" {...cell.getCellProps()}>
+                      <>
+                        <div className="tdHeader">{cell?.column?.Header}</div>
+                        <div className="tdContent">{cell.render("Cell")}</div>
+                      </>
+                    </div>
                   );
                 })}
-              </tr>
+              </div>
             );
           })}
-        </tbody>
-        {/* <tbody>
-          {ledgerEntries.map((entry) => (
-            <tr key={entry.id}>
-              <td>{EntryId.abbreviate(entry.id)}</td>
-              <td>
-                {entry.authored_on &&
-                  moment(entry.authored_on).format("YYYY-MM-DD k:mm")}
-              </td>
-              <td>{entry.type}</td>
-              <td>
-                {entry.sender && (
-                  <LedgerEntryUserLabel
-                    to={`/ledger/${ledger_id}/profile/discord_member-${entry.sender?.id}`}
-                    id={entry.sender?.id}
-                    imgClassName={"w-7 h-7 rounded-full inline-block"}
-                  />
-                )}
-              </td>
-              <td>
-                {entry.receiver && (
-                  <LedgerEntryUserLabel
-                    to={`/ledger/${ledger_id}/profile/discord_member-${entry.receiver?.id}`}
-                    id={entry.receiver?.id}
-                    imgClassName={"w-7 h-7 rounded-full inline-block"}
-                  />
-                )}
-              </td>
-              <td>
-                {entry.value?.vibe_rate ||
-                  entry.value?.vibe_period ||
-                  entry.value?.reason}
-              </td>
-            </tr>
-          ))}
-        </tbody> */}
-      </table>
+        </div>
+      </div>
       <div className="pagination">
         <div className="controls">
           <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
@@ -299,39 +261,109 @@ export default function LedgerTable({ ledger_id, ledgerEntries }) {
 }
 
 const CSS = css`
-  table {
+  max-width: 1600px;
+  margin: 10px auto;
+  /* inspired by: https://css-tricks.com/responsive-data-tables/ */
+  .responsiveTable .td .tdHeader {
+    display: none;
+  }
+
+  .responsiveTable .thead .tr {
+    display: flex;
+  }
+
+  @media screen and (max-width: 799px) {
+
+    .responsiveTable {
+      width: 100%;
+    }
+
+    /*
+      Force table elements to not behave like tables anymore
+      Hide table headers (but not display: none;, for accessibility)
+    */
+
+    .responsiveTable .table,
+    .responsiveTable .thead,
+    .responsiveTable .tbody,
+    .responsiveTable .th,
+    .responsiveTable .td,
+    .responsiveTable .tr {
+      display: block;
+    }
+
+    .responsiveTable .thead .tr {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 2px solid #333;
+      .th {
+        flex-grow: 1;
+      }
+    }
+
+    .responsiveTable .tbody .tr {
+      border: 1px solid #000;
+      padding: 0.25em;
+    }
+
+    .responsiveTable .td {
+      /* Behave like a "row" */
+      border: none !important;
+      position: relative;
+      text-align: left !important;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      min-height: 1.5em;
+    }
+
+    .responsiveTable .td .tdHeader {
+      display: inline-block;
+      width: 30%;
+      white-space: pre-wrap;
+      overflow-wrap: break-word;
+      text-align: left !important;
+      font-weight: 600;
+    }
+    .responsiveTable .td .tdContent {
+      display: inline-block;
+    }
+  }
+
+  .table {
     width: 100%;
     border-collapse: collapse;
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 
-  th,
-  td {
+  .th,
+  .td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
   }
 
-  th {
+  .th {
     text-align: left;
   }
 
-  thead {
-    th {
+  .thead {
+    .th {
       background-color: #55608f;
     }
   }
 
-  tbody {
+  .tbody {
     background: linear-gradient(45deg, #49a09d, #5f2c82);
 
-    tr {
+    .tr {
       &:hover {
         background-color: rgba(255, 255, 255, 0.3);
       }
     }
-    td {
+    .td {
       position: relative;
       &:hover {
         &:before {
