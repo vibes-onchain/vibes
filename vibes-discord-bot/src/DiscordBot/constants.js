@@ -139,6 +139,16 @@ export const BAD_VIBE_ROLES = [
     when: ["vibestack", "<", 0],
     level: -1,
   },
+  {
+    color: 10038562,
+    reason: "",
+    name: "Sus Timeout",
+    hoist: false,
+    icon: "sus-vibes.gif",
+    hoist: true,
+    when: ["vibestack", "<", 20],
+    level: -2,
+  },
 ];
 
 export const VIBE_ROLE_NAMES = [
