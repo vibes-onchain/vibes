@@ -4,6 +4,7 @@ import distributeVibeDust from "./distributeVibeDust";
 import * as ss from "simple-statistics";
 import { GOOD_VIBE_ROLES, BAD_VIBE_ROLES } from "../constants";
 import AppCache from ':/lib/AppCache';
+import _ from 'lodash';
 
 export default async function reduceVibesLedger({ ledger_id }) {
   if (!ledger_id) {
@@ -143,7 +144,7 @@ export default async function reduceVibesLedger({ ledger_id }) {
       const vibestack_percentile =
         ss.cumulativeStdNormalProbability(vibestack_zscore);
       let vibe_level, vibe_level_name;
-      for (const role of [...BAD_VIBE_ROLES, ...GOOD_VIBE_ROLES]) {
+      for (const role of [..._.reverse(_.cloneDeep(BAD_VIBE_ROLES)), ...GOOD_VIBE_ROLES]) {
         const key = role.when[0];
         const keys_value = (() => {
           if (key === "vibestack") {
