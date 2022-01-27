@@ -68,7 +68,7 @@ Join [#vibes-support](https://discord.gg/2ezqyrYy) in the Spotchain Discord to *
   TRIPPY                     40 p/day
   GROOVY                     30 p/day
   COOL                     20 p/day
-  GOOD                     3010 p/day
+  GOOD                     300 p/day
   SUS                     300 p/day`,
   ],
   "vibe-feed": [],
