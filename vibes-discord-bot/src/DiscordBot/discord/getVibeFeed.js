@@ -1,4 +1,4 @@
-export default function getVibeFeed({client, guild_id}) {
+export default function getVibeFeed({ client, guild_id }) {
   if (!guild_id) {
     throw new Error("needs guild_id");
   }
@@ -6,7 +6,5 @@ export default function getVibeFeed({client, guild_id}) {
   if (!guild) {
     throw new Error("guild not found");
   }
-  return guild.channels.cache.find(
-    (channel) => channel.name === "vibe-feed"
-  );
+  return guild.channels.cache.find((channel) => channel.name === "vibes-feed");
 }

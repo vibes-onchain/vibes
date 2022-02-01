@@ -165,7 +165,7 @@ export const VIBE_ROLE_NAMES = [
 export const VIBES_BOT_ROLE_NAME =
   process.env.APP_ENV === "development" ? "vibesbot-dev" : "vibesbot";
 
-export const VIBE_FEED_CHANNEL = { name: "vibe-feed", type: "GUILD_TEXT" };
+export const VIBE_FEED_CHANNEL = { name: "vibes-feed", type: "GUILD_TEXT" };
 
 const iconsDir = `${__dirname}/../../assets/icons`;
 
