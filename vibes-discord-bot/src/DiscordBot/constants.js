@@ -152,7 +152,7 @@ export const BAD_VIBE_ROLES = [
     name: "Sus Timeout",
     icon: "sus-vibes.gif",
     hoist: true,
-    when: ["vibestack", "<", -20],
+    when: ["vibestack", "<", -50],
     level: -2,
   },
 ];
