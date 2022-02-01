@@ -34,10 +34,30 @@ export default async function handleMention({
     await message.channel.send(`hey fren`);
   } else if (cmd === "hello") {
     await message.channel.send(`hey fren`);
-  } else if (cmd === "where do you live") {
-    await message.channel.send(`the good vibes universe`);
-  } else if (cmd === "space") {
-    await message.channel.send(`my favorite frontier`);
+  } else if (cmd === "wat") {
+    await message.channel.send({
+      embeds: [
+        {
+          color: "#000000",
+          description: "**Wat**",
+          image: {
+            url: "https://i.imgur.com/2UJmWv3.png",
+          },
+        },
+      ],
+    });
+  } else if (cmd === "how") {
+    await message.channel.send({
+      embeds: [
+        {
+          color: "#000000",
+          description: "**How**",
+          image: {
+            url: "https://i.imgur.com/2UJmWv3.png",
+          },
+        },
+      ],
+    });
   } else if (cmd === "refresh" && canControlFrenlyBot) {
     // for (const [member_id, member] of guild_members.cache) {
     //   const user = await DiscordDevKeyValue.findOrCreateMember(member);
