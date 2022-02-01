@@ -1,7 +1,7 @@
 const VIBE_CHANNELS = {
   "vibes-101": { name: "vibes-101", type: "GUILD_TEXT" },
   vibenomics: { name: "vibenomics", type: "GUILD_TEXT" },
-  "vibe-feeds": { name: "vibe-feeds", type: "GUILD_TEXT" },
+  "vibe-feed": { name: "vibes-feed", type: "GUILD_TEXT" },
 };
 import { stripIndent } from "common-tags";
 
@@ -71,7 +71,7 @@ Join [#vibes-support](https://discord.gg/2ezqyrYy) in the Spotchain Discord to *
   GOOD                     10 p/day
   SUS                     0 p/day`,
   ],
-  "vibe-feeds": [],
+  "vibes-feed": [],
 };
 
 // What  / Why / How [image] / AUA / FAQ
