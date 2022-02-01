@@ -44,15 +44,19 @@ Join [#vibes-support](https://discord.gg/2ezqyrYy) in the Spotchain Discord to *
   ],
   vibenomics: [
     stripIndent`***Wen token?***
-  :robot: Stop it you! Vibes are *pure* and totally *non-financial*. And not in a “we're not liable” way. If we involve money in vibe signals, then the vibes start to indicate wealth, and not vibes. There’s already plenty of that out there. That’s not what we want to help people share and show and see. No buying or selling vibes, ever.:sparkles:`,
-    stripIndent`***VIBELEVEL***                      **VIBESTACK**
+  :robot: Stop it you! Vibes are *pure* and totally *non-financial*. And not in a “we're not liable” way. If we involve money in vibe signals, then the vibes start to indicate wealth, and not vibes. There’s already plenty of that out there. That’s not what we want to help people share and show and see. No buying or selling vibes, ever.:sparkles:
+     
+     
+  ***VIBELEVEL***                      **VIBESTACK**
   :warning: Sus Vibes                     negative
   :green_square: Good Vibes                     positive
   :blue_square: Cool Vibes                     69.15 - 84.15 %tile
   :purple_square: Groovy Vibes                     84.15 - 93.32 %tile
   :orange_square: Trippy Vibes                     93.32 - 97.72 %tile
-  :yellow_square: Shamanic Vibes                     97.72 - 99.99 %tile`,
-    stripIndent`***VIBES BADGES***
+  :yellow_square: Shamanic Vibes                     97.72 - 99.99 %tile
+     
+     
+  ***VIBES BADGES***
   1 - 10 🌱 
   10 - 50 🌱 🌱
   50 - 200 🌱 🌱 🌱
@@ -62,14 +66,17 @@ Join [#vibes-support](https://discord.gg/2ezqyrYy) in the Spotchain Discord to *
   2500+ 🌈
   2500+ and above 90%tile 🌈 🌈 
   2500+ and above 95%tile 🌈 🌈 🌈 
-  2500+ and above 98%tile ☮️`,
-    stripIndent`***⁚⁛⁚⁛VIBEDUST DAILY BAGS💰⁚⁛⁚⁛***
+  2500+ and above 98%tile ☮️
+     
+     
+  ***⁚⁛⁚⁛VIBEDUST DAILY BAGS💰⁚⁛⁚⁛***
   SHAMANIC                     50 p/day
   TRIPPY                     40 p/day
   GROOVY                     30 p/day
   COOL                     20 p/day
   GOOD                     10 p/day
-  SUS                     0 p/day`,
+  SUS                     0 p/day
+  `,
   ],
   "vibes-feed": [],
 };
