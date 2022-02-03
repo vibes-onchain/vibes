@@ -16,7 +16,7 @@ Decentralized moderation becomes possible based on the vibes your community reco
       content: stripIndent`**How**`,
     },
     stripIndent`**AUA**
-Join [#vibes-support](https://discord.gg/2ezqyrYy) in the Spotchain Discord to *ask the Vibes Team anything*. Or even just to vibe out! 
+Join [#vibes-support](https://discord.gg/hnNqrAxYcd) in the Spotchain Discord to *ask the Vibes Team anything*. Or even just to vibe out! 
 ✨✨✨`,
     stripIndent`**FAQ**
 ***How many vibes can I send before running out?***
@@ -40,7 +40,7 @@ Join [#vibes-support](https://discord.gg/2ezqyrYy) in the Spotchain Discord to *
     stripIndent`***What does it mean that my vibes have a “boost”?***
 :robot: When your ${"`"}VIBESTACK${"`"} reaches new percentile ranks in your community, your vibes get the privilege of carrying a stronger signal. For example, using the high-ranking “OG-vibes" may carry a 10x boost in your community. This means that compared to the standard vibes, each of your OG-vibes will cause 10x more dust effect on the receivers. For details, check #vibenomics.:sparkles:`,
     stripIndent`***How are vibes “onchain”? Can we like see the contracts?***
-:robot: All vibe activity in each community is being recorded on Spotchain (spotchain.org). It's a blockchain *specifically* built to hold crypto-based social signals.  In your #vibes-feed , you will see at the bottom of *every* transaction a link to see that Tx on a Spot Ledger. Join the Spotchain discord if you’re interested in diving deeper into the chain stuff: https://discord.gg/U7s7Da4r . :sparkles:`,
+:robot: All vibe activity in each community is being recorded on Spotchain (spotchain.org). It's a blockchain *specifically* built to hold crypto-based social signals.  In your #vibes-feed , you will see at the bottom of *every* transaction a link to see that Tx on a Spot Ledger. Join the Spotchain discord if you’re interested in diving deeper into the chain stuff: https://discord.gg/7H3NWMjUyY . :sparkles:`,
   ],
   vibenomics: [
     stripIndent`***Wen token?***
