@@ -43,8 +43,8 @@ export default async function set_vibes_nickname_template({
   });
   await le.save();
 
+  await message.channel.send("Metadata saved");
   await AppCache.del(`ledger_for_guild-${guild.id}`);
   await updateAllGuildMembers({ client, guild_id: guild.id });
-
   return true;
 }
