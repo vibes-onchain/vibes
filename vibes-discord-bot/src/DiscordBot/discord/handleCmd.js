@@ -16,7 +16,7 @@ import set_vibes_metadata from "../cmds/set_vibes_metadata";
 import set_vibes_nickname from "../cmds/set_vibes_nickname";
 import use_default_nickname from "../cmds/use_default_nickname";
 import use_numeric_nickname from "../cmds/use_numeric_nickname";
-
+import set_custom_vibemojis from "../cmds/set_custom_vibemojis";
 import new_vibes_ledger from "../cmds/new_vibes_ledger";
 import refresh_vibes from "../cmds/refresh_vibes";
 
@@ -61,6 +61,8 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return new_vibes_ledger({ client, message, cmd_args, guild_id });
   } else if (cmd === "refresh_vibes") {
     return refresh_vibes({ client, message, cmd_args, guild_id });
+  } else if (cmd === "set_custom_vibemojis") {
+    return set_custom_vibemojis({ client, message, cmd_args, guild_id });
   } else if (cmd === "use_default_nickname") {
     return use_default_nickname({ client, message, cmd_args, guild_id });
   } else if (cmd === "use_numeric_nickname") {
