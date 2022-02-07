@@ -6,7 +6,7 @@ const VIBE_CHANNELS = {
 import { stripIndent } from "common-tags";
 
 const VIBE_CHANNEL_RELOAD = {
-  "vibes-101": true,
+  // "vibes-101": true,
   // "vibenomics": true
 };
 
