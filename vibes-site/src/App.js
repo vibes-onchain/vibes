@@ -59,6 +59,7 @@ function App() {
 }
 
 const routes = [
+  "/docs",
   "/setup/discord",
   "/ledger/:ledger_id/admin",
   "/ledger/:ledger_id/profile/:profile_id/shareable",
