@@ -13,16 +13,6 @@ export default async function set_vibes_nickname({
   const member = message ? message.member : command.member;
   const guild = member.guild;
 
-  if (
-    !(await canControlVibesBot({
-      client,
-      guild_id: guild.id,
-      member_id: member?.id,
-    }))
-  ) {
-    return;
-  }
-
   const value = command
     ? cmd_args.find((i) => i.name === "value").value
     : cmd_args.join(" ");
