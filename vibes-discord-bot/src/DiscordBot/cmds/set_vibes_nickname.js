@@ -4,7 +4,7 @@ import canControlVibesBot from "../discord/canControlVibesBot";
 import updateAllGuildMembers from "../multi/updateAllGuildMembers";
 import AppCache from ":/lib/AppCache";
 
-export default async function set_vibes_nickname_template({
+export default async function set_vibes_nickname({
   client,
   command,
   message,
@@ -23,10 +23,6 @@ export default async function set_vibes_nickname_template({
     return;
   }
 
-  const key = command
-    ? cmd_args.find((i) => i.name === "key").value
-    : cmd_args.shift();
-
   const value = command
     ? cmd_args.find((i) => i.name === "value").value
     : cmd_args.join(" ");
@@ -37,11 +33,13 @@ export default async function set_vibes_nickname_template({
     ledger_id: ledger.id,
     type: "Set Ledger Metadata",
     value: {
-      key: `vibes:${key}`,
+      key: `vibes:discord_nicknames:${member?.id}`,
       value: value,
     },
   });
   await le.save();
+
+  await message.channel.send("Nickname saved");
 
   await AppCache.del(`ledger_for_guild-${guild.id}`);
   await updateAllGuildMembers({ client, guild_id: guild.id });

@@ -13,7 +13,7 @@ import setup_vibes from "../cmds/setup_vibes";
 import set_vibes_nickname_template from "../cmds/set_vibes_nickname_template";
 import import_vibes_nickname_template from "../cmds/import_vibes_nickname_template";
 import set_vibes_metadata from "../cmds/set_vibes_metadata";
-
+import set_vibes_nickname from "../cmds/set_vibes_nickname";
 import use_default_nickname from "../cmds/use_default_nickname";
 import use_numeric_nickname from "../cmds/use_numeric_nickname";
 
@@ -53,6 +53,8 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return import_vibes_nickname_template({ client, message, cmd_args });
   } else if (cmd === "set_vibes_metadata") {
     return set_vibes_metadata({ client, message, cmd_args });
+  } else if (cmd === "set_vibes_nickname") {
+    return set_vibes_nickname({ client, message, cmd_args });
   } else if (cmd === "setup_vibes") {
     return setup_vibes({ client, message, cmd_args, guild_id });
   } else if (cmd === "new_vibes_ledger") {

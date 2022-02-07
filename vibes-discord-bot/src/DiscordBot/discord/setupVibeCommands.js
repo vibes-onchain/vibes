@@ -99,6 +99,12 @@ export default async function ({ client, guild_id }) {
         option.setName("value").setDescription("value").setRequired(true)
       ),
     new SlashCommandBuilder()
+      .setName("set_vibes_nickname")
+      .setDescription("[ADMINS ONLY] set ledger metadata for vibes")
+      .addStringOption((option) =>
+        option.setName("value").setDescription("value").setRequired(true)
+      ),
+    new SlashCommandBuilder()
       .setName("set_user_vibes")
       .setDescription("[ADMINS ONLY] set someone's vibestack")
       .addUserOption((option) =>

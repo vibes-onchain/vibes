@@ -39,6 +39,7 @@ export const GLOBAL_CMDS = [
   "use_default_nickname",
   "use_numeric_nickname",
   "set_vibes_metadata",
+  "set_vibes_nickname",
   "setup_vibes",
   //
   "new_vibes_ledger",

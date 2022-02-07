@@ -10,7 +10,7 @@ import reset_all_vibes from "../cmds/reset_all_vibes";
 
 import set_vibes_nickname_template from "../cmds/set_vibes_nickname_template";
 import set_vibes_metadata from "../cmds/set_vibes_metadata";
-
+import set_vibes_nickname from "../cmds/set_vibes_nickname";
 import setup_vibes from "../cmds/setup_vibes";
 import refresh_vibes from "../cmds/refresh_vibes";
 
@@ -48,6 +48,8 @@ export default async function handleCmd({ client, command }) {
     handled = await set_user_vibes({ client, command, cmd_args });
   } else if (cmd === "set_vibes_nickname_template") {
     handled = await set_vibes_nickname_template({ client, command, cmd_args });
+  } else if (cmd === "set_vibes_nickname") {
+    handled = await set_vibes_nickname({ client, command, cmd_args });
   } else if (cmd === "set_vibes_metadata") {
     handled = await set_vibes_metadata({ client, command, cmd_args });
   } else if (cmd === "setup_vibes") {

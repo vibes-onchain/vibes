@@ -9,7 +9,7 @@ export default async function updateGuildMember({
   client,
   guild_id,
   member_id,
-  skipIfUnknown = false
+  skipIfUnknown = false,
 }) {
   if (!guild_id) {
     throw new Error("needs guild_id");
@@ -26,15 +26,17 @@ export default async function updateGuildMember({
   if (!member) {
     throw new Error("member not found");
   }
-  const username = member.user?.username;
+
+  const ledger = await findOrCreateLedgerForGuild(guild_id);
+  const username =
+    ledger.meta?.[`vibes:discord_nicknames:${member?.id}`] ||
+    member.user?.username;
   if (!member) {
     throw new Error("member missing username");
   }
-
-  const ledger = await findOrCreateLedgerForGuild(guild_id);
   const template = ledger.meta?.["vibes:nickname_template"];
   const memberDetails = await getVibesUserDetails({ guild_id, member_id });
-  
+
   if (skipIfUnknown && memberDetails.vibe_level === 0) {
     return false;
   }
@@ -51,7 +53,8 @@ export default async function updateGuildMember({
   });
 
   const role_aliases = await getVibeRoleAliases({ guild_id });
-  const role_name = role_aliases[memberDetails.vibeLevel] || memberDetails.vibeLevel;
+  const role_name =
+    role_aliases[memberDetails.vibeLevel] || memberDetails.vibeLevel;
 
   // TODO figure out vibe role
   // updateGuildMemberVibeRoles
@@ -65,9 +68,7 @@ export default async function updateGuildMember({
   console.log(
     `update {nickname:${!!updatedNickname ? "1" : "0"}, role:${
       !!updatedVibesRole ? "1" : "0"
-    }} ${guild_id}:${member_id} ${
-      member.user.username
-    } => ${nickname}`
+    }} ${guild_id}:${member_id} ${member.user.username} => ${nickname}`
   );
 
   // console.log({updatedNickname, updatedVibesRole});
