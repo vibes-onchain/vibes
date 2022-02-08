@@ -23,7 +23,7 @@ import ThemeContext from ":/contexts/ThemeContext";
 
 export default function Header(props) {
   const themeContext = React.useContext(ThemeContext);
-  const [sidebarVisible, setSidebarVisible] = React.useState(true);
+  const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   let homeURL = props.homeURL ? props.homeURL : "/";
   let portal = props.portal ? props.portal : "";
@@ -287,7 +287,7 @@ const headerCSS = css`
       display: none;
     }
     .right.desktop-only {
-      display: initial;
+      display: flex;
     }
   }
 
