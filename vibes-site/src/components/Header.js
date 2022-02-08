@@ -2,18 +2,29 @@
 import { css } from "@emotion/core";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { Button, Icon, Dropdown, Label, Menu } from "semantic-ui-react";
+import {
+  Button,
+  Icon,
+  Image,
+  Dropdown,
+  Label,
+  Menu,
+  Segment,
+  Sidebar,
+} from "semantic-ui-react";
 import BodyClassName from "react-body-classname";
 // eslint-disable-next-line
 import React from "react";
 import { Discord } from "react-icons/fa";
-import { FiSun, FiMoon } from "react-icons/fi";
+import { FiSun, FiMoon, FiMenu } from "react-icons/fi";
 import vibes_logo_for_light_theme from ":/assets/img/vibes-logo-for-light-theme.png";
 import vibes_logo_for_dark_theme from ":/assets/img/vibes-logo-for-dark-theme.png";
 import ThemeContext from ":/contexts/ThemeContext";
 
 export default function Header(props) {
   const themeContext = React.useContext(ThemeContext);
+  const [sidebarVisible, setSidebarVisible] = React.useState(true);
+
   let homeURL = props.homeURL ? props.homeURL : "/";
   let portal = props.portal ? props.portal : "";
   let username = props.username ? props.username : "Account";
@@ -67,11 +78,57 @@ export default function Header(props) {
         <div className="page-width-container">
           <div className="left">
             <Link to={"/"}>
-              <img className="light-theme-only text" src={vibes_logo_for_light_theme} alt="vibes" />
-              <img className="dark-theme-only text" src={vibes_logo_for_dark_theme} alt="vibes" />
+              <img
+                className="light-theme-only text"
+                src={vibes_logo_for_light_theme}
+                alt="vibes"
+              />
+              <img
+                className="dark-theme-only text"
+                src={vibes_logo_for_dark_theme}
+                alt="vibes"
+              />
             </Link>
           </div>
-          <div className="right">
+          <div className="right mobile-only">
+            <div
+              className="icon"
+              onClick={() => setSidebarVisible(!sidebarVisible)}
+            >
+              <FiMenu />
+            </div>
+            <Sidebar
+              as={Menu}
+              animation="overlay"
+              icon="labeled"
+              inverted
+              onHide={() => setSidebarVisible(false)}
+              right
+              vertical
+              visible={sidebarVisible}
+            >
+              <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
+                Docs
+              </a>
+              <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
+                Chat with us
+              </a>
+              <a className="item" href={process.env.REACT_APP_DISCORD_BOT_URL}>
+                Add VibesBot
+              </a>
+              <div className="item">
+                <div className="theme">
+                  <div className="option light">
+                    <FiSun onClick={() => themeContext.setTheme("light")} />
+                  </div>
+                  <div className="option dark">
+                    <FiMoon onClick={() => themeContext.setTheme("dark")} />
+                  </div>
+                </div>
+              </div>
+            </Sidebar>
+          </div>
+          <div className="right desktop-only">
             <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
               Docs
             </a>
@@ -99,6 +156,25 @@ export default function Header(props) {
 }
 
 const headerCSS = css`
+  .pushable:not(body) {
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+  }
+
+  .pushable:not(body) > .ui.sidebar,
+  .pushable:not(body) > .fixed,
+  .pushable:not(body) > .pusher:after {
+    position: fixed;
+  }
+
+  .ui.visible.left.overlay.sidebar,
+  .ui.sidebar {
+    background: #2f3136;
+    width: auto;
+    box-shadow: 0px 0px 5px 4px #80808033;
+  }
+
   margin: 0px auto;
   text-align: center;
   width: 100%;
@@ -140,7 +216,6 @@ const headerCSS = css`
       color: #0f0f0f;
     }
     .right {
-      display: none;
       align-items: right;
       justify-content: space-between;
       flex-basis: 600px;
@@ -180,14 +255,55 @@ const headerCSS = css`
       }
     }
   }
+  .right.mobile-only {
+    display: initial;
+    text-align: right;
+    .icon {
+      text-align: right;
+      display: inline-block;
+      font-size: 30px;
+      padding: 8px;
+    }
+    .ui.labeled.icon.menu .item {
+      min-width: 6em;
+      flex-direction: column;
+      font-size: 20px;
+      text-align: left;
+      .theme {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        .option.dark {
+          color: #777; 
+        }
+      }
+    }
+  }
+  .right.desktop-only {
+    display: none;
+  }
+  @media (min-width: 600px) {
+    .right.mobile-only {
+      display: none;
+    }
+    .right.desktop-only {
+      display: initial;
+    }
+  }
+
   body.dark-theme & {
     .navbar {
       .right > .item {
-        color: #f2f2f2;
         .theme {
           background: #2f3136;
           border: 1px solid #f2f2f2;
           padding: 2px;
+        }
+      }
+      .right > .item,
+      .right .ui.labeled.icon.menu .item {
+        color: #f2f2f2;
+        .theme {
           .option {
             &.light {
               color: #777;
