@@ -142,7 +142,6 @@ export default function () {
             <div className="link-list">
               <p>🛠️ Build</p>
               <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Docs</a>
-              <a href="https://github.com/spot-foundation/vibes">Github</a>
               <a href={process.env.REACT_APP_DISCORD_INVITE}>Support Server</a>
             </div>
             <div className="link-list">
@@ -201,6 +200,7 @@ const CSS = css`
       justify-content: center;
     }
     .h1 {
+      color: black;
       z-index: 1;
       font-size: 40px;
       @media (min-width: 500px) {
@@ -210,13 +210,12 @@ const CSS = css`
       width: 1080px;
       max-width: 90%;
       line-height: 1.1em;
-      text-shadow: 0px 0px 2px rgb(255 255 255 / 10%),
-        0px 0px 5px rgb(255 255 255 / 3%);
     }
     .caption {
+      color: black;
       z-index: 1;
       padding-top: 20px;
-      font-weight: 300;
+      font-weight: 500;
       font-size: 21px;
       line-height: 1.2em;
       padding-bottom: 20px;
@@ -228,7 +227,7 @@ const CSS = css`
       padding: 15px 20px;
       border-radius: 8px;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 700;
       color: white;
     }
     /* customizable snowflake styling */
@@ -376,8 +375,8 @@ const CSS = css`
       text-align: left;
     }
     .vibesbot {
-      font-weight: 600px;
-      font-size: 20px;
+      font-weight: 600;
+      font-size: 18px;
       padding-bottom: 20px;
     }
     .a-powerful {
@@ -435,6 +434,7 @@ const CSS = css`
       padding-top: 20px;
       font-weight: 800;
       font-size: 38px;
+      line-height: 1.1em;
     }
   }
   .footer {
@@ -489,6 +489,11 @@ const CSS = css`
         a {
           padding-bottom: 10px;
         }
+      }
+    }
+    hero.dark-theme & {
+      .h1 {
+        color: white;
       }
     }
   }

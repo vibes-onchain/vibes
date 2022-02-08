@@ -79,7 +79,7 @@ export default function Header(props) {
               Chat with us
             </a>
             <a className="item" href={process.env.REACT_APP_DISCORD_BOT_URL}>
-              Build your bot
+              Add VibesBot
             </a>
             <div className="item">
               <div className="theme">
@@ -149,7 +149,7 @@ const headerCSS = css`
       }
     }
     .right > .item {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
       padding: 0 10px;
       color: #0f0f0f;
