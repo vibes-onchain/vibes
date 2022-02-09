@@ -35,15 +35,15 @@ async function handleVibeReaction({
       guild_id,
       member_id: from_member_id,
     });
-    await sendResponse({
-      client,
-      guild_id,
-      response: "no_vibing_vibe_commands",
-      ledger_id,
-      sending_member,
-      message,
-      reaction,
-    });
+    // await sendResponse({
+    //   client,
+    //   guild_id,
+    //   response: "no_vibing_vibe_commands",
+    //   ledger_id,
+    //   sending_member,
+    //   message,
+    //   reaction,
+    // });
     return;
   }
   if (["Vibe"].includes(entryType) && note?.trim?.().match("^!(vibe|vibes)")) {
