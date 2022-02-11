@@ -13,7 +13,7 @@ export default function distributeVibeDust({
   // console.log('DISTRIBUTING', current_time, pending_vibes)
   for (const from_user_id of Object.keys(pending_vibes)) {
     const from_user_vibe_rate = calculateUserVibeRate(current_rate, {
-      vibedust: user_vibes[from_user_id],
+      vibestack: user_vibes[from_user_id] || 0,
     });
     const pending_vibes_sent = pending_vibes[from_user_id];
     let total_pending_vibes = 0;
