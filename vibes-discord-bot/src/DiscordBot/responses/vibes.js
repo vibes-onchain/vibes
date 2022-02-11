@@ -46,6 +46,7 @@ export async function forVibeFeed({
   }`
     .replace(" ", "-")
     .toUpperCase();
+  if (vibe_level_action === 'UNKNOWN-VIBE') { vibe_level_action = 'VIBE'; }
   let reaction_emoji = reaction?.emoji?.name.match(/\p{Emoji_Presentation}/gu)
     ? reaction?.emoji
     : "✨";
