@@ -7,6 +7,7 @@ import handleReaction from "./discord/handleReaction";
 import handleSlashCommand from "./discord/handleSlashCommand";
 import readyGuilds from "./discord/readyGuilds";
 import welcomeGuildMember from "./discord/welcomeGuildMember";
+import setupNewGuild from "./multi/setupNewGuild";
 import updateSomeGuildsThisMinute from "./multi/updateSomeGuildsThisMinute";
 
 import Cron from "croner";
@@ -18,7 +19,7 @@ class DiscordBot {}
 async function setupCronJobs(client) {
   Cron("0 * * * * *", async () => {
     console.log("[CRON]", "starting minute tasks");
-    await updateSomeGuildsThisMinute({client})
+    await updateSomeGuildsThisMinute({ client });
     // await updateAllGuildsForPeriod({ client, period: "minute" });
   });
 
@@ -45,8 +46,8 @@ async function setupCronJobs(client) {
 
 async function setupListeners(client) {
   if (client.isReady()) {
-      ready_guilds = await readyGuilds(client, ready_guilds);
-      console.log("[CLIENT]", `Guilds: `, ready_guilds);
+    ready_guilds = await readyGuilds(client, ready_guilds);
+    console.log("[CLIENT]", `Guilds: `, ready_guilds);
   } else {
     client.once("ready", async () => {
       ready_guilds = await readyGuilds(client, ready_guilds);
@@ -62,6 +63,11 @@ async function setupListeners(client) {
 
   client.on("debug", (msg) => {
     console.log("[DISCORD]", msg);
+  });
+
+  client.on("guildCreate", (guild) => {
+    const guild_id = guild?.id;
+    return setupNewGuild({ client, guild_id });
   });
 
   client.on("guildMemberAdd", async (member) => {

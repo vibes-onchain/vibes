@@ -1,6 +1,7 @@
 import messageVibeFeedChannel from "../discord/messageVibeFeedChannel";
 import setVibenomics from "../spothub/setVibenomics";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
+import canControlVibesBot from "../discord/canControlVibesBot";
 
 export default async function set_vibenomics({
   client,
@@ -14,12 +15,13 @@ export default async function set_vibenomics({
   const ledger_id = ledger.id;
 
   if (
-    !member.roles.cache.some((role) => role.name === "[Can Control Vibes Bot]")
+    !(await canControlVibesBot({
+      client,
+      guild_id: guild.id,
+      member_id: member?.id,
+    }))
   ) {
-    await message.channel.send(
-      "You're not in the role [Can Control Vibes Bot], so you can't run this command."
-    );
-    return;
+    return { error: "you must be a vibesbot admin" };
   }
 
   const viberate_str = command

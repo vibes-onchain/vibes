@@ -35,13 +35,13 @@ export default async function set_user_vibes({
   if (!target_member) {
     await message_member.send(
       "ERROR: !set_user_vibes must specify receiver and amount"
-    );
+    ).catch(e => { console.log(1, e)});
     return;
   }
   if (cmd_args.length <= 1) {
     await message_member.send(
       "ERROR: !set_user_vibes must specify receiver and amount"
-    );
+    ).catch(e => { console.log(2, e)});
     return;
   }
 

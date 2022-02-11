@@ -16,10 +16,14 @@ export default async function ({ client, guild_id, member_id }) {
     !member.roles.cache.some(
       (role) => role.name === CAN_CONTROL_VIBES_BOT_ROLE.name
     )
+    && guild.ownerId !== member_id
+    && client.user.id !== member.user?.id
   ) {
     await member.send(
       `WARN: You're not in the role \`${CAN_CONTROL_VIBES_BOT_ROLE.name}\`, so you can't run this command.`
-    );
+    ).catch(e => {
+      console.log(e);
+    });
     return false;
   }
   return true;
