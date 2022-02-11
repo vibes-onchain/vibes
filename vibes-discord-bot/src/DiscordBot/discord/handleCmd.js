@@ -45,7 +45,7 @@ export default async function handleCmd({ client, message, cmd, cmd_args }) {
     return reset_all_vibes({ client, message, cmd_args });
   } else if (["set_vibenomics"].includes(cmd)) {
     return set_vibenomics({ client, message, cmd_args });
-  } else if (["set_user_vibes"].includes(cmd)) {
+  } else if (["set_user_vibes", "set_users_vibes"].includes(cmd)) {
     return set_user_vibes({ client, message, cmd_args });
   } else if (cmd === "set_vibes_nickname_template") {
     return set_vibes_nickname_template({ client, message, cmd_args });

@@ -30,6 +30,7 @@ export const GLOBAL_CMDS = [
   //
   // set_user_vibes
   "set_user_vibes",
+  "set_users_vibes",
   //
   // other
   // TODO "startvibeparty",
