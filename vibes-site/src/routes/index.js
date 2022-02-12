@@ -65,13 +65,12 @@ export default function () {
             On-chain trust for massive, open, decentralized communities
           </div>
           <div className="caption">
-            Bringing trust and reputation to web3 communities.
-            <br className="hide-from-mobile" /> Everyone has a vibe, what's
-            yours?
+            Bringing trust and reputation to web3 communities. Everyone has a vibe, what's yours?
           </div>
           <a href={process.env.REACT_APP_DISCORD_BOT_URL} className="button">
             ✨ Add to Discord ✨
           </a>
+          <a className="footnote" href="https://vibes-docs.notion.site/Vibesbot-Setup-Checklist-2406bf731ece43f9bab4ae54a214f1e4">View Bot Setup Checklist →</a>
         </div>
       </div>
       <div className="features">
@@ -179,7 +178,6 @@ const CSS = css`
     overflow: hidden;
     text-align: center;
     background-image: url(${wave_gradient});
-    background-position: center center;
     background-size: cover;
     @media (min-width: 500px) {
       background-size: contain;
@@ -189,7 +187,7 @@ const CSS = css`
     }
     .hero-container {
       width: 100%;
-      height: 600px;
+      height: 700px;
       max-height: 80vh;
       position: relative;
       z-index: 1;
@@ -200,7 +198,6 @@ const CSS = css`
       justify-content: center;
     }
     .h1 {
-      color: black;
       z-index: 1;
       font-size: 40px;
       @media (min-width: 500px) {
@@ -212,13 +209,14 @@ const CSS = css`
       line-height: 1.1em;
     }
     .caption {
-      color: black;
       z-index: 1;
       padding-top: 20px;
       font-weight: 500;
       font-size: 21px;
       line-height: 1.2em;
       padding-bottom: 20px;
+      width: 465px;
+      max-width: 80%;
     }
     .button {
       z-index: 1;
@@ -229,6 +227,12 @@ const CSS = css`
       font-size: 18px;
       font-weight: 700;
       color: white;
+    }
+    .footnote {
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 10px;
+      z-index: 1;
     }
     /* customizable snowflake styling */
     .snowflakes {
@@ -491,10 +495,9 @@ const CSS = css`
         }
       }
     }
-    hero.dark-theme & {
-      .h1 {
-        color: white;
-      }
-    }
+  }
+
+  body.dark-theme & {
+    h1 { color: white; }
   }
 `;
