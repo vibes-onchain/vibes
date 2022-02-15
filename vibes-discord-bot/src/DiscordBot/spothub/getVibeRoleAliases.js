@@ -3,12 +3,12 @@ import findOrCreateLedgerForGuild from "./findOrCreateLedgerForGuild";
 export default async function getVibeRoleAliases({guild_id}) {
   const ledger = await findOrCreateLedgerForGuild(guild_id);
   const role_aliases = {
-    "OG Vibe": ledger.meta?.["vibes:role_alias:OG Vibe"],
-    "Legendary Vibe": ledger.meta?.["vibes:role_alias:Legendary Vibe"],
-    "Epic Vibe": ledger.meta?.["vibes:role_alias:Epic Vibe"],
-    "Rare Vibe": ledger.meta?.["vibes:role_alias:Rare Vibe"],
-    "Frenly Vibe": ledger.meta?.["vibes:role_alias:Frenly Vibe"],
-    "Sus Vibe": ledger.meta?.["vibes:role_alias:Sus Vibe"],
+    "OG Vibes": ledger.meta?.["vibes:role_alias:OG Vibes"],
+    "Legendary Vibes": ledger.meta?.["vibes:role_alias:Legendary Vibes"],
+    "Epic Vibes": ledger.meta?.["vibes:role_alias:Epic Vibes"],
+    "Rare Vibes": ledger.meta?.["vibes:role_alias:Rare Vibes"],
+    "Frenly Vibes": ledger.meta?.["vibes:role_alias:Frenly Vibes"],
+    "Sus Vibse": ledger.meta?.["vibes:role_alias:Sus Vibes"],
   };
   return role_aliases;
 }

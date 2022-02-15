@@ -48,14 +48,14 @@ export default function () {
 
   const vibe_role_names = (() => {
     return {
-      "OG Vibe": ledger?.meta?.["vibes:role_alias:OG Vibe"] || "OG Vibe",
-      "Legendary Vibe":
-        ledger?.meta?.["vibes:role_alias:Legendary Vibe"] || "Legendary Vibe",
-      "Epic Vibe": ledger?.meta?.["vibes:role_alias:Epic Vibe"] || "Epic Vibe",
-      "Rare Vibe": ledger?.meta?.["vibes:role_alias:Rare Vibe"] || "Rare Vibe",
-      "Frenly Vibe":
-        ledger?.meta?.["vibes:role_alias:Frenly Vibe"] || "Frenly Vibe",
-      "Sus Vibe": ledger?.meta?.["vibes:role_alias:Sus Vibe"] || "Sus Vibe",
+      "OG Vibes": ledger?.meta?.["vibes:role_alias:OG Vibes"] || "OG Vibes",
+      "Legendary Vibes":
+        ledger?.meta?.["vibes:role_alias:Legendary Vibes"] || "Legendary Vibes",
+      "Epic Vibes": ledger?.meta?.["vibes:role_alias:Epic Vibes"] || "Epic Vibes",
+      "Rare Vibes": ledger?.meta?.["vibes:role_alias:Rare Vibes"] || "Rare Vibes",
+      "Frenly Vibes":
+        ledger?.meta?.["vibes:role_alias:Frenly Vibes"] || "Frenly Vibes",
+      "Sus Vibes": ledger?.meta?.["vibes:role_alias:Sus Vibes"] || "Sus Vibes",
     };
   })();
 

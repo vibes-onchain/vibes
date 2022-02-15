@@ -23,12 +23,12 @@ function description({ emojis, ledger_id }) {
 
   **VIBE LEVELS**
                     \`   VIBELEVEL              VIBESTACK\`
-  :warning:                \`Sus Vibe               negative\`
-  :green_square:           \`Frenly Vibe            positive\`
-  :blue_square:            \`Rare Vibe              69.15 - 84.15 %tile\`
-  :purple_square:          \`Epic Vibe              84.15 - 93.32 %tile\`
-  :orange_square:          \`Legendary Vibe         93.32 - 97.72 %tile\`
-  :yellow_square:          \`OG Vibe                97.72 - 99.99 %tile\`
+  :warning:                \`Sus Vibes              negative\`
+  :green_square:           \`Frenly Vibes           positive\`
+  :blue_square:            \`Rare Vibes             69.15 - 84.15 %tile\`
+  :purple_square:          \`Epic Vibes             84.15 - 93.32 %tile\`
+  :orange_square:          \`Legendary Vibes        93.32 - 97.72 %tile\`
+  :yellow_square:          \`OG Vibes               97.72 - 99.99 %tile\`
   
   **DEEP VIBES**
   :clipboard: full tx logs on **[vibescan.io](https://vibescan.io/ledger/${ledger_id}/entries)**

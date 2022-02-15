@@ -71,17 +71,17 @@ export function forVibeFeed({
   }
 
   const vibeLevelEmoji = (() => {
-    if (receiving_member.vibe_level_name === "Sus Vibe") {
+    if (receiving_member.vibe_level_name === "Sus Vibes") {
       return ":warning:";
-    } else if (receiving_member.vibe_level_name === "OG Vibe") {
+    } else if (receiving_member.vibe_level_name === "OG Vibes") {
       return ":yellow_square:";
-    } else if (receiving_member.vibe_level_name === "Legendary Vibe") {
+    } else if (receiving_member.vibe_level_name === "Legendary Vibes") {
       return ":orange_square:";
-    } else if (receiving_member.vibe_level_name === "Epic Vibe") {
+    } else if (receiving_member.vibe_level_name === "Epic Vibes") {
       return ":purple_square:";
-    } else if (receiving_member.vibe_level_name === "Rare Vibe") {
+    } else if (receiving_member.vibe_level_name === "Rare Vibes") {
       return ":blue_square:";
-    } else if (receiving_member.vibe_level_name === "Frenly Vibe") {
+    } else if (receiving_member.vibe_level_name === "Frenly Vibes") {
       return ":green_square:";
     } else {
       return ":green_square:";
