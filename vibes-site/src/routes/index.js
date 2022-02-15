@@ -23,54 +23,37 @@ import legendary_sparkle from ":/assets/img/legendary.png";
 import og_sparkle from ":/assets/img/og.png";
 
 export default function () {
+  React.useEffect(() => {
+    setTimeout(() => {
+      const els = document.getElementsByClassName("with-vibes-cursor");
+      for (const element of els) {
+        window.vibesCursor?.({ element });
+      }
+    }, 1500);
+  });
+
   return (
     <div css={CSS}>
       <Header />
-      <div className="hero">
+      <div className="hero with-vibes-cursor">
         {/* <img className="cover-wave" src={wave_gradient} alt="cover" /> */}
         <div className="hero-container">
-          <div className="snowflakes" aria-hidden="true">
-            <div className="snowflake">
-              <img src={epic_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={rare_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={legendary_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={og_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={epic_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={rare_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={legendary_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={og_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={epic_sparkle} />
-            </div>
-            <div className="snowflake">
-              <img src={rare_sparkle} />
-            </div>
-          </div>
           <div className="h1">
             On-chain trust for massive, open, decentralized communities
           </div>
           <div className="caption">
-            Bringing trust and reputation to web3 communities. Everyone has a vibe, what's yours?
+            Bringing trust and reputation to web3 communities. Everyone has a
+            vibe, what's yours?
           </div>
           <a href={process.env.REACT_APP_DISCORD_BOT_URL} className="button">
             ✨ Add to Discord ✨
           </a>
-          <a className="footnote" href="https://vibes-docs.notion.site/Vibesbot-Setup-Checklist-2406bf731ece43f9bab4ae54a214f1e4">View Bot Setup Checklist →</a>
+          <a
+            className="footnote"
+            href="https://vibes-docs.notion.site/Vibesbot-Setup-Checklist-2406bf731ece43f9bab4ae54a214f1e4"
+          >
+            View Bot Setup Checklist →
+          </a>
         </div>
       </div>
       <div className="features">
@@ -370,6 +353,7 @@ const CSS = css`
   }
   .features {
     background: #33363a;
+    position: relative;
     .features-container {
       width: calc(100% - 50px);
       max-width: 1200px;
@@ -498,6 +482,8 @@ const CSS = css`
   }
 
   body.dark-theme & {
-    h1 { color: white; }
+    h1 {
+      color: white;
+    }
   }
 `;

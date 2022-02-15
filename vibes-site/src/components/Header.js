@@ -211,7 +211,7 @@ const headerCSS = css`
       align-items: stretch;
       justify-content: space-between;
       flex-direction: row;
-      @media (min-width: 600px) {
+      @media (min-width: 860px) {
         flex-direction: row;
         > .left {
           flex-grow: 0;
@@ -247,7 +247,7 @@ const headerCSS = css`
       align-items: right;
       justify-content: space-between;
       flex-basis: 600px;
-      @media (min-width: 600px) {
+      @media (min-width: 860px) {
         display: flex;
       }
     }
@@ -328,7 +328,7 @@ const headerCSS = css`
   .right.desktop-only {
     display: none;
   }
-  @media (min-width: 600px) {
+  @media (min-width: 860px) {
     .center.desktop-only,
     .right.mobile-only {
       display: none;
