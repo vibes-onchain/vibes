@@ -15,7 +15,7 @@ import {
 import BodyClassName from "react-body-classname";
 // eslint-disable-next-line
 import React from "react";
-import { Discord } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 import { FiSun, FiMoon, FiMenu } from "react-icons/fi";
 import vibes_logo_for_light_theme from ":/assets/img/vibes-logo-for-light-theme.png";
 import vibes_logo_for_dark_theme from ":/assets/img/vibes-logo-for-dark-theme.png";
@@ -90,6 +90,31 @@ export default function Header(props) {
               />
             </Link>
           </div>
+          <div className="center desktop-only">
+            <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
+              Docs
+            </a>
+            <a className="item" href={"/"}>
+              Communities
+            </a>
+            <a className="item" href={"/"}>
+              VAO
+            </a>
+            <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
+              <FaDiscord className="icon" /> Chat with us
+            </a>
+            <div className="item">
+              <div className="theme">
+                <div className="option light">
+                  <FiSun onClick={() => themeContext.setTheme("light")} />
+                </div>
+                <div className="option dark">
+                  <FiMoon onClick={() => themeContext.setTheme("dark")} />
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="right mobile-only">
             <div
               className="icon"
@@ -110,6 +135,9 @@ export default function Header(props) {
               <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
                 Docs
               </a>
+              <a className="item" href={"/vao"}>
+                VAO
+              </a>
               <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
                 Chat with us
               </a>
@@ -129,25 +157,14 @@ export default function Header(props) {
             </Sidebar>
           </div>
           <div className="right desktop-only">
-            <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
-              Docs
-            </a>
-            <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
-              Chat with us
-            </a>
-            <a className="item" href={process.env.REACT_APP_DISCORD_BOT_URL}>
-              Add VibesBot
-            </a>
-            <div className="item">
-              <div className="theme">
-                <div className="option light">
-                  <FiSun onClick={() => themeContext.setTheme("light")} />
-                </div>
-                <div className="option dark">
-                  <FiMoon onClick={() => themeContext.setTheme("dark")} />
-                </div>
+            <a
+              className="item button-holder"
+              href={process.env.REACT_APP_DISCORD_BOT_URL}
+            >
+              <div className="button">
+                Add to Discord
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -196,12 +213,22 @@ const headerCSS = css`
       flex-direction: row;
       @media (min-width: 600px) {
         flex-direction: row;
+        > .left {
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 150px;
+        }
+        > .center {
+          flex-grow: 1;
+          display: flex;
+          justify-content: center;
+        }
+        > .right {
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 150px;
+        }
       }
-    }
-    .left {
-      flex-basis: 300px;
-      flex-grow: 0;
-      flex-shrink: 1;
     }
     .left a {
       display: flex;
@@ -210,6 +237,7 @@ const headerCSS = css`
       img {
         margin-right: 5px;
         height: 21px;
+        max-width: none;
       }
       font-size: 28px;
       font-weight: 800;
@@ -223,18 +251,21 @@ const headerCSS = css`
         display: flex;
       }
     }
-    .right > .item {
-      font-size: 16px;
+    .center > .item {
+      font-size: 15px;
       font-weight: 700;
-      padding: 0 10px;
+      padding: 0 20px;
       color: #0f0f0f;
       display: flex;
       align-items: center;
       border-radius: none;
-      flex-grow: 1;
+      flex-grow: 0;
       text-align: center;
       justify-content: center;
       cursor: pointer;
+      .icon {
+        margin-right: 5px;
+      }
       .theme {
         text-align: left;
         justify-content: left;
@@ -252,6 +283,20 @@ const headerCSS = css`
             color: #2f3136;
           }
         }
+      }
+    }
+    .right > .item.button-holder {
+      display: inline-flex;
+      vertical-align: middle;
+      margin: 5px 5px;
+      font-size: 15px;
+      font-weight: bold;
+      align-content: flex-end;
+      align-items: center;
+      .button {
+        border-radius: 15px;
+        padding: 8px 18px;
+        background: #bebebe3b;
       }
     }
   }
@@ -274,18 +319,21 @@ const headerCSS = css`
         justify-content: space-between;
         flex-direction: row;
         .option.dark {
-          color: #777; 
+          color: #777;
         }
       }
     }
   }
+  .center.desktop-only,
   .right.desktop-only {
     display: none;
   }
   @media (min-width: 600px) {
+    .center.desktop-only,
     .right.mobile-only {
       display: none;
     }
+    .center.desktop-only,
     .right.desktop-only {
       display: flex;
     }
@@ -293,6 +341,7 @@ const headerCSS = css`
 
   body.dark-theme & {
     .navbar {
+      .center > .item,
       .right > .item {
         .theme {
           background: #2f3136;
@@ -300,7 +349,9 @@ const headerCSS = css`
           padding: 2px;
         }
       }
+      .center > .item,
       .right > .item,
+      .center .ui.labeled.icon.menu .item,
       .right .ui.labeled.icon.menu .item {
         color: #f2f2f2;
         .theme {
