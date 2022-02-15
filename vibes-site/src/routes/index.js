@@ -115,31 +115,7 @@ export default function () {
           <div>Give Vibes a try on Discord ➝</div>
         </a>
       </div>
-      <div className="footer">
-        <div className="page-container">
-          <div className="logo">
-            <img className="icon" src={spotchain_logo} /> Powered by Spotchain
-          </div>
-          <div className="link-lists">
-            <div className="link-list">
-              <p>🛠️ Build</p>
-              <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Docs</a>
-              <a href={process.env.REACT_APP_DISCORD_INVITE}>Support Server</a>
-            </div>
-            <div className="link-list">
-              <p>🌎 Connect</p>
-              <a href="https://twitter.com/vibesonchain">Twitter</a>
-              <a href={process.env.REACT_APP_DISCORD_INVITE}>Discord</a>
-            </div>
-            {/* <div className="link-list"> */}
-            {/* <p>👤 Team</p> */}
-            {/* <a href={process.env.REACT_APP_VIBES_DOCS_URL}>Team</a> */}
-            {/* <a href="/">Terms of Use</a>
-              <a href="/">Privacy Policy</a> */}
-            {/* </div> */}
-          </div>
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 }
