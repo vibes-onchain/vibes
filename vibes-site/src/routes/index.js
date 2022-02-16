@@ -426,18 +426,25 @@ const CSS = css`
         }
         .name {
           color: white;
-          font-size: 22px;
-      @media (min-width: 600px) {
-        font-size: 27px;
-      }
+          font-size: 18px;
+          @media (min-width: 450px) {
+            font-size: 20px;
+          }
+          @media (min-width: 600px) {
+            font-size: 27px;
+          }
           line-height: 1.4em;
         }
         .link {
           margin-top: 10px;
           a {
-            font-size: 20px;
+            font-size: 16px;
+            padding: 12px 8px;
+            @media (min-width: 600px) {
+              font-size: 20px;
+              padding: 20px 8px;
+            }
             color: white;
-            padding: 20px 8px;
             display: inline-block;
             width: calc(100% - 50px);
             max-width: 300px;
