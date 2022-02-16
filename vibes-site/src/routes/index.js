@@ -32,6 +32,8 @@ import vibecheck from ":/assets/img/vibecheck.png";
 import vibesribbon from ":/assets/img/vibes-ribbon.png";
 import vibesicon from ":/assets/img/vibes-hand.png";
 
+import pixel_png from ":/assets/img/pixel.png";
+
 import TextTransition, { presets } from "react-text-transition";
 
 const WHATS = [
@@ -190,55 +192,50 @@ export default function () {
       </div>
       <div className="features">
         <div className="features-container">
-          <div className="vibesbot">✨🤖 VibesBot</div>
-          <div className="a-powerful">
-            A powerful way to moderate and grow your web3 community
-          </div>
           <div className="items">
             <div className="item">
-              <div className="icon">
-                <img src={vibenomics} />
-              </div>
-              <div className="title">Vibenomics</div>
+              <div className="title">Decentralized appreciation</div>
               <div className="text">
-                Not tokens, not XP. Vibes let your community socially recognize
-                members for being cool with a vibenomic policy set by you or
-                your DAO.
+                Let your community recognize and promote others for good !vibes.
+                Come for the art, stay for the vibes.
+              </div>
+              <div className="image">
+                <img src={pixel_png} />
               </div>
             </div>
             <div className="item">
-              <div className="icon">
-                <img src={demod} />
-              </div>
-              <div className="title">Decentralized moderation</div>
+              <div className="title">Scale your culture</div>
               <div className="text">
-                Stop scammers without burning your mods out. Vibes give your
-                community progressively decentralized moderation.
+                Establish and grow your culture. Custom vibe commands, emoji
+                reacts, and levels let's your community define its values.
+              </div>
+              <div className="image">
+                <img src={pixel_png} />
               </div>
             </div>
             <div className="item">
-              <div className="icon">
-                <img src={integrations} />
-              </div>
-              <div className="title">Cross platform integrations</div>
+              <div className="title">Scammers &amp; spammers NGMI</div>
               <div className="text">
-                Plug into your Discord, Telegram, Discourse, or custom app. Your
-                community can take their vibes with them wherever they go.
+                Give your community the power to protect each other by giving
+                them the tools to flag and timeout suspicious actors.
+              </div>
+              <div className="image">
+                <img src={pixel_png} />
               </div>
             </div>
             <div className="item">
-              <div className="icon">
-                <img src={vibecheck} />
-              </div>
-              <div className="title">Onchain vibechecks</div>
+              <div className="title">Onchain + cross platform</div>
               <div className="text">
-                Vibes live as append only entries on your community's ledger.
-                Vibechecks let you pull up historical interactions.
+                Use Vibes on your Discord, Discourse, DAO proposal system, and
+                more. Your community's vibes are onchain and go where you go.
+              </div>
+              <div className="image">
+                <img src={pixel_png} />
               </div>
             </div>
           </div>
         </div>
-        <img src={vibesribbon} />
+        <img src={vibesribbon} className="ribbon" />
       </div>
       <div className="give-vibes-a-try">
         <a href={process.env.REACT_APP_DISCORD_BOT_URL}>
@@ -463,40 +460,28 @@ const CSS = css`
       width: calc(100% - 50px);
       max-width: 1200px;
       margin: 0 auto;
-      padding: 80px 0;
+      padding: 20px 0;
       color: white;
       text-align: left;
-    }
-    .vibesbot {
-      font-weight: 600;
-      font-size: 18px;
-      padding-bottom: 20px;
-    }
-    .a-powerful {
-      font-size: 45px;
-      font-weight: 800;
-      line-height: 1.1em;
-      width: 760px;
-      max-width: 100%;
-      padding-bottom: 40px;
     }
     .items {
       display: flex;
       flex-wrap: wrap;
       @media (min-width: 600px) {
-        margin: -50px;
+        justify-content: space-around;
       }
     }
     .item {
       flex-basis: 400px;
       box-sizing: border-box;
-      padding: 50px;
+      padding: 10px;
       .icon {
         width: 135px;
       }
       .title {
-        padding-top: 20px;
-        line-height: 3em;
+        font-family: sharp_groteskbook_25, sans-serif;
+        padding-bottom: 20px;
+        line-height: 1.5em;
         font-weight: 700;
         font-size: 20px;
       }
@@ -507,6 +492,9 @@ const CSS = css`
         letter-spacing: 0.02em;
         line-height: 1.3em;
       }
+    }
+    .ribbon {
+      padding-bottom: 40px;
     }
   }
   .give-vibes-a-try {
