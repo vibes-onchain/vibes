@@ -8,11 +8,22 @@ import { Popup, Button } from "semantic-ui-react";
 import Footer from ":/components/Footer";
 import Header from ":/components/Header";
 import { responsiveSize } from ":/lib/CssHelpers";
+import { Swiper, SwiperSlide } from "swiper/react/swiper-react";
+import { Autoplay } from "swiper";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
+import { useWindowWidth } from "@react-hook/window-size";
 
 import hero_bg from ":/assets/img/homepage/hero-bg.png";
 import hero_gradient from ":/assets/img/homepage/hero-gradient.jpg";
 import vao1_img from ":/assets/img/homepage/vao-1.png";
 import vao1pg_img from ":/assets/img/homepage/vao-1-pg.png";
+
+// featured communities
+import pg_card from ":/assets/img/homepage/peaceful-groupies-card.png";
+import rare_bunni_card from ":/assets/img/homepage/rare-bunni-card.png";
+import monsterbuds_card from ":/assets/img/homepage/monsterbuds-card.png";
+import kaddex_card from ":/assets/img/homepage/kaddex-card.png";
 
 import vibenomics from ":/assets/img/vibenomics.png";
 import demod from ":/assets/img/demod.png";
@@ -33,6 +44,7 @@ const WHATS = [
 ];
 
 export default function () {
+  const windowWidth = useWindowWidth();
   const [whatIndex, setWhatIndex] = React.useState(0);
 
   React.useEffect(() => {
@@ -95,6 +107,87 @@ export default function () {
           </div>
         </div>
       </div>
+      <div className="featured-communities">
+        <div className="communities-with">
+          <span className="desktop-only">✨</span> Communities with{" "}
+          <span className="mobile-only">
+            <br /> ✨
+          </span>{" "}
+          Good Vibes ✨
+        </div>
+        <div className="communities">
+          <Swiper
+            slidesPerView={windowWidth > 1200 ? 4 : 2.25}
+            centeredSlides={true}
+            spaceBetween={30}
+            loop={windowWidth > 1200 ? true : true}
+            loopFillGroupWithBlank={true}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
+            modules={[Autoplay]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <div className="community">
+                <div className="image">
+                  <img src={pg_card} />
+                </div>
+                <div className="name">Peaceful Groupies</div>
+                <div className="link">
+                  <Link
+                    to={`/ledger/e9b405c56ee449c08030bae7672f1523dabdcf1693ab14b7c30202a7cd90099f`}
+                  >
+                    View
+                  </Link>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="community">
+                <div className="image">
+                  <img src={rare_bunni_card} />
+                </div>
+                <div className="name">Rare Bunni Club</div>
+                <div className="link">
+                  <Link
+                    to={`/ledger/3bfc1525c9a841336e5b1aa2fa01d1c69cf4d6d986ad9196499b87e061a4b6ec`}
+                  >
+                    View
+                  </Link>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="community">
+                <div className="image">
+                  <img src={monsterbuds_card} />
+                </div>
+                <div className="name">Monsterbuds</div>
+                <div className="link">
+                  <Link
+                    to={`/ledger/736682de98365d886397ec43ee2e2947889b7ae0855938335447d6e0b0ffe1bf`}
+                  >
+                    View
+                  </Link>
+                </div>
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="community">
+                <div className="image">
+                  <img src={kaddex_card} />
+                </div>
+                <div className="name">Kaddex</div>
+                <div className="link">
+                  <Link to={`/ledger/${1}`}>View</Link>
+                </div>
+              </div>
+            </SwiperSlide>
+          </Swiper>
+        </div>
+      </div>
       <div className="features">
         <div className="features-container">
           <div className="vibesbot">✨🤖 VibesBot</div>
@@ -147,7 +240,6 @@ export default function () {
         </div>
         <img src={vibesribbon} />
       </div>
-      <div className="communities"></div>
       <div className="give-vibes-a-try">
         <a href={process.env.REACT_APP_DISCORD_BOT_URL}>
           <img src={vibesicon} />
@@ -220,7 +312,7 @@ const CSS = css`
     }
     .h1 {
       color: white;
-      font-family: sharp_groteskbook_25, sans;
+      font-family: sharp_groteskbook_25, sans-serif;
       z-index: 1;
       font-size: 27px;
       font-size: ${responsiveSize({
@@ -295,6 +387,68 @@ const CSS = css`
       }
     }
   }
+
+  .featured-communities {
+    background: #202128;
+    padding: 20px 0;
+    .communities-with {
+      color: white;
+      font-size: 28px;
+      line-height: 1.2em;
+      font-family: sharp_groteskbook_25, sans-serif;
+      padding-bottom: 20px;
+      padding-bottom: 20px;
+      .desktop-only {
+        display: none;
+      }
+      @media (min-width: 860px) {
+        .desktop-only {
+          display: initial;
+        }
+        .mobile-only {
+          display: none;
+        }
+      }
+    }
+    .communities {
+      .slick-track {
+        display: flex;
+      }
+      .community {
+        .image {
+          width: 100%;
+          max-width: 100%;
+          text-align: center;
+          img {
+            display: inline-block;
+            max-height: 400px;
+          }
+        }
+        .name {
+          color: white;
+          font-size: 22px;
+      @media (min-width: 600px) {
+        font-size: 27px;
+      }
+          line-height: 1.4em;
+        }
+        .link {
+          margin-top: 10px;
+          a {
+            font-size: 20px;
+            color: white;
+            padding: 20px 8px;
+            display: inline-block;
+            width: calc(100% - 50px);
+            max-width: 300px;
+            border: 1px solid #fafafa;
+            border-radius: 20px;
+          }
+        }
+      }
+    }
+  }
+
   .features {
     background: #33363a;
     position: relative;
@@ -347,10 +501,6 @@ const CSS = css`
         line-height: 1.3em;
       }
     }
-  }
-  .communities {
-    background: #33363a;
-    padding: 60px;
   }
   .give-vibes-a-try {
     padding-top: 50px;
