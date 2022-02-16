@@ -10,6 +10,9 @@ import Header from ":/components/Header";
 import { responsiveSize } from ":/lib/CssHelpers";
 
 import hero_bg from ":/assets/img/homepage/hero-bg.png";
+import hero_gradient from ":/assets/img/homepage/hero-gradient.jpg";
+import vao1_img from ":/assets/img/homepage/vao-1.png";
+import vao1pg_img from ":/assets/img/homepage/vao-1-pg.png";
 
 import vibenomics from ":/assets/img/vibenomics.png";
 import demod from ":/assets/img/demod.png";
@@ -34,7 +37,7 @@ export default function () {
 
   React.useEffect(() => {
     const intervalId = setInterval(
-      () => setWhatIndex((index) => (index + 1 % WHATS.length)),
+      () => setWhatIndex((index) => index + (1 % WHATS.length)),
       3000 // every 3 seconds
     );
     return () => clearTimeout(intervalId);
@@ -55,31 +58,40 @@ export default function () {
       <div className="hero with-vibes-cursor">
         {/* <img className="cover-wave" src={wave_gradient} alt="cover" /> */}
         <div className="hero-container">
-          <div className="h1">
-            <span className="what">
-              {" "}
-              <TextTransition
-                text={WHATS[whatIndex % WHATS.length]}
-                springConfig={presets.default}
-              />
-            </span>
-            <span className="is-better"> is better with vibes</span>
+          <div className="text-part">
+            <div className="h1">
+              <span className="what">
+                {" "}
+                <TextTransition
+                  text={WHATS[whatIndex % WHATS.length]}
+                  springConfig={presets.default}
+                />
+              </span>
+              <span className="is-better"> is better with vibes</span>
+            </div>
+            <div className="caption">
+              VibesBot unlocks onchain vibe signals in your NFT, crypto, and
+              web3 community.
+            </div>
+            <div className="ctas">
+              <a
+                href={process.env.REACT_APP_DISCORD_BOT_URL}
+                className="button rainbow-button"
+              >
+                <div className="shadow"></div>
+                <div className="text">
+                  🤙 Add to Discord &nbsp;&nbsp;&nbsp;✨
+                </div>
+              </a>
+              <a className="read-setup" href="/docs">
+                Read Setup Checklist →
+              </a>
+            </div>
           </div>
-          <div className="caption">
-            VibesBot unlocks onchain vibe signals in your NFT, crypto, and web3
-            community.
-          </div>
-          <div className="ctas">
-            <a
-              href={process.env.REACT_APP_DISCORD_BOT_URL}
-              className="button rainbow-button"
-            >
-              <div className="shadow"></div>
-              <div className="text">🤙 Add to Discord &nbsp;&nbsp;&nbsp;✨</div>
-            </a>
-            <a className="read-setup" href="/docs">
-              Read Setup Checklist →
-            </a>
+          <div className="image-part">
+            <div className="first-vao">
+              <img src={vao1_img} />
+            </div>
           </div>
         </div>
       </div>
@@ -172,13 +184,14 @@ const CSS = css`
     background-position: center bottom;
     .hero-container {
       margin: 0 auto;
+      padding-top: 80px;
       width: 1200px;
       max-width: calc(100% - 40px);
       @media (min-width: 600px) {
         max-width: calc(100% - 80px);
       }
-      height: 700px;
-      max-height: 80vh;
+      /* height: 700px; */
+      /* max-height: 80vh; */
       position: relative;
       z-index: 1;
       display: flex;
@@ -186,6 +199,24 @@ const CSS = css`
       align-content: center;
       flex-direction: column;
       justify-content: center;
+      > .text-part {
+        max-width: 100%;
+      }
+      > .image-part {
+        max-width: 100%;
+      }
+      @media (min-width: 860px) {
+        flex-direction: row;
+        align-items: center;
+        > .text-part {
+          flex-basis: 50%;
+          width: 50%;
+        }
+        > .image-part {
+          flex-basis: 50%;
+          width: 50%;
+        }
+      }
     }
     .h1 {
       color: white;
