@@ -252,14 +252,14 @@ body.dark-theme .lds-ellipsis div {
   }
 }
 
-body:not(.color-scheme-dark) {
+body:not(.dark-theme) {
   background: white;
   color: #333;
 }
-body:not(.color-scheme-dark) .light-theme-only {
+body:not(.dark-theme) .light-theme-only {
   display: inherit;
 }
-body:not(.color-scheme-dark) .dark-theme-only {
+body:not(.dark-theme) .dark-theme-only {
   display: none;
 }
 

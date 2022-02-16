@@ -73,7 +73,7 @@ export default function Header(props) {
   };
 
   return (
-    <div css={headerCSS}>
+    <div className={`Header ${props.className}`} css={headerCSS}>
       <div className="navbar">
         <div className="page-width-container">
           <div className="left">
@@ -128,8 +128,8 @@ export default function Header(props) {
               icon="labeled"
               inverted
               onHide={() => setSidebarVisible(false)}
-              right
-              vertical
+              right={1}
+              vertical={true}
               visible={sidebarVisible}
             >
               <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
@@ -161,9 +161,7 @@ export default function Header(props) {
               className="item button-holder"
               href={process.env.REACT_APP_DISCORD_BOT_URL}
             >
-              <div className="button">
-                Add to Discord
-              </div>
+              <div className="button">Add to Discord</div>
             </a>
           </div>
         </div>
@@ -269,7 +267,8 @@ const headerCSS = css`
       .theme {
         text-align: left;
         justify-content: left;
-        border: 1px solid #f2f2f2;
+        background: #bebebe3b;
+        border: 1px solid #f2f2f200;
         border-radius: 20px;
         padding: 2px;
         .option {
@@ -339,6 +338,19 @@ const headerCSS = css`
     }
   }
 
+  // dark-theme or override
+  body.dark-theme &,
+  &.dark-theme {
+    .navbar {
+      .center > .item,
+      .right > .item,
+      .center .ui.labeled.icon.menu .item,
+      .right .ui.labeled.icon.menu .item {
+        color: #f2f2f2;
+      }
+    }
+  }
+  // dark-theme only
   body.dark-theme & {
     .navbar {
       .center > .item,
@@ -353,7 +365,6 @@ const headerCSS = css`
       .right > .item,
       .center .ui.labeled.icon.menu .item,
       .right .ui.labeled.icon.menu .item {
-        color: #f2f2f2;
         .theme {
           .option {
             &.light {

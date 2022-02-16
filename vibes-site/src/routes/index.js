@@ -7,8 +7,9 @@ import BackendContext from ":/contexts/BackendContext";
 import { Popup, Button } from "semantic-ui-react";
 import Footer from ":/components/Footer";
 import Header from ":/components/Header";
+import { responsiveSize } from ":/lib/CssHelpers";
 
-import wave_gradient from ":/assets/img/wave-gradient-seamless.png";
+import hero_bg from ":/assets/img/homepage/hero-bg.png";
 
 import vibenomics from ":/assets/img/vibenomics.png";
 import demod from ":/assets/img/demod.png";
@@ -16,13 +17,29 @@ import integrations from ":/assets/img/integrations.png";
 import vibecheck from ":/assets/img/vibecheck.png";
 import vibesribbon from ":/assets/img/vibes-ribbon.png";
 import vibesicon from ":/assets/img/vibes-hand.png";
-import spotchain_logo from ":/assets/img/spotchain.png";
-import epic_sparkle from ":/assets/img/epic.png";
-import rare_sparkle from ":/assets/img/rare.png";
-import legendary_sparkle from ":/assets/img/legendary.png";
-import og_sparkle from ":/assets/img/og.png";
+
+import TextTransition, { presets } from "react-text-transition";
+
+const WHATS = [
+  "Decentralization",
+  "Your DAO",
+  "Your Whitelist",
+  "Moderation",
+  "Governance",
+  "Discord",
+];
 
 export default function () {
+  const [whatIndex, setWhatIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    const intervalId = setInterval(
+      () => setWhatIndex((index) => (index + 1 % WHATS.length)),
+      3000 // every 3 seconds
+    );
+    return () => clearTimeout(intervalId);
+  }, []);
+
   React.useEffect(() => {
     setTimeout(() => {
       const els = document.getElementsByClassName("with-vibes-cursor");
@@ -30,30 +47,40 @@ export default function () {
         window.vibesCursor?.({ element });
       }
     }, 1500);
-  });
+  }, []);
 
   return (
     <div css={CSS}>
-      <Header />
+      <Header className={"dark-theme"} />
       <div className="hero with-vibes-cursor">
         {/* <img className="cover-wave" src={wave_gradient} alt="cover" /> */}
         <div className="hero-container">
           <div className="h1">
-            On-chain trust for massive, open, decentralized communities
+            <span className="what">
+              {" "}
+              <TextTransition
+                text={WHATS[whatIndex % WHATS.length]}
+                springConfig={presets.default}
+              />
+            </span>
+            <span className="is-better"> is better with vibes</span>
           </div>
           <div className="caption">
-            Bringing trust and reputation to web3 communities. Everyone has a
-            vibe, what's yours?
+            VibesBot unlocks onchain vibe signals in your NFT, crypto, and web3
+            community.
           </div>
-          <a href={process.env.REACT_APP_DISCORD_BOT_URL} className="button">
-            ✨ Add to Discord ✨
-          </a>
-          <a
-            className="footnote"
-            href="https://vibes-docs.notion.site/Vibesbot-Setup-Checklist-2406bf731ece43f9bab4ae54a214f1e4"
-          >
-            View Bot Setup Checklist →
-          </a>
+          <div className="ctas">
+            <a
+              href={process.env.REACT_APP_DISCORD_BOT_URL}
+              className="button rainbow-button"
+            >
+              <div className="shadow"></div>
+              <div className="text">🤙 Add to Discord &nbsp;&nbsp;&nbsp;✨</div>
+            </a>
+            <a className="read-setup" href="/docs">
+              Read Setup Checklist →
+            </a>
+          </div>
         </div>
       </div>
       <div className="features">
@@ -127,204 +154,114 @@ const CSS = css`
   overflow: hidden;
   font-family: "Cabin", sans-serif;
 
+  .Header {
+    position: absolute;
+    z-index: 10;
+  }
+
   .hero {
     display: block;
     box-sizing: border-box;
-    top: 0px;
     left: 0px;
     width: 100%;
     height: 100%;
     overflow: hidden;
     text-align: center;
-    background-image: url(${wave_gradient});
-    background-size: cover;
-    @media (min-width: 500px) {
-      background-size: contain;
-      background-repeat-x: repeat;
-      background-position: center bottom;
-      background-repeat-y: no-repeat;
-    }
+    background-image: url(${hero_bg});
+    background-size: 100% 100%;
+    background-position: center bottom;
     .hero-container {
-      width: 100%;
+      margin: 0 auto;
+      width: 1200px;
+      max-width: calc(100% - 40px);
+      @media (min-width: 600px) {
+        max-width: calc(100% - 80px);
+      }
       height: 700px;
       max-height: 80vh;
       position: relative;
       z-index: 1;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       align-content: center;
       flex-direction: column;
       justify-content: center;
     }
     .h1 {
+      color: white;
+      font-family: sharp_groteskbook_25, sans;
       z-index: 1;
-      font-size: 40px;
-      @media (min-width: 500px) {
-        font-size: 58px;
-      }
-      font-weight: 800;
+      font-size: 27px;
+      font-size: ${responsiveSize({
+        min: "27px",
+        max: "40px",
+        min_device_width: "390px",
+        max_device_width: "1200px",
+      })};
       width: 1080px;
-      max-width: 90%;
+      max-width: 100%;
       line-height: 1.1em;
+      text-align: left;
+      font-weight: 600;
+      .what {
+        line-height: 1.6em;
+        text-shadow: 0 0 12px #fff;
+      }
     }
     .caption {
+      color: white;
       z-index: 1;
+      text-align: left;
       padding-top: 20px;
       font-weight: 500;
       font-size: 21px;
-      line-height: 1.2em;
+      line-height: 1.3em;
       padding-bottom: 20px;
       width: 465px;
-      max-width: 80%;
+      max-width: 100%;
     }
     .button {
       z-index: 1;
-      margin-top: 28px;
-      background: #33363a;
-      padding: 15px 20px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: 700;
-      color: white;
+      position: relative;
+      .text {
+        background: #33363a;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+      }
+      .shadow {
+        position: absolute;
+        top: 3px;
+        right: -3px;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        content: ' ';
+        z-index: -1;
+        background: linear-gradient(90deg, #00a0db, #9274c4, #e74cb1, #ff6c2a, #ff9522,#ffbd2b);
+      }
     }
-    .footnote {
+    .read-setup {
+      color: white;
+      display: inline-block;
       font-size: 16px;
       font-weight: 600;
-      margin-top: 10px;
       z-index: 1;
-    }
-    /* customizable snowflake styling */
-    .snowflakes {
-      z-index: 0;
-    }
-    .snowflake {
-      color: #fff;
-      font-size: 40px;
-      font-family: Arial;
-      text-shadow: 0 0 1px #000;
-      img {
-        width: 35px;
+      padding: 20px 0;
+      @media (min-width: 600px) {
+        padding: 20px 40px;
       }
     }
-
-    @-webkit-keyframes snowflakes-fall {
-      0% {
-        top: -10%;
+    .ctas {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 600px) {
+        flex-direction: row;
+        align-items: center;
       }
-      100% {
-        top: 100%;
-      }
-    }
-    @-webkit-keyframes snowflakes-shake {
-      0% {
-        -webkit-transform: translateX(0px);
-        transform: translateX(0px);
-      }
-      50% {
-        -webkit-transform: translateX(80px);
-        transform: translateX(80px);
-      }
-      100% {
-        -webkit-transform: translateX(0px);
-        transform: translateX(0px);
-      }
-    }
-    @keyframes snowflakes-fall {
-      0% {
-        top: -10%;
-      }
-      100% {
-        top: 100%;
-      }
-    }
-    @keyframes snowflakes-shake {
-      0% {
-        transform: translateX(0px);
-      }
-      50% {
-        transform: translateX(80px);
-      }
-      100% {
-        transform: translateX(0px);
-      }
-    }
-    position: relative;
-    .snowflakes {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      top: 0;
-    }
-    .snowflake {
-      position: absolute;
-      top: -10%;
-      z-index: 9999;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      cursor: default;
-      -webkit-animation-name: snowflakes-fall, snowflakes-shake;
-      -webkit-animation-duration: 10s, 3s;
-      -webkit-animation-timing-function: linear, ease-in-out;
-      -webkit-animation-iteration-count: infinite, infinite;
-      -webkit-animation-play-state: running, running;
-      animation-name: snowflakes-fall, snowflakes-shake;
-      animation-duration: 10s, 3s;
-      animation-timing-function: linear, ease-in-out;
-      animation-iteration-count: infinite, infinite;
-      animation-play-state: running, running;
-    }
-    .snowflake:nth-of-type(0) {
-      left: 1%;
-      -webkit-animation-delay: 0s, 0s;
-      animation-delay: 0s, 0s;
-    }
-    .snowflake:nth-of-type(1) {
-      left: 10%;
-      -webkit-animation-delay: 1s, 1s;
-      animation-delay: 1s, 1s;
-    }
-    .snowflake:nth-of-type(2) {
-      left: 20%;
-      -webkit-animation-delay: 6s, 0.5s;
-      animation-delay: 6s, 0.5s;
-    }
-    .snowflake:nth-of-type(3) {
-      left: 30%;
-      -webkit-animation-delay: 4s, 2s;
-      animation-delay: 4s, 2s;
-    }
-    .snowflake:nth-of-type(4) {
-      left: 40%;
-      -webkit-animation-delay: 2s, 2s;
-      animation-delay: 2s, 2s;
-    }
-    .snowflake:nth-of-type(5) {
-      left: 50%;
-      -webkit-animation-delay: 8s, 3s;
-      animation-delay: 8s, 3s;
-    }
-    .snowflake:nth-of-type(6) {
-      left: 60%;
-      -webkit-animation-delay: 6s, 2s;
-      animation-delay: 6s, 2s;
-    }
-    .snowflake:nth-of-type(7) {
-      left: 70%;
-      -webkit-animation-delay: 2.5s, 1s;
-      animation-delay: 2.5s, 1s;
-    }
-    .snowflake:nth-of-type(8) {
-      left: 80%;
-      -webkit-animation-delay: 1s, 0s;
-      animation-delay: 1s, 0s;
-    }
-    .snowflake:nth-of-type(9) {
-      left: 90%;
-      -webkit-animation-delay: 3s, 1.5s;
-      animation-delay: 3s, 1.5s;
     }
   }
   .features {
@@ -457,9 +394,38 @@ const CSS = css`
     }
   }
 
+
+
+  body:not(.dark-theme) &,
+  body.dark-theme & {
+    .Header,
+    .Header .navbar .center > .item {
+      color: #f2f2f2;
+    }
+    .light-theme-only {
+      display: none;
+    }
+    .dark-theme-only {
+      display: block;
+    }
+  }
+  body:not(.dark-theme) &
+  .Header .navbar .center > .item .theme .option.light {
+      color: #f2f2f2;
+    }
+    .Header .navbar .center > .item .theme .option.dark {
+      color: #eeeeee33;
+    }
+  }
   body.dark-theme & {
     h1 {
       color: white;
+    }
+    .Header .navbar .center > .item .theme .option.light {
+      color: #eeeeee33;
+    }
+    .Header .navbar .center > .item .theme .option.dark {
+      color: #f2f2f2;
     }
   }
 `;
