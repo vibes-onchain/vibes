@@ -17,8 +17,8 @@ import BodyClassName from "react-body-classname";
 import React from "react";
 import { FaDiscord } from "react-icons/fa";
 import { FiSun, FiMoon, FiMenu } from "react-icons/fi";
-import vibes_logo_for_light_theme from ":/assets/img/vibes-logo-for-light-theme.png";
-import vibes_logo_for_dark_theme from ":/assets/img/vibes-logo-for-dark-theme.png";
+import vibes_logo_for_light_theme from ":/assets/img/homepage/vibes-logo-for-light-theme.png";
+import vibes_logo_for_dark_theme from ":/assets/img/homepage/vibes-logo-for-dark-theme.png";
 import ThemeContext from ":/contexts/ThemeContext";
 
 export default function Header(props) {

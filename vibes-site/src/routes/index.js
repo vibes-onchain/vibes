@@ -41,6 +41,7 @@ const WHATS = [
   "Your DAO",
   "Your Whitelist",
   "Moderation",
+  "Verification",
   "Governance",
   "Discord",
 ];
@@ -84,8 +85,8 @@ export default function () {
               <span className="is-better"> is better with vibes</span>
             </div>
             <div className="caption">
-              VibesBot unlocks onchain vibe signals in your NFT, crypto, and
-              web3 community.
+              Vibesbot unlocks onchain vibe signals for NFT, crypto, and
+              web3 communities.
             </div>
             <div className="ctas">
               <a
@@ -94,11 +95,11 @@ export default function () {
               >
                 <div className="shadow"></div>
                 <div className="text">
-                  🤙 Add to Discord &nbsp;&nbsp;&nbsp;✨
+                  🤙 Add to Discord ✨
                 </div>
               </a>
               <a className="read-setup" href="/docs">
-                Read Setup Checklist →
+                Setup Checklist →
               </a>
             </div>
           </div>
@@ -194,40 +195,44 @@ export default function () {
         <div className="features-container">
           <div className="items">
             <div className="item">
-              <div className="title">Decentralized appreciation</div>
+              <div className="title">⚡</div>
+              <div className="title">Boost your community's positivity</div>
               <div className="text">
-                Let your community recognize and promote others for good !vibes.
-                Come for the art, stay for the vibes.
+                Make it easy, fun, and rewarding to <strong>shout out</strong> good !vibes.
+                Come for the art, stay for the !vibes.
               </div>
               <div className="image">
                 <img src={pixel_png} />
               </div>
             </div>
             <div className="item">
+              <div className="title">🌱</div>
               <div className="title">Scale your culture</div>
               <div className="text">
-                Establish and grow your culture. Custom vibe commands, emoji
-                reacts, and levels let's your community define its values.
+                Custom vibe commands, emoji reacts, and vibe levels let you signal your culture.
+                Establish and propogate your norms.
               </div>
               <div className="image">
                 <img src={pixel_png} />
               </div>
             </div>
             <div className="item">
-              <div className="title">Scammers &amp; spammers NGMI</div>
+              <div className="title">🙅‍♀️</div>
+              <div className="title">Community moderation: Scammers NGMI</div>
               <div className="text">
-                Give your community the power to protect each other by giving
-                them the tools to flag and timeout suspicious actors.
+                Giving many trusted members the tools to flag and timeout suspicious
+                actors lets <strong>your community protect itself</strong> 24/7.
               </div>
               <div className="image">
                 <img src={pixel_png} />
               </div>
             </div>
             <div className="item">
+              <div className="title">⛓️</div>
               <div className="title">Onchain + cross platform</div>
               <div className="text">
                 Use Vibes on your Discord, Discourse, DAO proposal system, and
-                more. Your community's vibes are onchain and go where you go.
+                more. Your community's <strong>vibes are onchain</strong> and go where you go.
               </div>
               <div className="image">
                 <img src={pixel_png} />
@@ -237,18 +242,37 @@ export default function () {
         </div>
         <img src={vibesribbon} className="ribbon" />
       </div>
-      <div className="give-vibes-a-try">
-        <a href={process.env.REACT_APP_DISCORD_BOT_URL}>
-          <img src={vibesicon} />
-          <div>Give Vibes a try on Discord ➝</div>
-        </a>
+      <div className="vibey-features">
+        <div className="vibe-featues-container">
+          <div className="title">Vibey Features</div>
+          <div className="items">
+            <div className="item">✦ send + receive vibes ✦</div>
+            <div className="item">✦ vibenomics ✦</div>
+            <div className="item">✦ vibechecks ✦</div>
+            <div className="item">✦ display vibe levels ✦</div>
+            <div className="item">✦ vibes leaderboard ✦</div>
+            <div className="item">✦ vibes reactions ✦</div>
+            <div className="item">✦ flag sus vibes ✦</div>
+            <div className="item">✦ automatic timeouts ✦</div>
+            <div className="item">✦ custom naming ✦</div>
+            <div className="item">✦ custom reacts ✦</div>
+            <div className="item">✦ display name updating ✦</div>
+            <div className="item">✦ role management ✦</div>
+          </div>
+        </div>
       </div>
-      <Footer />
+      <div className="spread-the">
+        <div className="emojis">✨ ✨ ✨</div>
+        <div className="title">Spread the good vibes around</div>
+        <a className="button">Add Vibes to Discord →</a>
+      </div>
+      <Footer className="dark-theme" />
     </div>
   );
 }
 
 const CSS = css`
+  position: relative;
   margin: 0px auto;
   text-align: center;
   width: 100%;
@@ -324,21 +348,23 @@ const CSS = css`
       text-align: left;
       font-weight: 600;
       .what {
-        line-height: 1.6em;
-        text-shadow: 0 0 12px #fff;
+        line-height: 1.4em;
+        text-shadow: 0 0 0.2em rgb(255 255 255 / 95%);
       }
     }
     .caption {
       color: white;
+      opacity: 78%;
       z-index: 1;
       text-align: left;
       padding-top: 20px;
       font-weight: 500;
-      font-size: 21px;
+      font-size: 18px;
       line-height: 1.3em;
       padding-bottom: 20px;
-      width: 465px;
-      max-width: 100%;
+      max-width: 352px;
+      width: 98%;
+      -webkit-font-smoothing: antialiased;
     }
     .button {
       z-index: 1;
@@ -371,7 +397,7 @@ const CSS = css`
       z-index: 1;
       padding: 20px 0;
       @media (min-width: 600px) {
-        padding: 20px 40px;
+        padding: 20px 20px;
       }
     }
     .ctas {
@@ -386,7 +412,7 @@ const CSS = css`
   }
 
   .featured-communities {
-    background: #202128;
+    background: #1f2027;
     padding: 20px 0;
     .communities-with {
       color: white;
@@ -394,7 +420,7 @@ const CSS = css`
       line-height: 1.2em;
       font-family: sharp_groteskbook_25, sans-serif;
       padding-bottom: 20px;
-      padding-bottom: 20px;
+      padding-top: 20px;
       .desktop-only {
         display: none;
       }
@@ -480,13 +506,13 @@ const CSS = css`
       }
       .title {
         font-family: sharp_groteskbook_25, sans-serif;
-        padding-bottom: 20px;
         line-height: 1.5em;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 19px;
       }
       .text {
         color: white;
+        padding-top: 20px;
         font-size: 17px;
         opacity: 0.6;
         letter-spacing: 0.02em;
@@ -495,6 +521,75 @@ const CSS = css`
     }
     .ribbon {
       padding-bottom: 40px;
+    }
+  }
+
+  .vibey-features {
+    background: #33363a;
+    position: relative;
+    background-image: url(${hero_gradient});
+    background-size: 100% 100%;
+    position: relative;
+    color: white;
+    padding: 40px 0;
+    .vibey-features-container {
+      width: calc(100% - 50px);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+      color: white;
+      text-align: left;
+    }
+    .title {
+      font-family: sharp_groteskbook_25, sans-serif;
+      line-height: 1.5em;
+      font-weight: 700;
+      font-size: 28px;
+      padding-bottom: 20px;
+    }
+    .items {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 600px) {
+        justify-content: space-around;
+      }
+    }
+    .item {
+      font-family: sharp_groteskbook_25, sans-serif;
+      padding: 10px 0;
+      font-size: 14px;
+    }
+  }
+  
+  .spread-the {
+    padding: 60px;
+    background: #33363a;
+    color: white;
+    text-align: center;
+    .emojis {
+      line-height: 1.5em;
+      font-weight: 700;
+      font-size: 28px;
+    }
+    .title {
+      font-family: sharp_groteskbook_25, sans-serif;
+      line-height: 1.5em;
+      font-weight: 700;
+      font-size: 28px;
+      padding-bottom: 20px;
+    }
+    .button {
+      padding: 15px 20px;
+      @media (min-width: 600px) {
+        padding: 15px 60px;
+      }
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+      display: inline-block;
+      background: linear-gradient(45deg, #00a0db, #9274c4, #e74cb1, #ff6c2a, #ff9522,#ffbd2b);
+      color: white;
     }
   }
   .give-vibes-a-try {
@@ -577,12 +672,6 @@ const CSS = css`
     .Header,
     .Header .navbar .center > .item {
       color: #f2f2f2;
-    }
-    .light-theme-only {
-      display: none;
-    }
-    .dark-theme-only {
-      display: block;
     }
   }
   body:not(.dark-theme) &

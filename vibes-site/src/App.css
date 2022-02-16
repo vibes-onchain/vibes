@@ -262,6 +262,12 @@ body:not(.dark-theme) .light-theme-only {
 body:not(.dark-theme) .dark-theme-only {
   display: none;
 }
+body:not(.dark-theme) .dark-theme .dark-theme-only {
+  display: inherit;
+}
+body:not(.dark-theme) .dark-theme .light-theme-only {
+  display: none;
+}
 
 body.dark-theme {
   background: #2f3136;
@@ -272,4 +278,10 @@ body.dark-theme .light-theme-only {
 }
 body.dark-theme .dark-theme-only {
   display: inherit;
+}
+body.dark-theme .light-theme .light-theme-only {
+  display: inherit;
+}
+body.dark-theme .light-theme .dark-theme-only {
+  display: none;
 }
