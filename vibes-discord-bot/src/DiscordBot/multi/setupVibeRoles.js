@@ -59,7 +59,7 @@ async function createOrUpdateRole(guild, attrs, position, rel_to_name = null) {
     await guild.channels.cache.forEach(async (channel, id) => {
       console.log("editing perms on ", channel.name);
       await channel.permissionOverwrites.edit(role.id, {
-        VIEW_CHANNEL: false,
+        // VIEW_CHANNEL: false,
         SEND_MESSAGES: false,
       });
     });
