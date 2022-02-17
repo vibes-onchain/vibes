@@ -38,7 +38,7 @@ const VIBE_CHANNELS_MESSAGES = {
         {
           color: "#000",
           image: {
-            url: "https://i.imgur.com/4oroeVF.png",
+            url: "https://i.imgur.com/Cnl5WZ9.png",
           },
           description: stripIndent`Learn all about Vibes at [vibes.app/docs](https://vibes.app/docs/)
           `,
