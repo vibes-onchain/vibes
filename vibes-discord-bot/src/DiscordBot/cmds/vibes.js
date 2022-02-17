@@ -66,31 +66,6 @@ export default async function vibes({ client, message, command, cmd_args }) {
     note,
     vibesLedgerSummary,
   });
-  let vibe_level_ascii = "";
-  let embed_color = "";
-  let vibe_level_action = `${
-    role_alias[sending_member.vibe_level_name] ||
-    sending_member.vibe_level_name ||
-    "VIBES"
-  }`
-    .replace(" ", "-")
-    .toUpperCase();
-  if (sending_member.vibe_level == 1) {
-    embed_color = "#8f9296";
-    vibe_level_ascii = "˙";
-  } else if (sending_member.vibe_level == 2) {
-    embed_color = "#5397d5";
-    vibe_level_ascii = "‧⁚";
-  } else if (sending_member.vibe_level == 3) {
-    embed_color = "#915db1";
-    vibe_level_ascii = "⁛⁚";
-  } else if (sending_member.vibe_level == 4) {
-    embed_color = "#d7823b";
-    vibe_level_ascii = "⁚⁛⁚";
-  } else if (sending_member.vibe_level == 5) {
-    embed_color = "#eac545";
-    vibe_level_ascii = "⁛⁚⁛⁚";
-  }
   // await message.delete();
   // let message_url = `<#${vibeFeed.id}>`;
   // await vibeFeed.messages.fetch({ limit: 1 }).then((messages) => {
