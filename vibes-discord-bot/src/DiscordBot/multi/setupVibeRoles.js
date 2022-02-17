@@ -7,7 +7,9 @@ import {
   BAD_VIBES_START_HERE_ROLE,
   BAD_VIBE_ROLES,
   VIBES_BOT_ROLE_NAME,
+  VIBE_FEED_CHANNEL,
 } from "../constants";
+import getVibeFeed from "../discord/getVibeFeed";
 
 import getVibeRoleAliases from "../spothub/getVibeRoleAliases";
 
@@ -50,6 +52,17 @@ async function createOrUpdateRole(guild, attrs, position, rel_to_name = null) {
       );
       // console.log(e);
     }
+  }
+
+  if (role.name === "Sus Timeout") {
+    // role.setPermissions
+    await guild.channels.cache.forEach(async (channel, id) => {
+      console.log("editing perms on ", channel.name);
+      await channel.permissionOverwrites.edit(role.id, {
+        VIEW_CHANNEL: false,
+        SEND_MESSAGES: false,
+      });
+    });
   }
 
   return role;
