@@ -221,7 +221,7 @@ export default function () {
                 <div className="title">Scale your culture</div>
                 <div className="text">
                   Custom vibe commands, emoji reacts, and vibe levels let you
-                  signal your culture. Establish and propogate your norms.
+                  signal your culture. Establish and propagate your norms.
                 </div>
               </div>
               <div className="image">
@@ -571,10 +571,10 @@ const CSS = css`
         margin-bottom: 10px;
         display: flex;
         justify-content: space-around;
-        img { width: 300px; }
+        img { width: 250px; }
         @media (min-width: 800px) {
           display: block;
-          img { width: 300px; }
+          img { width: 225px; }
         }
       }
     }
