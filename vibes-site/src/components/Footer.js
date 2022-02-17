@@ -45,7 +45,7 @@ export default function Footer(props) {
               </a>
               <a href="/docs">Docs</a>
               <a href="/">Communities</a>
-              <a href="/">VAO</a>
+              <a href="https://opensea.io/collection/genesis-vaos">VAO</a>
               <a href="https://twitter.com/vibesonchain">Twitter</a>
             </div>
           </div>

@@ -97,7 +97,7 @@ export default function Header(props) {
             <a className="item" href={"/"}>
               Communities
             </a>
-            <a className="item" href={"/"}>
+            <a className="item" href={"https://opensea.io/collection/genesis-vaos"}>
               VAO
             </a>
             <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
@@ -135,7 +135,7 @@ export default function Header(props) {
               <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
                 Docs
               </a>
-              <a className="item" href={"/vao"}>
+              <a className="item" href={"https://opensea.io/collection/genesis-vaos"}>
                 VAO
               </a>
               <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
@@ -186,7 +186,7 @@ const headerCSS = css`
   .ui.visible.left.overlay.sidebar,
   .ui.sidebar {
     background: #2f3136;
-    width: auto;
+    width: 75%;
     box-shadow: 0px 0px 5px 4px #80808033;
   }
 

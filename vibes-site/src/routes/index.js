@@ -19,6 +19,11 @@ import hero_gradient from ":/assets/img/homepage/hero-gradient.jpg";
 import vao1_img from ":/assets/img/homepage/vao-1.png";
 import vao1pg_img from ":/assets/img/homepage/vao-1-pg.png";
 
+import feature1_img from ":/assets/img/homepage/1.gif";
+import feature2_img from ":/assets/img/homepage/2.gif";
+import feature3_img from ":/assets/img/homepage/3.gif";
+import feature4_img from ":/assets/img/homepage/4.gif";
+
 // featured communities
 import pg_card from ":/assets/img/homepage/peaceful-groupies-card.png";
 import rare_bunni_card from ":/assets/img/homepage/rare-bunni-card.png";
@@ -35,6 +40,8 @@ import vibesicon from ":/assets/img/vibes-hand.png";
 import pixel_png from ":/assets/img/pixel.png";
 
 import TextTransition, { presets } from "react-text-transition";
+
+import Tilt from "react-parallax-tilt";
 
 const WHATS = [
   "Decentralization",
@@ -85,8 +92,8 @@ export default function () {
               <span className="is-better"> is better with vibes</span>
             </div>
             <div className="caption">
-              Vibesbot unlocks onchain vibe signals for NFT, crypto, and
-              web3 communities.
+              Vibesbot unlocks onchain vibe signals for NFT, crypto, and web3
+              communities.
             </div>
             <div className="ctas">
               <a
@@ -94,9 +101,7 @@ export default function () {
                 className="button rainbow-button"
               >
                 <div className="shadow"></div>
-                <div className="text">
-                  🤙 Add to Discord ✨
-                </div>
+                <div className="text">🤙 Add to Discord ✨</div>
               </a>
               <a className="read-setup" href="/docs">
                 Setup Checklist →
@@ -105,7 +110,7 @@ export default function () {
           </div>
           <div className="image-part">
             <div className="first-vao">
-              <img src={vao1_img} />
+              <Tilt tiltEnable={true} scale={1.05} transitionSpeed={2500}><img src={vao1_img} /></Tilt>
             </div>
           </div>
         </div>
@@ -135,7 +140,9 @@ export default function () {
             <SwiperSlide>
               <div className="community">
                 <div className="image">
-                  <img src={pg_card} />
+                  <Tilt>
+                    <img src={pg_card} />
+                  </Tilt>
                 </div>
                 <div className="name">Peaceful Groupies</div>
                 <div className="link">
@@ -150,7 +157,7 @@ export default function () {
             <SwiperSlide>
               <div className="community">
                 <div className="image">
-                  <img src={rare_bunni_card} />
+                  <Tilt><img src={rare_bunni_card} /></Tilt>
                 </div>
                 <div className="name">Rare Bunni Club</div>
                 <div className="link">
@@ -165,7 +172,7 @@ export default function () {
             <SwiperSlide>
               <div className="community">
                 <div className="image">
-                  <img src={monsterbuds_card} />
+                  <Tilt><img src={monsterbuds_card} /></Tilt>
                 </div>
                 <div className="name">Monsterbuds</div>
                 <div className="link">
@@ -180,7 +187,7 @@ export default function () {
             <SwiperSlide>
               <div className="community">
                 <div className="image">
-                  <img src={kaddex_card} />
+                  <Tilt><img src={kaddex_card} /></Tilt>
                 </div>
                 <div className="name">Kaddex</div>
                 <div className="link">
@@ -195,54 +202,65 @@ export default function () {
         <div className="features-container">
           <div className="items">
             <div className="item">
-              <div className="title">⚡</div>
-              <div className="title">Boost your community's positivity</div>
-              <div className="text">
-                Make it easy, fun, and rewarding to <strong>shout out</strong> good !vibes.
-                Come for the art, stay for the !vibes.
+              <div className="copy">
+                <div className="title">⚡</div>
+                <div className="title">Boost your community's positivity</div>
+
+                <div className="text">
+                  Make it easy, fun, and rewarding to <strong>shout out</strong>{" "}
+                  good !vibes. Come for the art, stay for the !vibes.
+                </div>
               </div>
               <div className="image">
-                <img src={pixel_png} />
+                <img src={feature1_img} />
               </div>
             </div>
             <div className="item">
-              <div className="title">🌱</div>
-              <div className="title">Scale your culture</div>
-              <div className="text">
-                Custom vibe commands, emoji reacts, and vibe levels let you signal your culture.
-                Establish and propogate your norms.
+              <div className="copy">
+                <div className="title">🌱</div>
+                <div className="title">Scale your culture</div>
+                <div className="text">
+                  Custom vibe commands, emoji reacts, and vibe levels let you
+                  signal your culture. Establish and propogate your norms.
+                </div>
               </div>
               <div className="image">
-                <img src={pixel_png} />
+                <img src={feature2_img} />
               </div>
             </div>
             <div className="item">
-              <div className="title">🙅‍♀️</div>
-              <div className="title">Community moderation: Scammers NGMI</div>
-              <div className="text">
-                Giving many trusted members the tools to flag and timeout suspicious
-                actors lets <strong>your community protect itself</strong> 24/7.
+              <div className="copy">
+                <div className="title">🙅‍♀️</div>
+                <div className="title">Community moderation: Scammers NGMI</div>
+                <div className="text">
+                  Giving many trusted members the tools to flag and timeout
+                  suspicious actors lets{" "}
+                  <strong>your community protect itself</strong> 24/7.
+                </div>
               </div>
               <div className="image">
-                <img src={pixel_png} />
+                <img src={feature3_img} />
               </div>
             </div>
             <div className="item">
-              <div className="title">⛓️</div>
-              <div className="title">Onchain + cross platform</div>
-              <div className="text">
-                Use Vibes on your Discord, Discourse, DAO proposal system, and
-                more. Your community's <strong>vibes are onchain</strong> and go where you go.
+              <div className="copy">
+                <div className="title">⛓️</div>
+                <div className="title">Onchain + cross platform</div>
+                <div className="text">
+                  Use Vibes on your Discord, Discourse, DAO proposal system, and
+                  more. Your community's <strong>vibes are onchain</strong> and
+                  go where you go.
+                </div>
               </div>
               <div className="image">
-                <img src={pixel_png} />
+                <img src={feature4_img} />
               </div>
             </div>
           </div>
         </div>
         <img src={vibesribbon} className="ribbon" />
       </div>
-      <div className="vibey-features">
+      <div className="vibey-features with-vibes-cursor">
         <div className="vibe-featues-container">
           <div className="title">Vibey Features</div>
           <div className="items">
@@ -256,7 +274,7 @@ export default function () {
             <div className="item">✦ automatic timeouts ✦</div>
             <div className="item">✦ custom naming ✦</div>
             <div className="item">✦ custom reacts ✦</div>
-            <div className="item">✦ display name updating ✦</div>
+            <div className="item">✦ dynamic display names ✦</div>
             <div className="item">✦ role management ✦</div>
           </div>
         </div>
@@ -413,7 +431,7 @@ const CSS = css`
 
   .featured-communities {
     background: #1f2027;
-    padding: 20px 0;
+    padding: 20px 0 37px 0;
     .communities-with {
       color: white;
       font-size: 28px;
@@ -448,31 +466,37 @@ const CSS = css`
           }
         }
         .name {
+          font-family: 'sharp_groteskbook_25';
           color: white;
-          font-size: 18px;
+          font-size: 12px;
+          line-height: 1.4em;
           @media (min-width: 450px) {
-            font-size: 20px;
+            font-size: 15px;
           }
           @media (min-width: 600px) {
-            font-size: 27px;
+            font-size: 15px;
           }
           line-height: 1.4em;
         }
         .link {
-          margin-top: 10px;
+          margin-top: 16px;
           a {
-            font-size: 16px;
-            padding: 12px 8px;
+            font-size: 13px;
+            padding: 8px 8px;
             @media (min-width: 600px) {
-              font-size: 20px;
-              padding: 20px 8px;
+              font-size: 14px;
+              padding: 8px 8px;
             }
+            text-transform: uppercase;
+            font-family: 'sharp_groteskbook_25';
+            opacity: .8;
+            padding: 8px 8px;
             color: white;
             display: inline-block;
             width: calc(100% - 50px);
             max-width: 300px;
             border: 1px solid #fafafa;
-            border-radius: 20px;
+            border-radius: 12px;
           }
         }
       }
@@ -494,11 +518,30 @@ const CSS = css`
       display: flex;
       flex-wrap: wrap;
       @media (min-width: 600px) {
-        justify-content: space-around;
+        justify-content: space-evenly;
       }
     }
     .item {
       flex-basis: 400px;
+      @media (min-width: 800px) {
+        flex-basis: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        &:nth-child(2n+1) {
+          .image {
+            margin-left: 40px;
+          }
+        }
+        &:nth-child(2n) {
+          flex-direction: row-reverse;
+          .image {
+            margin-right: 40px;
+          }
+        }
+        margin-bottom: 80px;
+      }
       box-sizing: border-box;
       padding: 10px;
       .icon {
@@ -517,6 +560,22 @@ const CSS = css`
         opacity: 0.6;
         letter-spacing: 0.02em;
         line-height: 1.3em;
+      }
+      .copy {
+        @media (min-width: 800px) {
+          width: 500px;
+        }
+      }
+      .image {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-around;
+        img { width: 300px; }
+        @media (min-width: 800px) {
+          display: block;
+          img { width: 300px; }
+        }
       }
     }
     .ribbon {

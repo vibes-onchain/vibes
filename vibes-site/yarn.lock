@@ -11431,6 +11431,11 @@ react-papaparse@^3.11.1:
     "@types/papaparse" "^5.3.1"
     papaparse "^5.3.1"
 
+react-parallax-tilt@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-parallax-tilt/-/react-parallax-tilt-1.6.0.tgz#4294aed54405863bda4e266565a8db9b15a0218d"
+  integrity sha512-tuUJbqd2QHytW2ZQmShOBNavfjZpp5x3+yMHO0D2XMuovBxsjnz1qwCuDcJDVO72LaXtBTTL4CSAGBfjMN1S0w==
+
 react-phone-number-input@^3.1.25:
   version "3.1.44"
   resolved "https://registry.npmjs.org/react-phone-number-input/-/react-phone-number-input-3.1.44.tgz"
