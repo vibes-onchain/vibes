@@ -13,23 +13,60 @@ const VIBE_CHANNEL_RELOAD = {
 const VIBE_CHANNELS_MESSAGES = {
   "vibes-101": [
     {
-      files: [`${__dirname}/../../../assets/images/vibes-logo.png`],
-      content: stripIndent`VIBES`,
+      embeds: [
+        {
+          color: "#000",
+          thumbnail: {
+            url: "https://i.imgur.com/4oroeVF.png",
+          },
+          description: stripIndent`🤖 turns reacts into
+          community exhancing vibes ⇄ ✨
+          
+          ${"`"}HOW TO VIBE${"`"}
+          
+          1.   **Send Vibes**
+          ✨ react ⇄ ${"`"}!vibes @username${"`"}
+          
+          2.   **Flag Sus Vibes**
+          ⚠️ react ⇄ ${"`"}!susvibes @username${"`"}
+
+          3.   **Check Vibes**
+          🔎 react ⇄ ${"`"}!vibecheck @username${"`"}
+          
+          `,
+        },
+        {
+          color: "#000",
+          image: {
+            url: "https://i.imgur.com/4oroeVF.png",
+          },
+          description: stripIndent`Learn all about Vibes at [vibes.app/docs](https://vibes.app/docs/)
+          `,
+        },
+        {
+          color: "#000",
+
+          description: stripIndent`Drop into the Spotchain Discord 
+          for support or just to vibe out
+          `,
+        },
+      ],
     },
-    stripIndent`:robot: @vibesbot lets you see your community's vibes.`,
-    stripIndent`    ⟩`,
-    stripIndent`Each day, vibesbot gives you a quantity of vibe dust based on the vibenomics set by your community that you can give to others.`,
-    stripIndent`    ⟩`,
-    stripIndent`1. Give good vibes —> react :sparkles: or !vibes @username`,
-    stripIndent`2. Flag sus vibes —> react :warning: or !susvibes @username`,
-    stripIndent`3. Check anyone's vibes —> !vibecheck @username`,
-    stripIndent`    ⟩`,
-    {
-      files: [`${__dirname}/../../../assets/images/vibes-101.png`],
-      content: stripIndent`VIBES 101`,
-    },
-    stripIndent`Read more about Vibes --> https://www.vibes.app/docs`,
-    stripIndent`Drop into the Spotchain Discord for help or just to vibe out --> https://discord.gg/3RtpVVN4Sf`,
+    stripIndent`https://discord.gg/7H3NWMjUyY`,
+    // stripIndent`:robot: @vibesbot lets you see your community's vibes.`,
+    // stripIndent`    ⟩`,
+    // stripIndent`Each day, vibesbot gives you a quantity of vibe dust based on the vibenomics set by your community that you can give to others.`,
+    // stripIndent`    ⟩`,
+    // stripIndent`1. Give good vibes —> react :sparkles: or !vibes @username`,
+    // stripIndent`2. Flag sus vibes —> react :warning: or !susvibes @username`,
+    // stripIndent`3. Check anyone's vibes —> !vibecheck @username`,
+    // stripIndent`    ⟩`,
+    // {
+    //   files: [`${__dirname}/../../../assets/images/vibes-101.png`],
+    //   content: stripIndent`VIBES 101`,
+    // },
+    // stripIndent`Read more about Vibes --> https://www.vibes.app/docs`,
+    // stripIndent`Drop into the Spotchain Discord for help or just to vibe out --> https://discord.gg/3RtpVVN4Sf`,
     //     stripIndent`**What**
     // Vibesbot is a way to record vibe signals in discord, and store them onchain.`,
     //     stripIndent`**Why**
