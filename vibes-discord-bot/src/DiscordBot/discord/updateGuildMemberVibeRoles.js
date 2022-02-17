@@ -63,7 +63,7 @@ export default async function updateGuildMemberVibeRole({
                 member.id
               }>
                 *Mods to review reinstatement...*
-                **[notion.so →](https://vibes-docs.notion.site/How-does-Sus-Timeout-work-920bb4f91be148d4bebf644d2c38d018)**`,
+                **[vibes.app/docs →](https://vibes-docs.notion.site/How-does-Sus-Timeout-work-920bb4f91be148d4bebf644d2c38d018)**`,
             },
           ],
         });
