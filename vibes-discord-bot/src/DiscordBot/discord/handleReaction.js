@@ -47,6 +47,9 @@ async function handleVibeReaction({
     return;
   }
   if (["Vibe"].includes(entryType) && note?.trim?.().match("^!(vibe|vibes)")) {
+    if (from_member_id === note?.match(/(\d{18})/)[0]) {
+      return;
+    }
     await saveVibe({
       ledger_id: ledger_id,
       from_member_id: from_member_id,
@@ -177,8 +180,6 @@ export default async function handleReaction(client, reaction, user) {
 
   const vibe_reaction_aliases = await getVibeReactionAliases({ guild_id });
 
-  console.log({ vibe_reaction_aliases });
-  console.log(reaction.emoji);
   let entryType = null;
   if (
     [...vibe_reaction_aliases, ...GOOD_VIBE_EMOJI_NAMES].includes(

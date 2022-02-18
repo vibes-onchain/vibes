@@ -13,7 +13,6 @@ export default async function vibes({ client, message, command, cmd_args }) {
 
   const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
   const ledger_id = ledger.id;
-  const vibeFeed = getVibeFeed({ client, guild_id });
 
   const target_member = command
     ? cmd_args.find((i) => i.name === "user").member
