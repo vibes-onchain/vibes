@@ -317,6 +317,7 @@ const CSS = css`
       margin: 0 auto;
       padding-top: 80px;
       width: 1200px;
+      flex-direction: column-reverse;
       max-width: calc(100% - 40px);
       @media (min-width: 600px) {
         max-width: calc(100% - 80px);
@@ -328,7 +329,6 @@ const CSS = css`
       display: flex;
       align-items: flex-start;
       align-content: center;
-      flex-direction: column;
       justify-content: center;
       > .text-part {
         max-width: 100%;
@@ -431,7 +431,7 @@ const CSS = css`
 
   .featured-communities {
     background: #1f2027;
-    padding: 20px 0 37px 0;
+    padding: 30px 0 60px 0;
     .communities-with {
       color: white;
       font-size: 28px;
@@ -483,10 +483,6 @@ const CSS = css`
           a {
             font-size: 13px;
             padding: 8px 8px;
-            @media (min-width: 600px) {
-              font-size: 14px;
-              padding: 8px 8px;
-            }
             text-transform: uppercase;
             font-family: 'sharp_groteskbook_25';
             opacity: .8;
@@ -504,13 +500,13 @@ const CSS = css`
   }
 
   .features {
-    background: #33363a;
+    background: #2a2c33;
     position: relative;
     .features-container {
-      width: calc(100% - 50px);
-      max-width: 1200px;
+      width: 90%;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 20px 0;
+      padding: 35px 0;
       color: white;
       text-align: left;
     }
@@ -537,7 +533,7 @@ const CSS = css`
         &:nth-child(2n) {
           flex-direction: row-reverse;
           .image {
-            margin-right: 40px;
+            margin-right: 170px;
           }
         }
         margin-bottom: 80px;
@@ -551,7 +547,7 @@ const CSS = css`
         font-family: sharp_groteskbook_25, sans-serif;
         line-height: 1.5em;
         font-weight: 700;
-        font-size: 19px;
+        font-size: 25px;
       }
       .text {
         color: white;
@@ -571,10 +567,10 @@ const CSS = css`
         margin-bottom: 10px;
         display: flex;
         justify-content: space-around;
-        img { width: 250px; }
+        img { width: 300px; margin: 15px 40px 15px 40px; }
         @media (min-width: 800px) {
           display: block;
-          img { width: 225px; }
+          img { width: 300px; margin: 15px 40px 15px 40px; }
         }
       }
     }
@@ -621,8 +617,8 @@ const CSS = css`
   }
   
   .spread-the {
-    padding: 60px;
-    background: #33363a;
+    padding: 95px 0 110px 0;
+    background: #2a2c33;
     color: white;
     text-align: center;
     .emojis {
@@ -636,6 +632,8 @@ const CSS = css`
       font-weight: 700;
       font-size: 28px;
       padding-bottom: 20px;
+      max-width: 82%;
+      margin: 0 auto;
     }
     .button {
       padding: 15px 20px;
