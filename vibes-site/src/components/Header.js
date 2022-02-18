@@ -185,6 +185,7 @@ const headerCSS = css`
 
   .ui.visible.left.overlay.sidebar,
   .ui.sidebar {
+    font-family: 'sharp_groteskbook_25';
     background: #2f3136;
     width: 75%;
     box-shadow: 0px 0px 5px 4px #80808033;
@@ -231,15 +232,15 @@ const headerCSS = css`
     .left a {
       display: flex;
       align-items: center;
-      padding: 15px 0;
+      padding: 20px 0;
       img {
         margin-right: 5px;
         height: 21px;
         max-width: none;
       }
       font-size: 28px;
-      font-weight: 800;
-      color: #0f0f0f;
+      font-weight: 700;
+      color: white;
     }
     .right {
       align-items: right;
@@ -312,7 +313,7 @@ const headerCSS = css`
       min-width: 6em;
       flex-direction: column;
       font-size: 20px;
-      text-align: left;
+      text-align: center;
       .theme {
         display: flex;
         justify-content: space-between;
