@@ -48,6 +48,7 @@ export async function forVibeFeed({
     .toUpperCase();
   if (
     vibe_level_action === "UNKNOWN-VIBES" ||
+    vibe_level_action === "UNKNOWN-VIBE" ||
     vibe_level_action === "SUS-TIMEOUT" ||
     vibe_level_action === "SUS-VIBES"
   ) {

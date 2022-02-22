@@ -20,8 +20,8 @@ export default async function getVibesUserDetails({ guild_id, member_id }) {
     return {
       vibestack: 0,
       vibedust: vibedust || 0,
-      vibeLevel: 'Unknown Vibe',
-      vibe_level_name: 'Unknown Vibe',
+      vibeLevel: 'Unknown Vibes',
+      vibe_level_name: 'Unknown Vibes',
       vibe_level: 0,
       nicknameParen: null,
     };
