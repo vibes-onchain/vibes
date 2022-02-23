@@ -12,6 +12,17 @@ export default async function set_custom_vibemojis({
 }) {
   const member = message ? message.member : command.member;
   const guild = member.guild;
+  const guild_id = guild.id;
+
+  if (
+    !(await canControlVibesBot({
+      client,
+      guild_id,
+      member_id: member?.id,
+    }))
+  ) {
+    return { error: "you must be a vibesbot admin" };
+  }
 
   const value = command
     ? cmd_args.find((i) => i.name === "value").value
