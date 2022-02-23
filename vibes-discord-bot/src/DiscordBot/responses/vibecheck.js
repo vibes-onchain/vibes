@@ -18,7 +18,7 @@ ${"`"}!VIBECHECK${"`"}
 ${""}
 <@${receiving_member.user_id}>     ⟨
 ${vibeLevelEmoji} ${"`"}${
-    receiving_member.vibe_level_name?.replace(" Vibe", "").toUpperCase() ||
+    receiving_member.vibe_level_name?.replace(" Vibes", "").replace(" Vibe", "").toUpperCase() ||
     "Has no level"
   } ~ ✦${formatNumber(receiving_member.vibestack, "decimal0f")} (${formatNumber(
     receiving_member.vibestack_percentile,
