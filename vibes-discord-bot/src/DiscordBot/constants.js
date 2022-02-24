@@ -79,6 +79,7 @@ export const GOOD_VIBES_START_HERE_ROLE = {
   mentionable: false,
   name: "[Good Vibes Start Here]",
 };
+
 export const GOOD_VIBE_ROLES = [
   {
     color: 15844367,
@@ -201,6 +202,32 @@ export const GOOD_VIBE_EMOJI_NAMES = [
   // "vibes",
   // "vibe",
   // "vibedust",
+];
+export const BOOSTER_VIBE_EMOJI_NAMES = [
+  "😂",
+  "🤯",
+  "😊",
+  "🤣",
+  "😎",
+  "🙌",
+  "👏",
+  "🤝",
+  "👏",
+  "👍",
+  "✊",
+  "🤙",
+  "🙏",
+  "👀",
+  "🧠",
+  "🔥",
+  "💯",
+  "🚀",
+  "🍄",
+  "🤘",
+  "👌",
+  "🤗",
+  "🐐",
+  "🥇",
 ];
 
 export const BAD_VIBE_EMOJI_NAMES = ["⚠️", "warning", "susvibes"];

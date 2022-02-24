@@ -4,7 +4,11 @@ import saveBadVibe from "../spothub/saveBadVibe";
 import findOrCreateLedgerForGuild from "../spothub/findOrCreateLedgerForGuild";
 import getEmojis from "./getEmojis";
 import getVibeFeed from "./getVibeFeed";
-import { GOOD_VIBE_EMOJI_NAMES, BAD_VIBE_EMOJI_NAMES } from "../constants";
+import {
+  GOOD_VIBE_EMOJI_NAMES,
+  BAD_VIBE_EMOJI_NAMES,
+  BOOSTER_VIBE_EMOJI_NAMES,
+} from "../constants";
 import getVibesLedgerSummary from "../spothub/getVibesLedgerSummary";
 import getMemberDetails from "../multi/getMemberDetails";
 import getGuildMemberFromUserId from "./getGuildMemberFromUserId";
@@ -181,6 +185,7 @@ export default async function handleReaction(client, reaction, user) {
   const vibe_reaction_aliases = await getVibeReactionAliases({ guild_id });
 
   let entryType = null;
+  console.log(reaction.emoji.name);
   if (
     [...vibe_reaction_aliases, ...GOOD_VIBE_EMOJI_NAMES].includes(
       reaction.emoji.name
@@ -189,54 +194,95 @@ export default async function handleReaction(client, reaction, user) {
     entryType = "Vibe";
   } else if (BAD_VIBE_EMOJI_NAMES.includes(reaction.emoji.name)) {
     entryType = "BadVibe";
+  } else if (BOOSTER_VIBE_EMOJI_NAMES.includes(reaction.emoji.name)) {
+    entryType = "VibeBoost";
   } else {
     return;
   }
+  if (entryType.includes(["Vibe", "BadVibe"])) {
+    const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
+    const ledger_id = ledger.id;
 
-  const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
-  const ledger_id = ledger.id;
+    // note discord user_ids and member_ids are the same
+    const reactionMemberIds = Object.keys(
+      Object.fromEntries(await reaction.users.fetch())
+    );
 
-  // note discord user_ids and member_ids are the same
-  const reactionMemberIds = Object.keys(
-    Object.fromEntries(await reaction.users.fetch())
-  );
+    const entries = await LedgerEntry.findAll({
+      where: {
+        ledger_id: ledger.id,
+        type: entryType,
+        value: { reaction_to_message_id: message.id },
+      },
+    });
+    const existingReactionsByMemberIds = entries.map((i) => i.sender.id);
+    const newReactionMemberIds = _.difference(
+      reactionMemberIds,
+      existingReactionsByMemberIds
+    );
+    for (const member_id of newReactionMemberIds) {
+      const fromMember = guild.members.cache.find(
+        (i) => i.user.id === member_id
+      );
+      const from_member_id = fromMember.id;
+      const from_member_username = fromMember.user.username;
+      const note = message.content;
+      const note_url = message?.url;
 
-  const entries = await LedgerEntry.findAll({
-    where: {
-      ledger_id: ledger.id,
-      type: entryType,
-      value: { reaction_to_message_id: message.id },
-    },
-  });
-  const existingReactionsByMemberIds = entries.map((i) => i.sender.id);
-  const newReactionMemberIds = _.difference(
-    reactionMemberIds,
-    existingReactionsByMemberIds
-  );
-  for (const member_id of newReactionMemberIds) {
-    const fromMember = guild.members.cache.find((i) => i.user.id === member_id);
-    const from_member_id = fromMember.id;
-    const from_member_username = fromMember.user.username;
+      if (from_member_id === to_member_id) {
+        continue;
+      }
+      await handleVibeReaction({
+        client,
+        guild_id,
+        ledger_id,
+        from_member_id,
+        from_member_username,
+        to_member_id,
+        to_member_username,
+        note,
+        note_url,
+        reaction_to_message_id: message.id,
+        message,
+        reaction,
+        entryType,
+      });
+    }
+  } else if (entryType === "VibeBoost") {
+    const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
+    const ledger_id = ledger.id;
     const note = message.content;
     const note_url = message?.url;
 
-    if (from_member_id === to_member_id) {
-      continue;
-    }
-    await handleVibeReaction({
+    const sending_member = await getMemberDetails({
       client,
       guild_id,
+      member_id: client.user.id,
+    });
+    const receiving_member = await getMemberDetails({
+      client,
+      guild_id,
+      member_id: to_member_id,
+    });
+    const vibesLedgerSummary = await getVibesLedgerSummary({
+      guild_id,
+    });
+
+    await sendResponse({
+      client,
+      guild_id,
+      response: "vibes",
       ledger_id,
-      from_member_id,
-      from_member_username,
-      to_member_id,
-      to_member_username,
+      sending_member,
+      receiving_member,
       note,
       note_url,
-      reaction_to_message_id: message.id,
+      vibesLedgerSummary,
       message,
       reaction,
-      entryType,
     });
+    if (reaction.count > 2) {
+      await message.react("✨");
+    }
   }
 }
