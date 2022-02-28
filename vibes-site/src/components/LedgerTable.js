@@ -335,14 +335,14 @@ const CSS = css`
     width: 100%;
     border-collapse: collapse;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    //box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
   }
 
   .th,
   .td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
-    color: #fff;
+    //color: #fff;
   }
 
   .th {
@@ -351,13 +351,14 @@ const CSS = css`
 
   .thead {
     .th {
-      background-color: #55608f;
+      //background-color: #55608f;
+      font-weight: bolder;
     }
   }
 
   .tbody {
-    background: linear-gradient(45deg, #49a09d, #5f2c82);
-
+    //background: linear-gradient(45deg, #49a09d, #5f2c82);
+    
     .tr {
       &:hover {
         background-color: rgba(255, 255, 255, 0.3);
@@ -403,11 +404,11 @@ const CSS = css`
   body.dark-theme & {
     .pagination {
       input {
-        background: #888;
+        //background: #888;
       }
       .controls {
         > button {
-          background: rgba(0, 0, 0, 0.5);
+          //background: rgba(0, 0, 0, 0.5);
         }
       }
     }
