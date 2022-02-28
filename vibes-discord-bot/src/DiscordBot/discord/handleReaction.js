@@ -92,6 +92,9 @@ async function handleVibeReaction({
   }
 
   if (entryType === "Vibe") {
+    if (client.user.id === from_member_id) {
+      return;
+    }
     await saveVibe({
       ledger_id: ledger_id,
       from_member_id: from_member_id,
@@ -113,6 +116,7 @@ async function handleVibeReaction({
     const vibesLedgerSummary = await getVibesLedgerSummary({
       guild_id,
     });
+
     await sendResponse({
       client,
       guild_id,
@@ -199,7 +203,8 @@ export default async function handleReaction(client, reaction, user) {
   } else {
     return;
   }
-  if (entryType.includes(["Vibe", "BadVibe"])) {
+
+  if (["Vibe", "BadVibe"].includes(entryType)) {
     const ledger = await findOrCreateLedgerForGuild(guild.id, guild.name);
     const ledger_id = ledger.id;
 
@@ -268,21 +273,20 @@ export default async function handleReaction(client, reaction, user) {
       guild_id,
     });
 
-    await sendResponse({
-      client,
-      guild_id,
-      response: "vibes",
-      ledger_id,
-      sending_member,
-      receiving_member,
-      note,
-      note_url,
-      vibesLedgerSummary,
-      message,
-      reaction,
-    });
-    if (reaction.count > 2) {
+    if (reaction.count == 1) {
       await message.react("✨");
+      await sendResponse({
+        client,
+        guild_id,
+        response: "vibes",
+        ledger_id,
+        sending_member,
+        receiving_member,
+        note,
+        note_url,
+        vibesLedgerSummary,
+        message,
+      });
     }
   }
 }
