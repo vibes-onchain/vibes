@@ -273,7 +273,7 @@ export default async function handleReaction(client, reaction, user) {
       guild_id,
     });
 
-    if (reaction.count == 1) {
+    if (reaction.count == 3) {
       await message.react("✨");
       await sendResponse({
         client,
