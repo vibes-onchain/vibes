@@ -136,7 +136,7 @@ export const BAD_VIBE_ROLES = [
   {
     color: "9aaab6",
     reason: "",
-    name: "Unknown Vibes",
+    name: "Newb Vibes",
     hoist: false,
     when: ["vibestack", "==", 0],
     level: 0,
@@ -228,6 +228,9 @@ export const BOOSTER_VIBE_EMOJI_NAMES = [
   "🐐",
   "🥇",
   "❤️",
+  "🍒",
+  "🍻",
+  "🥂",
 ];
 
 export const BAD_VIBE_EMOJI_NAMES = ["⚠️", "warning", "susvibes"];
