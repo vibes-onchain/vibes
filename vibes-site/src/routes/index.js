@@ -191,7 +191,7 @@ export default function () {
                 </div>
                 <div className="name">Kaddex</div>
                 <div className="link">
-                  <Link to={`/ledger/${1}`}>View</Link>
+                  <Link to={`/ledger/29be21dc4f6cbac4046ac2eb7762ac03dfb4c7ae5ff6575e0036348b7fa4ba02`}>View</Link>
                 </div>
               </div>
             </SwiperSlide>
