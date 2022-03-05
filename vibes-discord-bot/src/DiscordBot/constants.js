@@ -13,6 +13,11 @@ export const GLOBAL_CMDS = [
   "susvibes",
   "susvibe",
   //
+  // supervibes
+  "supervibe", 
+  "supervibes",
+  "super-vibes",
+  //
   // vibecheck
   "vibecheck",
   "vibescheck",
@@ -232,6 +237,21 @@ export const BOOSTER_VIBE_EMOJI_NAMES = [
   "🍻",
   "🥂",
   "🎉",
+  "💟",
+  "😻",
+  "♥️",
+  "💕",
+  "💖",
+  "❣️",
+  "💗",
+  "💚",
+  "💛",
+  "🧡",
+  "💙",
+  "💜",
+  "💓",
 ];
+
+export const SUPER_VIBE_EMOJI_NAMES = [ "🤙", "call_me", "call_me_hand" ];
 
 export const BAD_VIBE_EMOJI_NAMES = ["⚠️", "warning", "susvibes"];
