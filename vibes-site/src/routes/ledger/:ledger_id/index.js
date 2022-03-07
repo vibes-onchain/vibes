@@ -13,6 +13,114 @@ import Backend from ":/lib/Backend";
 import LedgerEntryUserLabel from ":/components/LedgerEntryUserLabel";
 import _ from "lodash";
 import formatNumber from ":/lib/formatNumber";
+import {
+  useTable,
+  useSortBy,
+  useFilters,
+  usePagination,
+  useFlexLayout,
+} from "react-table";
+import { useWindowWidth } from "@react-hook/window-size";
+import { matchSorter } from "match-sorter";
+
+import PaginatedTable from ":/components/PaginatedTable";
+function fuzzyTextFilterFn(rows, id, filterValue) {
+  return matchSorter(rows, filterValue, { keys: [(row) => row.values[id]] });
+}
+
+// Let the table remove the filter if the string is empty
+fuzzyTextFilterFn.autoRemove = (val) => !val;
+// Define a default UI for filtering
+function DefaultColumnFilter({
+  column: { filterValue, preFilteredRows, setFilter },
+}) {
+  const count = preFilteredRows.length;
+
+  return (
+    <input
+      value={filterValue || ""}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
+      }}
+      placeholder={`Search ${count} records...`}
+    />
+  );
+}
+
+function LeaderboardTable({ leaderBoardMembers, vibe_role_names }) {
+  const data = React.useMemo(() => {
+    const r = _.sortBy(leaderBoardMembers, "vibestack").reverse().map((i, index) => {
+      const base = _.pick(i, [
+        "id",
+        "member_id",
+        "vibestack",
+        "vibes_received",
+        "unique_vibers",
+        "vibestack_percentile",
+        "vibe_level_name",
+      ]);
+      return {
+        rank: index + 1,
+        ...base,
+      };
+    });
+    return r;
+  }, [leaderBoardMembers]);
+
+  const columns = React.useMemo(() => [
+    {
+      Header: "",
+      accessor: "rank",
+      Cell: ({ value }) => <>{value}</>,
+      width: 10,
+    },
+    {
+      Header: "",
+      accessor: "member_id",
+      Cell: ({ value }) => <><LedgerEntryUserLabel id={value} /></>,
+    },
+    {
+      Header: "Vibestack",
+      accessor: "vibestack",
+      Cell: ({ value }) => <>{value > 1
+        ? formatNumber(value, "si_rounded")
+        : formatNumber(value, "decimal2f")}</>,
+    },
+    {
+      Header: "Vibes Received",
+      accessor: "vibes_received",
+      Cell: ({ value }) => <>{value}</>,
+    },
+    {
+      Header: "Unique Vibers",
+      accessor: "unique_vibers",
+      Cell: ({ value }) => <>{value}</>,
+    },
+    {
+      Header: "Percentile",
+      accessor: "vibestack_percentile",
+      Cell: ({ value }) => <>{formatNumber(value, "percent0f")}</>,
+    },
+    {
+      Header: "Role Name",
+      accessor: "vibe_level_name",
+      Cell: ({ value }) => <>{value}</>,
+    },
+  ]);
+
+  const initialSortBy = React.useMemo(
+    () => [{ id: "vibestack", desc: true }],
+    []
+  );
+
+  return (
+    <PaginatedTable
+      data={data}
+      columns={columns}
+      initialSortBy={initialSortBy}
+    />
+  );
+}
 
 export default function () {
   const router = useRouter();
@@ -51,8 +159,10 @@ export default function () {
       "OG Vibes": ledger?.meta?.["vibes:role_alias:OG Vibes"] || "OG Vibes",
       "Legendary Vibes":
         ledger?.meta?.["vibes:role_alias:Legendary Vibes"] || "Legendary Vibes",
-      "Epic Vibes": ledger?.meta?.["vibes:role_alias:Epic Vibes"] || "Epic Vibes",
-      "Rare Vibes": ledger?.meta?.["vibes:role_alias:Rare Vibes"] || "Rare Vibes",
+      "Epic Vibes":
+        ledger?.meta?.["vibes:role_alias:Epic Vibes"] || "Epic Vibes",
+      "Rare Vibes":
+        ledger?.meta?.["vibes:role_alias:Rare Vibes"] || "Rare Vibes",
       "Frenly Vibes":
         ledger?.meta?.["vibes:role_alias:Frenly Vibes"] || "Frenly Vibes",
       "Sus Vibes": ledger?.meta?.["vibes:role_alias:Sus Vibes"] || "Sus Vibes",
@@ -75,12 +185,20 @@ export default function () {
       {guild_id && <CommunityHeader guild_id={guild_id} tab={"leaderboard"} />}
       {!ledgerVibes && <Loading />}
       {ledgerVibes && (
+        <LeaderboardTable
+          leaderBoardMembers={leaderBoardMembers}
+          vibe_role_names={vibe_role_names}
+        />
+      )}
+      {false && ledgerVibes && (
         <div className="page-container leaderboard-holder">
           <div className="leaderboard">
             <div className="member header">
               <span className="rank"></span>
               <span className="username"></span>
-              <span className="vibestack">Vibe Stack</span>
+              <span className="vibestack">Vibestack</span>
+              <span className="vibes_received">Vibes Received</span>
+              <span className="vibers">Unique Vibers</span>
               <span className="percentile">Percentile</span>
               <span className="role_name">Role</span>
             </div>
@@ -94,6 +212,12 @@ export default function () {
                   {member.vibestack > 1
                     ? formatNumber(member.vibestack, "si_rounded")
                     : formatNumber(member.vibestack, "decimal2f")}
+                </span>
+                <span className="vibes_received">
+                  {formatNumber(member.vibes_received, "count")}
+                </span>
+                <span className="vibers">
+                  {formatNumber(member.unique_vibers, "count")}
                 </span>
                 <span className="percentile">
                   {formatNumber(member.vibestack_percentile, "percent0f")}
@@ -154,6 +278,8 @@ const CSS = css`
           align-self: center;
           font-weight: 700;
         }
+        &.vibes_received,
+        &.vibers,
         &.vibestack,
         &.percentile,
         &.role_name {
