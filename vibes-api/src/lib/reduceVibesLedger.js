@@ -118,6 +118,8 @@ export default async function reduceVibesLedger({ ledger_id }) {
   let current_period = "day";
   let current_time = null;
   let user_vibes = {};
+  let user_vibers = {};
+  let user_vibes_received = {};
   let pending_vibes = {};
   let latest_entry_id = null;
 
@@ -176,6 +178,12 @@ export default async function reduceVibesLedger({ ledger_id }) {
         bad: 0,
       };
       pending_vibes[entry.sender.id][entry.receiver.id].good++;
+      user_vibers[entry.receiver.id] = _.union(
+        user_vibers[entry.receiver.id] || [],
+        [entry.sender.id]
+      );
+      user_vibes_received[entry.receiver.id] =
+        (user_vibes_received[entry.receiver.id] || 0) + 1;
     }
     if (entry.type === "BadVibe") {
       pending_vibes[entry.sender.id] ||= {};
@@ -247,6 +255,8 @@ export default async function reduceVibesLedger({ ledger_id }) {
           }
         }
       }
+      const unique_vibers = user_vibers[user_id]?.length || 0;
+      const vibes_received = user_vibes_received[user_id] || 0;
       acc[user_id] = {
         vibestack,
         vibestack_score,
@@ -254,6 +264,8 @@ export default async function reduceVibesLedger({ ledger_id }) {
         vibeLevel: vibe_level_name,
         vibe_level_name,
         vibe_level,
+        unique_vibers,
+        vibes_received
       };
       return acc;
     },
