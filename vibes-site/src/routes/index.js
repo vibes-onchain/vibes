@@ -16,8 +16,7 @@ import { useWindowWidth } from "@react-hook/window-size";
 
 import hero_bg from ":/assets/img/homepage/hero-bg.png";
 import hero_gradient from ":/assets/img/homepage/hero-gradient.jpg";
-import vao1_img from ":/assets/img/homepage/vao-1.png";
-import vao1pg_img from ":/assets/img/homepage/vao-1-pg.png";
+import good_vibes_png from ":/assets/img/homepage/good-vibes.png";
 
 import feature1_img from ":/assets/img/homepage/1.gif";
 import feature2_img from ":/assets/img/homepage/2.gif";
@@ -108,8 +107,8 @@ export default function () {
             </div>
           </div>
           <div className="image-part">
-            <div className="first-vao">
-              <Tilt tiltEnable={true} scale={1.05} transitionSpeed={2500}><img src={vao1_img} /></Tilt>
+            <div className="image-holder">
+              <Tilt tiltEnable={true} scale={1.05} transitionSpeed={2500}><img src={good_vibes_png} /></Tilt>
             </div>
           </div>
         </div>
