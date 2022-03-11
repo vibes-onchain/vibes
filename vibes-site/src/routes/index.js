@@ -35,7 +35,6 @@ import demod from ":/assets/img/demod.png";
 import integrations from ":/assets/img/integrations.png";
 import vibecheck from ":/assets/img/vibecheck.png";
 import vibesribbon from ":/assets/img/vibes-ribbon.png";
-import vibesicon from ":/assets/img/vibes-hand.png";
 
 import pixel_png from ":/assets/img/pixel.png";
 
@@ -101,7 +100,7 @@ export default function () {
                 className="button rainbow-button"
               >
                 <div className="shadow"></div>
-                <div className="text">🤙 Add to Discord ✨</div>
+                <div className="text">✨ Add to Discord ✨</div>
               </a>
               <a className="read-setup" href="/docs">
                 Setup Checklist →

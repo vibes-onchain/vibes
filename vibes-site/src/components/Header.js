@@ -97,9 +97,6 @@ export default function Header(props) {
             <a className="item" href={"/"}>
               Communities
             </a>
-            <a className="item" href={"https://opensea.io/collection/genesis-vaos"}>
-              VAO
-            </a>
             <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
               <FaDiscord className="icon" /> Chat with us
             </a>
@@ -134,9 +131,6 @@ export default function Header(props) {
             >
               <a className="item" href={process.env.REACT_APP_VIBES_DOCS_URL}>
                 Docs
-              </a>
-              <a className="item" href={"https://opensea.io/collection/genesis-vaos"}>
-                VAO
               </a>
               <a className="item" href={process.env.REACT_APP_DISCORD_INVITE}>
                 Chat with us
@@ -235,7 +229,7 @@ const headerCSS = css`
       padding: 20px 0;
       img {
         margin-right: 5px;
-        height: 21px;
+        height: 40px;
         max-width: none;
       }
       font-size: 28px;
