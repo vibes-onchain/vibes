@@ -16,7 +16,7 @@ import { useWindowWidth } from "@react-hook/window-size";
 
 import hero_bg from ":/assets/img/homepage/hero-bg.png";
 import hero_gradient from ":/assets/img/homepage/hero-gradient.jpg";
-import good_vibes_png from ":/assets/img/homepage/good-vibes.png";
+import good_vibes_png from ":/assets/img/homepage/good-vibes-card.png";
 
 import feature1_img from ":/assets/img/homepage/1.gif";
 import feature2_img from ":/assets/img/homepage/2.gif";
